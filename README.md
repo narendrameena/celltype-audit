@@ -1,6 +1,9 @@
 # celltype-audit
 
 [![tests](https://github.com/narendrameena/celltype-audit/actions/workflows/tests.yml/badge.svg)](https://github.com/narendrameena/celltype-audit/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/celltype-audit.svg)](https://pypi.org/project/celltype-audit/)
+[![Python](https://img.shields.io/pypi/pyversions/celltype-audit.svg)](https://pypi.org/project/celltype-audit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Audit single-cell atlas annotations against the Cell Ontology and expression evidence.**
 
@@ -20,6 +23,10 @@ lung neutrophil:monocyte ratio from 1.25:1 to 0:1, against 0.07:1 in an independ
 ```bash
 pip install celltype-audit
 ```
+
+Releases are published from a version tag by the [publish workflow](.github/workflows/publish.yml),
+which refuses to run if the tag and `pyproject.toml` disagree, and runs the tests before
+anything is uploaded.
 
 Only `numpy` and `h5py` are required. The Cell Ontology and the expression reference are
 fetched from public endpoints on first use and cached under `~/.cache/celltype-audit`.

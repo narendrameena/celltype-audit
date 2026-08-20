@@ -18,3 +18,4 @@ dist/
 .env*
 *.pem
 id_rsa*
+dist/
