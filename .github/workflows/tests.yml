@@ -1,0 +1,79 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: pytest (python ${{ matrix.python-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        include:
+          # confirm it is not silently Linux-only
+          - os: macos-latest
+            python-version: "3.12"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ".[dev]"
+
+      # The suite runs against a synthetic ontology on purpose, so CI needs no
+      # network and no 50 MB Cell Ontology download. If a test ever starts
+      # reaching out, this step is where it will fail rather than flake.
+      - name: Run tests
+        run: pytest -q
+
+      - name: Smoke-test the CLI
+        run: |
+          celltype-audit --help
+          celltype-audit audit --help
+          celltype-audit annotate --help
+
+  build:
+    name: wheel builds and installs clean
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build wheel and sdist
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Install the wheel in a fresh venv and import it
+        run: |
+          python -m venv /tmp/venv
+          /tmp/venv/bin/pip install --quiet dist/*.whl
+          /tmp/venv/bin/python -c "import celltype_audit; print(celltype_audit.__version__)"
+          /tmp/venv/bin/celltype-audit --help > /dev/null
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
