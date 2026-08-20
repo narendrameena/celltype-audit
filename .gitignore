@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# data and caches are never committed - see DATA.md
+*.h5ad
+*.npz
+**/.wmg_cache/
+**/results/
+.cache/
+
+# credentials
+*.env
+.env*
+*.pem
+id_rsa*

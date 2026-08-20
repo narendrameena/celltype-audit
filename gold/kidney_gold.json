@@ -1,0 +1,38 @@
+{
+ "_note": "Hand-curated gold CL terms for hECA/uHAF kidney labels, assigned from the 50-gene deep marker sets (heca_markers_deep_Kidney.json) and NOT from the label string. Where markers contradict the label, the markers decide. 'null' = markers too non-specific to assign (abstention), a valid curation outcome that must not be scored as a miss.",
+ "_curated": "2026-08-19",
+ "_disagrees_with_label": "Neuroglial cell (CLDN6/AGR2/POU3F3 = epithelial, nothing neural); Juxtaglomerular cell (CDH5/KDR/ECSCR/APLNR = endothelial, not the modified smooth muscle a JG cell is); Myofibroblast (PRRX1/SFRP2/OGN/FBLN2 = fibroblast, no ACTA2 or TAGLN); Epithelial cell (EHHADH/ALDH8A1/WDR72 = proximal tubule specifically); Myeloid cell (FCN1/S100A8/CSTA = monocyte)",
+
+ "Proximal convoluted tubule": "CL:0002306",
+ "Proximal convoluted tubule progenitor": "CL:0002306",
+ "Epithelial cell": "CL:0002306",
+ "Loop of henle": "CL:1000909",
+ "Loop of henle progenitor": "CL:1000909",
+ "Distal convoluted tubule": "CL:1000849",
+ "Principle cell": "CL:0005009",
+ "Intercalated cell": "CL:0005010",
+ "Collecting duct": null,
+ "Podocyte": "CL:0000653",
+ "Ureteric epithelial cell": "CL:0000731",
+ "Ureteric bud cell": null,
+ "Neuroglial cell": "CL:0000066",
+
+ "Endothelial cell": "CL:0000115",
+ "Juxtaglomerular cell": "CL:0000115",
+ "Vascular smooth muscle cell": "CL:0000192",
+ "Interstitial cell": "CL:0000057",
+ "Stromal cell": "CL:0000057",
+ "Fibroblast": "CL:0000057",
+ "Myofibroblast": "CL:0000057",
+ "Mesenchymal cell": null,
+ "Progenitor cell": null,
+
+ "Macrophage": "CL:0000235",
+ "Monocyte": null,
+ "Myeloid cell": "CL:0000576",
+ "Conventional dendritic cell 2": "CL:0000990",
+ "B cell": "CL:0000236",
+ "NK cell": "CL:0000623",
+ "T cell": "CL:0000084",
+ "Lymphoid cell": "CL:0000542"
+}

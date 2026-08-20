@@ -1,0 +1,48 @@
+{
+ "_note": "Hand-curated gold CL terms for hECA/uHAF heart labels, assigned from the 50-gene deep marker sets (heca_markers_deep_Heart.json) and NOT from the label string. Where markers contradict the label, the markers decide. 'null' = markers too non-specific, or a cell STATE rather than a type (abstention); these must not be scored as misses.",
+ "_curated": "2026-08-19",
+ "_disagrees_with_label": "Neuroglial cell (MPZ-adjacent PLP1/PMP22/SCN7A/GPM6B/LGI4 = Schwann cell); Myeloid cell (LYVE1/VSIG4/STAB1 = resident macrophage); Naive CD4 T cell (LEF1 present but no CD4-restricted evidence, so the general naive T term is used); Proliferating macrophage (MKI67/TOP2A/CENPF only - a cell state with no lineage evidence, abstained); MAIT cell (no SLC4A10 or TRAV1-2, so scored as T cell)",
+
+ "Cardiomyocyte cell": "CL:0000746",
+ "Ventricle cardiomyocyte cell": "CL:2000046",
+ "Atrial cardiomyocyte cell": "CL:0002129",
+ "Smooth muscle cell": "CL:0000192",
+ "Pericyte": "CL:0000669",
+
+ "Fibroblast": "CL:0002548",
+ "Activated fibroblast": "CL:0002548",
+ "Adipocyte": "CL:0000136",
+ "Mesothelial cell": "CL:0000077",
+
+ "Capillary endothelial cell": "CL:0002144",
+ "Artery endothelial cell": "CL:1000413",
+ "Vein endothelial cell": "CL:0002543",
+ "Lymphatic endothelial cell": "CL:0002138",
+ "Vascular endothelial cell": "CL:0000115",
+ "Endothelial cell": "CL:0000115",
+ "Endocardial cell": null,
+
+ "Macrophage": "CL:0000235",
+ "Monocyte-derived macrophage": "CL:0000235",
+ "Myeloid cell": "CL:0000235",
+ "Proliferating macrophage": null,
+ "Monocyte": "CL:0000576",
+ "Dendritic cell": "CL:0000451",
+ "Mast cell": "CL:0000097",
+
+ "NK cell": "CL:0000623",
+ "Lymphoid cell": "CL:0000542",
+ "T cell": "CL:0000084",
+ "Naive CD4 T cell": "CL:0000898",
+ "Activated CD4 T cell": "CL:0000084",
+ "CD8 T te cell": "CL:0000084",
+ "CD8 T trans cell": "CL:0000084",
+ "Memory CD8 T cell": "CL:0000084",
+ "Effector CD8 T cell": "CL:0000625",
+ "MAIT cell": "CL:0000084",
+ "B cell": "CL:0000236",
+
+ "Neuron": null,
+ "Neuroglial cell": "CL:0002573",
+ "Schwann cell": "CL:0002573"
+}
