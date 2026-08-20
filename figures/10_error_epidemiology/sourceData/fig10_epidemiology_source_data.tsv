@@ -1,0 +1,18 @@
+panel	key	value
+a	size_0.5-2k	n=40;error_pct=20.0;ci=10.5-34.8
+a	size_2-10k	n=67;error_pct=4.5;ci=1.5-12.4
+a	size_10-50k	n=51;error_pct=5.9;ci=2.0-15.9
+a	size_>50k	n=32;error_pct=9.4;ci=3.2-24.2
+a	fisher_lt2k_vs_ge2k	0.01099
+b	haematopoietic->haematopoietic	5
+b	epithelial->haematopoietic	2
+b	connective->connective	2
+b	muscle->connective	1
+b	muscle->muscle	1
+b	muscle->endothelial	1
+b	endothelial->endothelial	1
+b	neural->epithelial	1
+b	diagonal_within_lineage	9 of 14
+c	Tabula Sapiens confirmed	4 of 8
+c	CellTypist disagreements	5 of 8
+c	hand-curated errors	3 of 17

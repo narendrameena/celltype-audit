@@ -1,0 +1,57 @@
+panel	label	value
+a	reached by the atlas	328
+a	human, mature, in vivo — NOT reached	2491
+a	developmental / precursor	430
+a	non-human / species-specific	278
+a	in vitro / abnormal	10
+a	in_scope_total	2819
+a	in_scope_coverage_pct	11.6
+b	Heart	atlas_types=48;cl_terms_in_tissue=88
+b	Lung	atlas_types=45;cl_terms_in_tissue=246
+b	Blood	atlas_types=29;cl_terms_in_tissue=150
+b	Spinal_cord	atlas_types=24;cl_terms_in_tissue=40
+b	Bone_marrow	atlas_types=44;cl_terms_in_tissue=134
+b	Skin	atlas_types=64;cl_terms_in_tissue=131
+b	Liver	atlas_types=26;cl_terms_in_tissue=146
+b	Intestine	atlas_types=25;cl_terms_in_tissue=103
+b	Adrenal_gland	atlas_types=12;cl_terms_in_tissue=65
+b	Spleen	atlas_types=61;cl_terms_in_tissue=112
+b	Kidney	atlas_types=51;cl_terms_in_tissue=142
+b	Brain	atlas_types=16;cl_terms_in_tissue=193
+b	Prostate	atlas_types=18;cl_terms_in_tissue=74
+b	Eye	atlas_types=15;cl_terms_in_tissue=129
+b	Bronchi	atlas_types=36;cl_terms_in_tissue=246
+b	Testis	atlas_types=22;cl_terms_in_tissue=18
+b	Adipose	atlas_types=19;cl_terms_in_tissue=62
+b	Pancreas	atlas_types=34;cl_terms_in_tissue=65
+b	Lymph_node	atlas_types=36;cl_terms_in_tissue=124
+b	Uterus	atlas_types=17;cl_terms_in_tissue=71
+b	Muscle	atlas_types=30;cl_terms_in_tissue=102
+b	Oesophagus	atlas_types=11;cl_terms_in_tissue=81
+b	Uterine_tube	atlas_types=15;cl_terms_in_tissue=35
+b	Ureter	atlas_types=11;cl_terms_in_tissue=21
+b	Bladder	atlas_types=19;cl_terms_in_tissue=30
+b	Stomach	atlas_types=30;cl_terms_in_tissue=127
+b	Salivary_gland	atlas_types=20;cl_terms_in_tissue=81
+b	Pleura	atlas_types=7;cl_terms_in_tissue=16
+b	Nose	atlas_types=9;cl_terms_in_tissue=84
+b	Gallbladder	atlas_types=10;cl_terms_in_tissue=10
+b	Ovary	atlas_types=13;cl_terms_in_tissue=46
+b	Vessel	atlas_types=11;cl_terms_in_tissue=52
+b	Breast	atlas_types=9;cl_terms_in_tissue=102
+b	Placenta	atlas_types=3;cl_terms_in_tissue=46
+b	Femur	atlas_types=7;cl_terms_in_tissue=134
+b	Rib	atlas_types=3;cl_terms_in_tissue=134
+c	organs_1	200
+c	organs_2	59
+c	organs_3	26
+c	organs_4	10
+c	organs_5	11
+c	organs_6	6
+c	organs_7	5
+c	organs_8	3
+c	organs_9	2
+c	organs_10	3
+c	organs_12	1
+c	organs_13	1
+c	organs_14	1

@@ -1,0 +1,231 @@
+panel	key	value
+a	well-powered_cell_types	602
+a	G1__exact_CL_identity	517
+a	G2__not_contradicted	506
+a	G3__evidenced,_better-scoring_subtype	205
+a	G4__not_a_mixture	92
+a	funnel_G1_no_exact_identity	85
+a	funnel_G2_contradicted	11
+a	funnel_G3_no_cl_subtype	49
+a	funnel_G3_no_evidenced_subtype	184
+a	funnel_G3_not_discriminated	68
+a	funnel_G4_mixture	113
+a	funnel_PROPOSED	205
+a	funnel_pass_G1	517
+a	funnel_pass_G2	506
+a	funnel_pass_G4	92
+a	funnel_well_powered	602
+b	median_subtypes_existing	33
+b	median_subtypes_supported	1
+b	types_with_no_supported_subtype	191
+b	types_assessed	491
+c	proposals_total	205
+c	sole_evidenced_subtype_no_margin	22
+c	confident_margin_ge_1.30	92
+c	gold_checked	42
+c	gold_compatible	41
+c	Lung|Vein endothelial cell -> vein endothelial cell of respiratory system	margin=999.000;confident=True;gold_compatible=None
+c	Skin|Smooth muscle cell -> vascular associated smooth muscle cell	margin=999.000;confident=True;gold_compatible=None
+c	Uterine_tube|Secretory epithelial cell -> fallopian tube secretory epithelial cell	margin=999.000;confident=True;gold_compatible=None
+c	Liver|Conventional dendritic cell 2 -> myeloid dendritic cell	margin=999.000;confident=True;gold_compatible=True
+c	Bronchi|Myofibroblast -> secondary crest myofibroblast	margin=999.000;confident=True;gold_compatible=None
+c	Bronchi|Vein endothelial cell -> vein endothelial cell of respiratory system	margin=999.000;confident=True;gold_compatible=None
+c	Gallbladder|Stromal cell -> fibroblast	margin=999.000;confident=True;gold_compatible=None
+c	Placenta|Epithelial cell -> glandular epithelial cell	margin=999.000;confident=True;gold_compatible=None
+c	Placenta|Macrophage -> Hofbauer cell	margin=999.000;confident=True;gold_compatible=None
+c	Spleen|Helper T cell -> T follicular helper cell	margin=999.000;confident=True;gold_compatible=None
+c	Intestine|Stromal cell -> fibroblast	margin=999.000;confident=True;gold_compatible=None
+c	Kidney|Fibroblast -> kidney interstitial fibroblast	margin=999.000;confident=True;gold_compatible=None
+c	Gallbladder|Epithelial cell -> goblet cell	margin=999.000;confident=True;gold_compatible=None
+c	Intestine|Macrophage -> CL:4047053	margin=999.000;confident=True;gold_compatible=None
+c	Uterine_tube|Stromal cell -> fibroblast	margin=999.000;confident=True;gold_compatible=None
+c	Uterus|ILC -> natural killer cell	margin=999.000;confident=True;gold_compatible=None
+c	Oesophagus|B cell -> immature B cell	margin=999.000;confident=True;gold_compatible=None
+c	Salivary_gland|Helper T cell -> T follicular helper cell	margin=999.000;confident=True;gold_compatible=None
+c	Prostate|CD8 T cell -> effector CD8-positive, alpha-beta T cell	margin=999.000;confident=True;gold_compatible=None
+c	Bronchi|Lymphatic endothelial cell -> endothelial cell of respiratory system lymphatic vessel	margin=999.000;confident=True;gold_compatible=None
+c	Intestine|Smooth muscle cell -> vascular associated smooth muscle cell	margin=999.000;confident=True;gold_compatible=None
+c	Intestine|Dendritic cell -> conventional dendritic cell	margin=999.000;confident=True;gold_compatible=None
+c	Spinal_cord|Progenitor cell -> oligodendrocyte precursor cell	margin=337.020;confident=True;gold_compatible=None
+c	Blood|Plasmacytoid dendritic cell -> plasmacytoid dendritic cell, human	margin=203.026;confident=True;gold_compatible=True
+c	Liver|Granulocyte -> neutrophil	margin=87.104;confident=True;gold_compatible=True
+c	Blood|NK T cell -> activated type II NK T cell	margin=55.715;confident=True;gold_compatible=True
+c	Salivary_gland|Ductal cell -> CL:4052048	margin=10.141;confident=True;gold_compatible=None
+c	Skin|Endothelial cell -> blood vessel endothelial cell	margin=9.413;confident=True;gold_compatible=None
+c	Pancreas|Lymphoid cell -> innate lymphoid cell	margin=6.105;confident=True;gold_compatible=True
+c	Lung|NK cell -> CD16-positive, CD56-dim natural killer cell, human	margin=4.890;confident=True;gold_compatible=None
+c	Kidney|Proximal convoluted tubule -> epithelial cell of proximal tubule segment 1	margin=4.223;confident=True;gold_compatible=None
+c	Muscle|Vascular endothelial cell -> vein endothelial cell	margin=3.907;confident=True;gold_compatible=None
+c	Femur|Granulocyte -> neutrophil	margin=3.414;confident=True;gold_compatible=None
+c	Lung|Conventional dendritic cell -> mature conventional dendritic cell	margin=3.179;confident=True;gold_compatible=None
+c	Brain|Granule cell -> cerebellar granule cell	margin=3.035;confident=True;gold_compatible=None
+c	Lung|Basal cell -> airway submucosal gland duct basal cell	margin=2.916;confident=True;gold_compatible=None
+c	Spleen|Lymphoid cell -> mature NK T cell	margin=2.807;confident=True;gold_compatible=None
+c	Oesophagus|Myeloid cell -> monocyte	margin=2.606;confident=True;gold_compatible=None
+c	Muscle|T cell -> naive T cell	margin=2.582;confident=True;gold_compatible=None
+c	Spleen|ILC -> group 3 innate lymphoid cell	margin=2.479;confident=True;gold_compatible=None
+c	Uterine_tube|Endothelial cell -> blood vessel endothelial cell	margin=2.325;confident=True;gold_compatible=None
+c	Skin|CD8 T cell -> naive thymus-derived CD8-positive, alpha-beta T cell	margin=2.299;confident=True;gold_compatible=None
+c	Muscle|Fibroblast -> fibroblast of the aortic adventitia	margin=2.228;confident=True;gold_compatible=None
+c	Bone_marrow|NK cell -> CD16-positive, CD56-dim natural killer cell, human	margin=2.177;confident=True;gold_compatible=True
+c	Pancreas|Fibroblast -> hepatic stellate cell	margin=1.894;confident=True;gold_compatible=True
+c	Liver|T cell -> mature NK T cell	margin=1.886;confident=True;gold_compatible=True
+c	Bone_marrow|Pre-B cell -> small pre-B-II cell	margin=1.793;confident=True;gold_compatible=True
+c	Adrenal_gland|Lymphoid cell -> plasma cell	margin=1.791;confident=True;gold_compatible=None
+c	Spleen|CD8 T cell -> activated CD8-positive, alpha-beta T cell	margin=1.761;confident=True;gold_compatible=None
+c	Bladder|Endothelial cell -> vein endothelial cell	margin=1.730;confident=True;gold_compatible=None
+c	Skin|Dendritic cell -> plasmacytoid dendritic cell, human	margin=1.705;confident=True;gold_compatible=None
+c	Bone_marrow|Lymphoid cell -> precursor B cell	margin=1.690;confident=True;gold_compatible=True
+c	Stomach|Neuron -> peripheral nervous system neuron	margin=1.627;confident=True;gold_compatible=None
+c	Salivary_gland|Fibroblast -> fibroblast of lung	margin=1.611;confident=True;gold_compatible=None
+c	Skin|Stromal cell -> skin fibroblast	margin=1.605;confident=True;gold_compatible=None
+c	Adipose|Activated T cell -> memory T cell	margin=1.576;confident=True;gold_compatible=None
+c	Lung|Epithelial progenitor cell -> respiratory hillock cell	margin=1.558;confident=True;gold_compatible=None
+c	Prostate|Smooth muscle cell -> smooth muscle cell of prostate	margin=1.551;confident=True;gold_compatible=None
+c	Skin|T cell -> activated CD8-positive, alpha-beta T cell	margin=1.533;confident=True;gold_compatible=None
+c	Spleen|NK cell -> CD16-negative, CD56-bright natural killer cell, human	margin=1.531;confident=True;gold_compatible=None
+c	Ovary|Epithelial cell -> ovarian surface epithelial cell	margin=1.527;confident=True;gold_compatible=None
+c	Liver|Monocyte -> classical monocyte	margin=1.525;confident=True;gold_compatible=True
+c	Spleen|Monocyte -> intermediate monocyte	margin=1.525;confident=True;gold_compatible=None
+c	Pancreas|Endocrine cell -> pancreatic epsilon cell	margin=1.523;confident=True;gold_compatible=True
+c	Kidney|Loop of henle -> kidney loop of Henle cortical thick ascending limb epithelial cell	margin=1.470;confident=True;gold_compatible=None
+c	Heart|Cardiomyocyte cell -> regular ventricular cardiac myocyte	margin=1.458;confident=True;gold_compatible=None
+c	Blood|Plasma B cell -> IgA plasma cell	margin=1.456;confident=True;gold_compatible=True
+c	Breast|T cell -> naive thymus-derived CD4-positive, alpha-beta T cell	margin=1.452;confident=True;gold_compatible=None
+c	Lung|Plasma cell -> IgA plasma cell	margin=1.448;confident=True;gold_compatible=None
+c	Kidney|Collecting duct -> kidney collecting duct principal cell	margin=1.436;confident=True;gold_compatible=None
+c	Uterus|Stromal cell -> stromal cell of ovary	margin=1.433;confident=True;gold_compatible=None
+c	Skin|Lymphoid cell -> CD8-positive, alpha-beta T cell	margin=1.431;confident=True;gold_compatible=None
+c	Uterus|Epithelial cell -> stratified epithelial cell	margin=1.417;confident=True;gold_compatible=None
+c	Bronchi|Monocyte -> CD14-low, CD16-positive monocyte	margin=1.407;confident=True;gold_compatible=None
+c	Lung|Effector T cell -> effector CD4-positive, alpha-beta T cell	margin=1.402;confident=True;gold_compatible=None
+c	Salivary_gland|Macrophage -> inflammatory macrophage	margin=1.385;confident=True;gold_compatible=None
+c	Stomach|Stromal cell -> fibroblast of gingiva	margin=1.384;confident=True;gold_compatible=None
+c	Bone_marrow|B cell -> immature B cell	margin=1.378;confident=True;gold_compatible=True
+c	Bronchi|Goblet cell -> nasal mucosa goblet cell	margin=1.372;confident=True;gold_compatible=None
+c	Lung|Vascular smooth muscle cell -> smooth muscle cell of the pulmonary artery	margin=1.365;confident=True;gold_compatible=None
+c	Liver|CD4 T cell -> CD4-positive helper T cell	margin=1.364;confident=True;gold_compatible=True
+c	Oesophagus|Epithelial cell -> keratinocyte	margin=1.358;confident=True;gold_compatible=None
+c	Eye|Epithelial cell -> corneal epithelial cell	margin=1.343;confident=True;gold_compatible=None
+c	Kidney|B cell -> mature B cell	margin=1.335;confident=True;gold_compatible=None
+c	Blood|Haematopoietic stem cell -> CD34-positive, CD38-negative hematopoietic stem cell	margin=1.326;confident=True;gold_compatible=True
+c	Bronchi|Macrophage -> alternatively activated macrophage	margin=1.323;confident=True;gold_compatible=None
+c	Lung|Treg cell -> natural T-regulatory cell	margin=1.320;confident=True;gold_compatible=None
+c	Skin|Keratinocyte -> hair follicular keratinocyte	margin=1.317;confident=True;gold_compatible=None
+c	Bone_marrow|Monocyte -> CD14-positive monocyte	margin=1.308;confident=True;gold_compatible=True
+c	Bronchi|Vascular smooth muscle cell -> smooth muscle cell of the pulmonary artery	margin=1.303;confident=True;gold_compatible=None
+c	Bladder|Urothelial cell -> umbrella cell of urothelium	margin=1.302;confident=True;gold_compatible=None
+c	Lung|Fibroblast -> CL:4052030	margin=1.301;confident=True;gold_compatible=None
+c	Skin|Myeloid cell -> myeloid dendritic cell	margin=1.300;confident=False;gold_compatible=None
+c	Blood|Haematopoietic stem and progenitor cell -> granulocyte monocyte progenitor cell	margin=1.282;confident=False;gold_compatible=False
+c	Nose|Secretory epithelial cell -> nasal mucosa goblet cell	margin=1.273;confident=False;gold_compatible=None
+c	Kidney|Endothelial cell -> vein endothelial cell	margin=1.270;confident=False;gold_compatible=None
+c	Bronchi|Secretory cell -> tracheobronchial goblet cell	margin=1.270;confident=False;gold_compatible=None
+c	Brain|Excitatory neuron -> L6 intratelencephalic projecting glutamatergic neuron of the primary motor cortex	margin=1.267;confident=False;gold_compatible=None
+c	Liver|Endothelial cell -> endothelial stalk cell	margin=1.261;confident=False;gold_compatible=True
+c	Skin|ILC -> group 3 innate lymphoid cell	margin=1.259;confident=False;gold_compatible=None
+c	Heart|Lymphoid cell -> CD8-positive, alpha-beta T cell	margin=1.255;confident=False;gold_compatible=None
+c	Liver|Lymphoid cell -> mucosal invariant T cell	margin=1.250;confident=False;gold_compatible=True
+c	Ureter|T cell -> cytotoxic T cell	margin=1.230;confident=False;gold_compatible=None
+c	Placenta|Stromal cell -> embryonic fibroblast	margin=1.230;confident=False;gold_compatible=None
+c	Blood|NK cell -> CD16-positive, CD56-dim natural killer cell, human	margin=1.227;confident=False;gold_compatible=True
+c	Brain|Neuron -> amacrine cell	margin=1.217;confident=False;gold_compatible=None
+c	Spleen|Macrophage -> Kupffer cell	margin=1.206;confident=False;gold_compatible=None
+c	Kidney|Epithelial cell -> kidney proximal convoluted tubule epithelial cell	margin=1.175;confident=False;gold_compatible=None
+c	Lung|Monocyte -> classical monocyte	margin=1.157;confident=False;gold_compatible=None
+c	Ureter|Urothelial cell -> intermediate cell of urothelium	margin=1.157;confident=False;gold_compatible=None
+c	Brain|Progenitor cell -> classical monocyte	margin=1.157;confident=False;gold_compatible=None
+c	Uterus|T cell -> CD4-positive, alpha-beta memory T cell	margin=1.154;confident=False;gold_compatible=None
+c	Uterine_tube|Epithelial cell -> stratified epithelial cell	margin=1.154;confident=False;gold_compatible=None
+c	Vessel|Endothelial cell -> vein endothelial cell	margin=1.148;confident=False;gold_compatible=None
+c	Adipose|Adipocyte -> adipocyte of omentum tissue	margin=1.148;confident=False;gold_compatible=None
+c	Spinal_cord|Neuron -> GABAergic neuron	margin=1.147;confident=False;gold_compatible=None
+c	Liver|Myeloid cell -> macrophage	margin=1.143;confident=False;gold_compatible=True
+c	Heart|Vascular endothelial cell -> cardiac blood vessel endothelial cell	margin=1.140;confident=False;gold_compatible=None
+c	Intestine|B cell -> germinal center B cell	margin=1.140;confident=False;gold_compatible=None
+c	Spleen|B cell -> small pre-B-II cell	margin=1.137;confident=False;gold_compatible=None
+c	Lymph_node|Naive T cell -> naive thymus-derived CD8-positive, alpha-beta T cell	margin=1.137;confident=False;gold_compatible=None
+c	Kidney|T cell -> mature NK T cell	margin=1.137;confident=False;gold_compatible=None
+c	Blood|CD4 Treg -> memory regulatory T cell	margin=1.136;confident=False;gold_compatible=True
+c	Bone_marrow|Granulocyte -> basophil	margin=1.136;confident=False;gold_compatible=True
+c	Heart|Adipocyte -> subcutaneous adipocyte	margin=1.129;confident=False;gold_compatible=None
+c	Liver|B cell -> late pro-B cell	margin=1.128;confident=False;gold_compatible=True
+c	Spleen|CD8 Trm -> CD8-positive, alpha-beta memory T cell, CD45RO-positive	margin=1.125;confident=False;gold_compatible=None
+c	Skin|Epithelial stem cell -> basal cell of epidermis	margin=1.123;confident=False;gold_compatible=None
+c	Prostate|T cell -> mature NK T cell	margin=1.119;confident=False;gold_compatible=None
+c	Kidney|Stromal cell -> kidney interstitial fibroblast	margin=1.118;confident=False;gold_compatible=None
+c	Prostate|Endothelial cell -> prostate gland microvascular endothelial cell	margin=1.117;confident=False;gold_compatible=None
+c	Adipose|T cell -> CD8-positive, alpha-beta T cell	margin=1.115;confident=False;gold_compatible=None
+c	Oesophagus|T cell -> gamma-delta T cell	margin=1.106;confident=False;gold_compatible=None
+c	Pancreas|Myeloid cell -> classical monocyte	margin=1.104;confident=False;gold_compatible=True
+c	Stomach|Endothelial cell -> endothelial cell of artery	margin=1.104;confident=False;gold_compatible=None
+c	Bone_marrow|Myeloid cell -> promyelocyte	margin=1.100;confident=False;gold_compatible=True
+c	Muscle|Endothelial cell -> endothelial cell of arteriole	margin=1.099;confident=False;gold_compatible=None
+c	Eye|Vascular endothelial cell -> endothelial cell of artery	margin=1.099;confident=False;gold_compatible=None
+c	Intestine|Myeloid cell -> CL:4047053	margin=1.095;confident=False;gold_compatible=None
+c	Lymph_node|CD8 T cell -> effector memory CD8-positive, alpha-beta T cell	margin=1.092;confident=False;gold_compatible=None
+c	Heart|Monocyte -> CD14-positive monocyte	margin=1.080;confident=False;gold_compatible=None
+c	Liver|Vascular endothelial cell -> endothelial stalk cell	margin=1.078;confident=False;gold_compatible=True
+c	Lymph_node|T cell -> regulatory T cell	margin=1.076;confident=False;gold_compatible=None
+c	Blood|T cell -> T follicular helper cell	margin=1.071;confident=False;gold_compatible=True
+c	Oesophagus|Endothelial cell -> blood vessel endothelial cell	margin=1.070;confident=False;gold_compatible=None
+c	Lymph_node|B cell -> memory B cell	margin=1.069;confident=False;gold_compatible=None
+c	Intestine|T cell -> gamma-delta T cell	margin=1.067;confident=False;gold_compatible=None
+c	Brain|Astrocyte -> hippocampal astrocyte	margin=1.065;confident=False;gold_compatible=None
+c	Intestine|CD8 T cell -> effector memory CD8-positive, alpha-beta T cell	margin=1.064;confident=False;gold_compatible=None
+c	Lung|Macrophage -> alternatively activated macrophage	margin=1.063;confident=False;gold_compatible=None
+c	Blood|Conventional dendritic cell -> CD1c-positive myeloid dendritic cell	margin=1.063;confident=False;gold_compatible=True
+c	Nose|Ciliated cell -> ciliated columnar cell of tracheobronchial tree	margin=1.062;confident=False;gold_compatible=None
+c	Bronchi|Epithelial progenitor cell -> respiratory suprabasal cell	margin=1.061;confident=False;gold_compatible=None
+c	Muscle|Skeletal muscle cell -> skeletal muscle satellite stem cell	margin=1.060;confident=False;gold_compatible=None
+c	Skin|B cell -> small pre-B-II cell	margin=1.060;confident=False;gold_compatible=None
+c	Kidney|Lymphoid cell -> memory T cell	margin=1.060;confident=False;gold_compatible=None
+c	Blood|Monocyte -> CD14-positive, CD16-negative classical monocyte	margin=1.056;confident=False;gold_compatible=True
+c	Blood|Lymphoid cell -> ILC1, human	margin=1.056;confident=False;gold_compatible=True
+c	Muscle|Lymphoid cell -> CD8-positive, alpha-beta memory T cell	margin=1.053;confident=False;gold_compatible=None
+c	Liver|Hepatocyte -> midzonal region hepatocyte	margin=1.052;confident=False;gold_compatible=True
+c	Spleen|T cell -> activated CD8-positive, alpha-beta T cell	margin=1.052;confident=False;gold_compatible=None
+c	Bronchi|Fibroblast -> CL:4052030	margin=1.050;confident=False;gold_compatible=None
+c	Uterus|Myeloid cell -> monocyte	margin=1.046;confident=False;gold_compatible=None
+c	Spleen|CD4 T cell -> T follicular helper cell	margin=1.043;confident=False;gold_compatible=None
+c	Brain|Inhibitory neuron -> medial ganglionic eminence derived GABAergic cortical interneuron	margin=1.040;confident=False;gold_compatible=None
+c	Intestine|Plasma B cell -> IgG plasma cell	margin=1.040;confident=False;gold_compatible=None
+c	Lymph_node|NK cell -> CD16-negative, CD56-bright natural killer cell, human	margin=1.038;confident=False;gold_compatible=None
+c	Heart|Smooth muscle cell -> vascular associated smooth muscle cell	margin=1.037;confident=False;gold_compatible=None
+c	Bone_marrow|CD8 T cell -> effector memory CD8-positive, alpha-beta T cell	margin=1.036;confident=False;gold_compatible=True
+c	Brain|Endothelial cell -> vein endothelial cell	margin=1.035;confident=False;gold_compatible=None
+c	Liver|CD8 T cell -> effector memory CD8-positive, alpha-beta T cell	margin=1.033;confident=False;gold_compatible=True
+c	Nose|Basal cell -> basal cell of epithelium of trachea	margin=1.033;confident=False;gold_compatible=None
+c	Eye|Horizontal cell -> H1 horizontal cell	margin=1.033;confident=False;gold_compatible=None
+c	Blood|Myeloid cell -> neutrophil	margin=1.031;confident=False;gold_compatible=True
+c	Muscle|Myeloid cell -> monocyte	margin=1.031;confident=False;gold_compatible=None
+c	Bone_marrow|CD4 T cell -> CD4-positive, CD25-positive, alpha-beta regulatory T cell	margin=1.030;confident=False;gold_compatible=True
+c	Blood|B cell -> naive B cell	margin=1.030;confident=False;gold_compatible=True
+c	Prostate|Fibroblast -> fibroblast of connective tissue of glandular part of prostate	margin=1.029;confident=False;gold_compatible=None
+c	Heart|T cell -> activated CD8-positive, alpha-beta T cell	margin=1.026;confident=False;gold_compatible=None
+c	Eye|Retinal ganglion cell -> ON midget ganglion cell	margin=1.025;confident=False;gold_compatible=None
+c	Blood|CD4 T cell -> effector memory CD4-positive, alpha-beta T cell	margin=1.023;confident=False;gold_compatible=True
+c	Lymph_node|CD4 T cell -> T follicular helper cell	margin=1.023;confident=False;gold_compatible=None
+c	Kidney|Progenitor cell -> myeloid lineage restricted progenitor cell	margin=1.021;confident=False;gold_compatible=None
+c	Bone_marrow|Haematopoietic stem and progenitor cell -> early lymphoid progenitor	margin=1.018;confident=False;gold_compatible=True
+c	Blood|CD8 T cell -> effector memory CD8-positive, alpha-beta T cell	margin=1.014;confident=False;gold_compatible=True
+c	Kidney|Myeloid cell -> neutrophil	margin=1.013;confident=False;gold_compatible=None
+c	Prostate|Lymphoid cell -> CD8-positive, alpha-beta thymocyte	margin=1.012;confident=False;gold_compatible=None
+c	Spleen|Myeloid cell -> neutrophil	margin=1.009;confident=False;gold_compatible=None
+c	Adrenal_gland|Myeloid cell -> macrophage	margin=1.007;confident=False;gold_compatible=None
+c	Bone_marrow|T cell -> mature NK T cell	margin=1.007;confident=False;gold_compatible=True
+c	Stomach|Epithelial cell -> enterocyte	margin=1.004;confident=False;gold_compatible=None
+c	Femur|T cell -> effector memory CD8-positive, alpha-beta T cell, terminally differentiated	margin=1.004;confident=False;gold_compatible=None
+c	Lymph_node|Monocyte -> classical monocyte	margin=1.004;confident=False;gold_compatible=None
+c	Lung|Ciliated cell -> ciliated columnar cell of tracheobronchial tree	margin=1.003;confident=False;gold_compatible=None
+c	Skin|Conventional dendritic cell 2 -> monocyte-derived dendritic cell	margin=1.003;confident=False;gold_compatible=None
+c	Bronchi|Ciliated cell -> ciliated columnar cell of tracheobronchial tree	margin=1.002;confident=False;gold_compatible=None
+c	Skin|Epithelial cell -> epidermal cell	margin=1.002;confident=False;gold_compatible=None
+c	Lymph_node|ILC -> natural killer cell	margin=1.001;confident=False;gold_compatible=None
+c	Salivary_gland|CD8 T cell -> effector CD8-positive, alpha-beta T cell	margin=1.001;confident=False;gold_compatible=None
+c	Skin|Conventional dendritic cell -> myeloid dendritic cell	margin=1.001;confident=False;gold_compatible=None
+c	Stomach|Myeloid cell -> neutrophil	margin=1.001;confident=False;gold_compatible=None
+c	Kidney|Macrophage -> alternatively activated macrophage	margin=1.000;confident=False;gold_compatible=None
+c	Gallbladder|Myeloid cell -> macrophage	margin=1.000;confident=False;gold_compatible=None
+c	Lymph_node|Macrophage -> tissue-resident macrophage	margin=1.000;confident=False;gold_compatible=None
+c	Muscle|CD8 T cell -> effector memory CD8-positive, alpha-beta T cell, terminally differentiated	margin=1.000;confident=False;gold_compatible=None

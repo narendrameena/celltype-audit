@@ -1,0 +1,22 @@
+panel	organ	label	n_cells	asserted	ts_best_match	off_lineage	on_lineage	verdict	celltypist
+d	-	Tabula Sapiens	81	-	-	-	-	agree=69;within=12;cross=0;thin_discarded=34	-
+d	-	hECA	116	-	-	-	-	agree=69;within=43;cross=4;thin_discarded=61	-
+a	Adipose	Fibroblast	479	connective	macrophage	0.529	0.311	CONFIRMED	
+a	Adipose	Smooth muscle cell	7904	muscle	fibroblast	0.512	0.000	CONFIRMED	
+a	Kidney	Neuroglial cell	718	neural	endothelial cell	0.479	0.000	CONFIRMED	
+a	Adipose	Lymphatic endothelial cell	244	endothelial	hematopoietic precursor cell	0.395	0.000	CONFIRMED	
+a	Lung	Bronchial smooth muscle cell	10805	muscle	alveolar adventitial fibroblast	0.383	0.000	CONFIRMED	Alveolar fibroblasts
+a	Testis	Smooth muscle cell	4760	muscle	stromal cell	0.364	0.000	CONFIRMED	
+a	Kidney	Juxtaglomerular cell	556	muscle	endothelial cell	0.313	0.000	CONFIRMED	
+a	Lung	Tuft cell	557	epithelial	mature NK T cell	0.307	0.000	CONFIRMED	NK cells
+a	Bladder	Stromal cell	1009	connective	fibroblast	0.439	0.465	uninformative	
+a	Liver	Kupffer cell	19832	haematopoietic	intrahepatic cholangiocyte	0.193	0.000	uninformative	Macrophages
+b	Skin	Smooth muscle cell	17243	muscle				flagged=False	Pericyte_2
+b	Skin	Vascular smooth muscle cell	12602	muscle				flagged=False	Pericyte_2
+b	Lung	Bronchial smooth muscle cell	10805	muscle				flagged=True	Alveolar fibroblasts
+b	Liver	Lymphoid cell	8217	haematopoietic				flagged=False	Endothelial cells
+b	Lung	Vascular smooth muscle cell	3739	muscle				flagged=False	Myofibroblasts
+b	Lung	Ionocyte cell	1936	epithelial				flagged=False	EC aerocyte capillary
+b	Skin	Muscle cell	611	muscle				flagged=False	Pericyte_1
+b	Lung	Tuft cell	557	epithelial				flagged=True	NK cells
+b	-	SUMMARY	187					agree=179;disagree=8	-

@@ -1,0 +1,41 @@
+panel	label	metric	value
+a	production (baseline)	top1	81.8
+a	production (baseline)	top5	95.5
+a	full profile cosine	top1	68.2
+a	full profile cosine	top5	86.4
+a	specificity weighted (IDF)	top1	59.1
+a	specificity weighted (IDF)	top5	86.4
+a	two-sided weighting	top1	68.2
+a	two-sided weighting	top5	90.9
+a	most-specific above threshold	top1	59.1
+a	most-specific above threshold	top5	86.4
+a	discriminative SUBSPACE	top1	86.4
+a	discriminative SUBSPACE	top5	95.5
+b	markers_5	top1	63.6
+b	markers_5	top5	86.4
+b	markers_10	top1	59.1
+b	markers_10	top5	86.4
+b	markers_20	top1	59.1
+b	markers_20	top5	81.8
+b	markers_50	top1	68.2
+b	markers_50	top5	90.9
+c	Pancreas	prod_top1	81.8
+c	Pancreas	sub_top1	86.4
+c	Pancreas	prod_top5	95.5
+c	Pancreas	sub_top5	95.5
+c	Liver	prod_top1	52.0
+c	Liver	sub_top1	60.0
+c	Liver	prod_top5	80.0
+c	Liver	sub_top5	80.0
+c	Blood	prod_top1	45.8
+c	Blood	sub_top1	50.0
+c	Blood	prod_top5	79.2
+c	Blood	sub_top5	87.5
+c	Bone_marrow	prod_top1	35.1
+c	Bone_marrow	sub_top1	48.6
+c	Bone_marrow	prod_top5	73.0
+c	Bone_marrow	sub_top5	81.1
+c	POOLED	prod_top1	50.9
+c	POOLED	sub_top1	59.3
+c	POOLED	prod_top5	80.6
+c	POOLED	sub_top5	85.2

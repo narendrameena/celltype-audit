@@ -1,0 +1,13 @@
+panel	label	value	denominator
+a	disjointness	35	3537
+a	capable_of (GO)	276	3537
+a	surface marker (PRO)	302	3537
+a	part_of (Uberon)	882	3537
+a	logical genus	1737	3537
+a	is_a parent	3335	3537
+a	textual definition	3369	3537
+b	assertable_lineage_pairs	131	253
+b	blocked_by_overlap	122	253
+b	disjointness_asserted_in_CL	35	3537
+c	upper_bound_catchable_pct	6.8	100
+c	actually_refuted	0	28

@@ -1,0 +1,34 @@
+# panel a = agreement between two label->CL routes (lexical crosswalk vs expression);
+# it is NOT accuracy against ground truth. panel b = hand-curated gold, label-independent.
+panel	organ	n_types	top1_pct	top5_pct	ceiling_pct
+a	Ureter	6	83.3	100.0	
+a	Uterine_tube	12	83.3	100.0	
+a	Uterus	12	83.3	91.7	
+a	Pancreas	10	80.0	100.0	
+a	Heart	17	76.5	100.0	
+a	Muscle	12	66.7	75.0	
+a	Oesophagus	6	66.7	83.3	
+a	Stomach	6	66.7	100.0	
+a	Intestine	14	64.3	92.9	
+a	Bladder	10	60.0	70.0	
+a	Blood	14	57.1	85.7	
+a	Liver	14	57.1	78.6	
+a	Spleen	25	56.0	88.0	
+a	Bone_marrow	15	53.3	80.0	
+a	Testis	6	50.0	83.3	
+a	Kidney	13	46.2	76.9	
+a	Prostate	9	44.4	100.0	
+a	Adipose	7	42.9	85.7	
+a	Lung	19	42.1	68.4	
+a	Lymph_node	10	40.0	80.0	
+a	Skin	24	33.3	79.2	
+a	Bronchi	11	27.3	81.8	
+a	POOLED	315	56.8	85.7	
+b	POOLED_handcurated_n>=500	200	55.5		
+b	Pancreas	19	89.5	100.0	82.4
+b	Liver	24	54.2	79.2	96.2
+b	Blood	24	45.8	79.2	96.6
+b	Bone_marrow	36	33.3	72.2	93.2
+b	Lung	33	60.6	97.0	100.0
+b	Kidney	24	62.5	95.8	96.0
+b	Heart	33	60.6	97.0	97.1
