@@ -1,5 +1,7 @@
 # celltype-audit
 
+[![tests](https://github.com/narendrameena/celltype-audit/actions/workflows/tests.yml/badge.svg)](https://github.com/narendrameena/celltype-audit/actions/workflows/tests.yml)
+
 **Audit single-cell atlas annotations against the Cell Ontology and expression evidence.**
 
 A cell type's *label* and its *expression* are two independent claims about the same
@@ -116,10 +118,10 @@ list of tissues and genes, with a stable cache key. Nothing depends on a local c
 ## Tests
 
 ```bash
-pip install celltype-audit[dev] && pytest
+pip install "celltype-audit[dev]" && pytest
 ```
 
-21 tests, no network required — they run against a synthetic ontology that reproduces the
+25 tests, no network required — they run against a synthetic ontology that reproduces the
 structural features the code depends on (polyhierarchy, synonym collisions, species-scoped
 and obsolete terms).
 
