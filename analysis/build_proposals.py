@@ -84,12 +84,48 @@ def already_known(label, g):
     forms = {norm(label), norm(re.sub(r"\([^)]*\)", " ", label))}
     forms |= {norm(a) for a in re.findall(r"\(([^)]+)\)", label)}
     forms |= {norm(x) for a in re.findall(r"\(([^)]+)\)", label) for x in a.split("/")}
+    forms |= {_depluralise(f) for f in list(forms)}
     hits = {}
     for f in filter(None, forms):
         c = syn.get(f) or ([by_name[f]] if f in by_name else None)
         if c:
             hits[f] = list(c)[0] if not isinstance(c, str) else c
+    if not hits:                                   # order- and plural-insensitive last pass
+        c = _token_index(g).get(_tokens(label))
+        if c:
+            hits[norm(label)] = sorted(c)[0]
     return hits
+
+
+def _depluralise(s):
+    return " ".join(w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith("ss") else w
+                    for w in s.split())
+
+
+def _tokens(s):
+    """A label as an unordered bag of stems, with `cell` dropped.
+
+    `Multipotent hematopoietic progenitor` and CL's `hematopoietic multipotent progenitor
+    cell` are the same words in a different order; `Schwann cell precursors` is CL's
+    `Schwann cell precursor` pluralised. Neither is an ontology gap, and asking a curator
+    to add either as a synonym wastes the one resource this whole queue exists to conserve.
+    """
+    return frozenset(w for w in _depluralise(norm(s)).split() if w not in ("cell", "cells"))
+
+
+_TOKIDX = {}
+
+
+def _token_index(g):
+    """token-set -> {curie}, over every CL label AND synonym. Built once."""
+    if _TOKIDX:
+        return _TOKIDX
+    for c, n in g["label"].items():
+        _TOKIDX.setdefault(_tokens(n), set()).add(c)
+    for name, cur in g["syn"].items():
+        for c in ([cur] if isinstance(cur, str) else cur):
+            _TOKIDX.setdefault(_tokens(name), set()).add(c)
+    return _TOKIDX
 
 
 def near_matches(label, index, k=3):
