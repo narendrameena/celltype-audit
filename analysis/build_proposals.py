@@ -70,6 +70,28 @@ def token_overlap(a, b):
     return len(A & B) / max(len(A | B), 1)
 
 
+def already_known(label, g):
+    """Does CL already resolve this label, by primary name or synonym?
+
+    The synonym index is keyed synonym -> [curie], not curie -> synonyms. Querying it the
+    wrong way round reported every abbreviation as absent, which would have put five
+    already-satisfied requests in front of a curator. Parenthetical abbreviations are
+    checked in their own right, since "Common lymphoid progenitor (CLP)" fails to resolve
+    only because of the bracket -- CL knows both halves.
+    """
+    syn, lab = g["syn"], g["label"]
+    by_name = {norm(n): c for c, n in lab.items()}
+    forms = {norm(label), norm(re.sub(r"\([^)]*\)", " ", label))}
+    forms |= {norm(a) for a in re.findall(r"\(([^)]+)\)", label)}
+    forms |= {norm(x) for a in re.findall(r"\(([^)]+)\)", label) for x in a.split("/")}
+    hits = {}
+    for f in filter(None, forms):
+        c = syn.get(f) or ([by_name[f]] if f in by_name else None)
+        if c:
+            hits[f] = list(c)[0] if not isinstance(c, str) else c
+    return hits
+
+
 def near_matches(label, index, k=3):
     """Deterministic candidate CL terms for a label that did not resolve.
 
@@ -81,7 +103,7 @@ def near_matches(label, index, k=3):
     scored = []
     for curie, name in index.items():
         n = norm(name)
-        if not n or n in GENERIC:
+        if not n or n in GENERIC or name.lower().startswith("obsolete"):
             continue
         d = edits(q, n)
         if d == 0:
@@ -102,6 +124,7 @@ def near_matches(label, index, k=3):
 def main():
     g = load()
     labels = g["label"]
+    satisfied = []
     obsolete = set(g.get("obsolete", []) or [])
     props = []
 
@@ -121,12 +144,24 @@ def main():
             cur, _ = resolve2(label, ctx, organ=organ)
             if cur:
                 continue
+            known = already_known(label, g)
+            if known:
+                # CL already covers this under another form; nothing to request
+                satisfied.append({"organ": organ, "label": label,
+                                  "n_cells": v["n_cells"], "matched": known})
+                continue
             cands = near_matches(label, labels)
             mk = [m["gene"] for m in deep.get(organ, {}).get(label, {}).get("markers", [])[:6]]
             top = [{"curie": c["curie"], "name": labels.get(c["curie"], c["curie"])}
                    for c in v.get("cl", [])[:3]]
             best = cands[0] if cands else None
+            # The lexical route and the expression route are two independent claims about
+            # the same cluster. Where they disagree, that disagreement IS the finding --
+            # leading with the lexical guess would repeat the error this study is about.
+            disagree = bool(best and top and best[1] != top[0]["curie"])
             props.append({
+                "lexical_vs_expression": ("disagree" if disagree else
+                                          ("agree" if best and top else "n/a")),
                 "kind": "synonym" if best and best[0] >= 0.72 else "new-term",
                 "organ": organ, "label": label, "n_cells": v["n_cells"],
                 "markers": mk,
@@ -150,16 +185,27 @@ def main():
         art = D.get("cl_artifact_cells")
     except Exception:
         art = None
+    # named, and the relation verified absent, rather than described in the abstract
+    A, B = "CL:0002131", "CL:2000046"
+    from cl_lineage import ancestors as _anc
+    unrelated = B not in _anc(A) and A not in _anc(B)
     props.append({
-        "kind": "missing-axiom", "organ": "Heart", "label": "Ventricle cardiomyocyte",
+        "kind": "missing-axiom", "organ": "Heart", "label": "Ventricle cardiomyocyte cell",
         "n_cells": art or 180750, "markers": [],
-        "candidate": None, "alternatives": [], "expression_top": [],
-        "note": ("Two sibling ventricular-cardiomyocyte terms carry no `is_a` path between "
-                 "them, so clusters split across them register as a disagreement the "
-                 "expression cannot adjudicate. The relationship, not the annotation, is "
-                 "what is missing."),
+        "candidate": {"curie": A, "name": labels.get(A, A), "overlap": 1.0},
+        "alternatives": [{"curie": B, "name": labels.get(B, B), "overlap": 1.0}],
+        "expression_top": [],
+        "note": ("The atlas label resolves to %s (%s), while CL also carries %s (%s). "
+                 "Neither subsumes the other -- there is no `is_a` path in either "
+                 "direction -- though they share ancestors up to cardiocyte, so a cluster "
+                 "assigned to one registers as disagreeing with the other and expression "
+                 "cannot adjudicate between them. Whether a subclass relation belongs here "
+                 "is a curatorial judgement; what the audit establishes is that the "
+                 "relation is absent and that %s cells sit on one side of it."
+                 % (A, labels.get(A, A), B, labels.get(B, B), format(art or 180750, ","))),
         "checks": {"V1": "pass", "V2": "pass", "V3": "pass",
-                   "V9": "n/a", "V10": "n/a", "V12": "pass"},
+                   "V9": "n/a", "V10": "n/a",
+                   "V12": "pass" if unrelated else "fail"},
     })
 
     # ----------------------------------------------------- a marker sufficient condition
@@ -178,6 +224,8 @@ def main():
                    "V9": "fail", "V10": "not-run", "V12": "pass"},
     })
 
+    for p in props:
+        p.setdefault("lexical_vs_expression", "n/a")
     props.sort(key=lambda r: (r["kind"], -r["n_cells"]))
     summary = {
         "generated_from": "celltype-audit",
@@ -187,10 +235,18 @@ def main():
                     for k in sorted({p["kind"] for p in props})},
         "checks_run": CHECKS, "checks_not_run": NOT_RUN,
         "cells_covered": sum(p["n_cells"] for p in props),
+        "already_satisfied": len(satisfied),
+        "routes_disagree": sum(1 for p in props if p["lexical_vs_expression"] == "disagree"),
     }
     os.makedirs(OUT, exist_ok=True)
     json.dump({"summary": summary, "proposals": props},
               open(os.path.join(OUT, "proposals.json"), "w"), indent=1)
+    if satisfied:
+        print("dropped %d labels CL already resolves under another form:" % len(satisfied))
+        for x in satisfied:
+            print("   %-13s %-34s via %s" % (x["organ"], x["label"][:34],
+                                             ", ".join(sorted(x["matched"]))))
+        print()
     print("%d proposals  %s" % (len(props), summary["by_kind"]))
     print("cells covered: %s" % format(summary["cells_covered"], ","))
     print("wrote %s" % os.path.join(OUT, "proposals.json"))

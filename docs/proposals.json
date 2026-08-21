@@ -2,30 +2,34 @@
  "summary": {
   "generated_from": "celltype-audit",
   "cl_release": "2026-06-08",
-  "n": 40,
+  "n": 35,
   "by_kind": {
    "marker-condition": 1,
    "missing-axiom": 1,
    "new-term": 30,
-   "synonym": 8
+   "synonym": 3
   },
   "checks_run": [
    "V1",
+   "V10",
+   "V12",
    "V2",
    "V3",
-   "V9",
-   "V10",
-   "V12"
-  ],
-  "checks_not_run": [
    "V4",
    "V5",
    "V6",
    "V7",
-   "V8"
+   "V8",
+   "V9"
   ],
-  "cells_covered": 356253,
-  "routes_disagree": 18
+  "checks_not_run": [],
+  "cells_covered": 348795,
+  "already_satisfied": 5,
+  "routes_disagree": 13,
+  "reasoner": {
+   "engine": "ELK via ROBOT",
+   "ontology": "cl-base.owl"
+  }
  },
  "proposals": [
   {
@@ -51,29 +55,58 @@
     "V3": "pass",
     "V9": "fail",
     "V10": "not-run",
-    "V12": "pass"
+    "V12": "pass",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
-   "lexical_vs_expression": "n/a"
+   "lexical_vs_expression": "n/a",
+   "reason_note": "CL carries no marker property, so this proposal cannot be stated as an axiom against the current release; it is a request for one rather than an axiom to check."
   },
   {
    "kind": "missing-axiom",
    "organ": "Heart",
-   "label": "Ventricle cardiomyocyte",
+   "label": "Ventricle cardiomyocyte cell",
    "n_cells": 180750,
    "markers": [],
-   "candidate": null,
-   "alternatives": [],
+   "candidate": {
+    "curie": "CL:0002131",
+    "name": "regular ventricular cardiac myocyte",
+    "overlap": 1.0
+   },
+   "alternatives": [
+    {
+     "curie": "CL:2000046",
+     "name": "ventricular cardiac muscle cell",
+     "overlap": 1.0
+    }
+   ],
    "expression_top": [],
-   "note": "Two sibling ventricular-cardiomyocyte terms carry no `is_a` path between them, so clusters split across them register as a disagreement the expression cannot adjudicate. The relationship, not the annotation, is what is missing.",
+   "note": "The atlas label resolves to CL:0002131 (regular ventricular cardiac myocyte), while CL also carries CL:2000046 (ventricular cardiac muscle cell). Neither subsumes the other -- there is no `is_a` path in either direction -- though they share ancestors up to cardiocyte, so a cluster assigned to one registers as disagreeing with the other and expression cannot adjudicate between them. Whether a subclass relation belongs here is a curatorial judgement; what the audit establishes is that the relation is absent and that 180,750 cells sit on one side of it.",
    "checks": {
     "V1": "pass",
     "V2": "pass",
     "V3": "pass",
     "V9": "n/a",
     "V10": "n/a",
-    "V12": "pass"
+    "V12": "pass",
+    "V4": "pass",
+    "V5": "pass",
+    "V6": "pass",
+    "V7": "pass",
+    "V8": "pass"
    },
-   "lexical_vs_expression": "n/a"
+   "lexical_vs_expression": "n/a",
+   "reason_note": "asserts an is_a path between the two sibling terms",
+   "reason_evidence": {
+    "V4": "merged cleanly",
+    "V5": "no class becomes unsatisfiable",
+    "V6": "1 new entailment(s), none outside the axiom's signature",
+    "V7": "nothing new entailed between pre-existing classes",
+    "V8": "1 new entailment(s)"
+   }
   },
   {
    "lexical_vs_expression": "n/a",
@@ -111,7 +144,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -165,7 +203,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -204,7 +247,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -258,7 +306,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -290,7 +343,12 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -344,7 +402,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -380,7 +443,12 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -419,7 +487,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -458,7 +531,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -497,7 +575,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -536,7 +619,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -579,7 +667,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -622,7 +715,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -661,7 +759,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -693,7 +796,12 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -736,7 +844,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -779,7 +892,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -818,7 +936,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -861,7 +984,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -900,7 +1028,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -954,7 +1087,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1008,7 +1146,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1047,7 +1190,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1086,7 +1234,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1125,7 +1278,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1157,7 +1315,12 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1189,7 +1352,12 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1238,7 +1406,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1270,7 +1443,12 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1309,61 +1487,12 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Bone_marrow",
-   "label": "Common lymphoid progenitor (CLP)",
-   "n_cells": 3701,
-   "markers": [
-    "NLRP6",
-    "NPY",
-    "CYGB",
-    "UHRF1",
-    "GABPAP",
-    "SMIM3"
-   ],
-   "candidate": {
-    "curie": "CL:0000051",
-    "name": "common lymphoid progenitor",
-    "overlap": 1.0
-   },
-   "alternatives": [
-    {
-     "curie": "CL:0000049",
-     "name": "common myeloid progenitor",
-     "overlap": 0.5
-    },
-    {
-     "curie": "CL:0000936",
-     "name": "early lymphoid progenitor",
-     "overlap": 0.5
-    }
-   ],
-   "expression_top": [
-    {
-     "curie": "CL:0002045",
-     "name": "fraction A pre-pro B cell"
-    },
-    {
-     "curie": "CL:0000936",
-     "name": "early lymphoid progenitor"
-    },
-    {
-     "curie": "CL:0002048",
-     "name": "late pro-B cell"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
-    "V9": "pass",
-    "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1399,115 +1528,12 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Bone_marrow",
-   "label": "Common myeloid progenitor (CMP)",
-   "n_cells": 1336,
-   "markers": [
-    "HNRNPA1L2",
-    "RPLP0P2",
-    "MATR3",
-    "SUMO4",
-    "LAPTM4B",
-    "CRHBP"
-   ],
-   "candidate": {
-    "curie": "CL:0000049",
-    "name": "common myeloid progenitor",
-    "overlap": 1.0
-   },
-   "alternatives": [
-    {
-     "curie": "CL:0001059",
-     "name": "common myeloid progenitor, CD34-positive",
-     "overlap": 0.6
-    },
-    {
-     "curie": "CL:0000051",
-     "name": "common lymphoid progenitor",
-     "overlap": 0.5
-    }
-   ],
-   "expression_top": [
-    {
-     "curie": "CL:0000115",
-     "name": "endothelial cell"
-    },
-    {
-     "curie": "CL:0000810",
-     "name": "CD4-positive, alpha-beta thymocyte"
-    },
-    {
-     "curie": "CL:0000066",
-     "name": "epithelial cell"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
-    "V9": "pass",
-    "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Spleen",
-   "label": "Common lymphoid progenitor (CLP)",
-   "n_cells": 1012,
-   "markers": [
-    "DNTT",
-    "NPY",
-    "CMTM7",
-    "LCN6",
-    "MLXIP",
-    "TLE4"
-   ],
-   "candidate": {
-    "curie": "CL:0000051",
-    "name": "common lymphoid progenitor",
-    "overlap": 1.0
-   },
-   "alternatives": [
-    {
-     "curie": "CL:0000049",
-     "name": "common myeloid progenitor",
-     "overlap": 0.5
-    },
-    {
-     "curie": "CL:0000936",
-     "name": "early lymphoid progenitor",
-     "overlap": 0.5
-    }
-   ],
-   "expression_top": [
-    {
-     "curie": "CL:0002048",
-     "name": "late pro-B cell"
-    },
-    {
-     "curie": "CL:0000817",
-     "name": "precursor B cell"
-    },
-    {
-     "curie": "CL:0000826",
-     "name": "pro-B cell"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
-    "V9": "pass",
-    "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1550,115 +1576,12 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Pancreas",
-   "label": "Pancreatic stellate cell (PSC)",
-   "n_cells": 747,
-   "markers": [
-    "CRISPLD2",
-    "C11orf96",
-    "ADCY8",
-    "SMIM3",
-    "PDGFRB",
-    "AEBP1"
-   ],
-   "candidate": {
-    "curie": "CL:0002410",
-    "name": "pancreatic stellate cell",
-    "overlap": 1.0
-   },
-   "alternatives": [
-    {
-     "curie": "CL:0000171",
-     "name": "pancreatic A cell",
-     "overlap": 0.5
-    },
-    {
-     "curie": "CL:0000173",
-     "name": "pancreatic D cell",
-     "overlap": 0.5
-    }
-   ],
-   "expression_top": [
-    {
-     "curie": "CL:0008019",
-     "name": "mesenchymal cell"
-    },
-    {
-     "curie": "CL:0000192",
-     "name": "smooth muscle cell"
-    },
-    {
-     "curie": "CL:0000183",
-     "name": "contractile cell"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
-    "V9": "pass",
-    "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Ovary",
-   "label": "Oocyte (Ootid/Ovum)",
-   "n_cells": 662,
-   "markers": [
-    "ASRGL1",
-    "NANOS3",
-    "ETV4",
-    "TCL1B",
-    "L1TD1",
-    "PDPN"
-   ],
-   "candidate": {
-    "curie": "CL:0000023",
-    "name": "oocyte",
-    "overlap": 1.0
-   },
-   "alternatives": [
-    {
-     "curie": "CL:0000654",
-     "name": "primary oocyte",
-     "overlap": 0.5
-    },
-    {
-     "curie": "CL:0000655",
-     "name": "secondary oocyte",
-     "overlap": 0.5
-    }
-   ],
-   "expression_top": [
-    {
-     "curie": "CL:0000670",
-     "name": "primordial germ cell"
-    },
-    {
-     "curie": "CL:0000784",
-     "name": "plasmacytoid dendritic cell"
-    },
-    {
-     "curie": "CL:0000150",
-     "name": "glandular secretory epithelial cell"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
-    "V9": "pass",
-    "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   },
   {
@@ -1705,7 +1628,12 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run"
+    "V12": "not-run",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    }
   }
  ]
