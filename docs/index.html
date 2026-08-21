@@ -95,15 +95,21 @@
               text-transform:uppercase; color:var(--faint)}
 
   /* the relation itself: atlas label -> CL term, drawn as the edge it proposes */
-  .rel{display:grid; grid-template-columns:1fr 34px 1fr; align-items:center;
+  .rel{display:grid; grid-template-columns:1fr 26px 1fr 26px 1fr; align-items:stretch;
        gap:0; padding:0 18px 14px}
+  .side.data{border-color:var(--accent)}
+  .side.data .lab{color:var(--accent)}
+  .split{display:flex; align-items:center; justify-content:center; padding:11px 18px 0;
+         gap:8px; font-size:11.5px; color:var(--fail); font-weight:620}
+  .split.agree{color:var(--muted); font-weight:500}
+  .split i{flex:1; height:1px; background:currentColor; opacity:.35}
   .side{padding:9px 12px; border:1px solid var(--hair); border-radius:7px;
         background:var(--sunk); min-width:0}
   .side .lab{font-size:10px; letter-spacing:.09em; text-transform:uppercase;
              color:var(--faint); display:block; margin-bottom:3px}
   .side .val{font-size:13.5px; overflow-wrap:anywhere}
   .side .cur{font-size:11.5px; color:var(--muted); display:block; margin-top:2px}
-  .edge{position:relative; height:2px; background:var(--rule)}
+  .edge{position:relative; height:2px; align-self:center; background:var(--rule)}
   .edge::after{content:""; position:absolute; right:-1px; top:-3px;
                border:4px solid transparent; border-left-color:var(--rule)}
   .edge.broken{background:none; border-top:2px dashed var(--fail)}
@@ -130,11 +136,13 @@
   .act:hover{text-decoration:underline}
   .act:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 
+  .split + .note{margin-top:10px}
   .foot{margin-top:34px; padding-top:20px; border-top:1px solid var(--rule);
         font-size:12.5px; color:var(--muted); max-width:74ch}
   .foot a{color:var(--accent)}
   @media (max-width:640px){
     .rel{grid-template-columns:1fr; gap:8px}
+    .split{padding:8px 18px 0}
     .edge{height:20px; width:2px; margin:0 auto; background:var(--rule)}
     .edge::after{right:-3px; top:auto; bottom:-1px; border:4px solid transparent;
                  border-top-color:var(--rule); border-left-color:transparent}
@@ -216,6 +224,7 @@ function render(){
   const shown = DATA.proposals.filter(p => active === "all" || p.kind === active);
   list.innerHTML = shown.map(p => {
     const cand = p.candidate;
+    const top = (p.expression_top && p.expression_top[0]) || null;
     const broken = p.kind === "missing-axiom";
     const verif = CHECK_ORDER.map(c => {
       const st = p.checks[c] || "not-run";
@@ -236,10 +245,18 @@ function render(){
         <div class="side"><span class="lab">atlas asserts</span>
           <span class="val mono">${esc(p.label)}</span></div>
         <div class="edge ${broken ? "broken" : ""}"></div>
-        <div class="side"><span class="lab">${broken ? "no is_a path to sibling" : (cand ? "nearest CL term" : "no CL term matches")}</span>
-          <span class="val">${cand ? esc(cand.name) : "&mdash;"}</span>
+        <div class="side"><span class="lab">${broken ? "no is_a path to sibling" : "by name alone"}</span>
+          <span class="val">${cand ? esc(cand.name) : "&mdash; no match"}</span>
           ${cand ? `<span class="cur mono">${esc(cand.curie)}</span>` : ""}</div>
+        <div class="edge"></div>
+        <div class="side data"><span class="lab">by its expression</span>
+          <span class="val">${top ? esc(top.name) : "&mdash; not scoreable"}</span>
+          ${top ? `<span class="cur mono">${esc(top.curie)}</span>` : ""}</div>
       </div>
+      ${p.lexical_vs_expression === "disagree"
+        ? `<div class="split"><i></i>the two routes disagree &mdash; the name and the data name different cells<i></i></div>`
+        : (p.lexical_vs_expression === "agree"
+           ? `<div class="split agree"><i></i>both routes agree<i></i></div>` : "")}
       ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
       ${p.markers && p.markers.length
         ? `<div class="genes">${p.markers.map(g => `<span class="g mono">${esc(g)}</span>`).join("")}</div>` : ""}
@@ -256,8 +273,8 @@ fetch("proposals.json").then(r => r.json()).then(d => {
   document.getElementById("stats").innerHTML = [
     [s.n, "proposals"],
     [s.cells_covered.toLocaleString(), "cells"],
-    [s.checks_run.length, "checks run"],
-    [s.checks_not_run.length, "not yet run"]
+    [s.routes_disagree, "routes disagree"],
+    [s.checks_not_run.length, "checks not run"]
   ].map(([v,l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
 
   const bar = document.getElementById("bar");

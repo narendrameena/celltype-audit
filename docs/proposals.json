@@ -24,7 +24,8 @@
    "V7",
    "V8"
   ],
-  "cells_covered": 356253
+  "cells_covered": 356253,
+  "routes_disagree": 18
  },
  "proposals": [
   {
@@ -51,7 +52,8 @@
     "V9": "fail",
     "V10": "not-run",
     "V12": "pass"
-   }
+   },
+   "lexical_vs_expression": "n/a"
   },
   {
    "kind": "missing-axiom",
@@ -70,9 +72,11 @@
     "V9": "n/a",
     "V10": "n/a",
     "V12": "pass"
-   }
+   },
+   "lexical_vs_expression": "n/a"
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Kidney",
    "label": "Principle cell",
@@ -111,6 +115,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Eye",
    "label": "Bipolar cell",
@@ -164,6 +169,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Prostate",
    "label": "Luminal cell",
@@ -202,6 +208,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Salivary_gland",
    "label": "Serous gland cell",
@@ -255,6 +262,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Adrenal_gland",
    "label": "Capsular cell",
@@ -286,6 +294,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Spleen",
    "label": "Mesodermal killer cell",
@@ -339,6 +348,7 @@
    }
   },
   {
+   "lexical_vs_expression": "agree",
    "kind": "new-term",
    "organ": "Ureter",
    "label": "Umbrella cell",
@@ -374,6 +384,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Eye",
    "label": "OFF-BC",
@@ -412,6 +423,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Spleen",
    "label": "CD4 Tem",
@@ -450,6 +462,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Spleen",
    "label": "CD8 Tem",
@@ -488,6 +501,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Eye",
    "label": "ON-BC",
@@ -526,6 +540,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Heart",
    "label": "CD8 T te cell",
@@ -568,6 +583,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Heart",
    "label": "CD8 T trans cell",
@@ -610,6 +626,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Breast",
    "label": "Luminal cell",
@@ -648,6 +665,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Spinal_cord",
    "label": "Midplate (MP) cell",
@@ -679,6 +697,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Stomach",
    "label": "Pit cell",
@@ -721,6 +740,7 @@
    }
   },
   {
+   "lexical_vs_expression": "agree",
    "kind": "new-term",
    "organ": "Pancreas",
    "label": "Orthochromatophilic erythroblast",
@@ -763,6 +783,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Stomach",
    "label": "Fundic gland",
@@ -801,6 +822,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Brain",
    "label": "PV inhibitory neuron",
@@ -818,13 +840,7 @@
     "name": "inhibitory motor neuron",
     "overlap": 0.5
    },
-   "alternatives": [
-    {
-     "curie": "CL:0008029",
-     "name": "obsolete inhibitory neuron",
-     "overlap": 0.5
-    }
-   ],
+   "alternatives": [],
    "expression_top": [
     {
      "curie": "CL:4023018",
@@ -849,6 +865,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Testis",
    "label": "Spermatogenic cell",
@@ -887,6 +904,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Lung",
    "label": "Erythroid-like cell",
@@ -940,6 +958,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Nose",
    "label": "Serous gland cell",
@@ -993,6 +1012,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Kidney",
    "label": "Proximal convoluted tubule progenitor",
@@ -1031,6 +1051,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Skin",
    "label": "CD8 Treg",
@@ -1069,6 +1090,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Kidney",
    "label": "Loop of henle progenitor",
@@ -1107,6 +1129,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Spinal_cord",
    "label": "Floor plate (FP) cell",
@@ -1138,6 +1161,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Pleura",
    "label": "Mesothelium",
@@ -1169,6 +1193,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "new-term",
    "organ": "Brain",
    "label": "VIP inhibitory neuron",
@@ -1187,11 +1212,6 @@
     "overlap": 0.5
    },
    "alternatives": [
-    {
-     "curie": "CL:0008029",
-     "name": "obsolete inhibitory neuron",
-     "overlap": 0.5
-    },
     {
      "curie": "CL:4042014",
      "name": "spiny VIP neuron",
@@ -1222,6 +1242,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Spinal_cord",
    "label": "Roof plate (RP) cell",
@@ -1253,6 +1274,7 @@
    }
   },
   {
+   "lexical_vs_expression": "n/a",
    "kind": "new-term",
    "organ": "Spleen",
    "label": "CD4 Trm",
@@ -1291,6 +1313,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Bone_marrow",
    "label": "Common lymphoid progenitor (CLP)",
@@ -1344,6 +1367,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Spinal_cord",
    "label": "Multipotent hematopoietic progenitor",
@@ -1379,6 +1403,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Bone_marrow",
    "label": "Common myeloid progenitor (CMP)",
@@ -1432,6 +1457,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Spleen",
    "label": "Common lymphoid progenitor (CLP)",
@@ -1485,6 +1511,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Spleen",
    "label": "Multipotent hematopoietic progenitor",
@@ -1527,6 +1554,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Pancreas",
    "label": "Pancreatic stellate cell (PSC)",
@@ -1580,6 +1608,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Ovary",
    "label": "Oocyte (Ootid/Ovum)",
@@ -1633,6 +1662,7 @@
    }
   },
   {
+   "lexical_vs_expression": "disagree",
    "kind": "synonym",
    "organ": "Adrenal_gland",
    "label": "Schwann cell precursors (SCPs)",
