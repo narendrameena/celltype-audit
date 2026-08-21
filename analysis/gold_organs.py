@@ -30,3 +30,11 @@ def curated(where=None):
 if __name__ == "__main__":
     got = curated()
     print("%d curated organs: %s" % (len(got), ", ".join(got)))
+
+
+# The organs curated most recently, after the mapper and the queue were fixed. They are
+# never tuned on, so they act as a prospective held-out set. Declared here rather than in
+# each figure script: fig2_performance.py carried its own copy naming Lung, Kidney and
+# Heart -- the PREVIOUS held-out set -- and went on marking them as held out, and quoting
+# their accuracy, for a month after skin, spleen and muscle superseded them.
+HELD_OUT = ("Skin", "Spleen", "Muscle")

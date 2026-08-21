@@ -166,7 +166,12 @@ def score(organ, min_cells_strata=(0, 500)):
 
 
 if __name__ == "__main__":
-    organs = sys.argv[1:] or ["Pancreas"]
+    # Default to EVERY curated organ, not a single example. This file is overwritten
+    # wholesale, so scoring a subset silently drops the rest: organ_scores.json sat at the
+    # seven organs curated on 2026-08-20 while skin, spleen and muscle were added around it,
+    # and Figure 2b pooled 200 cell types while the manuscript claimed 282.
+    from gold_organs import curated
+    organs = sys.argv[1:] or curated()
     allout = [o for o in (score(x) for x in organs) if o]
     if len(allout) > 1:
         print("\n=== SUMMARY ===")
