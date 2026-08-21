@@ -35,8 +35,12 @@ CURATED = set(curated())
 MINC = 500
 NMARK = 50
 
+# The pipeline's own candidate ranking is deliberately ABSENT. It is one of the two things
+# the gold exists to score, so putting it in front of the curator makes the measurement
+# partly circular -- the same failure the study documents for the label. The curator gets
+# the markers, the size and the label, and looks up CL directly.
 HEADER = ["cell_type", "n_cells", "markers_top50", "label_resolves_to", "resolved_name",
-          "expression_candidates", "GOLD_CURIE", "GOLD_NAME", "NOTE"]
+          "GOLD_CURIE", "GOLD_NAME", "NOTE"]
 
 
 def main():
@@ -48,7 +52,9 @@ def main():
     for fp in sorted(glob.glob(os.path.join(RES, "heca_to_cl_*.json"))):
         d = json.load(open(fp))
         organ = d["organ"]
-        if organ in CURATED or (want and organ not in want):
+        # naming an organ explicitly regenerates it even if a gold already exists, which is
+        # what re-curating a contaminated sheet requires
+        if (organ in CURATED and not want) or (want and organ not in want):
             continue
         deep = {}
         dp = os.path.join(RES, "heca_markers_deep_%s.json" % organ)
@@ -62,9 +68,8 @@ def main():
                 continue
             cur, _how = resolve2(t, ctx, organ=organ)
             mk = [m["gene"] for m in deep.get(t, {}).get("markers", [])[:NMARK]]
-            cands = ["%s %s" % (c["curie"], lab.get(c["curie"], "")) for c in v.get("cl", [])[:5]]
             rows.append([t, str(n), ";".join(mk), cur or "", lab.get(cur, "") if cur else "",
-                         " | ".join(cands), "", "", ""])
+                         "", "", ""])
         if not rows:
             continue
         p = os.path.join(OUT, "%s.tsv" % organ)
@@ -72,7 +77,8 @@ def main():
             fh.write("# %s -- %d cell types >= %d cells. Fill GOLD_CURIE from the markers.\n"
                      "# Where the markers contradict the label, the markers decide; say so in NOTE.\n"
                      "# Leave GOLD_CURIE empty to abstain -- abstention is explicit and is not\n"
-                     "# scored as a miss. Do not copy label_resolves_to: that is what is being tested.\n"
+                     "# scored as a miss. Do not copy label_resolves_to: that is what is being\n"
+                     "# tested. The pipeline's own ranking is not shown here, for the same reason.\n"
                      % (organ, len(rows), MINC))
             fh.write("\t".join(HEADER) + "\n")
             for r in rows:
