@@ -8,6 +8,13 @@
    "added": 40,
    "closed": 0,
    "withdrawn": 0
+  },
+  {
+   "date": "2026-08-21",
+   "release": "2026-06-08",
+   "added": 1,
+   "closed": 0,
+   "withdrawn": 6
   }
  ],
  "proposals": {
@@ -35,7 +42,7 @@
    "organ": "Heart",
    "label": "Ventricle cardiomyocyte",
    "n_cells": 180750,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -46,6 +53,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -624,7 +637,7 @@
    "organ": "Bone_marrow",
    "label": "Common lymphoid progenitor (CLP)",
    "n_cells": 3701,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -635,6 +648,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -662,7 +681,7 @@
    "organ": "Bone_marrow",
    "label": "Common myeloid progenitor (CMP)",
    "n_cells": 1336,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -673,6 +692,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -681,7 +706,7 @@
    "organ": "Spleen",
    "label": "Common lymphoid progenitor (CLP)",
    "n_cells": 1012,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -692,6 +717,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -719,7 +750,7 @@
    "organ": "Pancreas",
    "label": "Pancreatic stellate cell (PSC)",
    "n_cells": 747,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -730,6 +761,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -738,7 +775,7 @@
    "organ": "Ovary",
    "label": "Oocyte (Ootid/Ovum)",
    "n_cells": 662,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -749,6 +786,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -770,14 +813,34 @@
      "release": "2026-06-08"
     }
    ]
+  },
+  "e47755c74e73": {
+   "kind": "missing-axiom",
+   "organ": "Heart",
+   "label": "Ventricle cardiomyocyte cell",
+   "n_cells": 180750,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
   }
  },
  "latest": {
   "cl_release": "2026-06-08",
   "by_status": {
-   "drafted": 40
+   "drafted": 35,
+   "withdrawn": 6
   },
-  "open": 40,
+  "open": 35,
   "submitted": 0,
   "accepted": 0,
   "acceptance_rate": null
