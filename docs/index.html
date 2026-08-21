@@ -137,6 +137,9 @@
   .act:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 
   .split + .note{margin-top:10px}
+  .cycle{margin:22px 0 0; padding:11px 14px; border-left:2px solid var(--accent);
+         background:var(--sunk); font-size:13px; color:var(--muted); max-width:74ch}
+  .cycle:empty{display:none}
   .foot{margin-top:34px; padding-top:20px; border-top:1px solid var(--rule);
         font-size:12.5px; color:var(--muted); max-width:74ch}
   .foot a{color:var(--accent)}
@@ -182,6 +185,7 @@
       asserted is prose, and carries no weight here.</footer>
   </section>
 
+  <p class="cycle" id="cycle"></p>
   <div class="bar" id="bar"><span class="lbl">Filter</span></div>
   <ol id="list"></ol>
 
@@ -267,9 +271,24 @@ function render(){
   }).join("");
 }
 
-fetch("proposals.json").then(r => r.json()).then(d => {
+Promise.all([
+  fetch("proposals.json").then(r => r.json()),
+  fetch("state.json").then(r => r.ok ? r.json() : null).catch(() => null)
+]).then(([d, st]) => {
   DATA = d;
   const s = d.summary;
+  if (st && st.latest) {
+    const by = st.latest.by_status || {};
+    const open = st.latest.open || 0, res = by.resolved || 0;
+    document.getElementById("cycle").innerHTML =
+      `Tracked since ${st.first_run} across CL ${st.latest.cl_release}. ` +
+      `<b>${open}</b> still open, <b>${res}</b> closed by a later release, ` +
+      `<b>${st.latest.submitted}</b> submitted. ` +
+      (st.latest.acceptance_rate === null
+        ? `Acceptance rate is not yet measurable &mdash; it needs an adjudicated request, ` +
+          `and a gap closing in CL is not evidence that we closed it.`
+        : `Acceptance rate <b>${st.latest.acceptance_rate}%</b>.`);
+  }
   document.getElementById("stats").innerHTML = [
     [s.n, "proposals"],
     [s.cells_covered.toLocaleString(), "cells"],
