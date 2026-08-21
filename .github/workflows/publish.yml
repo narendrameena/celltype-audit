@@ -46,7 +46,12 @@ jobs:
     name: publish to PyPI
     needs: build
     runs-on: ubuntu-latest
-    environment: pypi
+    # No `environment:` on purpose. PyPI matches the OIDC `sub` claim exactly, and an
+    # environment must therefore be set in BOTH the workflow and the trusted publisher or
+    # in NEITHER -- a mismatch in either direction fails as `invalid-publisher`. The field
+    # is optional on PyPI's form and commonly left blank, so the no-environment form is the
+    # one more likely to match a publisher someone has just registered. To use one, add
+    # `environment: pypi` back here AND type `pypi` into the publisher's Environment field.
     # Trusted Publishing: PyPI verifies this workflow's OIDC identity, so no API
     # token is stored anywhere. Configure once at
     # https://pypi.org/manage/account/publishing/
@@ -92,7 +97,7 @@ jobs:
           echo "  owner            : ${{ github.repository_owner }}"
           echo "  repository       : ${{ github.event.repository.name }}"
           echo "  workflow         : publish.yml"
-          echo "  environment      : pypi"
+          echo "  environment      : (leave BLANK -- this workflow declares none)"
           echo
           echo "Then re-run this job. No API token needs to be created or stored: that is"
           echo "the point of Trusted Publishing, and a token that has been pasted anywhere"
