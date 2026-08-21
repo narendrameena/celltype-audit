@@ -139,8 +139,12 @@ and obsolete terms).
   against it and which were not; approval happens on the
   [cell-ontology](https://github.com/obophenotype/cell-ontology/issues) and
   [provisional Cell Ontology](https://github.com/obophenotype/provisional_cell_ontology)
-  issue trackers, not here. Regenerate with `python analysis/build_proposals.py`.
-- **`analysis/`** — the 41 scripts behind the study, so every number is traceable to the
+  issue trackers, not here. Regenerate with `python analysis/build_proposals.py`, then
+  `python analysis/proposal_state.py` to record each proposal and re-check, against the
+  current CL release, whether an earlier gap has since closed. A closure is measured, not
+  attributed: CL gains terms constantly, so `resolved` says the gap is gone, never that we
+  closed it.
+- **`analysis/`** — the 42 scripts behind the study, so every number is traceable to the
   code that produced it (`cl_resolve.py`, `audit_ts.py`, `cxg_survey.py`,
   `sensitivity.py`, `downstream_impact.py`, ...).
 - **`gold/`** — 7 hand-curated gold standards, 200 cell types across 7 organs, each
