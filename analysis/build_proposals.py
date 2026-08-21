@@ -125,6 +125,17 @@ def main():
     g = load()
     labels = g["label"]
     satisfied = []
+    decided = []
+    # A label a curator has already assigned a gold term to is a MIS-ANNOTATION, not a gap
+    # in the ontology: the right term exists and the atlas used the wrong one. Asking CL for
+    # a new term in that case would be asking it to absorb someone else's labelling error.
+    from gold_organs import curated as _curated_organs
+    GOLDS = {}
+    for _o in _curated_organs():
+        _p = os.path.join(HERE, "%s_gold.json" % _o.lower())
+        if os.path.exists(_p):
+            GOLDS[_o] = {k: v for k, v in json.load(open(_p)).items()
+                         if not k.startswith("_")}
     obsolete = set(g.get("obsolete", []) or [])
     props = []
 
@@ -143,6 +154,10 @@ def main():
                 continue
             cur, _ = resolve2(label, ctx, organ=organ)
             if cur:
+                continue
+            if label in GOLDS.get(organ, {}):
+                decided.append({"organ": organ, "label": label, "n_cells": v["n_cells"],
+                                "gold": GOLDS[organ][label]})
                 continue
             known = already_known(label, g)
             if known:
@@ -236,6 +251,7 @@ def main():
         "checks_run": CHECKS, "checks_not_run": NOT_RUN,
         "cells_covered": sum(p["n_cells"] for p in props),
         "already_satisfied": len(satisfied),
+        "already_curated": len(decided),
         "routes_disagree": sum(1 for p in props if p["lexical_vs_expression"] == "disagree"),
     }
     os.makedirs(OUT, exist_ok=True)
@@ -246,6 +262,15 @@ def main():
         for x in satisfied:
             print("   %-13s %-34s via %s" % (x["organ"], x["label"][:34],
                                              ", ".join(sorted(x["matched"]))))
+        print()
+    if decided:
+        print("dropped %d labels a curator has already assigned a term to -- these are\n"
+              "mis-annotations, not ontology gaps:" % len(decided))
+        for x in decided[:8]:
+            print("   %-13s %-34s -> %s" % (x["organ"], x["label"][:34],
+                                            x["gold"] or "abstained"))
+        if len(decided) > 8:
+            print("   ... and %d more" % (len(decided) - 8))
         print()
     print("%d proposals  %s" % (len(props), summary["by_kind"]))
     print("cells covered: %s" % format(summary["cells_covered"], ","))

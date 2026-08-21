@@ -22,6 +22,20 @@
    "added": 0,
    "closed": 0,
    "withdrawn": 0
+  },
+  {
+   "date": "2026-08-21",
+   "release": "2026-06-08",
+   "added": 0,
+   "closed": 0,
+   "withdrawn": 0
+  },
+  {
+   "date": "2026-08-21",
+   "release": "2026-06-08",
+   "added": 0,
+   "closed": 0,
+   "withdrawn": 13
   }
  ],
  "proposals": {
@@ -74,7 +88,7 @@
    "organ": "Kidney",
    "label": "Principle cell",
    "n_cells": 11753,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -85,6 +99,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -169,7 +189,7 @@
    "organ": "Spleen",
    "label": "Mesodermal killer cell",
    "n_cells": 6128,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -180,6 +200,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -226,7 +252,7 @@
    "organ": "Spleen",
    "label": "CD4 Tem",
    "n_cells": 3837,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -237,6 +263,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -245,7 +277,7 @@
    "organ": "Spleen",
    "label": "CD8 Tem",
    "n_cells": 3127,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -256,6 +288,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -283,7 +321,7 @@
    "organ": "Heart",
    "label": "CD8 T te cell",
    "n_cells": 2685,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -294,6 +332,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -302,7 +346,7 @@
    "organ": "Heart",
    "label": "CD8 T trans cell",
    "n_cells": 2671,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -313,6 +357,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -378,7 +428,7 @@
    "organ": "Pancreas",
    "label": "Orthochromatophilic erythroblast",
    "n_cells": 2318,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -389,6 +439,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -454,7 +510,7 @@
    "organ": "Lung",
    "label": "Erythroid-like cell",
    "n_cells": 1750,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -465,6 +521,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -492,7 +554,7 @@
    "organ": "Kidney",
    "label": "Proximal convoluted tubule progenitor",
    "n_cells": 1631,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -503,6 +565,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -511,7 +579,7 @@
    "organ": "Skin",
    "label": "CD8 Treg",
    "n_cells": 1615,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -522,6 +590,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -530,7 +604,7 @@
    "organ": "Kidney",
    "label": "Loop of henle progenitor",
    "n_cells": 1522,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -541,6 +615,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -625,7 +705,7 @@
    "organ": "Spleen",
    "label": "CD4 Trm",
    "n_cells": 571,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -636,6 +716,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -738,7 +824,7 @@
    "organ": "Spleen",
    "label": "Multipotent hematopoietic progenitor",
    "n_cells": 754,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -749,6 +835,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -844,10 +936,10 @@
  "latest": {
   "cl_release": "2026-06-08",
   "by_status": {
-   "drafted": 35,
-   "withdrawn": 6
+   "drafted": 22,
+   "withdrawn": 19
   },
-  "open": 35,
+  "open": 22,
   "submitted": 0,
   "accepted": 0,
   "acceptance_rate": null
