@@ -212,19 +212,39 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 let DATA = null, active = "all";
 
 function issueURL(p){
+  // CL's README specifies a template and a label for new term requests; a bare
+  // issues/new bypasses both, so a request would arrive unlabelled and missing the
+  // fields curators expect. Synonyms and structural observations are not NTRs, so
+  // they use the generic form with the appropriate label instead.
+  const isNTR = p.kind === "new-term";
   const isSyn = p.kind === "synonym";
-  const repo = "obophenotype/cell-ontology";
-  const title = isSyn
-    ? `Add synonym "${p.label}" to ${p.candidate ? p.candidate.name : ""}`
-    : `New term request: ${p.label} (${p.organ})`;
-  const lines = [
-    `**Source** atlas label \`${p.label}\` in ${p.organ}, ${p.n_cells.toLocaleString()} cells`,
-    p.candidate ? `**Nearest existing term** ${p.candidate.name} (\`${p.candidate.curie}\`)` : "",
+  const q = new URLSearchParams();
+  if (isNTR) {
+    q.set("template", "a_adding_term.md");
+    q.set("labels", "new term request");
+    q.set("title", `[NTR] ${p.label} (${p.organ})`);
+  } else {
+    q.set("title", isSyn
+      ? `Add synonym "${p.label}" to ${p.candidate ? p.candidate.name : ""}`
+      : `${p.label} (${p.organ}): ${p.kind.replace("-", " ")}`);
+  }
+  const top = (p.expression_top && p.expression_top[0]) || null;
+  const body = [
+    `Found by [celltype-audit](https://github.com/narendrameena/celltype-audit) over a`,
+    `10.07M-cell atlas; evidence below, not yet reviewed by a CL curator.`,
+    ``,
+    `**Atlas label** \`${p.label}\` in ${p.organ.replace(/_/g, " ")}, ${p.n_cells.toLocaleString()} cells`,
+    p.candidate ? `**Nearest term by name** ${p.candidate.name} (\`${p.candidate.curie}\`)` : "",
+    top ? `**Best term by expression** ${top.name} (\`${top.curie}\`)` : "",
+    p.lexical_vs_expression === "disagree"
+      ? `> The two routes disagree, which is why this is worth a look.` : "",
     p.markers && p.markers.length ? `**Discriminative markers** ${p.markers.join(", ")}` : "",
     p.note ? `\n${p.note}` : "",
-    `\nDrafted by celltype-audit; checks run: ${CHECK_ORDER.filter(c => p.checks[c] === "pass").join(", ") || "none"}.`
-  ].filter(Boolean);
-  return `https://github.com/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(lines.join("\n"))}`;
+    ``,
+    `Checks passed: ${CHECK_ORDER.filter(c => p.checks[c] === "pass").join(", ") || "none"}.`
+  ].filter(Boolean).join("\n");
+  q.set("body", body);
+  return `https://github.com/obophenotype/cell-ontology/issues/new?${q.toString()}`;
 }
 
 function render(){
