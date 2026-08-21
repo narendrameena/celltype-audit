@@ -24,12 +24,50 @@ lung neutrophil:monocyte ratio from 1.25:1 to 0:1, against 0.07:1 in an independ
 pip install celltype-audit
 ```
 
-Releases are published from a version tag by the [publish workflow](.github/workflows/publish.yml),
-which refuses to run if the tag and `pyproject.toml` disagree, and runs the tests before
-anything is uploaded.
-
 Only `numpy` and `h5py` are required. The Cell Ontology and the expression reference are
 fetched from public endpoints on first use and cached under `~/.cache/celltype-audit`.
+
+### From git
+
+To install `main`, ahead of the latest release:
+
+```bash
+pip install "git+https://github.com/narendrameena/celltype-audit.git"
+```
+
+A tag, branch or commit pins it:
+
+```bash
+pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.1"
+```
+
+### From source
+
+Clone if you want the study as well as the tool. The gold standards, curation sheets,
+analysis scripts and figure code are in the repository, **not** in the wheel — `pip
+install` gives you `celltype_audit`, nothing else:
+
+```bash
+git clone https://github.com/narendrameena/celltype-audit.git
+cd celltype-audit
+pip install -e ".[dev]"      # editable, with pytest
+pytest -q                     # 36 tests; no network and no data needed
+```
+
+Use `pip install .` instead of `-e` when you want the package but not a working copy, or
+`python -m build` to produce a wheel and sdist under `dist/`.
+
+### Checking what you got
+
+```bash
+celltype-audit --version
+python -c "import celltype_audit; print(celltype_audit.__version__)"
+```
+
+Releases are published from a version tag by the
+[publish workflow](.github/workflows/publish.yml), which refuses to run if the tag and
+`pyproject.toml` disagree, and runs the tests before anything is uploaded. Uploads use
+PyPI Trusted Publishing, so no API token is stored in this repository or in CI.
 
 ## Quickstart
 
@@ -63,10 +101,12 @@ celltype-audit annotate fresh.h5ad --cluster-key seurat_clusters --tissue UBERON
 ```
 
 returns a ranked CL shortlist per cluster with the marker evidence attached. **This is a
-curation aid, not an annotator.** Measured against 200 hand-curated cell types with no
-label involved, the top-scoring term is right **55%** of the time (35% in bone marrow, 86%
-in pancreas) and a right call cannot be told from a wrong one (leave-one-organ-out AUC
-0.563). There is no threshold that makes it safe to automate.
+curation aid, not an annotator.** Measured against 297 hand-curated cell types with no
+label involved, the top-scoring term is right **56%** of the time (35% in bone marrow, 87%
+in muscle). Its confidence ranks better than chance but not well enough to act on
+unattended: leave-one-organ-out AUC 0.72, and precision reaches 80% only over the most
+confident 37% of calls and never reaches 90%. There is no threshold that makes it safe to
+automate.
 
 What it is good for is that the correct term is in the **top five 73-100%** of the time,
 so it turns "name this cluster" into "choose among five, with evidence". For automated
@@ -88,24 +128,27 @@ celltype-audit resolve "Neutrophilic granulocyte" "Alpha cell" --organ Pancreas
 labels; the misses are conventions, not exotica (`Haematopoietic stem cell` vs CL's `-e-`
 spelling, `Cardiomyocyte cell` doubling a suffix, `CD8 T cell` vs
 `CD8-positive, alpha-beta T cell`). A normalisation cascade plus organ-qualified lookup
-raises that to **80% of labels and 99% of cells**. Terms scoped to other species (CL
+raises that to **94% of labels and 99% of cells**. Terms scoped to other species (CL
 carries 152 mouse-only classes) and obsolete terms are never returned.
 
 **2. Lineage sweep.** Compare the anchor set of the asserted term against the terms the
 markers point to. Disjoint on every candidate means the two disagree about *lineage*.
-**~83% precision**, but structurally blind to any error inside one lineage — and most
-errors are: 9 of 14 in the reference study.
+**71% precision** (5 of 7 flags), but structurally blind to any error inside one lineage —
+and most errors are: 21 of 28 in the reference study.
 
 **3. Marker queue.** Ask which CL term best explains the cluster, guarded so a merely
 coarser or finer name is not called an error. As a binary flag this does **not** reach
 usable precision and is **not** shipped as one. Ranked, it puts real errors near the top.
 
-Together: reviewing **33 of 177** cell types surfaced **9 of 14** known errors.
+Together: reviewing **33 of 256** cell types surfaced **9 of 19** known errors — 27% of
+those reviews landing on a real error, against a 7.4% base rate.
 
 ## Limitations, stated
 
-- **Recall is not high.** The two tiers together found 64% of known errors at a 19% review
-  budget. This is triage, not an oracle.
+- **It is triage, not an oracle.** The top 33 candidates carry 9 of the 19 known errors;
+  reaching 80% of them takes 123 reviews of 256. Yield is what stays fixed as the gold
+  grows — recall at a fixed budget falls as more errors are curated into the denominator,
+  which says nothing about the method.
 - **The reference can hide errors in atlases that built it.** If your dataset is part of
   CELLxGENE, its own mislabelled clusters help the wrong term fit. Counts are a lower bound.
 - **Tissue coverage is the reference's, not yours.** CELLxGENE's expression vocabulary has
@@ -144,16 +187,18 @@ and obsolete terms).
   current CL release, whether an earlier gap has since closed. A closure is measured, not
   attributed: CL gains terms constantly, so `resolved` says the gap is gone, never that we
   closed it.
-- **`curation/`** — evidence sheets for the 29 organs that have no hand-curated gold:
-  388 cell types with their markers, sizes and candidate CL terms, and the decision
-  columns left empty. These are not a gold standard and must not be used as one until a
+- **`curation/`** — evidence sheets for the 26 organs that have no hand-curated gold:
+  402 cell types with their markers, sizes and candidate CL terms, and the decision
+  columns left empty. An organ's sheet is deleted once it has a gold, so the directory is
+  always the work that remains. These are not a gold standard and must not be used as one until a
   curator has filled them; the study's own result is that a gold cannot be assembled
   automatically. Regenerate with `python analysis/make_curation_sheets.py`.
-- **`analysis/`** — the 43 scripts behind the study, so every number is traceable to the
+- **`analysis/`** — the 47 scripts behind the study, so every number is traceable to the
   code that produced it (`cl_resolve.py`, `audit_ts.py`, `cxg_survey.py`,
   `sensitivity.py`, `downstream_impact.py`, ...).
-- **`gold/`** — 7 hand-curated gold standards, 200 cell types across 7 organs, each
-  assigned from marker evidence and **not** from the label. Files record which entries
+- **`gold/`** — 10 hand-curated gold standards, 388 cell types across 10 organs — 353
+  assigned from marker evidence and **not** from the label, and 35 explicit abstentions
+  where no term is defensible.  Files record which entries
   deliberately disagree with the atlas label, and why.
 - **`figures/`** — figure code, source data and rendered panels for 13 themes.
 - **`examples/`** — three notebooks: quickstart, unannotated data, and the worked

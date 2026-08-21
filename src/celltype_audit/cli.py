@@ -9,6 +9,8 @@ import argparse
 import json
 import sys
 
+from . import __version__
+
 
 def _audit(a):
     from .audit import audit_h5ad
@@ -84,8 +86,12 @@ def _reference(a):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(prog="celltype_audit", description=__doc__,
+    # prog matches the console script, not the module: the help text is what a user reads
+    # after `pip install`, and it should show the command they actually have.
+    p = argparse.ArgumentParser(prog="celltype-audit", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--version", action="version",
+                   version="celltype-audit %s" % __version__)
     p.add_argument("--cache", help="cache directory (default ~/.cache/celltype-audit)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
