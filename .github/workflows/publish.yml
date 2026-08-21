@@ -57,7 +57,18 @@ jobs:
         with:
           name: dist
           path: dist/
-      - id: upload
+      # Two routes, and the repository picks whichever is set up. Trusted Publishing is
+      # preferred and needs no secret at all; the token path exists because a project whose
+      # first release was uploaded by hand has no publisher registered, and configuring one
+      # is a manual step on PyPI that a release should not be blocked on.
+      - name: Upload (API token)
+        if: ${{ secrets.PYPI_API_TOKEN != '' }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+      - name: Upload (Trusted Publishing)
+        if: ${{ secrets.PYPI_API_TOKEN == '' }}
         uses: pypa/gh-action-pypi-publish@release/v1
 
       # The usual reason this step fails is that PyPI has no trusted publisher for the

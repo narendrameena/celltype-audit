@@ -38,7 +38,7 @@ pip install "git+https://github.com/narendrameena/celltype-audit.git"
 A tag, branch or commit pins it:
 
 ```bash
-pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.1"
+pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.2"
 ```
 
 ### From source
@@ -51,7 +51,7 @@ install` gives you `celltype_audit`, nothing else:
 git clone https://github.com/narendrameena/celltype-audit.git
 cd celltype-audit
 pip install -e ".[dev]"      # editable, with pytest
-pytest -q                     # 36 tests; no network and no data needed
+pytest -q                     # 39 tests; no network and no data needed
 ```
 
 Use `pip install .` instead of `-e` when you want the package but not a working copy, or
@@ -68,6 +68,45 @@ Releases are published from a version tag by the
 [publish workflow](.github/workflows/publish.yml), which refuses to run if the tag and
 `pyproject.toml` disagree, and runs the tests before anything is uploaded. Uploads use
 PyPI Trusted Publishing, so no API token is stored in this repository or in CI.
+
+## Configuration
+
+There is nothing to configure. No account, no API key, no config file — the tool talks to
+two public endpoints and caches what it fetches.
+
+**The first run downloads two things** into `~/.cache/celltype-audit`:
+
+| what | from | size |
+|---|---|---|
+| the Cell Ontology (`cl.json`) | `purl.obolibrary.org` | ~40 MB, once |
+| the expression reference, per tissue | `api.cellxgene.cziscience.com` | a few MB per tissue |
+
+Everything already cached is reused, so only the first run for a given tissue needs the
+network.
+
+**Moving the cache** — worth doing on HPC, where `$HOME` is often small or read-only from
+compute nodes:
+
+```bash
+export CELLTYPE_AUDIT_CACHE=/scratch/$USER/celltype-audit    # or: --cache /scratch/...
+```
+
+If your compute nodes have no outbound network, run once on a login node with that same
+path to warm the cache, then run the real job offline.
+
+**What your `.h5ad` needs.** Two things, and both have an escape hatch:
+
+- **a column of labels to audit.** `obs/cell_type` by default; if yours is called something
+  else, `--type-key annotation`. Getting this wrong lists the columns that *are* present
+  rather than failing obscurely.
+- **a tissue**, so there is something to score against. Taken from the file if it carries
+  `tissue_ontology_term_id` (the CELLxGENE layout); otherwise pass `--tissue UBERON:0002048`.
+  `--organ Lung` is separate and optional — it only helps resolve organ-qualified labels
+  like `Bronchial smooth muscle cell`.
+
+Gene symbols are read from `var/feature_name`, `var/Gene_symbol`, `var/gene_symbols` or
+`var/_index`, whichever exists. `celltype-audit` does not cluster; cluster with scanpy or
+Seurat first.
 
 ## Quickstart
 

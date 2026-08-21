@@ -15,6 +15,7 @@ from . import __version__
 def _audit(a):
     from .audit import audit_h5ad
     rep = audit_h5ad(a.h5ad, organ=a.organ, tissue=a.tissue, min_cells=a.min_cells,
+                     type_key=a.type_key,
                      topk=a.topk, cache=a.cache, verbose=not a.quiet)
     print()
     print(rep.summary())
@@ -98,6 +99,8 @@ def main(argv=None):
     a = sub.add_parser("audit", help="audit an h5ad's cell-type labels")
     a.add_argument("h5ad")
     a.add_argument("--organ", help="organ name, used to resolve organ-qualified labels")
+    a.add_argument("--type-key", default="cell_type",
+                   help="obs column holding the cell-type labels (default: cell_type)")
     a.add_argument("--tissue", help="UBERON id, if the file does not carry one")
     a.add_argument("--min-cells", type=int, default=500)
     a.add_argument("--topk", type=int, default=5)
