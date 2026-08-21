@@ -1,6 +1,6 @@
 panel	organ	label	n_cells	asserted	ts_best_match	off_lineage	on_lineage	verdict	celltypist
 d	-	Tabula Sapiens	81	-	-	-	-	agree=69;within=12;cross=0;thin_discarded=34	-
-d	-	hECA	131	-	-	-	-	agree=82;within=44;cross=5;thin_discarded=78	-
+d	-	hECA	158	-	-	-	-	agree=101;within=52;cross=5;thin_discarded=85	-
 a	Adipose	Fibroblast	479	connective	macrophage	0.529	0.311	CONFIRMED	
 a	Adipose	Smooth muscle cell	7904	muscle	fibroblast	0.512	0.000	CONFIRMED	
 a	Kidney	Neuroglial cell	718	neural	endothelial cell	0.479	0.000	CONFIRMED	

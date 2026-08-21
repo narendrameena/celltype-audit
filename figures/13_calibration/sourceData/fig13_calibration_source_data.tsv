@@ -1,8 +1,8 @@
 panel	key	value
 a	HRA crosswalks (n=315)	n=315;max_precision=73.9;at_coverage=28;coverage_at_80pct_precision=unreachable
 b	HRA crosswalks (n=315)	AUC=0.6843
-a	hand-curated gold (n=241)	n=241;max_precision=88.9;at_coverage=4;coverage_at_80pct_precision=28
-b	hand-curated gold (n=241)	AUC=0.7131
+a	hand-curated gold (n=282)	n=282;max_precision=87.1;at_coverage=11;coverage_at_80pct_precision=36
+b	hand-curated gold (n=282)	AUC=0.7260
 b	HRA crosswalks, score-shape features only	AUC=0.6527
 c	Intestine Erythrocyte -> progenitor cell	conf=0.9861;n_cells=1391;correct_in_top5=True
 c	Adipose Smooth muscle cell -> fibroblast	conf=0.9074;n_cells=7904;correct_in_top5=False

@@ -9,37 +9,37 @@ d	Lung	Bronchial smooth muscle cell	10805	-	bronchial smooth muscle cell	seconda
 d	Bone_marrow	Pre conventional dendritic cell	2967	-	conventional dendritic cell	plasmacytoid dendritic cell, human	-	queue_rank=8;ratio=0.152;error=True;anchor_flagged=False
 d	Skin	Conventional dendritic cell 2	2579	-	conventional dendritic cell	neutrophil	-	queue_rank=9;ratio=0.157;error=False;anchor_flagged=False
 d	Bone_marrow	Mesenchymal cell	528	-	mesenchymal cell	stromal cell of bone marrow	-	queue_rank=10;ratio=0.193;error=False;anchor_flagged=False
-d	Skin	Monocyte-derived macrophage	2184	-	macrophage	eurydendroid cell	-	queue_rank=11;ratio=0.206;error=False;anchor_flagged=False
-d	Kidney	Ureteric epithelial cell	554	-	epithelial cell	papillary tips cell	-	queue_rank=12;ratio=0.232;error=False;anchor_flagged=False
-d	Kidney	Myofibroblast	581	-	myofibroblast cell	stromal cell	-	queue_rank=13;ratio=0.266;error=True;anchor_flagged=False
-d	Pancreas	Fibroblast	2463	-	fibroblast	mesenchymal stem cell	-	queue_rank=14;ratio=0.311;error=False;anchor_flagged=False
-d	Lung	Naive CD8 T cell	1335	-	naive thymus-derived CD8-positive, alpha-beta T cell	lung resident memory CD8-positive, alpha-beta T cell	-	queue_rank=15;ratio=0.319;error=False;anchor_flagged=False
-d	Skin	Schwann cell	609	-	Schwann cell	blood vessel endothelial cell	-	queue_rank=16;ratio=0.328;error=True;anchor_flagged=False
-d	Bone_marrow	Myeloid cell	5497	-	myeloid cell	endothelial cell	-	queue_rank=17;ratio=0.354;error=False;anchor_flagged=False
-d	Skin	Monocyte	23110	-	monocyte	neutrophil	-	queue_rank=18;ratio=0.366;error=False;anchor_flagged=False
-d	Skin	Smooth muscle cell	17243	-	smooth muscle cell	blood vessel endothelial cell	-	queue_rank=19;ratio=0.368;error=False;anchor_flagged=False
-d	Skin	NK cell	11616	-	natural killer cell	mature NK T cell	-	queue_rank=20;ratio=0.376;error=False;anchor_flagged=False
-d	Liver	Dendritic cell	4231	-	liver dendritic cell	common dendritic progenitor	-	queue_rank=21;ratio=0.393;error=False;anchor_flagged=False
-d	Bone_marrow	NK T cell	8428	-	mature NK T cell	CD16-positive, CD56-dim natural killer cell, human	-	queue_rank=22;ratio=0.393;error=False;anchor_flagged=False
-d	Blood	Erythrocyte	14141	-	erythrocyte	platelet	-	queue_rank=23;ratio=0.397;error=False;anchor_flagged=False
-d	Heart	T cell	3288	-	T cell	lymphoid lineage restricted progenitor cell	-	queue_rank=24;ratio=0.397;error=False;anchor_flagged=False
-d	Lung	Memory CD8 T cell	1389	-	central memory CD8-positive, alpha-beta T cell	natural T-regulatory cell	-	queue_rank=25;ratio=0.406;error=True;anchor_flagged=False
-d	Bone_marrow	Haematopoietic stem and progenitor cell	40393	-	hematopoietic precursor cell	endothelial cell of sinusoid	-	queue_rank=26;ratio=0.412;error=False;anchor_flagged=False
-d	Bone_marrow	Memory CD8 T cell	9025	-	central memory CD8-positive, alpha-beta T cell	effector memory CD8-positive, alpha-beta T cell, terminally differentiated	-	queue_rank=27;ratio=0.425;error=False;anchor_flagged=False
-d	Lung	Lymphatic endothelial cell	7067	-	endothelial cell of lymphatic vessel	alveolar capillary type 1 endothelial cell	-	queue_rank=28;ratio=0.426;error=False;anchor_flagged=False
-d	Liver	T cell	3466	-	T cell	neuroblast (sensu Vertebrata)	-	queue_rank=29;ratio=0.433;error=False;anchor_flagged=False
-d	Lung	Basal cell	1590	-	basal cell	club cell	-	queue_rank=30;ratio=0.443;error=True;anchor_flagged=False
-d	Lung	Memory B cell	1942	-	memory B cell	small pre-B-II cell	-	queue_rank=31;ratio=0.446;error=False;anchor_flagged=False
-d	Kidney	Fibroblast	2473	-	fibroblast	endo-epithelial cell	-	queue_rank=32;ratio=0.451;error=False;anchor_flagged=False
-d	Kidney	Vascular smooth muscle cell	7255	-	vascular associated smooth muscle cell	mesangial cell	-	queue_rank=33;ratio=0.453;error=False;anchor_flagged=False
-d	Blood	T cell	90989	-	T cell	immature innate lymphoid cell	-	queue_rank=34;ratio=0.457;error=False;anchor_flagged=False
-d	Bone_marrow	Megakaryocytic progenitor cell	1520	-	megakaryocyte progenitor cell	megakaryocyte	-	queue_rank=35;ratio=0.457;error=False;anchor_flagged=False
-d	Blood	Memory CD8 T cell	1746	-	central memory CD8-positive, alpha-beta T cell	CD8-positive, alpha-beta cytotoxic T cell	-	queue_rank=36;ratio=0.463;error=False;anchor_flagged=False
-d	Heart	Activated CD4 T cell	2414	-	T cell	lymphoid lineage restricted progenitor cell	-	queue_rank=37;ratio=0.487;error=False;anchor_flagged=False
-d	Blood	Plasma B cell	3600	-	plasma cell	IgA plasmablast	-	queue_rank=38;ratio=0.502;error=False;anchor_flagged=False
-d	Lung	NKT cell	42712	-	mature NK T cell	activated CD8-positive, alpha-beta T cell	-	queue_rank=39;ratio=0.557;error=True;anchor_flagged=False
-d	Skin	T cell	8141	-	T cell	blood vessel endothelial cell	-	queue_rank=40;ratio=0.565;error=False;anchor_flagged=False
-d	-	SUMMARY	209	-	-	-	-	errors=18;anchor_flags=5;two_tier_reviewed=33;two_tier_found=9
+d	Spleen	Conventional dendritic cell	940	-	conventional dendritic cell	plasmacytoid dendritic cell	-	queue_rank=11;ratio=0.199;error=True;anchor_flagged=False
+d	Skin	Monocyte-derived macrophage	2184	-	macrophage	eurydendroid cell	-	queue_rank=12;ratio=0.206;error=False;anchor_flagged=False
+d	Spleen	Lymphoid cell	1978	-	lymphocyte	stromal cell	-	queue_rank=13;ratio=0.221;error=False;anchor_flagged=False
+d	Kidney	Ureteric epithelial cell	554	-	epithelial cell	papillary tips cell	-	queue_rank=14;ratio=0.232;error=False;anchor_flagged=False
+d	Kidney	Myofibroblast	581	-	myofibroblast cell	stromal cell	-	queue_rank=15;ratio=0.266;error=True;anchor_flagged=False
+d	Spleen	Memory CD8 T cell	11441	-	central memory CD8-positive, alpha-beta T cell	mature NK T cell	-	queue_rank=16;ratio=0.308;error=False;anchor_flagged=False
+d	Pancreas	Fibroblast	2463	-	fibroblast	mesenchymal stem cell	-	queue_rank=17;ratio=0.311;error=False;anchor_flagged=False
+d	Lung	Naive CD8 T cell	1335	-	naive thymus-derived CD8-positive, alpha-beta T cell	lung resident memory CD8-positive, alpha-beta T cell	-	queue_rank=18;ratio=0.319;error=False;anchor_flagged=False
+d	Skin	Schwann cell	609	-	Schwann cell	blood vessel endothelial cell	-	queue_rank=19;ratio=0.328;error=True;anchor_flagged=False
+d	Bone_marrow	Myeloid cell	5497	-	myeloid cell	endothelial cell	-	queue_rank=20;ratio=0.354;error=False;anchor_flagged=False
+d	Skin	Monocyte	23110	-	monocyte	neutrophil	-	queue_rank=21;ratio=0.366;error=False;anchor_flagged=False
+d	Skin	Smooth muscle cell	17243	-	smooth muscle cell	blood vessel endothelial cell	-	queue_rank=22;ratio=0.368;error=False;anchor_flagged=False
+d	Skin	NK cell	11616	-	natural killer cell	mature NK T cell	-	queue_rank=23;ratio=0.376;error=False;anchor_flagged=False
+d	Liver	Dendritic cell	4231	-	liver dendritic cell	common dendritic progenitor	-	queue_rank=24;ratio=0.393;error=False;anchor_flagged=False
+d	Bone_marrow	NK T cell	8428	-	mature NK T cell	CD16-positive, CD56-dim natural killer cell, human	-	queue_rank=25;ratio=0.393;error=False;anchor_flagged=False
+d	Blood	Erythrocyte	14141	-	erythrocyte	platelet	-	queue_rank=26;ratio=0.397;error=False;anchor_flagged=False
+d	Heart	T cell	3288	-	T cell	lymphoid lineage restricted progenitor cell	-	queue_rank=27;ratio=0.397;error=False;anchor_flagged=False
+d	Lung	Memory CD8 T cell	1389	-	central memory CD8-positive, alpha-beta T cell	natural T-regulatory cell	-	queue_rank=28;ratio=0.406;error=True;anchor_flagged=False
+d	Spleen	Pro-B cell	648	-	pro-B cell	late pro-B cell	-	queue_rank=29;ratio=0.411;error=False;anchor_flagged=False
+d	Bone_marrow	Haematopoietic stem and progenitor cell	40393	-	hematopoietic precursor cell	endothelial cell of sinusoid	-	queue_rank=30;ratio=0.412;error=False;anchor_flagged=False
+d	Bone_marrow	Memory CD8 T cell	9025	-	central memory CD8-positive, alpha-beta T cell	effector memory CD8-positive, alpha-beta T cell, terminally differentiated	-	queue_rank=31;ratio=0.425;error=False;anchor_flagged=False
+d	Lung	Lymphatic endothelial cell	7067	-	endothelial cell of lymphatic vessel	alveolar capillary type 1 endothelial cell	-	queue_rank=32;ratio=0.426;error=False;anchor_flagged=False
+d	Liver	T cell	3466	-	T cell	neuroblast (sensu Vertebrata)	-	queue_rank=33;ratio=0.433;error=False;anchor_flagged=False
+d	Lung	Basal cell	1590	-	basal cell	club cell	-	queue_rank=34;ratio=0.443;error=True;anchor_flagged=False
+d	Lung	Memory B cell	1942	-	memory B cell	small pre-B-II cell	-	queue_rank=35;ratio=0.446;error=False;anchor_flagged=False
+d	Kidney	Fibroblast	2473	-	fibroblast	endo-epithelial cell	-	queue_rank=36;ratio=0.451;error=False;anchor_flagged=False
+d	Kidney	Vascular smooth muscle cell	7255	-	vascular associated smooth muscle cell	mesangial cell	-	queue_rank=37;ratio=0.453;error=False;anchor_flagged=False
+d	Blood	T cell	90989	-	T cell	immature innate lymphoid cell	-	queue_rank=38;ratio=0.457;error=False;anchor_flagged=False
+d	Bone_marrow	Megakaryocytic progenitor cell	1520	-	megakaryocyte progenitor cell	megakaryocyte	-	queue_rank=39;ratio=0.457;error=False;anchor_flagged=False
+d	Blood	Memory CD8 T cell	1746	-	central memory CD8-positive, alpha-beta T cell	CD8-positive, alpha-beta cytotoxic T cell	-	queue_rank=40;ratio=0.463;error=False;anchor_flagged=False
+d	-	SUMMARY	243	-	-	-	-	errors=19;anchor_flags=5;two_tier_reviewed=33;two_tier_found=9
 c	Adipose	Lymphatic endothelial cell	244	TOP2A;CENPF;MKI67;NUSAP1	endothelial	haematopoietic/neural	plasma cell;hematopoietic precursor cell;erythrocyte;dendritic cell;neuron associated cell	confirmed
 c	Gallbladder	Endothelial cell	312	GNG11;FABP5P1;PCAT19;CCL21	endothelial	connective/haematopoietic	connective tissue cell;fibroblast;leukocyte;myeloid leukocyte;mononuclear cell	boundary
 c	Adipose	Fibroblast	479	C1QA;S100A8;MT1X;CD163	connective	haematopoietic	neutrophil;blood cell;macrophage;myeloid leukocyte;myeloid cell	confirmed
