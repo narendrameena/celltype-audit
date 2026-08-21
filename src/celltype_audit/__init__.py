@@ -9,7 +9,7 @@ does not try to re-annotate an atlas; it reports where an atlas disagrees with i
     print(report.summary())
 
 For data that has no annotation yet, `annotate_h5ad` proposes a ranked CL shortlist per
-cluster -- a curation aid, not an annotator: top-1 is right about 55%% of the time and its
+cluster -- a curation aid, not an annotator: top-1 is right about 56%% of the time and its
 confidence is not calibratable, so read the shortlist rather than the top hit.
 
 or from the command line:
@@ -22,5 +22,5 @@ from .resolve import Resolver
 from .annotate import annotate_h5ad
 from .audit import audit_h5ad, Report
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = ["Ontology", "Resolver", "audit_h5ad", "annotate_h5ad", "Report", "__version__"]

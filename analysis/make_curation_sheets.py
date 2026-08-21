@@ -84,10 +84,26 @@ def main():
             for r in rows:
                 fh.write("\t".join(r) + "\n")
         made.append((organ, len(rows)))
+
+    # Drop sheets for organs that have since been curated. Skipping them on write is not
+    # enough: the file from before the gold existed stays on disk, and the directory goes
+    # on advertising "organs with no hand-curated gold" while three of them have one --
+    # inviting a curator to redo finished work. Only ever removes a sheet whose organ now
+    # has a gold; a full regeneration is not a licence to delete anything else.
+    pruned = []
+    if not want:
+        for fp in sorted(glob.glob(os.path.join(OUT, "*.tsv"))):
+            organ = os.path.basename(fp)[:-4]
+            if organ in CURATED:
+                os.remove(fp)
+                pruned.append(organ)
+
     made.sort(key=lambda r: -r[1])
     print("%d sheets, %d cell types awaiting a decision\n" % (len(made), sum(n for _o, n in made)))
     for o, n in made:
         print("   %-16s %3d" % (o, n))
+    if pruned:
+        print("\n   pruned (now curated): %s" % ", ".join(pruned))
     print("\nwrote %s/" % OUT)
 
 

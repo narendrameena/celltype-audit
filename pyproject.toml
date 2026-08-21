@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "celltype-audit"
-version = "0.1.0"
+version = "0.1.1"
 description = "Audit single-cell atlas cell-type annotations against the Cell Ontology and expression evidence"
 readme = "README.md"
 requires-python = ">=3.9"
