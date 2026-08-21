@@ -77,10 +77,16 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+          # Re-running a release must not hard-fail on a version that is already up.
+          # Without this the only way to test the credential path is to burn a version
+          # number, and a re-run after a partial failure would always go red.
+          skip-existing: true
 
       - name: Upload (Trusted Publishing)
         if: env.HAS_TOKEN != 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
 
       # The usual reason this step fails is that PyPI has no trusted publisher for the
       # project -- which is the state any project starts in if its first release was
