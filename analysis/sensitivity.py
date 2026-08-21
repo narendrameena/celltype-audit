@@ -37,6 +37,7 @@ from cl_lineage import anchor_set, ancestors, load                    # noqa: E4
 from cl_resolve import resolve as resolve2                            # noqa: E402
 from scoring_variants import ok                                       # noqa: E402
 from error_epidemiology import fisher                                 # noqa: E402
+import within_lineage as wl                                          # noqa: E402
 
 DEF = {"support": 0.10, "margin": 1.30, "min_ref": 100, "size_floor": 500, "topk": 5}
 GOLD = ["Pancreas", "Liver", "Blood", "Bone_marrow", "Lung", "Kidney", "Heart"]
@@ -127,9 +128,15 @@ def ts_rows(idx, mats, p):
 
 
 def anchor_flags(p):
-    """The lineage sweep, at shortlist depth topk and the given size floor."""
+    """The lineage sweep, at shortlist depth topk and the given size floor.
+
+    Returns (true positives, false positives, flagged keys in scan order). The keys are
+    needed because the two-tier protocol reads these flags BEFORE the ranked queue, and
+    recall at a fixed budget depends on that order.
+    """
     import glob
     tp = fp = 0
+    keys = []
     for fpth in sorted(glob.glob(os.path.join(RES, "heca_to_cl_*.json"))):
         d = json.load(open(fpth))
         o = d["organ"]
@@ -147,11 +154,12 @@ def anchor_flags(p):
             A = anchor_set(cur)
             anc = [anchor_set(c["curie"]) for c in v["cl"][:p["topk"]]]
             if A and any(anc) and all(B and not (A & B) for B in anc):
+                keys.append((o, t))
                 if not ok(cur, G[t]):
                     tp += 1
                 else:
                     fp += 1
-    return tp, fp
+    return tp, fp, keys
 
 
 def evaluate(p, idx, mats):
@@ -162,21 +170,28 @@ def evaluate(p, idx, mats):
     livet = kt["agree"] + kt["within"] + kt["cross"]
     c1h = 100 * kh["cross"] / max(liveh, 1)
     c1t = 100 * kt["cross"] / max(livet, 1)
-    tp, fp = anchor_flags(p)
+    tp, fp, aflag = anchor_flags(p)
     # with no flags precision is UNDEFINED, not zero; printing 0% would read as a
     # collapse when the sweep has simply become too conservative to fire at all
     prec = (100.0 * tp / (tp + fp)) if (tp + fp) else float("nan")
-    # two-tier at a fixed review budget
-    q = sorted([r for r in hr if not r["related"]
-                and r["sup_b"] >= p["support"] * max(r["sup_a"], 1)], key=lambda r: r["ratio"])
-    E = {(r["organ"], r["label"]) for r in hr if r["error"]}
-    seen = []
-    for r in q:
-        k = (r["organ"], r["label"])
-        if k not in seen:
-            seen.append(k)
-    found = len(set(seen[:BUDGET]) & E)
-    rec = 100 * found / max(len(E), 1)
+    # Recall at a fixed review budget, under the SAME protocol the figure reports and
+    # through the SAME code path: within_lineage.build_rows/queue, with the swept
+    # constants passed in. Re-implementing the ranking here is what made three earlier
+    # versions of this block disagree with the figure -- one of them silently dropped the
+    # flagship pancreatic "B cell" catch. A sensitivity analysis of a re-implementation
+    # measures the re-implementation.
+    rows = wl.build_rows(idx, mats, minc=p["size_floor"], min_ref=p["min_ref"])
+    q = wl.queue(rows)
+    qkeys = [(r["organ"], r["label"]) for r in q]
+    E = {(r["organ"], r["label"]) for r in rows if r["error"]}
+    order, ins = [], set()
+    for k in [x for x in aflag if x in set(qkeys)] + qkeys:   # tier 1 flags, then the queue
+        if k not in ins:
+            ins.add(k)
+            order.append(k)
+    rec = 100 * len(set(order[:BUDGET]) & E) / max(len(E), 1)
+    qonly = 100 * len(set(qkeys[:BUDGET]) & E) / max(len(E), 1)
+
     # epidemiology
     sm = [r for r in hr if r["n_cells"] < 2000]
     bg = [r for r in hr if r["n_cells"] >= 2000]
@@ -184,7 +199,7 @@ def evaluate(p, idx, mats):
     c = sum(1 for r in bg if r["error"]); d = len(bg) - c
     rs = 100 * a / max(len(sm), 1); rb = 100 * c / max(len(bg), 1)
     return {"heca_cross": c1h, "ts_cross": c1t, "precision": prec, "flags": tp + fp,
-            "two_tier": rec, "n_err": len(E), "small": rs, "large": rb,
+            "two_tier": rec, "queue_only": qonly, "n_err": len(E), "n_types": len(rows), "small": rs, "large": rb,
             "fold": rs / max(rb, 1e-9), "p": fisher(a, b, c, d)}
 
 

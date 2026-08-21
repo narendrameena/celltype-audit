@@ -98,6 +98,39 @@ def main():
                      r["celltypist"][:22], "/".join(r["label_anchors"])[:9],
                      "/".join(r["ct_anchors"])[:12]))
 
+    # CellTypist AS A COMPETING DETECTOR. The obvious baseline for "find the mislabelled
+    # clusters" is to run an established annotator and flag where it disagrees with the
+    # label. Scoring that the same way the sweep is scored -- against the hand-curated gold,
+    # in the organs where a gold exists -- is the comparison a referee will construct if we
+    # do not, so compute it here rather than leaving it implicit.
+    from scoring_variants import ok as ok_gold
+    GOLD = {}
+    for o in sorted({r["organ"] for r in rows}):
+        gp = os.path.join(HERE, "%s_gold.json" % o.lower())
+        if os.path.exists(gp):
+            GOLD[o] = {k: v for k, v in json.load(open(gp)).items()
+                       if not k.startswith("_") and v}
+    def is_error(r):
+        g = GOLD.get(r["organ"], {}).get(r["label"])
+        return None if not g else (not ok_gold(r["label_cl"], g))
+    ct_scored = [(r, is_error(r)) for r in ct_dis]
+    ct_tp = sum(1 for _r, v in ct_scored if v is True)
+    ct_fp = sum(1 for _r, v in ct_scored if v is False)
+    ct_unk = sum(1 for _r, v in ct_scored if v is None)
+    base = {"flags": len(ct_dis), "scoreable": ct_tp + ct_fp, "true": ct_tp,
+            "false": ct_fp, "uncurated": ct_unk,
+            "precision": (100.0 * ct_tp / (ct_tp + ct_fp)) if (ct_tp + ct_fp) else None}
+    print("\n  CELLTYPIST AS A COMPETING DETECTOR (flag where it disagrees with the label)")
+    print("     flags raised                     : %d of %d cell types" % (len(ct_dis), n))
+    print("     falling in a curated organ       : %d (%d not curated, unscoreable)"
+          % (base["scoreable"], ct_unk))
+    print("     of those, real errors            : %d  -> precision %s"
+          % (ct_tp, "%.0f%%" % base["precision"] if base["precision"] is not None else "n/a"))
+    for r, v in sorted(ct_scored, key=lambda x: -x[0]["n_cells"]):
+        print("       %-9s %-26s %-24s %s"
+              % (r["organ"][:9], r["label"][:26], r["celltypist"][:24],
+                 {True: "REAL ERROR", False: "false flag", None: "not curated"}[v]))
+
     print("\n  CellTypist calls the auditor disputes but we did NOT flag   : %d"
           % (len(ct_dis) - len(caught)))
     for r in sorted([x for x in ct_dis if not x["flagged"]], key=lambda x: -x["n_cells"])[:8]:
@@ -105,7 +138,8 @@ def main():
               % (r["organ"][:9], r["label"][:24], "/".join(r["label_anchors"])[:16], r["celltypist"][:24]))
 
     json.dump({"n": n, "agree": agree, "flags": len(fl), "corroborated": len(corro),
-               "rows": rows}, open(os.path.join(RES, "audit_baseline.json"), "w"), indent=1)
+               "celltypist_as_detector": base, "rows": rows},
+              open(os.path.join(RES, "audit_baseline.json"), "w"), indent=1)
     print("\nwrote results/audit_baseline.json")
 
 

@@ -18,11 +18,14 @@ is a gold term or within 3 is_a hops of one.
 
 RESULT: THIS DOES NOT WORK, AND THE REASON MATTERS.
 
-Confidence is not learnable from the mapper's own output. Leave-one-organ-out AUC is
-0.653 against the HRA crosswalks (n=315) and 0.563 against the hand-curated gold organs
-(n=108) -- barely above chance -- and adding ontology-shape features of the predicted
-term lifts it only to 0.684. Precision plateaus near 73%% and never reaches 80%% at any
-useful coverage. The high-confidence errors are systematically BIOLOGICALLY ADJACENT
+The score RANKS somewhat better than chance but cannot be turned into a gate.
+Leave-one-organ-out AUC is 0.653 against the HRA crosswalks (n=315) on score-shape
+features alone and 0.684 once ontology shape is added; against the hand-curated gold
+(n=200, 7 organs) it is 0.707. That is real signal, and it is still useless for
+assignment: precision plateaus at 73.9%% and NO threshold reaches 80%% at any coverage,
+90%% or 95%% at any coverage on either set. The most confident single call is wrong, and
+the top decile runs at 58%% precision, so the ranking is not even monotone where it
+matters. The high-confidence errors are systematically BIOLOGICALLY ADJACENT
 calls (Megakaryocyte -> platelet, Mast cell -> basophil), and nothing about the shape of
 a score distribution can distinguish a near-miss from a hit.
 
@@ -32,12 +35,12 @@ reproduces it on 312 of 315 types. That means the crosswalk measures label -> CL
 TRANSLATION, not annotation correctness -- it trusts the label. The 56.8%% "accuracy" of
 the expression mapper against it is therefore a DISAGREEMENT RATE between two routes to
 a CL term, not an accuracy against truth. Against the hand-curated gold, where a human
-read the markers, top-1 is 50.9%%.
+read the markers, top-1 is 55.5%%.
 
 So the expression mapper should not be the assigner and does not need a confidence gate
-to become one. Lexical resolution assigns (stage 1, 98.7%% of cells); expression audits,
+to become one. Lexical resolution assigns (stage 1, 98.8%% of cells); expression audits,
 and its disagreements feed the contradiction sweep; abstention applies where lexical
-fails (1.3%% of cells), and there the expression top-5 gives a curator a shortlist.
+fails (1.2%% of cells), and there the expression top-5 gives a curator a shortlist.
 
 Usage: python benchmark/calibrate.py
 """
@@ -220,7 +223,10 @@ def gold_organ_set():
         depth[c] = d
     ont = (depth, ch, anchor_set)
     X, y, organ = [], [], []
-    for o in ("Pancreas", "Liver", "Blood", "Bone_marrow"):
+    # every curated organ. This list used to stop at the four that existed when the
+    # calibration was first run, so lung, kidney and heart -- curated later, and the three
+    # never tuned on -- were silently excluded from the one non-circular check in the study.
+    for o in ("Pancreas", "Liver", "Blood", "Bone_marrow", "Lung", "Kidney", "Heart"):
         G = {k: v for k, v in json.load(open(os.path.join(HERE, "%s_gold.json" % o.lower()))).items()
              if not k.startswith("_") and v}
         M = json.load(open(os.path.join(RES, "heca_to_cl_%s.json" % o)))["types"]
@@ -274,6 +280,13 @@ if __name__ == "__main__":
     for n, wi in sorted(zip(FEATS, w[1:]), key=lambda r: -abs(r[1])):
         print("  %-12s %+.3f" % (n, wi))
 
+    # the docstring quotes an AUC for score-shape features alone; compute it rather than
+    # assert it, since the ontology-shape lift is the whole point of reporting both
+    n_score = len([f for f in FEATS if not f.startswith(("pred_", "anchor_", "n_anchors"))])
+    auc_score_only = auc(oof(X[:, :n_score], y, organ), y)
+    print("\nAUC against the crosswalks: %.3f on the %d score-shape features alone, "
+          "%.3f with ontology shape" % (auc_score_only, n_score, auc(conf, y)))
+
     Xg, yg, og = gold_organ_set()
     cg = oof(Xg, yg, og)
     print("\nnon-circular check — hand-curated gold organs (%d types, %d organs)" % (len(yg), len(set(og))))
@@ -285,7 +298,11 @@ if __name__ == "__main__":
               if r else "unreachable"))
 
     json.dump({"verdict": "confidence not learnable from mapper output; see module docstring",
-               "auc_crosswalks": auc(conf, y), "auc_gold_organs": auc(cg, yg),
+               "gold_per_type": [{"organ": str(o), "conf": float(c), "correct": int(v)}
+                                 for o, c, v in zip(og, cg, yg)],
+               "auc_crosswalks": auc(conf, y), "auc_crosswalks_score_only": auc_score_only,
+               "auc_gold_organs": auc(cg, yg), "n_gold": len(yg),
+               "n_gold_organs": len(set(og)),
                "features": FEATS, "n": len(y), "base_top1": float(y.mean()),
                "operating_points": {str(t): at_precision(conf, y, t) for t in (0.95, 0.9, 0.85, 0.8)},
                "per_type": [dict(m, conf=float(c), correct=int(v))
