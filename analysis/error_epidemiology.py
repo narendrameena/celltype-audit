@@ -153,6 +153,13 @@ def main():
     print("     reported as a cross-source observation, not a rate from one denominator.")
 
     json.dump({"n": n, "errors": e,
+               # persisted so downstream text quotes the computed value rather than a
+               # number someone typed once; it moved from 0.011 to 0.0018 when an eighth
+               # gold organ widened the base
+               "size_fisher_p": fisher(a, b, c, d),
+               "size_small_k": a, "size_small_n": a + b,
+               "size_large_k": c, "size_large_n": c + d,
+               "size_fold": (a / (a + b)) / max(c / (c + d), 1e-9),
                "by_size": [{"lo": lo, "hi": hi,
                             "n": len([r for r in rows if lo <= r["n_cells"] < hi]),
                             "k": sum(1 for r in rows if lo <= r["n_cells"] < hi and r["error"])}
