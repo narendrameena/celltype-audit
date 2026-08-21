@@ -144,7 +144,12 @@ and obsolete terms).
   current CL release, whether an earlier gap has since closed. A closure is measured, not
   attributed: CL gains terms constantly, so `resolved` says the gap is gone, never that we
   closed it.
-- **`analysis/`** — the 42 scripts behind the study, so every number is traceable to the
+- **`curation/`** — evidence sheets for the 29 organs that have no hand-curated gold:
+  388 cell types with their markers, sizes and candidate CL terms, and the decision
+  columns left empty. These are not a gold standard and must not be used as one until a
+  curator has filled them; the study's own result is that a gold cannot be assembled
+  automatically. Regenerate with `python analysis/make_curation_sheets.py`.
+- **`analysis/`** — the 43 scripts behind the study, so every number is traceable to the
   code that produced it (`cl_resolve.py`, `audit_ts.py`, `cxg_survey.py`,
   `sensitivity.py`, `downstream_impact.py`, ...).
 - **`gold/`** — 7 hand-curated gold standards, 200 cell types across 7 organs, each
