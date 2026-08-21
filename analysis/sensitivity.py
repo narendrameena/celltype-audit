@@ -40,7 +40,24 @@ from error_epidemiology import fisher                                 # noqa: E4
 import within_lineage as wl                                          # noqa: E402
 
 DEF = {"support": 0.10, "margin": 1.30, "min_ref": 100, "size_floor": 500, "topk": 5}
-GOLD = ["Pancreas", "Liver", "Blood", "Bone_marrow", "Lung", "Kidney", "Heart"]
+def _curated_organs():
+    """Organs with a hand-curated gold on disk, discovered rather than listed.
+
+    This was a hardcoded list in three modules, and calibrate.py's copy silently excluded
+    the three organs curated after it was written -- 108 cell types where there were 200,
+    and an AUC of 0.563 where it was 0.707. Reading the directory means a new gold file is
+    picked up by everything at once.
+    """
+    import glob as _glob
+    names = [os.path.basename(p)[:-len("_gold.json")]
+             for p in _glob.glob(os.path.join(HERE, "*_gold.json"))]
+    return sorted(n.capitalize() if "_" not in n else
+                  "_".join(w.capitalize() if i == 0 else w
+                           for i, w in enumerate(n.split("_")))
+                  for n in names)
+
+
+GOLD = _curated_organs()
 BUDGET = 33
 
 
