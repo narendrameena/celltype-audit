@@ -1,0 +1,785 @@
+{
+ "schema": "celltype-audit/proposal-state/1",
+ "first_run": "2026-08-21",
+ "runs": [
+  {
+   "date": "2026-08-21",
+   "release": "2026-06-08",
+   "added": 40,
+   "closed": 0,
+   "withdrawn": 0
+  }
+ ],
+ "proposals": {
+  "c1aa38a8616d": {
+   "kind": "marker-condition",
+   "organ": "Lung",
+   "label": "neutrophil",
+   "n_cells": 56394,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "1cb53441a096": {
+   "kind": "missing-axiom",
+   "organ": "Heart",
+   "label": "Ventricle cardiomyocyte",
+   "n_cells": 180750,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "05e63d061c38": {
+   "kind": "new-term",
+   "organ": "Kidney",
+   "label": "Principle cell",
+   "n_cells": 11753,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "4ca57ba54f00": {
+   "kind": "new-term",
+   "organ": "Eye",
+   "label": "Bipolar cell",
+   "n_cells": 11653,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "d98e72b8e4f3": {
+   "kind": "new-term",
+   "organ": "Prostate",
+   "label": "Luminal cell",
+   "n_cells": 8610,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "88861cdbc5de": {
+   "kind": "new-term",
+   "organ": "Salivary_gland",
+   "label": "Serous gland cell",
+   "n_cells": 8174,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "1be0dba899c8": {
+   "kind": "new-term",
+   "organ": "Adrenal_gland",
+   "label": "Capsular cell",
+   "n_cells": 7017,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "b5fc9be9f201": {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "Mesodermal killer cell",
+   "n_cells": 6128,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "a9949da6b6a2": {
+   "kind": "new-term",
+   "organ": "Ureter",
+   "label": "Umbrella cell",
+   "n_cells": 5454,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "85e01d22d792": {
+   "kind": "new-term",
+   "organ": "Eye",
+   "label": "OFF-BC",
+   "n_cells": 5299,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "d0c5eb674a0f": {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "CD4 Tem",
+   "n_cells": 3837,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "caedba580e84": {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "CD8 Tem",
+   "n_cells": 3127,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "e1059d538b40": {
+   "kind": "new-term",
+   "organ": "Eye",
+   "label": "ON-BC",
+   "n_cells": 3113,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "c9728b48f598": {
+   "kind": "new-term",
+   "organ": "Heart",
+   "label": "CD8 T te cell",
+   "n_cells": 2685,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "06afb647d262": {
+   "kind": "new-term",
+   "organ": "Heart",
+   "label": "CD8 T trans cell",
+   "n_cells": 2671,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "e78275ef7f04": {
+   "kind": "new-term",
+   "organ": "Breast",
+   "label": "Luminal cell",
+   "n_cells": 2478,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "9a865ec18a0b": {
+   "kind": "new-term",
+   "organ": "Spinal_cord",
+   "label": "Midplate (MP) cell",
+   "n_cells": 2437,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "4db215b58f44": {
+   "kind": "new-term",
+   "organ": "Stomach",
+   "label": "Pit cell",
+   "n_cells": 2374,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "dd350bfbc45f": {
+   "kind": "new-term",
+   "organ": "Pancreas",
+   "label": "Orthochromatophilic erythroblast",
+   "n_cells": 2318,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "fe0588421afb": {
+   "kind": "new-term",
+   "organ": "Stomach",
+   "label": "Fundic gland",
+   "n_cells": 2172,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "9b3507641a0d": {
+   "kind": "new-term",
+   "organ": "Brain",
+   "label": "PV inhibitory neuron",
+   "n_cells": 2138,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "22b7c81a97f6": {
+   "kind": "new-term",
+   "organ": "Testis",
+   "label": "Spermatogenic cell",
+   "n_cells": 2014,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "1cc8e5171ac1": {
+   "kind": "new-term",
+   "organ": "Lung",
+   "label": "Erythroid-like cell",
+   "n_cells": 1750,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "d39c0ddfd069": {
+   "kind": "new-term",
+   "organ": "Nose",
+   "label": "Serous gland cell",
+   "n_cells": 1713,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "3b9c33e21de5": {
+   "kind": "new-term",
+   "organ": "Kidney",
+   "label": "Proximal convoluted tubule progenitor",
+   "n_cells": 1631,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "51df472b6b0e": {
+   "kind": "new-term",
+   "organ": "Skin",
+   "label": "CD8 Treg",
+   "n_cells": 1615,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "6dda60392d04": {
+   "kind": "new-term",
+   "organ": "Kidney",
+   "label": "Loop of henle progenitor",
+   "n_cells": 1522,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "e6d7292ac39f": {
+   "kind": "new-term",
+   "organ": "Spinal_cord",
+   "label": "Floor plate (FP) cell",
+   "n_cells": 1395,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "3d74e88d600c": {
+   "kind": "new-term",
+   "organ": "Pleura",
+   "label": "Mesothelium",
+   "n_cells": 1380,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "5ffaecfb354a": {
+   "kind": "new-term",
+   "organ": "Brain",
+   "label": "VIP inhibitory neuron",
+   "n_cells": 1029,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "8cb74c246b84": {
+   "kind": "new-term",
+   "organ": "Spinal_cord",
+   "label": "Roof plate (RP) cell",
+   "n_cells": 892,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "c961872acc11": {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "CD4 Trm",
+   "n_cells": 571,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "016ac3e1e2f7": {
+   "kind": "synonym",
+   "organ": "Bone_marrow",
+   "label": "Common lymphoid progenitor (CLP)",
+   "n_cells": 3701,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "f0aaaa96f690": {
+   "kind": "synonym",
+   "organ": "Spinal_cord",
+   "label": "Multipotent hematopoietic progenitor",
+   "n_cells": 1368,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "219fb9f608de": {
+   "kind": "synonym",
+   "organ": "Bone_marrow",
+   "label": "Common myeloid progenitor (CMP)",
+   "n_cells": 1336,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "ef5a8ce630dc": {
+   "kind": "synonym",
+   "organ": "Spleen",
+   "label": "Common lymphoid progenitor (CLP)",
+   "n_cells": 1012,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "23a624d93588": {
+   "kind": "synonym",
+   "organ": "Spleen",
+   "label": "Multipotent hematopoietic progenitor",
+   "n_cells": 754,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "82084c6842f9": {
+   "kind": "synonym",
+   "organ": "Pancreas",
+   "label": "Pancreatic stellate cell (PSC)",
+   "n_cells": 747,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "41381b4847f4": {
+   "kind": "synonym",
+   "organ": "Ovary",
+   "label": "Oocyte (Ootid/Ovum)",
+   "n_cells": 662,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  },
+  "eacfa0d1ed58": {
+   "kind": "synonym",
+   "organ": "Adrenal_gland",
+   "label": "Schwann cell precursors (SCPs)",
+   "n_cells": 579,
+   "status": "drafted",
+   "issue": null,
+   "accepted": null,
+   "first_seen": "2026-08-21",
+   "first_seen_release": "2026-06-08",
+   "closed_in_release": null,
+   "history": [
+    {
+     "date": "2026-08-21",
+     "status": "drafted",
+     "release": "2026-06-08"
+    }
+   ]
+  }
+ },
+ "latest": {
+  "cl_release": "2026-06-08",
+  "by_status": {
+   "drafted": 40
+  },
+  "open": 40,
+  "submitted": 0,
+  "accepted": 0,
+  "acceptance_rate": null
+ }
+}
