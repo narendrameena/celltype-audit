@@ -85,17 +85,20 @@ class Report:
 
 def audit_h5ad(path, organ=None, tissue=None, ontology=None, reference=None,
                min_cells=MIN_CELLS, topk=TOPK, min_ref=MIN_REF,
-               support_ratio=MIN_SUPPORT_RATIO, cache=None, verbose=True):
+               support_ratio=MIN_SUPPORT_RATIO, cache=None, verbose=True,
+               type_key="cell_type"):
     """Audit one h5ad and return a Report.
 
     tissue: UBERON id. Taken from the file when it carries one (CELLxGENE layout),
     otherwise it must be given -- there is no reference to score against without it.
+    type_key: obs column holding the labels under audit. Only `cell_type` was accepted
+    before, which silently excluded every file not written in the CELLxGENE layout.
     """
     o = ontology or Ontology.load(cache=cache)
     res = Resolver(o)
     if verbose:
         print("computing markers ...", flush=True)
-    tbl = marker_table(path, min_cells=min_cells)
+    tbl = marker_table(path, type_key=type_key, min_cells=min_cells)
     tbl = {k: v for k, v in tbl.items() if v["n_cells"] >= min_cells}
     if not tbl:
         raise ValueError("no cell types with >= %d cells in %s" % (min_cells, path))

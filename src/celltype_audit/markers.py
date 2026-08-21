@@ -55,6 +55,15 @@ def marker_table(path, gene_key=None, type_key="cell_type", topk=20, min_cells=5
         gcats, gcodes = _cat(f, "var/%s" % gene_key)
         genes = gcats[gcodes] if len(gcodes) == f["var/%s" % gene_key].get("codes", np.array([])).shape[0] \
             or isinstance(f["var/%s" % gene_key], h5py.Group) else gcats[gcodes]
+        if type_key not in f["obs"]:
+            # A bare KeyError here reads as a broken file. It is almost always a naming
+            # difference -- annotations live in `celltype`, `Cell_type`, `annotation`,
+            # `free_annotation` about as often as in `cell_type` -- so say what is there.
+            cols = [k for k in f["obs"] if not k.startswith("_")]
+            raise KeyError(
+                "obs/%s not found in %s. Pass --type-key with the column holding the "
+                "cell-type labels. Available: %s"
+                % (type_key, path, ", ".join(sorted(cols)) or "(none)"))
         tcats, tcodes = _cat(f, "obs/%s" % type_key)
         codes = tcodes.astype(np.int64)
         nt, n_genes = len(tcats), len(genes)
