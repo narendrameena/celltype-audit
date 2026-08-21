@@ -52,6 +52,12 @@ jobs:
     # https://pypi.org/manage/account/publishing/
     permissions:
       id-token: write
+    env:
+      # `secrets` cannot be referenced from a step-level `if:` -- doing so is a workflow
+      # validation error, which GitHub reports as a run with zero jobs rather than as a
+      # syntax error. Resolving it once here, where the secrets context IS allowed, gives
+      # the steps a plain string to test.
+      HAS_TOKEN: ${{ secrets.PYPI_API_TOKEN != '' }}
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -62,13 +68,13 @@ jobs:
       # first release was uploaded by hand has no publisher registered, and configuring one
       # is a manual step on PyPI that a release should not be blocked on.
       - name: Upload (API token)
-        if: ${{ secrets.PYPI_API_TOKEN != '' }}
+        if: env.HAS_TOKEN == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
 
       - name: Upload (Trusted Publishing)
-        if: ${{ secrets.PYPI_API_TOKEN == '' }}
+        if: env.HAS_TOKEN != 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
 
       # The usual reason this step fails is that PyPI has no trusted publisher for the
