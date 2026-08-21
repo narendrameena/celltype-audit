@@ -27,7 +27,8 @@ from scoring_variants import ok                                       # noqa: E4
 from cl_lineage import load, anchor_set                               # noqa: E402
 from cl_resolve import resolve as resolve2                            # noqa: E402
 
-ORGANS = ["Pancreas", "Liver", "Blood", "Bone_marrow", "Lung", "Kidney", "Heart"]
+from gold_organs import curated
+ORGANS = curated()
 MINC, K = 500, 5
 
 

@@ -30,7 +30,8 @@ OUT = os.path.join(RES, "curation")
 from cl_lineage import load                                            # noqa: E402
 from cl_resolve import resolve as resolve2                             # noqa: E402
 
-CURATED = {"Pancreas", "Liver", "Blood", "Bone_marrow", "Lung", "Kidney", "Heart"}
+from gold_organs import curated
+CURATED = set(curated())
 MINC = 500
 NMARK = 50
 

@@ -1,22 +1,22 @@
 panel	key	value
-a/b	union|minov=3|margin=2.0	n_gold=111;checked=29;agree=16;agreement=55.2
-a/b	union|minov=3|margin=1.5	n_gold=159;checked=41;agree=24;agreement=58.5
-a/b	union|minov=4|margin=1.5	n_gold=109;checked=32;agree=18;agreement=56.2
-a/b	union|minov=4|margin=2.0	n_gold=91;checked=26;agree=14;agreement=53.8
-a/b	union|minov=5|margin=2.0	n_gold=71;checked=22;agree=11;agreement=50.0
-a/b	union|minov=5|margin=3.0	n_gold=39;checked=10;agree=5;agreement=50.0
-a/b	union|minov=6|margin=3.0	n_gold=33;checked=9;agree=4;agreement=44.4
-a/b	consensus|minov=3|margin=2.0	n_gold=16;checked=8;agree=6;agreement=75.0
-a/b	consensus|minov=3|margin=1.5	n_gold=22;checked=10;agree=7;agreement=70.0
-a/b	consensus|minov=4|margin=1.5	n_gold=11;checked=7;agree=4;agreement=57.1
-a/b	consensus|minov=4|margin=2.0	n_gold=8;checked=5;agree=3;agreement=60.0
-a/b	consensus|minov=5|margin=2.0	n_gold=4;checked=1;agree=1;agreement=100.0
-a/b	consensus|minov=5|margin=3.0	n_gold=2;checked=1;agree=1;agreement=100.0
-a/b	consensus|minov=6|margin=3.0	n_gold=1;checked=0;agree=0;agreement=0.0
+a/b	union|minov=3|margin=2.0	n_gold=111;checked=58;agree=35;agreement=60.3
+a/b	union|minov=3|margin=1.5	n_gold=159;checked=89;agree=54;agreement=60.7
+a/b	union|minov=4|margin=1.5	n_gold=109;checked=61;agree=37;agreement=60.7
+a/b	union|minov=4|margin=2.0	n_gold=91;checked=48;agree=28;agreement=58.3
+a/b	union|minov=5|margin=2.0	n_gold=71;checked=37;agree=21;agreement=56.8
+a/b	union|minov=5|margin=3.0	n_gold=39;checked=19;agree=12;agreement=63.2
+a/b	union|minov=6|margin=3.0	n_gold=33;checked=16;agree=10;agreement=62.5
+a/b	consensus|minov=3|margin=2.0	n_gold=16;checked=14;agree=12;agreement=85.7
+a/b	consensus|minov=3|margin=1.5	n_gold=22;checked=18;agree=14;agreement=77.8
+a/b	consensus|minov=4|margin=1.5	n_gold=11;checked=9;agree=6;agreement=66.7
+a/b	consensus|minov=4|margin=2.0	n_gold=8;checked=7;agree=5;agreement=71.4
+a/b	consensus|minov=5|margin=2.0	n_gold=4;checked=3;agree=3;agreement=100.0
+a/b	consensus|minov=5|margin=3.0	n_gold=2;checked=2;agree=2;agreement=100.0
+a/b	consensus|minov=6|margin=3.0	n_gold=1;checked=1;agree=1;agreement=100.0
 c	any_candidate	n=928;median=10.0;q1=6.0;q3=18.0
 c	chosen_as_best	n=237;median=29.0;q1=16.0;q3=80.0
-c	chosen,_and_right	n=39;median=30.0;q1=18.0;q3=91.0
-c	chosen,_and_wrong	n=29;median=94.0;q1=24.0;q3=484.0
+c	chosen,_and_right	n=89;median=27.0;q1=15.0;q3=47.0
+c	chosen,_and_wrong	n=53;median=48.0;q1=25.0;q3=484.0
 a	disagreement|Blood|CD4 Treg	auto=CL:0001056;hand=CL:0000815
 a	disagreement|Blood|CD8 T cell	auto=CL:0001056;hand=CL:0000625
 a	disagreement|Blood|Conventional dendritic cell	auto=CL:0001056;hand=CL:0000990
@@ -49,6 +49,7 @@ a	disagreement|Bone_marrow|Common myeloid progenitor (CMP)	auto=CL:0000037;hand=
 a	disagreement|Bone_marrow|Memory B cell	auto=CL:0000788;hand=CL:0000787
 a	disagreement|Bone_marrow|Common myeloid progenitor (CMP)	auto=CL:0000037;hand=CL:0000049
 a	disagreement|Bone_marrow|Memory B cell	auto=CL:0000788;hand=CL:0000787
+a	disagreement|Heart|Lymphatic endothelial cell	auto=CL:0000071;hand=CL:0002138
 a	disagreement|Liver|NK T cell	auto=CL:0000909;hand=CL:0000814
 a	disagreement|Bone_marrow|Common myeloid progenitor (CMP)	auto=CL:0000037;hand=CL:0000049
 a	disagreement|Bone_marrow|Memory B cell	auto=CL:0000788;hand=CL:0000787

@@ -40,24 +40,8 @@ from error_epidemiology import fisher                                 # noqa: E4
 import within_lineage as wl                                          # noqa: E402
 
 DEF = {"support": 0.10, "margin": 1.30, "min_ref": 100, "size_floor": 500, "topk": 5}
-def _curated_organs():
-    """Organs with a hand-curated gold on disk, discovered rather than listed.
-
-    This was a hardcoded list in three modules, and calibrate.py's copy silently excluded
-    the three organs curated after it was written -- 108 cell types where there were 200,
-    and an AUC of 0.563 where it was 0.707. Reading the directory means a new gold file is
-    picked up by everything at once.
-    """
-    import glob as _glob
-    names = [os.path.basename(p)[:-len("_gold.json")]
-             for p in _glob.glob(os.path.join(HERE, "*_gold.json"))]
-    return sorted(n.capitalize() if "_" not in n else
-                  "_".join(w.capitalize() if i == 0 else w
-                           for i, w in enumerate(n.split("_")))
-                  for n in names)
-
-
-GOLD = _curated_organs()
+from gold_organs import curated                                       # noqa: E402
+GOLD = curated()
 BUDGET = 33
 
 
@@ -260,9 +244,15 @@ if __name__ == "__main__":
              else "FAILS somewhere",
              min(x["fold"] for x in c4), max(x["fold"] for x in c4),
              min(x["p"] for x in c4), max(x["p"] for x in c4)))
-    print("     Direction is robust; SIGNIFICANCE is not. This sweep scores only clusters")
-    print("     that can be scored against the reference (14 errors); error_epidemiology.py")
-    print("     uses every cluster whose label resolves (17 errors) and reports p = 0.011.")
-    print("     The defensible claim is the ~2-3x enrichment, not a p-value.")
+    # computed, not recited: these counts moved when an eighth gold organ was added and a
+    # hardcoded version of this sentence would have gone stale silently
+    import json as _json
+    _epi = _json.load(open(os.path.join(RES, "error_epidemiology.json")))
+    print("     This sweep scores only clusters that can be scored against the reference")
+    print("     (%d errors in %d types); error_epidemiology.py uses every cluster whose"
+          % (base["n_err"], base.get("n_types", 0)))
+    print("     label resolves (%d errors in %d) and reports p = %.4f."
+          % (_epi.get("errors", 0), _epi.get("n", 0), _epi.get("size_fisher_p", float("nan"))))
+    print("     Report the enrichment with its interval, not a bare p-value.")
     json.dump(out, open(os.path.join(RES, "sensitivity.json"), "w"), indent=1)
     print("\nwrote results/sensitivity.json")

@@ -11,25 +11,22 @@
   },
   "checks_run": [
    "V1",
-   "V10",
-   "V12",
    "V2",
    "V3",
+   "V9",
+   "V10",
+   "V12"
+  ],
+  "checks_not_run": [
    "V4",
    "V5",
    "V6",
    "V7",
-   "V8",
-   "V9"
+   "V8"
   ],
-  "checks_not_run": [],
   "cells_covered": 348795,
   "already_satisfied": 5,
-  "routes_disagree": 13,
-  "reasoner": {
-   "engine": "ELK via ROBOT",
-   "ontology": "cl-base.owl"
-  }
+  "routes_disagree": 13
  },
  "proposals": [
   {
@@ -55,15 +52,9 @@
     "V3": "pass",
     "V9": "fail",
     "V10": "not-run",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
-   "lexical_vs_expression": "n/a",
-   "reason_note": "CL carries no marker property, so this proposal cannot be stated as an axiom against the current release; it is a request for one rather than an axiom to check."
+   "lexical_vs_expression": "n/a"
   },
   {
    "kind": "missing-axiom",
@@ -91,22 +82,9 @@
     "V3": "pass",
     "V9": "n/a",
     "V10": "n/a",
-    "V12": "pass",
-    "V4": "pass",
-    "V5": "pass",
-    "V6": "pass",
-    "V7": "pass",
-    "V8": "pass"
+    "V12": "pass"
    },
-   "lexical_vs_expression": "n/a",
-   "reason_note": "asserts an is_a path between the two sibling terms",
-   "reason_evidence": {
-    "V4": "merged cleanly",
-    "V5": "no class becomes unsatisfiable",
-    "V6": "1 new entailment(s), none outside the axiom's signature",
-    "V7": "nothing new entailed between pre-existing classes",
-    "V8": "1 new entailment(s)"
-   }
+   "lexical_vs_expression": "n/a"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -144,12 +122,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -203,12 +176,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -247,12 +215,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -306,12 +269,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -343,12 +301,7 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -402,12 +355,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -443,12 +391,7 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -487,12 +430,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -531,12 +469,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -575,12 +508,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -619,12 +547,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -667,12 +590,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -715,12 +633,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -759,12 +672,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -796,12 +704,7 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -844,12 +747,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -892,12 +790,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -936,12 +829,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -984,12 +872,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1028,12 +911,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1087,12 +965,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1146,12 +1019,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1190,12 +1058,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1234,12 +1097,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1278,12 +1136,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1315,12 +1168,7 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1352,12 +1200,7 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1406,12 +1249,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1443,12 +1281,7 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1487,12 +1320,7 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1528,12 +1356,7 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1576,12 +1399,7 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   },
   {
@@ -1628,12 +1446,7 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
-    "V12": "not-run",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "not-run"
    }
   }
  ]

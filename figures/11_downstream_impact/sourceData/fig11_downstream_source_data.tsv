@@ -15,5 +15,5 @@ c	one cluster corrected	neutrophil=0;monocyte=101592;ratio=0.0000
 c	independent atlas	neutrophil=371;monocyte=5387;ratio=0.0689
 c	fold_overstatement	18.1
 d	confirmed by an independent atlas	26023 cells (0.258% of 10071582)
-d	plus hand-curated errors	249264 cells (2.475% of 10071582)
+d	plus hand-curated errors	289876 cells (2.878% of 10071582)
 d	excluded_cl_artifact	180750

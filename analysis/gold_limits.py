@@ -33,7 +33,8 @@ from cl_lineage import load, ancestors                                # noqa: E4
 from marker_gold import (asctb_by_organ, cellmarker_by_organ,          # noqa: E402
                          ORGAN2ASCTB, ORGAN2CELLMARKER)
 
-GOLDO = ("Pancreas", "Liver", "Blood", "Bone_marrow")
+from gold_organs import curated
+GOLDO = tuple(curated())
 SETTINGS = [(3, 2.0), (3, 1.5), (4, 1.5), (4, 2.0), (5, 2.0), (5, 3.0), (6, 3.0)]
 
 

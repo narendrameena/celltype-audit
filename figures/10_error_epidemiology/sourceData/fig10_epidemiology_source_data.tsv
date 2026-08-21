@@ -1,27 +1,29 @@
 panel	key	value
-a	size_0.5-2k	n=40;error_pct=20.0;ci=10.5-34.8
-a	size_2-10k	n=67;error_pct=4.5;ci=1.5-12.4
-a	size_10-50k	n=51;error_pct=5.9;ci=2.0-15.9
-a	size_>50k	n=32;error_pct=9.4;ci=3.2-24.2
-a	fisher_lt2k_vs_ge2k	0.01099
-b	ref_support_Q1	n=55;error_pct=14.5;ci=7.6-26.2
-b	ref_support_Q2	n=46;error_pct=6.5;ci=2.2-17.5
-b	ref_support_Q3	n=44;error_pct=9.1;ci=3.6-21.2
-b	ref_support_Q4	n=45;error_pct=4.4;ci=1.2-14.8
-b	logit_p_size_only	0.1615
-b	logit_p_support_only	0.0399
-b	logit_p_size_adjusted	0.5557
-b	LR_adding_size_to_support	0.5547
-b	spearman_size_support	rho=0.515;p=2.92e-14
-c	haematopoietic->haematopoietic	5
+a	size_0.5-2k	n=50;error_pct=24.0;ci=14.3-37.4
+a	size_2-10k	n=86;error_pct=5.8;ci=2.5-12.9
+a	size_10-50k	n=60;error_pct=8.3;ci=3.6-18.1
+a	size_>50k	n=34;error_pct=8.8;ci=3.0-23.0
+a	fisher_lt2k_vs_ge2k	0.00181
+b	ref_support_Q1	n=70;error_pct=18.6;ci=11.2-29.2
+b	ref_support_Q2	n=53;error_pct=7.5;ci=3.0-17.9
+b	ref_support_Q3	n=53;error_pct=9.4;ci=4.1-20.3
+b	ref_support_Q4	n=54;error_pct=5.6;ci=1.9-15.1
+b	logit_p_size_only	0.0468
+b	logit_p_support_only	0.0004
+b	logit_p_size_adjusted	0.5199
+b	LR_adding_size_to_support	0.5178
+b	spearman_size_support	rho=0.504;p=3.42e-16
+c	haematopoietic->haematopoietic	7
 c	epithelial->haematopoietic	2
+c	epithelial->epithelial	1
 c	connective->connective	2
-c	muscle->connective	1
+c	muscle->connective	2
 c	muscle->muscle	1
 c	muscle->endothelial	1
 c	endothelial->endothelial	1
-c	neural->epithelial	1
-c	diagonal_within_lineage	9 of 14
+c	neural->epithelial	2
+c	neural->neural	1
+c	diagonal_within_lineage	13 of 20
 d	Tabula Sapiens confirmed	4 of 8
 d	CellTypist disagreements	5 of 8
-d	hand-curated errors	3 of 17
+d	hand-curated errors	4 of 25

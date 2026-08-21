@@ -226,11 +226,8 @@ def gold_organ_set():
     # every curated organ. This list used to stop at the four that existed when the
     # calibration was first run, so lung, kidney and heart -- curated later, and the three
     # never tuned on -- were silently excluded from the one non-circular check in the study.
-    import glob as _glob
-    _organs = sorted(os.path.basename(p)[:-len("_gold.json")]
-                     for p in _glob.glob(os.path.join(HERE, "*_gold.json")))
-    for o in ["_".join(w.capitalize() if i == 0 else w for i, w in enumerate(n.split("_")))
-              for n in _organs]:
+    from gold_organs import curated
+    for o in curated():
         G = {k: v for k, v in json.load(open(os.path.join(HERE, "%s_gold.json" % o.lower()))).items()
              if not k.startswith("_") and v}
         M = json.load(open(os.path.join(RES, "heca_to_cl_%s.json" % o)))["types"]

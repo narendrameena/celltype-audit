@@ -48,7 +48,12 @@ from cl_lineage import anchor_set                                     # noqa: E4
 from cl_resolve import resolve as resolve2                            # noqa: E402
 from scoring_variants import ok                                       # noqa: E402
 
-ORGANS = ["Pancreas", "Liver", "Blood", "Bone_marrow"]
+from gold_organs import curated
+# a curated organ is not enough here: prune also needs deep_to_cl_<Organ>.json, which was
+# only ever generated for four organs. Intersecting with what exists keeps the module
+# honest about its own coverage instead of failing on a missing input.
+ORGANS = [o for o in curated()
+          if os.path.exists(os.path.join(RES, "deep_to_cl_%s.json" % o))]
 ASCTB_ORGAN = {"Pancreas": "pancreas", "Liver": "liver", "Bone_marrow": "bone-marrow"}
 MINC = 500
 GRID = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
