@@ -2,12 +2,11 @@
  "summary": {
   "generated_from": "celltype-audit",
   "cl_release": "2026-06-08",
-  "n": 22,
+  "n": 20,
   "by_kind": {
    "marker-condition": 1,
    "missing-axiom": 1,
-   "new-term": 18,
-   "synonym": 2
+   "new-term": 18
   },
   "checks_run": [
    "V1",
@@ -24,10 +23,10 @@
    "V7",
    "V8"
   ],
-  "cells_covered": 308433,
-  "already_satisfied": 1,
+  "cells_covered": 306486,
+  "already_satisfied": 3,
   "already_curated": 17,
-  "routes_disagree": 8
+  "routes_disagree": 6
  },
  "proposals": [
   {
@@ -809,89 +808,6 @@
     "V1": "n/a",
     "V2": "n/a",
     "V3": "n/a",
-    "V9": "not-run",
-    "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Spinal_cord",
-   "label": "Multipotent hematopoietic progenitor",
-   "n_cells": 1368,
-   "markers": [],
-   "candidate": {
-    "curie": "CL:0000837",
-    "name": "hematopoietic multipotent progenitor cell",
-    "overlap": 0.75
-   },
-   "alternatives": [],
-   "expression_top": [
-    {
-     "curie": "CL:0000766",
-     "name": "myeloid leukocyte"
-    },
-    {
-     "curie": "CL:0000738",
-     "name": "leukocyte"
-    },
-    {
-     "curie": "CL:0000988",
-     "name": "hematopoietic cell"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
-    "V9": "not-run",
-    "V10": "not-run",
-    "V12": "not-run"
-   }
-  },
-  {
-   "lexical_vs_expression": "disagree",
-   "kind": "synonym",
-   "organ": "Adrenal_gland",
-   "label": "Schwann cell precursors (SCPs)",
-   "n_cells": 579,
-   "markers": [],
-   "candidate": {
-    "curie": "CL:0002375",
-    "name": "Schwann cell precursor",
-    "overlap": 0.9
-   },
-   "alternatives": [
-    {
-     "curie": "CL:0002573",
-     "name": "Schwann cell",
-     "overlap": 0.67
-    },
-    {
-     "curie": "CL:0000218",
-     "name": "myelinating Schwann cell",
-     "overlap": 0.5
-    }
-   ],
-   "expression_top": [
-    {
-     "curie": "CL:0000576",
-     "name": "monocyte"
-    },
-    {
-     "curie": "CL:0002470",
-     "name": "MHC-II-positive classical monocyte"
-    },
-    {
-     "curie": "CL:0002306",
-     "name": "epithelial cell of proximal tubule"
-    }
-   ],
-   "checks": {
-    "V1": "pass",
-    "V2": "pass",
-    "V3": "pass",
     "V9": "not-run",
     "V10": "not-run",
     "V12": "not-run"

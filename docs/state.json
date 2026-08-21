@@ -43,6 +43,13 @@
    "added": 0,
    "closed": 0,
    "withdrawn": 0
+  },
+  {
+   "date": "2026-08-21",
+   "release": "2026-06-08",
+   "added": 0,
+   "closed": 0,
+   "withdrawn": 2
   }
  ],
  "proposals": {
@@ -762,7 +769,7 @@
    "organ": "Spinal_cord",
    "label": "Multipotent hematopoietic progenitor",
    "n_cells": 1368,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -773,6 +780,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -906,7 +919,7 @@
    "organ": "Adrenal_gland",
    "label": "Schwann cell precursors (SCPs)",
    "n_cells": 579,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -917,6 +930,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-21",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -943,10 +962,10 @@
  "latest": {
   "cl_release": "2026-06-08",
   "by_status": {
-   "drafted": 22,
-   "withdrawn": 19
+   "drafted": 20,
+   "withdrawn": 21
   },
-  "open": 22,
+  "open": 20,
   "submitted": 0,
   "accepted": 0,
   "acceptance_rate": null
