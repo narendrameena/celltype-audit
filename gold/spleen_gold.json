@@ -48,5 +48,6 @@
  "Pro-B cell": "CL:0000826",
  "Myofibroblast": "CL:0000186",
  "Mesothelial cell": "CL:0000077",
- "CD4 Trm": null
+ "CD4 Trm": null,
+ "_recuration": "Re-curated 2026-08-21 from the markers alone, after the first pass was made with the pipeline's own candidate ranking visible in the sheet. That ranking is one of the two things the gold exists to score, so its presence made the measurement partly circular -- the same failure this study documents for the label. The sheets no longer carry it. Re-deriving every call from the marker genes changed no call in this organ."
 }

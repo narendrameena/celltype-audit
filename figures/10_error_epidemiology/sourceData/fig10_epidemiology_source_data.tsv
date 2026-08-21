@@ -1,18 +1,18 @@
 panel	key	value
-a	size_0.5-2k	n=60;error_pct=21.7;ci=13.1-33.6
-a	size_2-10k	n=100;error_pct=5.0;ci=2.2-11.2
-a	size_10-50k	n=72;error_pct=6.9;ci=3.0-15.2
+a	size_0.5-2k	n=66;error_pct=21.2;ci=13.1-32.5
+a	size_2-10k	n=108;error_pct=5.6;ci=2.6-11.6
+a	size_10-50k	n=73;error_pct=6.8;ci=3.0-15.1
 a	size_>50k	n=34;error_pct=8.8;ci=3.0-23.0
-a	fisher_lt2k_vs_ge2k	0.00111
-b	ref_support_Q1	n=80;error_pct=16.2;ci=9.7-25.8
-b	ref_support_Q2	n=62;error_pct=8.1;ci=3.5-17.5
-b	ref_support_Q3	n=62;error_pct=8.1;ci=3.5-17.5
-b	ref_support_Q4	n=62;error_pct=4.8;ci=1.7-13.3
-b	logit_p_size_only	0.0371
-b	logit_p_support_only	0.0004
-b	logit_p_size_adjusted	0.4450
-b	LR_adding_size_to_support	0.4423
-b	spearman_size_support	rho=0.526;p=2.72e-20
+a	fisher_lt2k_vs_ge2k	0.00149
+b	ref_support_Q1	n=85;error_pct=17.6;ci=11.0-27.1
+b	ref_support_Q2	n=65;error_pct=7.7;ci=3.3-16.8
+b	ref_support_Q3	n=65;error_pct=7.7;ci=3.3-16.8
+b	ref_support_Q4	n=66;error_pct=4.5;ci=1.6-12.5
+b	logit_p_size_only	0.0254
+b	logit_p_support_only	0.0000
+b	logit_p_size_adjusted	0.5352
+b	LR_adding_size_to_support	0.5331
+b	spearman_size_support	rho=0.517;p=1.34e-20
 c	haematopoietic->haematopoietic	8
 c	epithelial->haematopoietic	2
 c	epithelial->epithelial	1
@@ -26,4 +26,4 @@ c	neural->neural	1
 c	diagonal_within_lineage	14 of 21
 d	Tabula Sapiens confirmed	4 of 8
 d	CellTypist disagreements	5 of 8
-d	hand-curated errors	4 of 26
+d	hand-curated errors	4 of 28
