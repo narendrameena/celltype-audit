@@ -319,12 +319,19 @@ def main():
     ax.set_ylim(0, nE + 0.8)
     ax.legend(loc="lower right", fontsize=5.3, handlelength=1.6, borderpad=0.2,
               labelspacing=0.35)
+    # the sweep's yield differs between the two populations and both numbers appear in
+    # the manuscript, so state which is which rather than leaving a reader to reconcile them
+    sweep_here = sum(1 for k in anchor if k in E)
+    wide_err = sum(1 for r in REC.values() if r.get("error"))
+    wide_hit = sum(1 for r in REC.values() if r.get("error") and r.get("flagged"))
     ax.text(-0.155, -0.275,
-            "the anchor sweep alone stops at %d errors \u2014 it compares lineage anchor\n"
-            "sets, so an error inside one lineage is invisible to it. The marker queue\n"
-            "asks instead which CL term best explains the cluster, and catches lung\n"
-            "\u201cneutrophilic granulocyte\u201d (56,394 cells) whose best term is classical monocyte"
-            % sum(1 for k in anchor if k in E),
+            "the anchor sweep alone stops at %d of these %d \u2014 it compares lineage\n"
+            "anchor sets, so an error inside one lineage is invisible to it. Over all\n"
+            "%d curated types it catches %d of %d, the other %d falling outside the %d\n"
+            "scoreable here. The marker queue instead asks which CL term best explains\n"
+            "the cluster, catching lung \u201cneutrophilic granulocyte\u201d (56,394 cells),\n"
+            "whose best term is classical monocyte"
+            % (sweep_here, nE, len(REC), wide_hit, wide_err, wide_hit - sweep_here, nT),
             transform=ax.transAxes, fontsize=5.3, color=F.INK2, ha="left", va="top",
             linespacing=1.42)
 

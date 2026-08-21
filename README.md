@@ -134,13 +134,19 @@ and obsolete terms).
 
 ## What else is in this repository
 
-- **`analysis/`** — the 37 scripts behind the study, so every number is traceable to the
+- **`docs/`** — a review queue for Cell Ontology contributions drafted from the audit's
+  by-products, served by GitHub Pages. Every proposal shows which checks were actually run
+  against it and which were not; approval happens on the
+  [cell-ontology](https://github.com/obophenotype/cell-ontology/issues) and
+  [provisional Cell Ontology](https://github.com/obophenotype/provisional_cell_ontology)
+  issue trackers, not here. Regenerate with `python analysis/build_proposals.py`.
+- **`analysis/`** — the 41 scripts behind the study, so every number is traceable to the
   code that produced it (`cl_resolve.py`, `audit_ts.py`, `cxg_survey.py`,
   `sensitivity.py`, `downstream_impact.py`, ...).
 - **`gold/`** — 7 hand-curated gold standards, 200 cell types across 7 organs, each
   assigned from marker evidence and **not** from the label. Files record which entries
   deliberately disagree with the atlas label, and why.
-- **`figures/`** — figure code, source data and rendered panels for 10 themes.
+- **`figures/`** — figure code, source data and rendered panels for 13 themes.
 - **`examples/`** — three notebooks: quickstart, unannotated data, and the worked
   case study of the 56,394-cell mislabelled cluster.
 

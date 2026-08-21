@@ -35,7 +35,32 @@ import figstyle as S                                            # noqa: E402
 S.apply()
 import matplotlib.pyplot as plt                                 # noqa: E402
 
+sys.path.insert(0, os.path.join(ROOT, "cellscribe_tool", "benchmark"))
 RES = os.path.join(ROOT, "cellscribe_tool", "benchmark", "results")
+
+
+def unauditable_ts():
+    """TS clusters passing the size floor whose tissue has no reference at all.
+
+    Computed, not asserted: this sentence used to carry a hardcoded 31 over three named
+    tissues, which missed a single skin-of-chest cluster and was off by one.
+    """
+    import glob
+    from audit_ts import tissue_per_type
+    from cl_lineage import load as _load
+    have = set(json.load(open(os.path.join(RES, "wide_ref_repro_index.json")))["term_ix"])
+    n, tis = 0, Counter()
+    for fp in sorted(glob.glob(os.path.join(RES, "ts_markers_*.json"))):
+        organ = os.path.basename(fp)[len("ts_markers_"):-len(".json")]
+        t2ub = tissue_per_type(organ)
+        for t, v in json.load(open(fp))["types"].items():
+            if v["n_cells"] < 500 or not v.get("cl"):
+                continue
+            ub = t2ub.get(t)
+            if not ub or ub not in have:
+                n += 1
+                tis[organ] += 1
+    return n, tis
 CX = json.load(open(os.path.join(RES, "cross_atlas_confirmation.json")))
 AB = json.load(open(os.path.join(RES, "audit_baseline.json")))
 
@@ -208,11 +233,14 @@ from matplotlib.patches import Patch                              # noqa: E402
 ax.legend(handles=[Patch(facecolor=c, label=l) for _k, l, c in CATS],
           loc="upper left", bbox_to_anchor=(-0.30, -0.20), ncol=1, fontsize=5.4,
           handlelength=1.1, borderpad=0, labelspacing=0.35)
+N_UNAUD, UNAUD_TIS = unauditable_ts()
 ax.text(-0.30, -0.60,
         "same pipeline, same support guard, same reference. Tabula Sapiens is a LOWER\n"
         "bound: it is one of the datasets behind that reference, so an error of its own\n"
-        "helps the wrong term fit. A further 31 TS clusters sit in tissues CELLxGENE has\n"
-        "no reference for at all (thymus, mammary gland, trachea) and cannot be audited.",
+        "helps the wrong term fit. A further %d TS clusters sit in tissues CELLxGENE has\n"
+        "no reference for at all (%s) and cannot be audited."
+        % (N_UNAUD, ", ".join("%s %d" % (o.lower().replace("_", " "), c)
+                              for o, c in UNAUD_TIS.most_common())),
         transform=ax.transAxes, fontsize=5.3, color=S.INK2, ha="left", va="top",
         linespacing=1.42)
 

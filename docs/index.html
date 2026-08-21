@@ -1,0 +1,284 @@
+<title>Provisional CL Review Queue</title>
+<style>
+  /* ---- light palette: complete, defined here, referenced everywhere ---- */
+  :root{
+    --ground:#FAFBFC; --surface:#FFFFFF; --sunk:#F2F5F7;
+    --ink:#0F171E; --muted:#5C6B78; --faint:#8A97A2;
+    --rule:#DBE2E8; --hair:#E9EEF2;
+    --accent:#0B6E75; --accent-soft:#E2F0F0;
+    --pass:#2C6E49; --fail:#A33A2E; --pending:#8A6D1F;
+    --pass-bg:#E8F1EC; --fail-bg:#F7E9E7; --pending-bg:#F6F0DF;
+    --shadow:0 1px 2px rgba(15,23,30,.05), 0 4px 14px rgba(15,23,30,.04);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0D1317; --surface:#141C22; --sunk:#101820;
+      --ink:#E4ECF2; --muted:#8494A0; --faint:#68767F;
+      --rule:#222D36; --hair:#1B242B;
+      --accent:#3FB0B8; --accent-soft:#15302F;
+      --pass:#5AAE81; --fail:#D97F71; --pending:#C9A85C;
+      --pass-bg:#132219; --fail-bg:#2A1A17; --pending-bg:#231E12;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0D1317; --surface:#141C22; --sunk:#101820;
+    --ink:#E4ECF2; --muted:#8494A0; --faint:#68767F;
+    --rule:#222D36; --hair:#1B242B;
+    --accent:#3FB0B8; --accent-soft:#15302F;
+    --pass:#5AAE81; --fail:#D97F71; --pending:#C9A85C;
+    --pass-bg:#132219; --fail-bg:#2A1A17; --pending-bg:#231E12;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.28);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px 96px}
+
+  /* ---------------------------------------------------------------- masthead */
+  header{border-bottom:1px solid var(--rule); background:var(--surface)}
+  .head{max-width:1080px; margin:0 auto; padding:34px 24px 26px;
+        display:flex; flex-wrap:wrap; gap:26px; align-items:flex-end;
+        justify-content:space-between}
+  h1{margin:0; font-size:27px; line-height:1.2; letter-spacing:-.022em;
+     font-weight:640; text-wrap:balance}
+  .kicker{font-size:11px; letter-spacing:.13em; text-transform:uppercase;
+          color:var(--accent); font-weight:640; margin-bottom:9px}
+  .lede{margin:11px 0 0; color:var(--muted); max-width:60ch; font-size:14.5px}
+  .stats{display:flex; gap:26px; flex-wrap:wrap}
+  .stat b{display:block; font-size:23px; font-weight:640; letter-spacing:-.02em;
+          font-variant-numeric:tabular-nums; line-height:1.15}
+  .stat span{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}
+
+  /* ------------------------------------------------------- verification legend */
+  .stack{margin:26px 0 0; border:1px solid var(--rule); border-radius:9px;
+         background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
+  .stack h2{margin:0; padding:14px 18px; font-size:13px; font-weight:640;
+            letter-spacing:.01em; border-bottom:1px solid var(--hair); background:var(--sunk)}
+  .checks{display:grid; grid-template-columns:repeat(auto-fill,minmax(228px,1fr)); gap:0}
+  .chk{padding:12px 18px; border-bottom:1px solid var(--hair); border-right:1px solid var(--hair)}
+  .chk code{font-size:11px; font-weight:700; letter-spacing:.05em; color:var(--accent)}
+  .chk p{margin:3px 0 0; font-size:12.5px; color:var(--muted); line-height:1.45}
+  .chk.off code{color:var(--faint)}
+  .stack footer{padding:12px 18px; font-size:12.5px; color:var(--muted); background:var(--sunk)}
+
+  /* ------------------------------------------------------------------ filters */
+  .bar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:30px 0 14px}
+  .bar .lbl{font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+            color:var(--faint); margin-right:4px}
+  button.f{font:inherit; font-size:12.5px; padding:5px 12px; cursor:pointer;
+           border:1px solid var(--rule); background:var(--surface); color:var(--muted);
+           border-radius:999px; transition:.12s}
+  button.f:hover{border-color:var(--accent); color:var(--ink)}
+  button.f[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent);
+                                color:var(--accent); font-weight:620}
+  button.f:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* ------------------------------------------------------------------ proposals */
+  ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px}
+  .p{border:1px solid var(--rule); border-radius:9px; background:var(--surface);
+     box-shadow:var(--shadow); overflow:hidden}
+  .p > .top{display:grid; grid-template-columns:1fr auto; gap:16px; padding:15px 18px 13px}
+  .kind{display:inline-block; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+        font-weight:680; padding:2px 8px; border-radius:4px; margin-bottom:8px;
+        background:var(--accent-soft); color:var(--accent)}
+  .ttl{font-size:15.5px; font-weight:600; letter-spacing:-.008em}
+  .meta{font-size:12.5px; color:var(--faint); margin-top:2px}
+  .cells{text-align:right; font-variant-numeric:tabular-nums}
+  .cells b{font-size:16px; font-weight:640; letter-spacing:-.01em}
+  .cells span{display:block; font-size:10.5px; letter-spacing:.07em;
+              text-transform:uppercase; color:var(--faint)}
+
+  /* the relation itself: atlas label -> CL term, drawn as the edge it proposes */
+  .rel{display:grid; grid-template-columns:1fr 34px 1fr; align-items:center;
+       gap:0; padding:0 18px 14px}
+  .side{padding:9px 12px; border:1px solid var(--hair); border-radius:7px;
+        background:var(--sunk); min-width:0}
+  .side .lab{font-size:10px; letter-spacing:.09em; text-transform:uppercase;
+             color:var(--faint); display:block; margin-bottom:3px}
+  .side .val{font-size:13.5px; overflow-wrap:anywhere}
+  .side .cur{font-size:11.5px; color:var(--muted); display:block; margin-top:2px}
+  .edge{position:relative; height:2px; background:var(--rule)}
+  .edge::after{content:""; position:absolute; right:-1px; top:-3px;
+               border:4px solid transparent; border-left-color:var(--rule)}
+  .edge.broken{background:none; border-top:2px dashed var(--fail)}
+  .edge.broken::after{border-left-color:var(--fail)}
+
+  .note{margin:0 18px 14px; font-size:13px; color:var(--muted); line-height:1.5}
+  .genes{display:flex; gap:5px; flex-wrap:wrap; margin:0 18px 14px}
+  .g{font-size:11.5px; padding:2px 7px; border:1px solid var(--hair);
+     border-radius:4px; background:var(--sunk); color:var(--muted)}
+
+  .verif{display:flex; gap:6px; flex-wrap:wrap; align-items:center;
+         padding:11px 18px; border-top:1px solid var(--hair); background:var(--sunk)}
+  .v{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:660;
+     letter-spacing:.03em; padding:3px 8px; border-radius:4px; border:1px solid transparent}
+  .v.pass{background:var(--pass-bg); color:var(--pass); border-color:var(--pass)}
+  .v.fail{background:var(--fail-bg); color:var(--fail); border-color:var(--fail)}
+  .v.notrun{background:transparent; color:var(--faint); border-color:var(--rule);
+            border-style:dashed}
+  .v.na{background:transparent; color:var(--faint); border-color:var(--hair)}
+  .dot{width:5px; height:5px; border-radius:50%; background:currentColor}
+  .v.notrun .dot,.v.na .dot{background:none; border:1px solid currentColor}
+  .act{margin-left:auto; font-size:12.5px; color:var(--accent); text-decoration:none;
+       font-weight:620; white-space:nowrap}
+  .act:hover{text-decoration:underline}
+  .act:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  .foot{margin-top:34px; padding-top:20px; border-top:1px solid var(--rule);
+        font-size:12.5px; color:var(--muted); max-width:74ch}
+  .foot a{color:var(--accent)}
+  @media (max-width:640px){
+    .rel{grid-template-columns:1fr; gap:8px}
+    .edge{height:20px; width:2px; margin:0 auto; background:var(--rule)}
+    .edge::after{right:-3px; top:auto; bottom:-1px; border:4px solid transparent;
+                 border-top-color:var(--rule); border-left-color:transparent}
+    .p > .top{grid-template-columns:1fr}
+    .cells{text-align:left}
+  }
+</style>
+
+<header>
+  <div class="head">
+    <div>
+      <div class="kicker">celltype-audit &middot; provisional contributions</div>
+      <h1>Cell Ontology proposals awaiting a curator</h1>
+      <p class="lede">Drafted from audit by-products across a 10.07 M-cell atlas. Nothing here
+        has been submitted anywhere. Each proposal shows the checks that were actually run
+        against it &mdash; and the ones that were not.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="stack">
+    <h2>What has been checked</h2>
+    <div class="checks">
+      <div class="chk"><code>V1</code><p>The CURIE exists in the pinned CL release.</p></div>
+      <div class="chk"><code>V2</code><p>Its <span class="mono">rdfs:label</span> is the name used.</p></div>
+      <div class="chk"><code>V3</code><p>Not obsolete, not scoped to another species.</p></div>
+      <div class="chk"><code>V9</code><p>Cells asserted to be of this type express the markers.</p></div>
+      <div class="chk"><code>V10</code><p>The markers exclude the other types in the tissue.</p></div>
+      <div class="chk"><code>V12</code><p>Counterexamples: clusters that violate the proposal.</p></div>
+      <div class="chk off"><code>V4&ndash;V8</code><p>Parse, consistency, entailment diff,
+        conservativity, non-triviality. Require a reasoner run; not yet performed.</p></div>
+    </div>
+    <footer>A claim is admissible only if it is <b>grounded</b> (a lookup), <b>derived</b>
+      (a decision procedure) or <b>measured</b> (checked against data). Anything merely
+      asserted is prose, and carries no weight here.</footer>
+  </section>
+
+  <div class="bar" id="bar"><span class="lbl">Filter</span></div>
+  <ol id="list"></ol>
+
+  <p class="foot">Generated by <span class="mono">analysis/build_proposals.py</span> from the
+    audit results; the page reads <span class="mono">proposals.json</span> and holds no state.
+    Approval happens where it already happens &mdash; the
+    <a href="https://github.com/obophenotype/cell-ontology/issues">cell-ontology</a> and
+    <a href="https://github.com/obophenotype/provisional_cell_ontology">provisional Cell
+    Ontology</a> issue trackers &mdash; so the audit trail is git history rather than
+    anything invented here.</p>
+</div>
+
+<script>
+const CHECK_ORDER = ["V1","V2","V3","V9","V10","V12"];
+const KIND_LABEL = {
+  "synonym":"synonym", "new-term":"new term",
+  "missing-axiom":"missing axiom", "marker-condition":"marker condition"
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let DATA = null, active = "all";
+
+function issueURL(p){
+  const isSyn = p.kind === "synonym";
+  const repo = "obophenotype/cell-ontology";
+  const title = isSyn
+    ? `Add synonym "${p.label}" to ${p.candidate ? p.candidate.name : ""}`
+    : `New term request: ${p.label} (${p.organ})`;
+  const lines = [
+    `**Source** atlas label \`${p.label}\` in ${p.organ}, ${p.n_cells.toLocaleString()} cells`,
+    p.candidate ? `**Nearest existing term** ${p.candidate.name} (\`${p.candidate.curie}\`)` : "",
+    p.markers && p.markers.length ? `**Discriminative markers** ${p.markers.join(", ")}` : "",
+    p.note ? `\n${p.note}` : "",
+    `\nDrafted by celltype-audit; checks run: ${CHECK_ORDER.filter(c => p.checks[c] === "pass").join(", ") || "none"}.`
+  ].filter(Boolean);
+  return `https://github.com/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+function render(){
+  const list = document.getElementById("list");
+  const shown = DATA.proposals.filter(p => active === "all" || p.kind === active);
+  list.innerHTML = shown.map(p => {
+    const cand = p.candidate;
+    const broken = p.kind === "missing-axiom";
+    const verif = CHECK_ORDER.map(c => {
+      const st = p.checks[c] || "not-run";
+      const cls = st === "pass" ? "pass" : st === "fail" ? "fail"
+                : st === "n/a" ? "na" : "notrun";
+      return `<span class="v ${cls}" title="${esc(c)}: ${esc(st)}"><i class="dot"></i>${c}</span>`;
+    }).join("");
+    return `<li class="p">
+      <div class="top">
+        <div>
+          <span class="kind">${esc(KIND_LABEL[p.kind] || p.kind)}</span>
+          <div class="ttl">${esc(p.label)}</div>
+          <div class="meta">${esc(p.organ.replace(/_/g," "))}</div>
+        </div>
+        <div class="cells"><b>${p.n_cells.toLocaleString()}</b><span>cells</span></div>
+      </div>
+      <div class="rel">
+        <div class="side"><span class="lab">atlas asserts</span>
+          <span class="val mono">${esc(p.label)}</span></div>
+        <div class="edge ${broken ? "broken" : ""}"></div>
+        <div class="side"><span class="lab">${broken ? "no is_a path to sibling" : (cand ? "nearest CL term" : "no CL term matches")}</span>
+          <span class="val">${cand ? esc(cand.name) : "&mdash;"}</span>
+          ${cand ? `<span class="cur mono">${esc(cand.curie)}</span>` : ""}</div>
+      </div>
+      ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
+      ${p.markers && p.markers.length
+        ? `<div class="genes">${p.markers.map(g => `<span class="g mono">${esc(g)}</span>`).join("")}</div>` : ""}
+      <div class="verif">${verif}
+        <a class="act" href="${issueURL(p)}" target="_blank" rel="noopener">Open term request &rarr;</a>
+      </div>
+    </li>`;
+  }).join("");
+}
+
+fetch("proposals.json").then(r => r.json()).then(d => {
+  DATA = d;
+  const s = d.summary;
+  document.getElementById("stats").innerHTML = [
+    [s.n, "proposals"],
+    [s.cells_covered.toLocaleString(), "cells"],
+    [s.checks_run.length, "checks run"],
+    [s.checks_not_run.length, "not yet run"]
+  ].map(([v,l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
+
+  const bar = document.getElementById("bar");
+  const kinds = ["all"].concat(Object.keys(s.by_kind));
+  kinds.forEach(k => {
+    const b = document.createElement("button");
+    b.className = "f";
+    b.setAttribute("aria-pressed", String(k === "all"));
+    b.textContent = k === "all" ? `all ${s.n}` : `${KIND_LABEL[k] || k} ${s.by_kind[k]}`;
+    b.onclick = () => {
+      active = k;
+      [...bar.querySelectorAll("button")].forEach(x =>
+        x.setAttribute("aria-pressed", String(x === b)));
+      render();
+    };
+    bar.appendChild(b);
+  });
+  render();
+}).catch(e => {
+  document.getElementById("list").innerHTML =
+    `<li class="p"><p class="note">Could not load <span class="mono">proposals.json</span>. ` +
+    `Run <span class="mono">python analysis/build_proposals.py</span> to generate it.</p></li>`;
+});
+</script>

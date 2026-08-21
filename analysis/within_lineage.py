@@ -84,8 +84,13 @@ def _related(a, b, hops=3):
     return b in ancestors(a) or a in ancestors(b)
 
 
-def features(idx, mats, organ, markers, asserted):
-    """-> (percentile, ratio, rank, n_terms, best_term, best_score, related) or None."""
+def features(idx, mats, organ, markers, asserted, min_ref=None):
+    """-> (percentile, ratio, rank, n_terms, best_term, best_score, related) or None.
+
+    min_ref overrides the module default; sensitivity.py sweeps it, and must reach this
+    code path rather than re-implementing it, or the sweep measures a different pipeline.
+    """
+    min_ref = MIN_REF if min_ref is None else min_ref
     o = idx["organs"].get(organ)
     if not o:
         return None
@@ -99,7 +104,7 @@ def features(idx, mats, organ, markers, asserted):
     s = M[:, cols].mean(axis=1)
     cnt = idx["counts"].get(ub, {})
     inv = {v: k for k, v in tix.items()}
-    keep = np.array([cnt.get(inv[i], 0) >= MIN_REF for i in range(len(s))])
+    keep = np.array([cnt.get(inv[i], 0) >= min_ref for i in range(len(s))])
     if not keep.any() or not keep[tix[asserted]]:
         return None
     sk = np.where(keep, s, -1.0)
@@ -114,7 +119,9 @@ def features(idx, mats, organ, markers, asserted):
             r, n, bc, best, _related(asserted, bc))
 
 
-def build_rows(idx, mats):
+def build_rows(idx, mats, minc=None, min_ref=None):
+    """One row per gold-annotated cluster that can be scored against the reference."""
+    minc = MINC if minc is None else minc
     g = load()["label"]
     rows = []
     for o in GOLD:
@@ -129,12 +136,13 @@ def build_rows(idx, mats):
         ctx = {c["curie"] for v in M.values() for c in v.get("cl", [])}
         for t, gd in G.items():
             v = D.get(t)
-            if not v or v["n_cells"] < MINC:
+            if not v or v["n_cells"] < minc:
                 continue
             cur, how = resolve2(t, ctx, organ=o)
             if not cur:
                 continue
-            f = features(idx, mats, o, [m["gene"] for m in v["markers"]], cur)
+            f = features(idx, mats, o, [m["gene"] for m in v["markers"]], cur,
+                         min_ref=min_ref)
             if not f:
                 continue
             pct, ratio, r, n, best, bscore, related = f

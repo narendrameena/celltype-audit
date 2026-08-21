@@ -1,0 +1,1682 @@
+{
+ "summary": {
+  "generated_from": "celltype-audit",
+  "cl_release": "2026-06-08",
+  "n": 40,
+  "by_kind": {
+   "marker-condition": 1,
+   "missing-axiom": 1,
+   "new-term": 30,
+   "synonym": 8
+  },
+  "checks_run": [
+   "V1",
+   "V2",
+   "V3",
+   "V9",
+   "V10",
+   "V12"
+  ],
+  "checks_not_run": [
+   "V4",
+   "V5",
+   "V6",
+   "V7",
+   "V8"
+  ],
+  "cells_covered": 356253
+ },
+ "proposals": [
+  {
+   "kind": "marker-condition",
+   "organ": "Lung",
+   "label": "neutrophil",
+   "n_cells": 56394,
+   "markers": [
+    "FCGR3B",
+    "ELANE"
+   ],
+   "candidate": {
+    "curie": "CL:0000775",
+    "name": "neutrophil",
+    "overlap": 1.0
+   },
+   "alternatives": [],
+   "expression_top": [],
+   "note": "Proposed sufficient condition, tissue-scoped: a cluster asserted as neutrophil should express FCGR3B and ELANE. The atlas supplies an immediate counterexample \u2014 a 56,394-cell lung cluster carrying the label with neither gene detected, whose own provenance field calls it a monocyte in 91.2% of cells.",
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "fail",
+    "V10": "not-run",
+    "V12": "pass"
+   }
+  },
+  {
+   "kind": "missing-axiom",
+   "organ": "Heart",
+   "label": "Ventricle cardiomyocyte",
+   "n_cells": 180750,
+   "markers": [],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [],
+   "note": "Two sibling ventricular-cardiomyocyte terms carry no `is_a` path between them, so clusters split across them register as a disagreement the expression cannot adjudicate. The relationship, not the annotation, is what is missing.",
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "n/a",
+    "V10": "n/a",
+    "V12": "pass"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Kidney",
+   "label": "Principle cell",
+   "n_cells": 11753,
+   "markers": [
+    "AQP2",
+    "FXYD4",
+    "HSD11B2",
+    "SCNN1G",
+    "CALB1",
+    "KRT19"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:1001431",
+     "name": "kidney collecting duct principal cell"
+    },
+    {
+     "curie": "CL:0005009",
+     "name": "renal principal cell"
+    },
+    {
+     "curie": "CL:4030018",
+     "name": "kidney connecting tubule principal cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Eye",
+   "label": "Bipolar cell",
+   "n_cells": 11653,
+   "markers": [
+    "PCP2",
+    "LPGAT1",
+    "PRKCA",
+    "SERPINI1",
+    "CCDC136",
+    "CABP5"
+   ],
+   "candidate": {
+    "curie": "CL:0000749",
+    "name": "ON-bipolar cell",
+    "overlap": 0.67
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000750",
+     "name": "OFF-bipolar cell",
+     "overlap": 0.67
+    },
+    {
+     "curie": "CL:0000751",
+     "name": "rod bipolar cell",
+     "overlap": 0.67
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000751",
+     "name": "rod bipolar cell"
+    },
+    {
+     "curie": "CL:4033085",
+     "name": "diffuse bipolar 5 cell"
+    },
+    {
+     "curie": "CL:4033095",
+     "name": "diffuse bipolar 4a cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Prostate",
+   "label": "Luminal cell",
+   "n_cells": 8610,
+   "markers": [
+    "PLA2G2A",
+    "SLC39A6",
+    "SLC44A4",
+    "MSMB",
+    "TMC5",
+    "SPDEF"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000163",
+     "name": "endocrine cell"
+    },
+    {
+     "curie": "CL:0002340",
+     "name": "luminal cell of prostate epithelium"
+    },
+    {
+     "curie": "CL:4032000",
+     "name": "club-like cell of the urethral epithelium"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Salivary_gland",
+   "label": "Serous gland cell",
+   "n_cells": 8174,
+   "markers": [
+    "MUCL1",
+    "TESC",
+    "AQP5",
+    "DNER",
+    "S100A1",
+    "DNASE2B"
+   ],
+   "candidate": {
+    "curie": "CL:0000249",
+    "name": "hatching gland cell",
+    "overlap": 0.5
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000313",
+     "name": "serous secreting cell",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0009005",
+     "name": "salivary gland cell",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000313",
+     "name": "serous secreting cell"
+    },
+    {
+     "curie": "CL:0000319",
+     "name": "mucus secreting cell"
+    },
+    {
+     "curie": "CL:0000159",
+     "name": "seromucus secreting cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Adrenal_gland",
+   "label": "Capsular cell",
+   "n_cells": 7017,
+   "markers": [],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000134",
+     "name": "mesenchymal stem cell"
+    },
+    {
+     "curie": "CL:0000034",
+     "name": "stem cell"
+    },
+    {
+     "curie": "CL:0000071",
+     "name": "blood vessel endothelial cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "Mesodermal killer cell",
+   "n_cells": 6128,
+   "markers": [
+    "DNM3",
+    "TMEM40",
+    "RAB27B",
+    "LTBP1",
+    "GP9",
+    "GP1BA"
+   ],
+   "candidate": {
+    "curie": "CL:0000222",
+    "name": "mesodermal cell",
+    "overlap": 0.67
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000623",
+     "name": "natural killer cell",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0011010",
+     "name": "lateral mesodermal cell",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000556",
+     "name": "megakaryocyte"
+    },
+    {
+     "curie": "CL:0000233",
+     "name": "platelet"
+    },
+    {
+     "curie": "CL:0000151",
+     "name": "secretory cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Ureter",
+   "label": "Umbrella cell",
+   "n_cells": 5454,
+   "markers": [],
+   "candidate": {
+    "curie": "CL:4030056",
+    "name": "umbrella cell of urothelium",
+    "overlap": 0.5
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:4030056",
+     "name": "umbrella cell of urothelium"
+    },
+    {
+     "curie": "CL:0000731",
+     "name": "urothelial cell"
+    },
+    {
+     "curie": "CL:0000066",
+     "name": "epithelial cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Eye",
+   "label": "OFF-BC",
+   "n_cells": 5299,
+   "markers": [
+    "TTN",
+    "GRIK1",
+    "SLC1A2",
+    "TRAPPC8",
+    "PSD3",
+    "REPS2"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:4033033",
+     "name": "flat midget bipolar cell"
+    },
+    {
+     "curie": "CL:4033028",
+     "name": "diffuse bipolar 2 cell"
+    },
+    {
+     "curie": "CL:0000750",
+     "name": "OFF-bipolar cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "CD4 Tem",
+   "n_cells": 3837,
+   "markers": [
+    "MRTFA",
+    "FLT3LG",
+    "TOB1",
+    "PLSCR3",
+    "RCAN3",
+    "GIMAP1"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000907",
+     "name": "central memory CD8-positive, alpha-beta T cell"
+    },
+    {
+     "curie": "CL:0000900",
+     "name": "naive thymus-derived CD8-positive, alpha-beta T cell"
+    },
+    {
+     "curie": "CL:0000904",
+     "name": "central memory CD4-positive, alpha-beta T cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "CD8 Tem",
+   "n_cells": 3127,
+   "markers": [
+    "GZMH",
+    "FGFBP2",
+    "GNLY",
+    "SAMD3",
+    "GZMB",
+    "KLRG1"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000939",
+     "name": "CD16-positive, CD56-dim natural killer cell, human"
+    },
+    {
+     "curie": "CL:0001087",
+     "name": "effector memory CD4-positive, alpha-beta T cell, terminally differentiated"
+    },
+    {
+     "curie": "CL:0001082",
+     "name": "immature innate lymphoid cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Eye",
+   "label": "ON-BC",
+   "n_cells": 3113,
+   "markers": [
+    "PCP4L1",
+    "VSX1",
+    "CABP2",
+    "MPP2",
+    "SLC24A4",
+    "CCDC88A"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:4033034",
+     "name": "invaginating midget bipolar cell"
+    },
+    {
+     "curie": "CL:0000752",
+     "name": "cone retinal bipolar cell"
+    },
+    {
+     "curie": "CL:0000749",
+     "name": "ON-bipolar cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Heart",
+   "label": "CD8 T te cell",
+   "n_cells": 2685,
+   "markers": [
+    "CLEC2D",
+    "PPP2R5C",
+    "AOAH",
+    "PYHIN1",
+    "DTHD1",
+    "AKNA"
+   ],
+   "candidate": {
+    "curie": "CL:0000084",
+    "name": "T cell",
+    "overlap": 0.5
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000906",
+     "name": "activated CD8-positive, alpha-beta T cell"
+    },
+    {
+     "curie": "CL:0000625",
+     "name": "CD8-positive, alpha-beta T cell"
+    },
+    {
+     "curie": "CL:0000838",
+     "name": "lymphoid lineage restricted progenitor cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Heart",
+   "label": "CD8 T trans cell",
+   "n_cells": 2671,
+   "markers": [
+    "TOX",
+    "THEMIS",
+    "LINC01934",
+    "SAMD3",
+    "CLEC2D",
+    "DTHD1"
+   ],
+   "candidate": {
+    "curie": "CL:0000084",
+    "name": "T cell",
+    "overlap": 0.5
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000838",
+     "name": "lymphoid lineage restricted progenitor cell"
+    },
+    {
+     "curie": "CL:0008001",
+     "name": "hematopoietic precursor cell"
+    },
+    {
+     "curie": "CL:0000906",
+     "name": "activated CD8-positive, alpha-beta T cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Breast",
+   "label": "Luminal cell",
+   "n_cells": 2478,
+   "markers": [
+    "DNAJC12",
+    "TMC5",
+    "AGR2",
+    "ANKRD30A",
+    "MLPH",
+    "TMEM45B"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:4033058",
+     "name": "luminal hormone-sensing cell of mammary gland"
+    },
+    {
+     "curie": "CL:0009116",
+     "name": "progenitor cell of mammary luminal epithelium"
+    },
+    {
+     "curie": "CL:0000152",
+     "name": "exocrine cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spinal_cord",
+   "label": "Midplate (MP) cell",
+   "n_cells": 2437,
+   "markers": [],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000065",
+     "name": "ependymal cell"
+    },
+    {
+     "curie": "CL:0000075",
+     "name": "columnar/cuboidal epithelial cell"
+    },
+    {
+     "curie": "CL:0000127",
+     "name": "astrocyte"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Stomach",
+   "label": "Pit cell",
+   "n_cells": 2374,
+   "markers": [
+    "PIGR",
+    "LYZ",
+    "MUC6",
+    "RPL28",
+    "RPL5",
+    "RNASE1"
+   ],
+   "candidate": {
+    "curie": "CL:2000054",
+    "name": "hepatic pit cell",
+    "overlap": 0.67
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0002181",
+     "name": "mucous neck cell of gastric gland"
+    },
+    {
+     "curie": "CL:0000152",
+     "name": "exocrine cell"
+    },
+    {
+     "curie": "CL:0002180",
+     "name": "mucous cell of stomach"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Pancreas",
+   "label": "Orthochromatophilic erythroblast",
+   "n_cells": 2318,
+   "markers": [
+    "ALAS2",
+    "AHSP",
+    "HEMGN",
+    "GYPA",
+    "HBG1",
+    "HBB"
+   ],
+   "candidate": {
+    "curie": "CL:0000765",
+    "name": "erythroblast",
+    "overlap": 0.5
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000765",
+     "name": "erythroblast"
+    },
+    {
+     "curie": "CL:0000764",
+     "name": "erythroid lineage cell"
+    },
+    {
+     "curie": "CL:0011026",
+     "name": "progenitor cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Stomach",
+   "label": "Fundic gland",
+   "n_cells": 2172,
+   "markers": [
+    "ESRRG",
+    "FGD4",
+    "IGFBP5",
+    "SIK2",
+    "ARHGEF28",
+    "RAP1GAP2"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000162",
+     "name": "parietal cell"
+    },
+    {
+     "curie": "CL:0000094",
+     "name": "granulocyte"
+    },
+    {
+     "curie": "CL:0000775",
+     "name": "neutrophil"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Brain",
+   "label": "PV inhibitory neuron",
+   "n_cells": 2138,
+   "markers": [
+    "CPLX1",
+    "SATB1-AS1",
+    "ADAMTS17",
+    "ANKRD34C-AS1",
+    "GABRD",
+    "MB"
+   ],
+   "candidate": {
+    "curie": "CL:0008015",
+    "name": "inhibitory motor neuron",
+    "overlap": 0.5
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0008029",
+     "name": "obsolete inhibitory neuron",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:4023018",
+     "name": "pvalb GABAergic interneuron"
+    },
+    {
+     "curie": "CL:4023036",
+     "name": "pvalb chandelier GABAergic interneuron"
+    },
+    {
+     "curie": "CL:4023083",
+     "name": "obsolete chandelier cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Testis",
+   "label": "Spermatogenic cell",
+   "n_cells": 2014,
+   "markers": [
+    "POU5F1",
+    "TUBA1C",
+    "DPPA5",
+    "PGK1",
+    "SNRPC",
+    "PDPN"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000670",
+     "name": "primordial germ cell"
+    },
+    {
+     "curie": "CL:0000057",
+     "name": "fibroblast"
+    },
+    {
+     "curie": "CL:0002320",
+     "name": "connective tissue cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Lung",
+   "label": "Erythroid-like cell",
+   "n_cells": 1750,
+   "markers": [
+    "SLC4A1",
+    "ALAS2",
+    "HEMGN",
+    "HBQ1",
+    "TRIM58",
+    "DMTN"
+   ],
+   "candidate": {
+    "curie": "CL:0000038",
+    "name": "erythroid progenitor cell",
+    "overlap": 0.5
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000504",
+     "name": "enterochromaffin-like cell",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0000764",
+     "name": "erythroid lineage cell",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000595",
+     "name": "enucleate erythrocyte"
+    },
+    {
+     "curie": "CL:0000558",
+     "name": "reticulocyte"
+    },
+    {
+     "curie": "CL:0000232",
+     "name": "erythrocyte"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Nose",
+   "label": "Serous gland cell",
+   "n_cells": 1713,
+   "markers": [
+    "DMBT1",
+    "ODAM",
+    "S100A1",
+    "MUC7",
+    "DLC1",
+    "LPO"
+   ],
+   "candidate": {
+    "curie": "CL:0000249",
+    "name": "hatching gland cell",
+    "overlap": 0.5
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000313",
+     "name": "serous secreting cell",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0009005",
+     "name": "salivary gland cell",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000313",
+     "name": "serous secreting cell"
+    },
+    {
+     "curie": "CL:0019001",
+     "name": "tracheobronchial serous cell"
+    },
+    {
+     "curie": "CL:0000622",
+     "name": "acinar cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Kidney",
+   "label": "Proximal convoluted tubule progenitor",
+   "n_cells": 1631,
+   "markers": [
+    "AFP",
+    "CUBN",
+    "APOM",
+    "FLRT3",
+    "LRP2",
+    "GLYATL1"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:1000838",
+     "name": "kidney proximal convoluted tubule epithelial cell"
+    },
+    {
+     "curie": "CL:4030011",
+     "name": "epithelial cell of proximal tubule segment 3"
+    },
+    {
+     "curie": "CL:0000067",
+     "name": "ciliated epithelial cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Skin",
+   "label": "CD8 Treg",
+   "n_cells": 1615,
+   "markers": [
+    "TIGIT",
+    "PBXIP1",
+    "HTATIP2",
+    "CD247",
+    "FANK1",
+    "P2RY10"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000920",
+     "name": "CD8-positive, CD28-negative, alpha-beta regulatory T cell"
+    },
+    {
+     "curie": "CL:0002038",
+     "name": "T follicular helper cell"
+    },
+    {
+     "curie": "CL:0000815",
+     "name": "regulatory T cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Kidney",
+   "label": "Loop of henle progenitor",
+   "n_cells": 1522,
+   "markers": [
+    "PANTR1",
+    "POU3F3",
+    "CLDN10",
+    "SLC12A1",
+    "KNG1",
+    "SEPTIN2"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:1001109",
+     "name": "kidney loop of Henle cortical thick ascending limb epithelial cell"
+    },
+    {
+     "curie": "CL:1001106",
+     "name": "kidney loop of Henle thick ascending limb epithelial cell"
+    },
+    {
+     "curie": "CL:1001016",
+     "name": "kidney loop of Henle ascending limb epithelial cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spinal_cord",
+   "label": "Floor plate (FP) cell",
+   "n_cells": 1395,
+   "markers": [],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000065",
+     "name": "ependymal cell"
+    },
+    {
+     "curie": "CL:0000075",
+     "name": "columnar/cuboidal epithelial cell"
+    },
+    {
+     "curie": "CL:0000679",
+     "name": "glutamatergic neuron"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Pleura",
+   "label": "Mesothelium",
+   "n_cells": 1380,
+   "markers": [],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000077",
+     "name": "mesothelial cell"
+    },
+    {
+     "curie": "CL:0000066",
+     "name": "epithelial cell"
+    },
+    {
+     "curie": "CL:0011026",
+     "name": "progenitor cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Brain",
+   "label": "VIP inhibitory neuron",
+   "n_cells": 1029,
+   "markers": [
+    "COL21A1",
+    "L3MBTL4",
+    "LYPD4",
+    "DNAH17",
+    "PSD4",
+    "RNR2"
+   ],
+   "candidate": {
+    "curie": "CL:0008015",
+    "name": "inhibitory motor neuron",
+    "overlap": 0.5
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0008029",
+     "name": "obsolete inhibitory neuron",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:4042014",
+     "name": "spiny VIP neuron",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:4023015",
+     "name": "sncg GABAergic interneuron"
+    },
+    {
+     "curie": "CL:4023016",
+     "name": "VIP GABAergic interneuron"
+    },
+    {
+     "curie": "CL:0000192",
+     "name": "smooth muscle cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spinal_cord",
+   "label": "Roof plate (RP) cell",
+   "n_cells": 892,
+   "markers": [],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000065",
+     "name": "ependymal cell"
+    },
+    {
+     "curie": "CL:0000075",
+     "name": "columnar/cuboidal epithelial cell"
+    },
+    {
+     "curie": "CL:0011026",
+     "name": "progenitor cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "new-term",
+   "organ": "Spleen",
+   "label": "CD4 Trm",
+   "n_cells": 571,
+   "markers": [
+    "ZC3H12A",
+    "PGAP3",
+    "RORA",
+    "KCNA3",
+    "EML4",
+    "PPP1R15B"
+   ],
+   "candidate": null,
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000499",
+     "name": "stromal cell"
+    },
+    {
+     "curie": "CL:0000814",
+     "name": "mature NK T cell"
+    },
+    {
+     "curie": "CL:0000940",
+     "name": "mucosal-associated invariant T cell"
+    }
+   ],
+   "checks": {
+    "V1": "n/a",
+    "V2": "n/a",
+    "V3": "n/a",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Bone_marrow",
+   "label": "Common lymphoid progenitor (CLP)",
+   "n_cells": 3701,
+   "markers": [
+    "NLRP6",
+    "NPY",
+    "CYGB",
+    "UHRF1",
+    "GABPAP",
+    "SMIM3"
+   ],
+   "candidate": {
+    "curie": "CL:0000051",
+    "name": "common lymphoid progenitor",
+    "overlap": 1.0
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000049",
+     "name": "common myeloid progenitor",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0000936",
+     "name": "early lymphoid progenitor",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0002045",
+     "name": "fraction A pre-pro B cell"
+    },
+    {
+     "curie": "CL:0000936",
+     "name": "early lymphoid progenitor"
+    },
+    {
+     "curie": "CL:0002048",
+     "name": "late pro-B cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Spinal_cord",
+   "label": "Multipotent hematopoietic progenitor",
+   "n_cells": 1368,
+   "markers": [],
+   "candidate": {
+    "curie": "CL:0000837",
+    "name": "hematopoietic multipotent progenitor cell",
+    "overlap": 0.75
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000766",
+     "name": "myeloid leukocyte"
+    },
+    {
+     "curie": "CL:0000738",
+     "name": "leukocyte"
+    },
+    {
+     "curie": "CL:0000988",
+     "name": "hematopoietic cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Bone_marrow",
+   "label": "Common myeloid progenitor (CMP)",
+   "n_cells": 1336,
+   "markers": [
+    "HNRNPA1L2",
+    "RPLP0P2",
+    "MATR3",
+    "SUMO4",
+    "LAPTM4B",
+    "CRHBP"
+   ],
+   "candidate": {
+    "curie": "CL:0000049",
+    "name": "common myeloid progenitor",
+    "overlap": 1.0
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0001059",
+     "name": "common myeloid progenitor, CD34-positive",
+     "overlap": 0.6
+    },
+    {
+     "curie": "CL:0000051",
+     "name": "common lymphoid progenitor",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000115",
+     "name": "endothelial cell"
+    },
+    {
+     "curie": "CL:0000810",
+     "name": "CD4-positive, alpha-beta thymocyte"
+    },
+    {
+     "curie": "CL:0000066",
+     "name": "epithelial cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Spleen",
+   "label": "Common lymphoid progenitor (CLP)",
+   "n_cells": 1012,
+   "markers": [
+    "DNTT",
+    "NPY",
+    "CMTM7",
+    "LCN6",
+    "MLXIP",
+    "TLE4"
+   ],
+   "candidate": {
+    "curie": "CL:0000051",
+    "name": "common lymphoid progenitor",
+    "overlap": 1.0
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000049",
+     "name": "common myeloid progenitor",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0000936",
+     "name": "early lymphoid progenitor",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0002048",
+     "name": "late pro-B cell"
+    },
+    {
+     "curie": "CL:0000817",
+     "name": "precursor B cell"
+    },
+    {
+     "curie": "CL:0000826",
+     "name": "pro-B cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Spleen",
+   "label": "Multipotent hematopoietic progenitor",
+   "n_cells": 754,
+   "markers": [
+    "MLLT3",
+    "ANGPT1",
+    "HMGA2",
+    "TIMM9",
+    "TMEM69",
+    "ETFRF1"
+   ],
+   "candidate": {
+    "curie": "CL:0000837",
+    "name": "hematopoietic multipotent progenitor cell",
+    "overlap": 0.75
+   },
+   "alternatives": [],
+   "expression_top": [
+    {
+     "curie": "CL:0000499",
+     "name": "stromal cell"
+    },
+    {
+     "curie": "CL:0002139",
+     "name": "endothelial cell of vascular tree"
+    },
+    {
+     "curie": "CL:0000050",
+     "name": "megakaryocyte-erythroid progenitor cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Pancreas",
+   "label": "Pancreatic stellate cell (PSC)",
+   "n_cells": 747,
+   "markers": [
+    "CRISPLD2",
+    "C11orf96",
+    "ADCY8",
+    "SMIM3",
+    "PDGFRB",
+    "AEBP1"
+   ],
+   "candidate": {
+    "curie": "CL:0002410",
+    "name": "pancreatic stellate cell",
+    "overlap": 1.0
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000171",
+     "name": "pancreatic A cell",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0000173",
+     "name": "pancreatic D cell",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0008019",
+     "name": "mesenchymal cell"
+    },
+    {
+     "curie": "CL:0000192",
+     "name": "smooth muscle cell"
+    },
+    {
+     "curie": "CL:0000183",
+     "name": "contractile cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Ovary",
+   "label": "Oocyte (Ootid/Ovum)",
+   "n_cells": 662,
+   "markers": [
+    "ASRGL1",
+    "NANOS3",
+    "ETV4",
+    "TCL1B",
+    "L1TD1",
+    "PDPN"
+   ],
+   "candidate": {
+    "curie": "CL:0000023",
+    "name": "oocyte",
+    "overlap": 1.0
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0000654",
+     "name": "primary oocyte",
+     "overlap": 0.5
+    },
+    {
+     "curie": "CL:0000655",
+     "name": "secondary oocyte",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000670",
+     "name": "primordial germ cell"
+    },
+    {
+     "curie": "CL:0000784",
+     "name": "plasmacytoid dendritic cell"
+    },
+    {
+     "curie": "CL:0000150",
+     "name": "glandular secretory epithelial cell"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "pass",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  },
+  {
+   "kind": "synonym",
+   "organ": "Adrenal_gland",
+   "label": "Schwann cell precursors (SCPs)",
+   "n_cells": 579,
+   "markers": [],
+   "candidate": {
+    "curie": "CL:0002375",
+    "name": "Schwann cell precursor",
+    "overlap": 0.9
+   },
+   "alternatives": [
+    {
+     "curie": "CL:0002573",
+     "name": "Schwann cell",
+     "overlap": 0.67
+    },
+    {
+     "curie": "CL:0000218",
+     "name": "myelinating Schwann cell",
+     "overlap": 0.5
+    }
+   ],
+   "expression_top": [
+    {
+     "curie": "CL:0000576",
+     "name": "monocyte"
+    },
+    {
+     "curie": "CL:0002470",
+     "name": "MHC-II-positive classical monocyte"
+    },
+    {
+     "curie": "CL:0002306",
+     "name": "epithelial cell of proximal tubule"
+    }
+   ],
+   "checks": {
+    "V1": "pass",
+    "V2": "pass",
+    "V3": "pass",
+    "V9": "not-run",
+    "V10": "not-run",
+    "V12": "not-run"
+   }
+  }
+ ]
+}

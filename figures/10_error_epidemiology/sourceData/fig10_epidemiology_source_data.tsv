@@ -4,15 +4,24 @@ a	size_2-10k	n=67;error_pct=4.5;ci=1.5-12.4
 a	size_10-50k	n=51;error_pct=5.9;ci=2.0-15.9
 a	size_>50k	n=32;error_pct=9.4;ci=3.2-24.2
 a	fisher_lt2k_vs_ge2k	0.01099
-b	haematopoietic->haematopoietic	5
-b	epithelial->haematopoietic	2
-b	connective->connective	2
-b	muscle->connective	1
-b	muscle->muscle	1
-b	muscle->endothelial	1
-b	endothelial->endothelial	1
-b	neural->epithelial	1
-b	diagonal_within_lineage	9 of 14
-c	Tabula Sapiens confirmed	4 of 8
-c	CellTypist disagreements	5 of 8
-c	hand-curated errors	3 of 17
+b	ref_support_Q1	n=55;error_pct=14.5;ci=7.6-26.2
+b	ref_support_Q2	n=46;error_pct=6.5;ci=2.2-17.5
+b	ref_support_Q3	n=44;error_pct=9.1;ci=3.6-21.2
+b	ref_support_Q4	n=45;error_pct=4.4;ci=1.2-14.8
+b	logit_p_size_only	0.1615
+b	logit_p_support_only	0.0399
+b	logit_p_size_adjusted	0.5557
+b	LR_adding_size_to_support	0.5547
+b	spearman_size_support	rho=0.515;p=2.92e-14
+c	haematopoietic->haematopoietic	5
+c	epithelial->haematopoietic	2
+c	connective->connective	2
+c	muscle->connective	1
+c	muscle->muscle	1
+c	muscle->endothelial	1
+c	endothelial->endothelial	1
+c	neural->epithelial	1
+c	diagonal_within_lineage	9 of 14
+d	Tabula Sapiens confirmed	4 of 8
+d	CellTypist disagreements	5 of 8
+d	hand-curated errors	3 of 17

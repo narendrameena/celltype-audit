@@ -1,0 +1,19 @@
+panel	key	value
+a	FCN1	present
+a	CD14	present
+a	S100A12	present
+a	MAFB	present
+a	FCGR3B	absent
+a	ELANE	absent
+b	monocyte, macrophage, myeloid or dendritic	51453 cells (91.24% of 56394)
+b	other or unspecified	4427 cells (7.85% of 56394)
+b	neutrophil or granulocyte	514 cells (0.91% of 56394)
+b	mangled_original_names	22075 cells in 9 strings
+a	median_genes_detected	flagged=1300;lung_monocyte=977;median_cell_type=1160
+c	as published	neutrophil=56394;monocyte=45198;ratio=1.2477
+c	one cluster corrected	neutrophil=0;monocyte=101592;ratio=0.0000
+c	independent atlas	neutrophil=371;monocyte=5387;ratio=0.0689
+c	fold_overstatement	18.1
+d	confirmed by an independent atlas	26023 cells (0.258% of 10071582)
+d	plus hand-curated errors	249264 cells (2.475% of 10071582)
+d	excluded_cl_artifact	180750

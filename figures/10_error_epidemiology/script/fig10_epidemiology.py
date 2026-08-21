@@ -43,8 +43,11 @@ RES = os.path.join(ROOT, "cellscribe_tool", "benchmark", "results")
 rows = json.load(open(os.path.join(RES, "auditor_recall.json")))
 err = [r for r in rows if r["error"]]
 
-fig = plt.figure(figsize=(S.W2, 3.05))
-gs = fig.add_gridspec(1, 3, width_ratios=[1.05, 1.25, 0.85], wspace=0.50,
+SVS = json.load(open(os.path.join(RES, "size_vs_support_epi.json")))
+RTA = json.load(open(os.path.join(RES, "referee_tests.json")))["test_a"]
+
+fig = plt.figure(figsize=(S.W2, 6.3))
+gs = fig.add_gridspec(2, 2, width_ratios=[1.0, 1.12], hspace=1.05, wspace=0.42,
                       left=0.075, right=0.985, top=0.825, bottom=0.315)
 
 # ------------------------------------------------------------------ a size
@@ -54,8 +57,8 @@ _sm = [r for r in rows if r["n_cells"] < 2000]
 _bg = [r for r in rows if r["n_cells"] >= 2000]
 _rs = (sum(1 for r in _sm if r["error"]) / max(len(_sm), 1))
 _rb = (sum(1 for r in _bg if r["error"]) / max(len(_bg), 1))
-ax.set_title("Small clusters are mislabelled\n%.1f times as often" % (_rs / max(_rb, 1e-9)),
-             loc="left", pad=5, linespacing=1.25)
+ax.set_title("Mislabelling by cluster size\n%.1f times as often below 2,000 cells"
+             % (_rs / max(_rb, 1e-9)), loc="left", pad=5, linespacing=1.25)
 CUTS = [(500, 2000, "0.5-2k"), (2000, 10000, "2-10k"),
         (10000, 50000, "10-50k"), (50000, 10 ** 9, ">50k")]
 xs, rates, los, his, ns = [], [], [], [], []
@@ -84,15 +87,61 @@ ax.text(0.97, 0.95, "<2k: %.1f%%     \u2265 2k: %.1f%%\nFisher p = %.4f"
         % (100 * a1 / len(sm), 100 * c1 / len(bg), fisher(a1, b1, c1, d1)),
         transform=ax.transAxes, ha="right", va="top", fontsize=5.5, color=S.INK2,
         linespacing=1.35)
-ax.text(0, -0.50, "bars are Wilson 95%% intervals; %d errors in %d cell types.\n"
-        "Direction holds across five swept thresholds (1.7-2.5\u00d7); the p-value does\n"
-        "not (0.011 here, 0.138 on the reference-scoreable subset)."
+ax.text(0, -0.80, "bars are Wilson 95%% intervals; %d errors in %d cell types. The direction\n"
+        "holds across all 16 swept threshold settings (1.7-2.5\u00d7) but the p-value does not\n"
+        "(0.011 here, 0.138 on the reference-scoreable subset). Panel b shows that size is\n"
+        "a proxy: what predicts the error is how much reference evidence the term has."
         % (len(err), len(rows)), transform=ax.transAxes, fontsize=5.2, color=S.INK2,
         linespacing=1.4)
 
-# ------------------------------------------------------------------ b confusion
+# ---------------------------------------------------- b the variable that actually predicts
 ax = fig.add_subplot(gs[0, 1])
-S.panel(ax, "b", dx=-0.22, dy=1.16)
+S.panel(ax, "b", dx=-0.24, dy=1.16)
+ax.set_title("The same errors, binned by the\nreference evidence instead",
+             loc="left", pad=5, linespacing=1.25)
+sup = np.array([r["ref_support"] for r in SVS], float)
+ye = np.array([1.0 if r["error"] else 0.0 for r in SVS])
+qs = np.quantile(sup[sup > 0], [0.25, 0.50, 0.75])
+SB = [(-1, qs[0]), (qs[0], qs[1]), (qs[1], qs[2]), (qs[2], np.inf)]
+xs2, r2, lo2, hi2, n2 = [], [], [], [], []
+for i, (a_, b_) in enumerate(SB):
+    m = (sup > a_) & (sup <= b_) if np.isfinite(b_) else (sup > a_)
+    k = int(ye[m].sum())
+    a1_, b1_ = wilson(k, int(m.sum()))
+    xs2.append(i); r2.append(100 * k / max(int(m.sum()), 1))
+    lo2.append(100 * a1_); hi2.append(100 * b1_); n2.append(int(m.sum()))
+ax.errorbar(xs2, r2, yerr=[np.array(r2) - lo2, np.array(hi2) - np.array(r2)],
+            fmt="none", elinewidth=0.9, capsize=2.2, ecolor=S.RULE, zorder=3)
+for i, r_ in enumerate(r2):
+    ax.scatter([i], [r_], s=28, color=S.VERM if i == 0 else S.BLUE, zorder=4, lw=0)
+ax.set_xticks(xs2)
+ax.set_xticklabels(["Q%d\n(n=%d)" % (i + 1, n) for i, n in enumerate(n2)], fontsize=5.6,
+                   linespacing=1.3)
+ax.set_xlabel("reference cells for the asserted CL term (quartile)")
+ax.set_ylabel("cell types mislabelled (%)")
+ax.set_ylim(0, max(hi2) * 1.12)
+ax.set_xlim(-0.5, len(SB) - 0.5)
+ax.text(0.97, 0.95,
+        "logistic regression, %d errors in %d types\n"
+        "size only        p = %.3f\n"
+        "support only     p = %.3f\n"
+        "size + support   size p = %.3f\n"
+        "adding size to support   p = %.3f"
+        % (RTA["all"]["errors"], RTA["all"]["n"], RTA["all"]["p_size"],
+           RTA["all"]["p_support"], RTA["all"]["p_size_adj"], RTA["all"]["p_lr_size"]),
+        transform=ax.transAxes, ha="right", va="top", fontsize=5.3, color=S.INK2,
+        linespacing=1.45, family="monospace")
+ax.text(0, -0.80,
+        "cluster size and reference support are strongly collinear (Spearman rho = %+.2f,\n"
+        "p = %.0e), and with %d errors they cannot be separated. On a continuous scale it is\n"
+        "SUPPORT that reaches significance, not size, and size adds nothing to a model that\n"
+        "already knows the support. The actionable claim is about evidence, not cluster size."
+        % (RTA["all"]["rho"], RTA["all"]["p_rho"], RTA["all"]["errors"]),
+        transform=ax.transAxes, fontsize=5.2, color=S.INK2, linespacing=1.4)
+
+# ------------------------------------------------------------------ c confusion
+ax = fig.add_subplot(gs[1, 0])
+S.panel(ax, "c", dx=-0.22, dy=1.16)
 ax.set_title("What is mislabelled as what", loc="left", pad=5)
 LIN = ["haematopoietic", "epithelial", "connective", "muscle", "endothelial", "neural"]
 SHORT = {"haematopoietic": "haemato.", "epithelial": "epithel.", "connective": "connect.",
@@ -122,14 +171,14 @@ ax.set_yticklabels([SHORT[l] for l in LIN], fontsize=5.4)
 ax.set_xlabel("what the markers say")
 ax.set_ylabel("what the label asserts")
 diag = int(np.trace(M))
-ax.text(0, -0.52, "boxed diagonal = label and evidence share a lineage.\n"
+ax.text(0, -0.70, "boxed diagonal = label and evidence share a lineage.\n"
         "%d of %d placed errors sit there, invisible to an anchor-set test."
         % (diag, int(M.sum())), transform=ax.transAxes, fontsize=5.2, color=S.INK2,
         linespacing=1.4)
 
-# ------------------------------------------------------------------ c muscle pattern
-ax = fig.add_subplot(gs[0, 2])
-S.panel(ax, "c", dx=-0.34, dy=1.16)
+# ------------------------------------------------------------------ d muscle pattern
+ax = fig.add_subplot(gs[1, 1])
+S.panel(ax, "d", dx=-0.34, dy=1.16)
 ax.set_title("A smooth-muscle label is\nthe commonest single trap", loc="left", pad=5,
              linespacing=1.25)
 CX = json.load(open(os.path.join(RES, "cross_atlas_confirmation.json")))
@@ -152,7 +201,7 @@ ax.set_xticks([0, 50, 100])
 ax.set_xlabel("% of that source's errors")
 for sp in ("left",):
     ax.spines[sp].set_visible(False)
-ax.text(-0.62, -0.56, "counted per source, not pooled \u2014 the\n"
+ax.text(-0.30, -0.62, "counted per source, not pooled \u2014 the\n"
         "denominators are different populations; the\n"
         "curated organs hold few smooth-muscle clusters.",
         transform=ax.transAxes, fontsize=5.2, color=S.INK2, ha="left", va="top",
@@ -162,13 +211,21 @@ tsv = ["panel\tkey\tvalue"]
 for (lo, hi, lab), n, r, l, h in zip(CUTS, ns, rates, los, his):
     tsv.append("a\tsize_%s\tn=%d;error_pct=%.1f;ci=%.1f-%.1f" % (lab, n, r, l, h))
 tsv.append("a\tfisher_lt2k_vs_ge2k\t%.5f" % fisher(a1, b1, c1, d1))
+for i, (r_, n_) in enumerate(zip(r2, n2)):
+    tsv.append("b\tref_support_Q%d\tn=%d;error_pct=%.1f;ci=%.1f-%.1f"
+               % (i + 1, n_, r_, lo2[i], hi2[i]))
+tsv.append("b\tlogit_p_size_only\t%.4f" % RTA["all"]["p_size"])
+tsv.append("b\tlogit_p_support_only\t%.4f" % RTA["all"]["p_support"])
+tsv.append("b\tlogit_p_size_adjusted\t%.4f" % RTA["all"]["p_size_adj"])
+tsv.append("b\tLR_adding_size_to_support\t%.4f" % RTA["all"]["p_lr_size"])
+tsv.append("b\tspearman_size_support\trho=%.3f;p=%.2e" % (RTA["all"]["rho"], RTA["all"]["p_rho"]))
 for i, li in enumerate(LIN):
     for j, lj in enumerate(LIN):
         if M[i, j]:
-            tsv.append("b\t%s->%s\t%d" % (li, lj, int(M[i, j])))
-tsv.append("b\tdiagonal_within_lineage\t%d of %d" % (diag, int(M.sum())))
+            tsv.append("c\t%s->%s\t%d" % (li, lj, int(M[i, j])))
+tsv.append("c\tdiagonal_within_lineage\t%d of %d" % (diag, int(M.sum())))
 for name, k, tot in src:
-    tsv.append("c\t%s\t%d of %d" % (name.replace("\n", " "), k, tot))
+    tsv.append("d\t%s\t%d of %d" % (name.replace("\n", " "), k, tot))
 out = S.save(fig, HERE, "fig10_epidemiology", "\n".join(tsv) + "\n")
 print("size p=%.4f | confusion diagonal %d/%d" % (fisher(a1, b1, c1, d1), diag, int(M.sum())))
 print("\n".join(out))
