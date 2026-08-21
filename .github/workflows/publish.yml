@@ -57,4 +57,27 @@ jobs:
         with:
           name: dist
           path: dist/
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - id: upload
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      # The usual reason this step fails is that PyPI has no trusted publisher for the
+      # project -- which is the state any project starts in if its first release was
+      # uploaded with an API token. Nothing is wrong with the build when that happens:
+      # the version check, the tests and `twine check` all ran in the job before this one.
+      - name: Explain a failed upload
+        if: failure()
+        run: |
+          echo "The distributions built and validated; the upload was rejected."
+          echo
+          echo "If this is the first Trusted Publishing release, register the publisher at"
+          echo "  https://pypi.org/manage/project/celltype-audit/settings/publishing/"
+          echo "with EXACTLY these values -- all four must match or the OIDC token is refused:"
+          echo "  owner            : ${{ github.repository_owner }}"
+          echo "  repository       : ${{ github.event.repository.name }}"
+          echo "  workflow         : publish.yml"
+          echo "  environment      : pypi"
+          echo
+          echo "Then re-run this job. No API token needs to be created or stored: that is"
+          echo "the point of Trusted Publishing, and a token that has been pasted anywhere"
+          echo "should be revoked rather than reused."
+          exit 1
