@@ -1,0 +1,59 @@
+name: pages
+
+# Publishes docs/ — the review queue for Cell Ontology contributions drafted from the
+# audit's by-products. Deploying from a workflow rather than the Settings panel keeps the
+# site under version control, and means a regenerated proposals.json goes live on push
+# instead of waiting for someone to remember.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# never let two deployments race; queue rather than cancel, so a push that lands mid-deploy
+# still publishes instead of being dropped
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: build and deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # enables Pages on the repository if it is not already on, so the site does not
+      # depend on a dropdown in the Settings panel having been saved correctly
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Check the page and its data are present
+        run: |
+          test -f docs/index.html || { echo "docs/index.html missing"; exit 1; }
+          python3 -c "
+          import json
+          d = json.load(open('docs/proposals.json'))
+          n = len(d['proposals'])
+          assert n == d['summary']['n'], 'summary count disagrees with the proposal list'
+          print(f'{n} proposals, {d[\"summary\"][\"routes_disagree\"]} where the routes disagree')
+          "
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
