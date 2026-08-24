@@ -22,7 +22,7 @@ re-resolving the label. Gene symbols are read from whichever of `var/feature_nam
 
 **The queue** is ranked triage, not a set of assertions. Work down it until the hit rate
 stops justifying the time. In the reference study the top 5 were 60% real and the top 30
-were 27% real, against a 7.9% base rate.
+were 30% real, against a 7.4% base rate.
 
 ## 3. Understand an entry
 
@@ -72,7 +72,7 @@ celltype-audit annotate fresh.h5ad --cluster-key leiden --tissue UBERON:0002048
 ```
 20 clusters (>=500 cells), grouped on obs/leiden
 
-  !! PROPOSALS, NOT CALLS: top-1 is right ~55% of the time ...
+  !! PROPOSALS, NOT CALLS: top-1 is right ~56% of the time (297 curated cell types, 10 organs; ...)
 
   3      2869  epithelial cell of proximal tubule segment 1
                  2. kidney proximal convoluted tubule epithelial cell   0.86
