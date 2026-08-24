@@ -18,6 +18,29 @@ no ELANE) are a **classical monocyte**. Correcting that one cluster changes the 
 lung neutrophil:monocyte ratio from 1.25:1 to 0:1, against 0.07:1 in an independent atlas
 — an 18-fold error in a statistic anyone might publish.
 
+### Whose label is being tested
+
+Everything audited here is public data, but "public dataset" and "the authors' annotation"
+are not the same thing, and the distinction changes what a flag means:
+
+| kind of resource | example | the label under test belongs to |
+|---|---|---|
+| **aggregating atlas** | hECA v2.0 | the harmonisation pipeline, which rewrote the contributing datasets into one vocabulary |
+| **primary atlas** | Tabula Sapiens | the consortium that generated and annotated the cells, natively in CL |
+| **published dataset** | CELLxGENE Discover | the depositing authors, mapped into CL under the CELLxGENE schema |
+
+That is not a caveat, it is the finding. The 56,394-cell *neutrophil* cluster above was
+**not** an error by the people who generated the cells — hECA keeps each cell's original
+name, and 91.2% of them were called a monocyte, macrophage, myeloid or dendritic cell by
+their original authors. 22,075 carry a mangled name containing `Monocytenocyte`, across
+nine variants: the signature of a string substitution misfiring on a label that already
+matched. The harmonised label contradicts the provenance in the same file, through a
+text-processing fault rather than a disputed biological judgement.
+
+So what the audit catches depends on what you point it at — **harmonisation faults** in an
+aggregating atlas, **annotation judgements** in a primary one, and a **base rate** across
+a set of published datasets. It never establishes that the original authors were wrong.
+
 ## Install
 
 ```bash
