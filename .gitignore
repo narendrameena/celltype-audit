@@ -19,3 +19,4 @@ dist/
 *.pem
 id_rsa*
 dist/
+figures/

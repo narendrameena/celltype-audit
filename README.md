@@ -262,7 +262,6 @@ and obsolete terms).
   assigned from marker evidence and **not** from the label, and 35 explicit abstentions
   where no term is defensible.  Files record which entries
   deliberately disagree with the atlas label, and why.
-- **`figures/`** — figure code, source data and rendered panels for 13 themes.
 - **`examples/`** — three notebooks: quickstart, unannotated data, and the worked
   case study of the 56,394-cell mislabelled cluster.
 
