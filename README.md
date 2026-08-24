@@ -61,7 +61,7 @@ pip install "git+https://github.com/narendrameena/celltype-audit.git"
 A tag, branch or commit pins it:
 
 ```bash
-pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.3"
+pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.4"
 ```
 
 ### From source
