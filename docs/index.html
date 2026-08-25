@@ -457,9 +457,14 @@ function render(){
   }).join("");
 }
 
+// GitHub Pages serves these with max-age=600, so for ten minutes after a regeneration a
+// reader is shown the previous queue and the previous counts with nothing to indicate it.
+// On a page whose whole claim is that it reports current state, that is the wrong default:
+// ask for the file, not for whatever the browser last saw.
+const fresh = f => fetch(f, {cache: "no-cache"});
 Promise.all([
-  fetch("proposals.json").then(r => r.json()),
-  fetch("state.json").then(r => r.ok ? r.json() : null).catch(() => null)
+  fresh("proposals.json").then(r => r.json()),
+  fresh("state.json").then(r => r.ok ? r.json() : null).catch(() => null)
 ]).then(([d, st]) => {
   DATA = d;
   const s = d.summary;

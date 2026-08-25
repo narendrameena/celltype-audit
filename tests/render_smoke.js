@@ -37,7 +37,7 @@ const doc = {
 };
 
 const json = f => JSON.parse(fs.readFileSync(path.join(DOCS, f), "utf8"));
-const fetchStub = f => Promise.resolve({
+const fetchStub = (f, _opts) => Promise.resolve({
   ok: fs.existsSync(path.join(DOCS, f)),
   json: () => Promise.resolve(json(f)),
   text: () => Promise.resolve(fs.readFileSync(path.join(DOCS, f), "utf8"))
