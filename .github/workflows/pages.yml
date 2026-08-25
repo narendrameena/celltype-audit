@@ -51,6 +51,17 @@ jobs:
           print(f'{n} proposals, {d[\"summary\"][\"routes_disagree\"]} where the routes disagree')
           "
 
+      # Execute the page's own script against the real proposals.json before publishing.
+      # index.html once shipped with a helper declared inside another function, so the
+      # renderer threw and the page's catch handler blamed the data -- it deployed green
+      # and rendered nothing. There is no JavaScript runtime where the page is authored;
+      # there is one here.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: The queue must actually render
+        run: node tests/render_smoke.js
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs

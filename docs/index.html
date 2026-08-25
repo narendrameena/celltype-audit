@@ -229,11 +229,6 @@ const KIND_LABEL = {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let DATA = null, active = "all";
 
-function issueURL(p){
-  // CL's README specifies a template and a label for new term requests; a bare
-  // issues/new bypasses both, so a request would arrive unlabelled and missing the
-  // fields curators expect. Synonyms and structural observations are not NTRs, so
-  // they use the generic form with the appropriate label instead.
 const BG = {                       // which part of the background page explains this kind
   "new-term":        ["anchors",   "What an anchor set is"],
   "synonym":         ["anchors",   "What an anchor set is"],
@@ -244,6 +239,12 @@ function bgLink(p){
   const b = BG[p.kind] || ["", "How the graph works"];
   return `<a class="bg" href="ontology.html#${b[0]}">${b[1]} &rarr;</a>`;
 }
+
+function issueURL(p){
+  // CL's README specifies a template and a label for new term requests; a bare
+  // issues/new bypasses both, so a request would arrive unlabelled and missing the
+  // fields curators expect. Synonyms and structural observations are not NTRs, so
+  // they use the generic form with the appropriate label instead.
   const isNTR = p.kind === "new-term";
   const isSyn = p.kind === "synonym";
   const q = new URLSearchParams();
@@ -367,7 +368,14 @@ Promise.all([
   render();
 }).catch(e => {
   document.getElementById("list").innerHTML =
-    `<li class="p"><p class="note">Could not load <span class="mono">proposals.json</span>. ` +
-    `Run <span class="mono">python analysis/build_proposals.py</span> to generate it.</p></li>`;
+    // Distinguish "the data is missing" from "the page threw while drawing it". This
+    // handler used to blame proposals.json for both, so a scoping bug in the renderer
+    // reported itself as a missing file and sent the reader after the wrong thing.
+    (e && e.name === "TypeError" && /fetch|Failed/i.test(e.message || "")
+      ? `<li class="p"><p class="note">Could not load <span class="mono">proposals.json</span>. ` +
+        `Run <span class="mono">python analysis/build_proposals.py</span> to generate it.</p></li>`
+      : `<li class="p"><p class="note">The data loaded but the page failed while rendering it: ` +
+        `<span class="mono">${String(e && e.message || e)}</span>. This is a bug in ` +
+        `<span class="mono">index.html</span>, not a missing file.</p></li>`);
 });
 </script>
