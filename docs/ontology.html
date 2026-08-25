@@ -1,0 +1,193 @@
+<!-- Explains the graph the review queue is built on. Self-contained: the diagrams are
+     inline SVG, not a diagramming library from a CDN, because a page arguing that a curator
+     should be able to check things should not need a third party to draw its own figures. -->
+<title>Reading the Cell Ontology</title>
+<style>
+  :root{
+    --ground:#FAFBFC; --surface:#FFFFFF; --sunk:#F2F5F7;
+    --ink:#0F171E; --muted:#5C6B78; --faint:#8A97A2;
+    --rule:#DBE2E8; --hair:#E9EEF2;
+    --accent:#0B6E75; --accent-soft:#E2F0F0;
+    --pass:#2C6E49; --fail:#A33A2E;
+    --pass-bg:#E8F1EC; --fail-bg:#F7E9E7;
+    --shadow:0 1px 2px rgba(15,23,30,.05), 0 4px 14px rgba(15,23,30,.04);
+    --d-fill:#F2F5F7; --d-stroke:#C3CFD8; --d-ink:#0F171E; --d-line:#7C8B97;
+    --d-mute:#5C6B78; --d-ok:#E8F1EC; --d-okline:#2C6E49; --d-bad:#F7E9E7; --d-badline:#A33A2E;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --ground:#0D1317; --surface:#141C22; --sunk:#101820;
+    --ink:#E4ECF2; --muted:#8494A0; --faint:#68767F;
+    --rule:#222D36; --hair:#1B242B;
+    --accent:#3FB0B8; --accent-soft:#15302F;
+    --pass:#5AAE81; --fail:#D97F71;
+    --pass-bg:#132219; --fail-bg:#2A1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.28);
+    --d-fill:#1B242B; --d-stroke:#33414C; --d-ink:#E4ECF2; --d-line:#7C8B97;
+    --d-mute:#8494A0; --d-ok:#132219; --d-okline:#5AAE81; --d-bad:#2A1A17; --d-badline:#D97F71;
+  } }
+  :root[data-theme="dark"]{
+    --ground:#0D1317; --surface:#141C22; --sunk:#101820;
+    --ink:#E4ECF2; --muted:#8494A0; --faint:#68767F;
+    --rule:#222D36; --hair:#1B242B;
+    --accent:#3FB0B8; --accent-soft:#15302F;
+    --pass:#5AAE81; --fail:#D97F71;
+    --pass-bg:#132219; --fail-bg:#2A1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.28);
+    --d-fill:#1B242B; --d-stroke:#33414C; --d-ink:#E4ECF2; --d-line:#7C8B97;
+    --d-mute:#8494A0; --d-ok:#132219; --d-okline:#5AAE81; --d-bad:#2A1A17; --d-badline:#D97F71;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground); color:var(--ink); margin:0;
+    font:16px/1.62 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:70ch; margin:0 auto; padding:3.5rem 1.25rem 6rem;
+    display:flex; flex-direction:column; gap:2.75rem}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.86em;
+    background:var(--sunk); padding:.1em .34em; border-radius:3px}
+  header{border-bottom:1px solid var(--rule); padding-bottom:1.75rem;
+    display:flex; flex-direction:column; gap:.7rem}
+  .kicker{font-family:ui-monospace,Menlo,monospace; font-size:.7rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent)}
+  h1{font-size:2.15rem; line-height:1.12; margin:0; letter-spacing:-.02em; text-wrap:balance}
+  .lede{color:var(--muted); margin:0; font-size:1.05rem; max-width:60ch}
+  .back{font-size:.85rem}
+  a{color:var(--accent)}
+  section{display:flex; flex-direction:column; gap:.95rem}
+  h2{font-size:1.28rem; line-height:1.25; margin:0; letter-spacing:-.01em; text-wrap:balance;
+    display:flex; gap:.6rem; align-items:baseline}
+  h2 .n{font-family:ui-monospace,Menlo,monospace; font-size:.75rem; color:var(--accent);
+    border:1px solid var(--accent); border-radius:2px; padding:.06em .4em; flex:none}
+  p{margin:0} .sub{color:var(--muted)}
+  figure{margin:0; background:var(--surface); border:1px solid var(--rule); border-radius:8px;
+    padding:1.15rem 1rem .9rem; box-shadow:var(--shadow); overflow-x:auto}
+  figure > svg{display:block; margin:0 auto}
+  figcaption{font-size:.82rem; color:var(--muted); line-height:1.5; margin-top:.85rem;
+    border-top:1px solid var(--hair); padding-top:.7rem}
+  .note{border-left:2px solid var(--accent); background:var(--accent-soft);
+    padding:.85rem 1rem; border-radius:0 4px 4px 0; font-size:.93rem; color:var(--muted)}
+  .note strong{color:var(--ink)}
+  .note.bad{border-left-color:var(--fail); background:var(--fail-bg)}
+  table{width:100%; border-collapse:collapse; font-size:.88rem; font-variant-numeric:tabular-nums}
+  th,td{text-align:left; padding:.45rem .55rem; border-bottom:1px solid var(--hair); vertical-align:top}
+  th{font-size:.68rem; text-transform:uppercase; letter-spacing:.1em; color:var(--faint); font-weight:600}
+  td.g{color:var(--pass)} td.r{color:var(--fail)}
+  .scroll{overflow-x:auto}
+  footer{border-top:1px solid var(--rule); padding-top:1.4rem; font-size:.83rem; color:var(--faint)}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">celltype-audit &middot; background</div>
+  <h1>Reading the Cell Ontology</h1>
+  <p class="lede">CL is a graph, not a list. This is the structure the review queue is built on,
+    worked through with real terms and real flags &mdash; every example below comes from the
+    <code>2026-06-08</code> release and from the audit's own results.</p>
+  <p class="back"><a href="./">&larr; back to the proposal queue</a></p>
+</header>
+
+<section>
+  <h2><span class="n">1</span> The basic edge is <code>is_a</code></h2>
+  <p class="sub">A term points at the thing it is a kind of. Follow the arrows and you reach
+    progressively coarser claims about the same cell. Nothing else is asserted: the edge says a
+    neutrophil <em>is a kind of</em> granulocyte, not what a neutrophil looks like.</p>
+  <figure><svg viewBox="0 0 500 352" width="100%" style="max-width:500px" role="img" aria-label="is_a chain from neutrophil to cell" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,SFMono-Regular,Menlo,monospace"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--d-line)"/></marker></defs><rect x="150" y="12" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="30.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">neutrophil</text><text x="250" y="45.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000775</text><line x1="250.0" y1="58.0" x2="250.0" y2="80.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><text x="250.0" y="65.0" text-anchor="middle" font-size="9.5" fill="var(--d-mute)">is_a</text><rect x="150" y="80" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="98.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">granulocyte</text><text x="250" y="113.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000094</text><line x1="250.0" y1="126.0" x2="250.0" y2="148.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><text x="250.0" y="133.0" text-anchor="middle" font-size="9.5" fill="var(--d-mute)">is_a</text><rect x="150" y="148" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="166.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">blood cell</text><text x="250" y="181.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000081</text><line x1="250.0" y1="194.0" x2="250.0" y2="216.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><text x="250.0" y="201.0" text-anchor="middle" font-size="9.5" fill="var(--d-mute)">is_a</text><rect x="150" y="216" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="234.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">hematopoietic cell</text><text x="250" y="249.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000988</text><line x1="250.0" y1="262.0" x2="250.0" y2="284.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><text x="250.0" y="269.0" text-anchor="middle" font-size="9.5" fill="var(--d-mute)">is_a</text><rect x="150" y="284" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="302.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">cell</text><text x="250" y="317.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000000</text></svg>
+    <figcaption>The real ancestry of <code>CL:0000775</code> &mdash; four steps to the root.</figcaption>
+  </figure>
+  <p class="note"><strong>Why it matters here.</strong> A reasoner can walk these edges perfectly
+    and still tell you nothing about whether a cluster <em>is</em> a neutrophil. What would help is
+    what CL has least of: marker-based sufficient conditions, present for about <strong>9%</strong>
+    of classes. One of the proposals in the queue is exactly that, for neutrophil.</p>
+</section>
+
+<section>
+  <h2><span class="n">2</span> A term can have several parents</h2>
+  <p class="sub">The graph is a DAG, not a tree. Cell identity is genuinely not a partition, and
+    CL records that rather than forcing a choice.</p>
+  <figure><svg viewBox="0 0 500 258" width="100%" style="max-width:500px" role="img" aria-label="microglial cell inherits two lineages" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,SFMono-Regular,Menlo,monospace"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--d-line)"/></marker></defs><rect x="150" y="12" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="30.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">microglial cell</text><text x="250" y="45.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000129</text><rect x="10" y="108" width="210" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="115" y="126.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">CNS macrophage</text><text x="115" y="141.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000878</text><rect x="280" y="108" width="200" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="380" y="126.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">glial cell</text><text x="380" y="141.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000125</text><rect x="10" y="204" width="210" height="40" rx="4" fill="var(--d-ok)" stroke="var(--d-okline)" stroke-width="1.2"/><text x="115" y="220.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">haematopoietic</text><text x="115" y="235.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">anchor</text><rect x="280" y="204" width="200" height="40" rx="4" fill="var(--d-ok)" stroke="var(--d-okline)" stroke-width="1.2"/><text x="380" y="220.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">neural</text><text x="380" y="235.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">anchor</text><line x1="220.0" y1="58.0" x2="130.0" y2="104.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="285.0" y1="58.0" x2="372.0" y2="104.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="115.0" y1="154.0" x2="115.0" y2="200.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="380.0" y1="154.0" x2="380.0" y2="200.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/></svg>
+    <figcaption>Microglia are macrophages resident in the brain, so the term inherits two
+      lineages. Any method assuming one lineage per cell type breaks here.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Anchor sets</h2>
+  <p class="sub">Rather than compare terms directly, the audit walks a term's ancestors and records
+    which of eight coarse roots it reaches. That set is its <em>anchor set</em> &mdash; a summary of
+    what kind of thing it is, robust to how finely it happens to be named.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>anchor</th><th>CURIE</th><th>reached by, for example</th></tr></thead>
+    <tbody>
+      <tr><td class="g">haematopoietic</td><td><code>CL:0000988</code></td><td>neutrophil, monocyte, B cell</td></tr>
+      <tr><td class="g">epithelial</td><td><code>CL:0000066</code></td><td>tuft cell, type B pancreatic cell</td></tr>
+      <tr><td class="g">endothelial</td><td><code>CL:0000115</code></td><td>capillary endothelial cell</td></tr>
+      <tr><td class="g">connective</td><td><code>CL:0002320</code></td><td>fibroblast of lung</td></tr>
+      <tr><td class="g">muscle</td><td><code>CL:0000187</code></td><td>bronchial smooth muscle cell</td></tr>
+      <tr><td class="g">neural</td><td><code>CL:0002319</code></td><td>glial cell</td></tr>
+      <tr><td class="g">germ</td><td><code>CL:0000586</code></td><td>oocyte</td></tr>
+      <tr><td class="g">germline</td><td><code>CL:0000039</code></td><td>spermatogonium</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Microglia carry <strong>two</strong> anchors, because the set is built from the
+    whole ancestor closure rather than one path. Keeping polyhierarchy intact is the point:
+    collapsing it would manufacture disagreements CL does not assert.</p>
+</section>
+
+<section>
+  <h2><span class="n">4</span> Disagreement, made visible</h2>
+  <p class="sub">A cluster's label and its expression are two independent claims. Resolve each to a
+    CL term, take both anchor sets, and ask whether they intersect. When they do not, the claims
+    disagree about lineage &mdash; a strong signal, because crossing one of eight roots takes more
+    than a naming quibble.</p>
+  <figure><svg viewBox="0 0 500 178" width="100%" style="max-width:500px" role="img" aria-label="label and markers reach different anchors" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,SFMono-Regular,Menlo,monospace"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--d-line)"/></marker></defs><rect x="10" y="12" width="220" height="56" rx="4" fill="var(--d-bad)" stroke="var(--d-badline)" stroke-width="1.2"/><text x="120" y="29.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">label says</text><text x="120" y="44.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">type B pancreatic cell</text><text x="120" y="59.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000169</text><rect x="270" y="12" width="220" height="56" rx="4" fill="var(--d-ok)" stroke="var(--d-okline)" stroke-width="1.2"/><text x="380" y="29.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">markers say</text><text x="380" y="44.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">B cell — VPREB3, IGHM</text><text x="380" y="59.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000236</text><rect x="10" y="124" width="220" height="40" rx="4" fill="var(--d-bad)" stroke="var(--d-badline)" stroke-width="1.2"/><text x="120" y="140.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">epithelial</text><text x="120" y="155.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">anchor</text><rect x="270" y="124" width="220" height="40" rx="4" fill="var(--d-ok)" stroke="var(--d-okline)" stroke-width="1.2"/><text x="380" y="140.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">haematopoietic</text><text x="380" y="155.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">anchor</text><line x1="120.0" y1="70.0" x2="120.0" y2="120.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="380.0" y1="70.0" x2="380.0" y2="120.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><text x="250" y="150" text-anchor="middle" font-size="17" fill="var(--d-badline)" font-weight="700">≠</text></svg>
+    <figcaption>A real flag: a 1,605-cell pancreas cluster labelled <em>B cell</em>. The label
+      resolved to a pancreatic beta cell &mdash; in pancreas, &ldquo;B cell&rdquo; conventionally
+      means that &mdash; while its markers are immunoglobulin genes.</figcaption>
+  </figure>
+  <div class="scroll"><table>
+    <thead><tr><th>cluster</th><th>label resolves to</th><th>markers point to</th><th>anchors</th></tr></thead>
+    <tbody>
+      <tr><td>Lung <em>Tuft cell</em></td><td>tuft cell</td><td>natural killer cell</td><td class="r">epithelial &ne; haematopoietic</td></tr>
+      <tr><td>Kidney <em>Juxtaglomerular</em></td><td>kidney granular cell</td><td>endothelial cell</td><td class="r">muscle &ne; endothelial</td></tr>
+      <tr><td>Lung <em>Bronchial SMC</em></td><td>bronchial smooth muscle cell</td><td>fibroblast of lung</td><td class="r">muscle &ne; connective</td></tr>
+      <tr><td>Kidney <em>Neuroglial cell</em></td><td>glial cell</td><td>epithelial cell</td><td class="r">neural &ne; epithelial</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2><span class="n">5</span> What this cannot see</h2>
+  <p class="sub">The property that makes anchor sets precise also makes them blind. If a label is
+    wrong but wrong <em>within</em> one lineage, both terms reach the same anchor, the sets
+    intersect, and nothing fires.</p>
+  <figure><svg viewBox="0 0 500 216" width="100%" style="max-width:500px" role="img" aria-label="both terms share one anchor so no flag fires" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,SFMono-Regular,Menlo,monospace"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--d-line)"/></marker></defs><rect x="10" y="12" width="220" height="56" rx="4" fill="var(--d-bad)" stroke="var(--d-badline)" stroke-width="1.2"/><text x="120" y="29.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">label says</text><text x="120" y="44.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">neutrophil</text><text x="120" y="59.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0000775</text><rect x="270" y="12" width="220" height="56" rx="4" fill="var(--d-ok)" stroke="var(--d-okline)" stroke-width="1.2"/><text x="380" y="29.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">markers say</text><text x="380" y="44.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">classical monocyte</text><text x="380" y="59.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">FCN1, CD14, S100A12</text><rect x="150" y="138" width="200" height="44" rx="4" fill="var(--d-bad)" stroke="var(--d-badline)" stroke-width="1.2"/><text x="250" y="156.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">haematopoietic</text><text x="250" y="171.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">same anchor</text><line x1="120.0" y1="70.0" x2="215.0" y2="134.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="380.0" y1="70.0" x2="285.0" y2="134.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><text x="250" y="204" text-anchor="middle" font-size="10.5" fill="var(--d-mute)">sets intersect → nothing fires</text></svg>
+    <figcaption>The 56,394-cell lung cluster. Both terms are haematopoietic, so the anchor test is
+      silent &mdash; yet the label is wrong, and correcting it moves a published
+      neutrophil:monocyte ratio eighteenfold.</figcaption>
+  </figure>
+  <p class="note bad"><strong>This is the common case.</strong> <strong>21 of 28</strong> curated
+    errors stay inside a single lineage &mdash; which is why the audit ships a second tier, a
+    ranked marker queue asking which term best explains the cluster, rather than the anchor sweep
+    alone.</p>
+</section>
+
+<section>
+  <h2><span class="n">6</span> When the graph is missing an edge</h2>
+  <p class="sub">Sometimes the disagreement is not about the data. Two terms can describe
+    overlapping populations with no <code>is_a</code> path between them in either direction, so a
+    cluster assigned to one registers as disagreeing with the other &mdash; and no expression
+    evidence can settle it, because the question is structural.</p>
+  <figure><svg viewBox="0 0 500 206" width="100%" style="max-width:500px" role="img" aria-label="two ventricular terms with no subclass relation" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,SFMono-Regular,Menlo,monospace"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--d-line)"/></marker></defs><rect x="10" y="12" width="225" height="56" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="122" y="29.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">regular ventricular</text><text x="122" y="44.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">cardiac myocyte</text><text x="122" y="59.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:0002131</text><rect x="265" y="12" width="225" height="56" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="377" y="29.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">ventricular cardiac</text><text x="377" y="44.0" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">muscle cell</text><text x="377" y="59.0" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">CL:2000046</text><rect x="140" y="148" width="220" height="44" rx="4" fill="var(--d-fill)" stroke="var(--d-stroke)" stroke-width="1.2"/><text x="250" y="166.5" text-anchor="middle" font-size="12" fill="var(--d-ink)" font-weight="600">cardiac muscle cell</text><text x="250" y="181.5" text-anchor="middle" font-size="10" fill="var(--d-ink)" font-weight="400">shared ancestor</text><line x1="122.0" y1="70.0" x2="205.0" y2="144.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="378.0" y1="70.0" x2="295.0" y2="144.0" stroke="var(--d-line)" stroke-width="1.2" marker-end="url(#ar)"/><line x1="240" y1="40" x2="260" y2="40" stroke="var(--d-badline)" stroke-width="1.2" stroke-dasharray="4 3"/><text x="250" y="96" text-anchor="middle" font-size="10" fill="var(--d-badline)">no is_a either way</text><text x="250" y="110" text-anchor="middle" font-size="10" fill="var(--d-mute)">180,750 cells on one side</text></svg>
+    <figcaption>Verified against the release: neither term subsumes the other, and they share
+      ancestors up to <em>cardiac muscle cell</em>.</figcaption>
+  </figure>
+  <p class="note">Whether a subclass relation belongs there is a curatorial judgement, not
+    something an audit can decide. What the audit contributes is that the relation is
+    <strong>absent</strong> and the scale at which it bites &mdash; which is the shape of the
+    missing-axiom proposal in the queue.</p>
+</section>
+
+<footer>Cell Ontology release <code>2026-06-08</code> &middot; 3,537 labelled classes &middot;
+  eight anchor roots. Terms, edges and anchor sets read from the release; flags and cell counts
+  from <code>results/</code>. Diagrams are inline SVG &mdash; no scripts, no external requests.
+</footer>
+</div>
