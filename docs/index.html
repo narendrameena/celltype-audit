@@ -122,6 +122,16 @@
 
   .bg{font-size:.78rem; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:1px}
   .bg:hover{color:var(--accent); border-bottom-color:var(--accent)}
+  .why{border-top:1px solid var(--hair); font-size:.86rem}
+  .why > summary{cursor:pointer; padding:9px 18px; color:var(--accent); font-weight:600;
+    list-style:none; font-size:.8rem}
+  .why > summary::-webkit-details-marker{display:none}
+  .why > summary:hover{background:var(--sunk)}
+  .why[open] > summary{background:var(--sunk)}
+  .whybody{padding:2px 18px 14px; color:var(--muted); display:flex; flex-direction:column; gap:.55rem}
+  .whybody b{color:var(--ink)} .whybody p{margin:0; line-height:1.55}
+  .perma{font-size:.78rem}
+  .p:target{outline:2px solid var(--accent); outline-offset:2px}
   .verif{display:flex; gap:6px; flex-wrap:wrap; align-items:center;
          padding:11px 18px; border-top:1px solid var(--hair); background:var(--sunk)}
   .v{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:660;
@@ -235,6 +245,38 @@ const BG = {                       // which part of the background page explains
   "marker-condition":["isa",       "Why CL cannot answer this"],
   "missing-axiom":   ["axiom",     "What a missing edge means"]
 };
+function pid(p){                   // stable, so a single proposal can be linked to
+  return (p.kind + "-" + p.organ + "-" + p.label).toLowerCase()
+         .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+function reasoning(p){
+  // Derived from the proposal's own fields, never written by hand: this is the chain that
+  // put it in the queue, stated so a curator can disagree with a specific step of it.
+  const s = [], c = p.checks || {}, cand = p.candidate, top = (p.expression_top || [])[0];
+  const n = p.n_cells ? p.n_cells.toLocaleString() : "?";
+  s.push(`The atlas asserts <b>${esc(p.label)}</b> for a ${n}-cell population in ${esc(p.organ)}.`);
+  if (p.kind === "new-term") {
+    s.push(cand
+      ? `The name resolves only as far as <span class="mono">${esc(cand.curie)}</span> &mdash; ${esc(cand.name)} &mdash; which is broader than what is being named.`
+      : `The name does not resolve to any term in the pinned CL release.`);
+    if (top) s.push(`Scored on its markers, the best-explaining term is ${esc(top.name)}${p.lexical_vs_expression === "disagree" ? ", which is not what the name points at" : ""}.`);
+    s.push(`So the gap is a <b>vocabulary</b> one: the atlas is naming a population the ontology has no term for.`);
+  } else if (p.kind === "synonym") {
+    s.push(`The name fails to resolve, but ${cand ? esc(cand.name) : "an existing term"} covers the same population, so what is missing is a <b>synonym</b> rather than a class.`);
+  } else if (p.kind === "marker-condition") {
+    s.push(`CL states what this term <i>is a kind of</i> but not what would make a cell be one, so nothing in the ontology can contradict the label.`);
+    if (p.markers && p.markers.length)
+      s.push(`The proposal is a sufficient condition on ${p.markers.map(g => `<span class="mono">${esc(g)}</span>`).join(" and ")} &mdash; and the atlas supplies its own counterexample.`);
+  } else if (p.kind === "missing-axiom") {
+    const alt = (p.alternatives || [])[0];
+    s.push(`The label resolves to <span class="mono">${esc(cand ? cand.curie : "?")}</span>${alt ? `, while CL also carries <span class="mono">${esc(alt.curie)}</span> for an overlapping population` : ""}. Neither subsumes the other, so a cluster assigned to one registers as disagreeing with the other and expression cannot adjudicate.`);
+    s.push(`Whether a subclass relation belongs there is a <b>curatorial judgement</b>; what the audit establishes is that it is absent.`);
+  }
+  const ran = CHECK_ORDER.filter(k => c[k] === "pass" || c[k] === "fail");
+  const notrun = CHECK_ORDER.filter(k => c[k] === "not-run");
+  if (ran.length) s.push(`Checks that ran: ${ran.join(", ")}.` + (notrun.length ? ` Not run: ${notrun.join(", ")} &mdash; so those are not evidence either way.` : ""));
+  return s.map(x => `<p>${x}</p>`).join("");
+}
 function bgLink(p){
   const b = BG[p.kind] || ["", "How the graph works"];
   return `<a class="bg" href="ontology.html#${b[0]}">${b[1]} &rarr;</a>`;
@@ -289,7 +331,7 @@ function render(){
                 : st === "n/a" ? "na" : "notrun";
       return `<span class="v ${cls}" title="${esc(c)}: ${esc(st)}"><i class="dot"></i>${c}</span>`;
     }).join("");
-    return `<li class="p">
+    return `<li class="p" id="${pid(p)}">
       <div class="top">
         <div>
           <span class="kind">${esc(KIND_LABEL[p.kind] || p.kind)}</span>
@@ -317,6 +359,11 @@ function render(){
       ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
       ${p.markers && p.markers.length
         ? `<div class="genes">${p.markers.map(g => `<span class="g mono">${esc(g)}</span>`).join("")}</div>` : ""}
+      <details class="why">
+        <summary>Why this proposal &rarr;</summary>
+        <div class="whybody">${reasoning(p)}
+          <p class="perma"><a href="#${pid(p)}">link to this proposal</a></p></div>
+      </details>
       <div class="verif">${verif}
         ${bgLink(p)}
         <a class="act" href="${issueURL(p)}" target="_blank" rel="noopener">Open term request &rarr;</a>

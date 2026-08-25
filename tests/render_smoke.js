@@ -72,11 +72,20 @@ setTimeout(() => {
   // every card should offer the background link the proposals page promises
   const bg = (out.match(/class="bg"/g) || []).length;
   if (bg !== cards) problems.push(`${bg} background links for ${cards} cards`);
+  // every card must carry its own derived reasoning and a stable anchor to link to
+  const why = (out.match(/<details class="why">/g) || []).length;
+  if (why !== cards) problems.push(`${why} reasoning blocks for ${cards} cards`);
+  const ids = (out.match(/<li class="p" id="[^"]+"/g) || []).length;
+  if (ids !== cards) problems.push(`${ids} cards have a stable id, expected ${cards}`);
+  const perma = (out.match(/link to this proposal/g) || []).length;
+  if (perma !== cards) problems.push(`${perma} permalinks for ${cards} cards`);
+  if (/undefined|\[object Object\]|NaN/.test(out))
+    problems.push("rendered output contains undefined/NaN - a field name is wrong");
 
   if (problems.length) {
     problems.forEach(p => console.error("FAIL: " + p));
     process.exit(1);
   }
-  console.log(`ok: ${cards} cards rendered from ${proposals.length} proposals, ` +
-              `${bg} background links`);
+  console.log(`ok: ${cards} cards, ${bg} background links, ${why} reasoning blocks, ` +
+              `${ids} anchored ids`);
 }, 50);
