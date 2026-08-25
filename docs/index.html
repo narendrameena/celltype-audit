@@ -265,11 +265,14 @@ const KIND_LABEL = {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let DATA = null, active = "all";
 
-const BG = {                       // which part of the background page explains this kind
-  "new-term":        ["anchors",   "What an anchor set is"],
-  "synonym":         ["anchors",   "What an anchor set is"],
-  "marker-condition":["isa",       "Why CL cannot answer this"],
-  "missing-axiom":   ["axiom",     "What a missing edge means"]
+// A link to the background page only where it goes somewhere specific to the kind of
+// proposal. It used to sit on every card, and 17 of 19 pointed at the same #anchors
+// section -- a general explainer dressed as though it were about the proposal in front of
+// you. Each card now carries its own graph read from the release, which is what that link
+// was failing to be; the header still links to the background page for anyone who wants it.
+const BG = {
+  "marker-condition":["isa",   "Why CL cannot answer this"],
+  "missing-axiom":   ["axiom", "What a missing edge means"]
 };
 function pid(p){                   // stable, so a single proposal can be linked to
   return (p.kind + "-" + p.organ + "-" + p.label).toLowerCase()
@@ -315,8 +318,8 @@ function reasoning(p){
   return s.map(x => `<p>${x}</p>`).join("");
 }
 function bgLink(p){
-  const b = BG[p.kind] || ["", "How the graph works"];
-  return `<a class="bg" href="ontology.html#${b[0]}">${b[1]} &rarr;</a>`;
+  const b = BG[p.kind];
+  return b ? `<a class="bg" href="ontology.html#${b[0]}">${b[1]} &rarr;</a>` : "";
 }
 
 function issueURL(p){

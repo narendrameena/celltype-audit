@@ -72,8 +72,11 @@ setTimeout(() => {
   if (cards && cards !== proposals.length)
     problems.push(`rendered ${cards} cards for ${proposals.length} proposals`);
   // every card should offer the background link the proposals page promises
+  // a background link only where it is specific to the kind; a card's own graph does the
+  // rest. Asserting one per card is what let 17 identical #anchors links look intentional.
   const bg = (out.match(/class="bg"/g) || []).length;
-  if (bg !== cards) problems.push(`${bg} background links for ${cards} cards`);
+  const kindsWithBg = proposals.filter(p => ["marker-condition", "missing-axiom"].includes(p.kind)).length;
+  if (bg !== kindsWithBg) problems.push(`${bg} background links, expected ${kindsWithBg}`);
   // every card must carry its own derived reasoning and a stable anchor to link to
   const why = (out.match(/<details class="why">/g) || []).length;
   if (why !== cards) problems.push(`${why} reasoning blocks for ${cards} cards`);
@@ -92,31 +95,30 @@ setTimeout(() => {
   // V10 and V12 are the checks that make a proposal falsifiable rather than merely
   // stated. They were hardcoded "not-run" on every proposal for weeks; if they regress to
   // that, the page is claiming a verification stack it did not run.
-  const props = json("proposals.json").proposals;
-  const ranV = props.filter(p => ["pass", "fail"].includes((p.checks || {}).V10) ||
+  const ranV = proposals.filter(p => ["pass", "fail"].includes((p.checks || {}).V10) ||
                                  ["pass", "fail"].includes((p.checks || {}).V12)).length;
   if (ranV === 0) problems.push("no proposal has V10 or V12 actually run");
   // every proposal must carry a verdict for every check in the stack -- an absent key is
   // a check that silently stopped applying, which reads on the page as if it never existed
   const STACK = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V12"];
-  const gaps = props.filter(p => STACK.some(v => !(p.checks || {})[v]));
+  const gaps = proposals.filter(p => STACK.some(v => !(p.checks || {})[v]));
   if (gaps.length) problems.push(`${gaps.length} proposals missing a verdict for some check`);
   // a proposal that failed exclusivity must say so where a curator will see it
   // every proposal must carry its own ontology graph, read from the release rather than
   // a shared explainer link: the generic one told a curator what an anchor set is and
   // nothing about the proposal in front of them
-  const graphed = props.filter(p => p.graph).length;
-  if (graphed !== props.length)
-    problems.push(`${graphed}/${props.length} proposals carry an ontology graph`);
+  const graphed = proposals.filter(p => p.graph).length;
+  if (graphed !== proposals.length)
+    problems.push(`${graphed}/${proposals.length} proposals carry an ontology graph`);
   const svgs = (out.match(/<figure class="cg">/g) || []).length;
-  if (svgs !== props.length) problems.push(`${svgs} graphs rendered for ${props.length} proposals`);
+  if (svgs !== proposals.length) problems.push(`${svgs} graphs rendered for ${proposals.length} proposals`);
 
-  const weak = props.filter(p => p.readiness === "weakened").length;
+  const weak = proposals.filter(p => p.readiness === "weakened").length;
   const marks = (out.match(/Not ready to submit/g) || []).length;
   if (marks !== weak) problems.push(`${marks} "not ready" notices for ${weak} weakened proposals`);
-  const detailed = props.filter(p => p.check_detail && (p.check_detail.V10 || p.check_detail.V12)).length;
-  if (detailed !== props.length)
-    problems.push(`${detailed}/${props.length} proposals carry falsification detail`);
+  const detailed = proposals.filter(p => p.check_detail && (p.check_detail.V10 || p.check_detail.V12)).length;
+  if (detailed !== proposals.length)
+    problems.push(`${detailed}/${proposals.length} proposals carry falsification detail`);
 
   const bad = out.match(/\b(broader|narrower) than\b|\bwhich subsumes\b/gi);
   if (bad) problems.push("prose claims a subclass direction proposals.json does not carry: "
