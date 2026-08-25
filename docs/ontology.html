@@ -52,7 +52,7 @@
   .lede{color:var(--muted); margin:0; font-size:1.05rem; max-width:60ch}
   .back{font-size:.85rem}
   a{color:var(--accent)}
-  section{display:flex; flex-direction:column; gap:.95rem}
+  section{scroll-margin-top:1.5rem; display:flex; flex-direction:column; gap:.95rem}
   h2{font-size:1.28rem; line-height:1.25; margin:0; letter-spacing:-.01em; text-wrap:balance;
     display:flex; gap:.6rem; align-items:baseline}
   h2 .n{font-family:ui-monospace,Menlo,monospace; font-size:.75rem; color:var(--accent);
@@ -85,7 +85,7 @@
   <p class="back"><a href="./">&larr; back to the proposal queue</a></p>
 </header>
 
-<section>
+<section id="isa">
   <h2><span class="n">1</span> The basic edge is <code>is_a</code></h2>
   <p class="sub">A term points at the thing it is a kind of. Follow the arrows and you reach
     progressively coarser claims about the same cell. Nothing else is asserted: the edge says a
@@ -99,7 +99,7 @@
     of classes. One of the proposals in the queue is exactly that, for neutrophil.</p>
 </section>
 
-<section>
+<section id="poly">
   <h2><span class="n">2</span> A term can have several parents</h2>
   <p class="sub">The graph is a DAG, not a tree. Cell identity is genuinely not a partition, and
     CL records that rather than forcing a choice.</p>
@@ -109,7 +109,7 @@
   </figure>
 </section>
 
-<section>
+<section id="anchors">
   <h2><span class="n">3</span> Anchor sets</h2>
   <p class="sub">Rather than compare terms directly, the audit walks a term's ancestors and records
     which of eight coarse roots it reaches. That set is its <em>anchor set</em> &mdash; a summary of
@@ -132,7 +132,7 @@
     collapsing it would manufacture disagreements CL does not assert.</p>
 </section>
 
-<section>
+<section id="disagree">
   <h2><span class="n">4</span> Disagreement, made visible</h2>
   <p class="sub">A cluster's label and its expression are two independent claims. Resolve each to a
     CL term, take both anchor sets, and ask whether they intersect. When they do not, the claims
@@ -154,7 +154,7 @@
   </table></div>
 </section>
 
-<section>
+<section id="blindspot">
   <h2><span class="n">5</span> What this cannot see</h2>
   <p class="sub">The property that makes anchor sets precise also makes them blind. If a label is
     wrong but wrong <em>within</em> one lineage, both terms reach the same anchor, the sets
@@ -170,7 +170,7 @@
     alone.</p>
 </section>
 
-<section>
+<section id="axiom">
   <h2><span class="n">6</span> When the graph is missing an edge</h2>
   <p class="sub">Sometimes the disagreement is not about the data. Two terms can describe
     overlapping populations with no <code>is_a</code> path between them in either direction, so a

@@ -120,6 +120,8 @@
   .g{font-size:11.5px; padding:2px 7px; border:1px solid var(--hair);
      border-radius:4px; background:var(--sunk); color:var(--muted)}
 
+  .bg{font-size:.78rem; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:1px}
+  .bg:hover{color:var(--accent); border-bottom-color:var(--accent)}
   .verif{display:flex; gap:6px; flex-wrap:wrap; align-items:center;
          padding:11px 18px; border-top:1px solid var(--hair); background:var(--sunk)}
   .v{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:660;
@@ -232,6 +234,16 @@ function issueURL(p){
   // issues/new bypasses both, so a request would arrive unlabelled and missing the
   // fields curators expect. Synonyms and structural observations are not NTRs, so
   // they use the generic form with the appropriate label instead.
+const BG = {                       // which part of the background page explains this kind
+  "new-term":        ["anchors",   "What an anchor set is"],
+  "synonym":         ["anchors",   "What an anchor set is"],
+  "marker-condition":["isa",       "Why CL cannot answer this"],
+  "missing-axiom":   ["axiom",     "What a missing edge means"]
+};
+function bgLink(p){
+  const b = BG[p.kind] || ["", "How the graph works"];
+  return `<a class="bg" href="ontology.html#${b[0]}">${b[1]} &rarr;</a>`;
+}
   const isNTR = p.kind === "new-term";
   const isSyn = p.kind === "synonym";
   const q = new URLSearchParams();
@@ -305,6 +317,7 @@ function render(){
       ${p.markers && p.markers.length
         ? `<div class="genes">${p.markers.map(g => `<span class="g mono">${esc(g)}</span>`).join("")}</div>` : ""}
       <div class="verif">${verif}
+        ${bgLink(p)}
         <a class="act" href="${issueURL(p)}" target="_blank" rel="noopener">Open term request &rarr;</a>
       </div>
     </li>`;
