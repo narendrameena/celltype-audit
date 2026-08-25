@@ -60,6 +60,19 @@ def _ref():
 
 
 def _uberon(organ):
+    """Organ -> UBERON, from the atlas mapping rather than the wide reference.
+
+    The wide reference covers 28 organs; the atlas maps 36. Reading the tissue id from it
+    made V10 unrunnable for Adrenal_gland, Pleura, Spinal_cord and Ureter -- reported as
+    "no tissue reference" when the reference was never the problem, since the check queries
+    WMG directly and only needs the id. heca_to_cl_<organ>.json carries it for every organ
+    the atlas maps.
+    """
+    p = os.path.join(RES, "heca_to_cl_%s.json" % organ)
+    if os.path.exists(p):
+        ub = json.load(open(p)).get("uberon")
+        if ub:
+            return ub
     idx = json.load(open(os.path.join(RES, "wide_ref_index.json")))
     o = idx["organs"].get(organ)
     return o["uberon"] if isinstance(o, dict) else o

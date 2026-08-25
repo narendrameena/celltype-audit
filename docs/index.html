@@ -9,6 +9,9 @@
     --pass:#2C6E49; --fail:#A33A2E; --pending:#8A6D1F;
     --pass-bg:#E8F1EC; --fail-bg:#F7E9E7; --pending-bg:#F6F0DF;
     --shadow:0 1px 2px rgba(15,23,30,.05), 0 4px 14px rgba(15,23,30,.04);
+    --d-fill:#FFFFFF; --d-stroke:#C3CFD8; --d-ink:#0F171E; --d-line:#7C8B97;
+    --d-mute:#5C6B78; --d-ok:#E8F1EC; --d-okline:#2C6E49; --d-bad:#F7E9E7;
+    --d-badline:#A33A2E; --d-anchor:#E2F0F0;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -19,6 +22,12 @@
       --pass:#5AAE81; --fail:#D97F71; --pending:#C9A85C;
       --pass-bg:#132219; --fail-bg:#2A1A17; --pending-bg:#231E12;
       --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.28);
+    --d-fill:#141C22; --d-stroke:#33414C; --d-ink:#E4ECF2; --d-line:#7C8B97;
+    --d-mute:#8494A0; --d-ok:#132219; --d-okline:#5AAE81; --d-bad:#2A1A17;
+    --d-badline:#D97F71; --d-anchor:#15302F;
+      --d-fill:#141C22; --d-stroke:#33414C; --d-ink:#E4ECF2; --d-line:#7C8B97;
+      --d-mute:#8494A0; --d-ok:#132219; --d-okline:#5AAE81; --d-bad:#2A1A17;
+      --d-badline:#D97F71; --d-anchor:#15302F;
     }
   }
   :root[data-theme="dark"]{
@@ -29,6 +38,9 @@
     --pass:#5AAE81; --fail:#D97F71; --pending:#C9A85C;
     --pass-bg:#132219; --fail-bg:#2A1A17; --pending-bg:#231E12;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.28);
+    --d-fill:#141C22; --d-stroke:#33414C; --d-ink:#E4ECF2; --d-line:#7C8B97;
+    --d-mute:#8494A0; --d-ok:#132219; --d-okline:#5AAE81; --d-bad:#2A1A17;
+    --d-badline:#D97F71; --d-anchor:#15302F;
   }
 
   *{box-sizing:border-box}
@@ -140,6 +152,10 @@
   .vtag.pass{color:var(--pass); border-color:var(--pass); background:var(--pass-bg)}
   .vtag.fail{color:var(--fail); border-color:var(--fail); background:var(--fail-bg)}
   .vtag.not-run{color:var(--faint); border-color:var(--rule); border-style:dashed}
+  .cg{margin:0 0 .3rem; padding:.7rem .4rem .3rem; background:var(--sunk);
+    border:1px solid var(--hair); border-radius:5px; overflow-x:auto}
+  .cg svg{display:block; margin:0 auto}
+  .cg figcaption{font-size:.72rem; color:var(--faint); text-align:center; margin-top:.4rem}
   .perma{font-size:.78rem}
   .p:target{outline:2px solid var(--accent); outline-offset:2px}
   .verif{display:flex; gap:6px; flex-wrap:wrap; align-items:center;
@@ -388,7 +404,10 @@ function render(){
         ? `<p class="weak"><b>Not ready to submit.</b> Exclusivity failed: ${esc(p.weakened_by || "another term")} in this tissue expresses the same markers. That does not refute the proposal &mdash; different cell types share markers &mdash; but it has to be settled before a curator is asked to act on it.</p>` : ""}
       <details class="why">
         <summary>Why this proposal &rarr;</summary>
-        <div class="whybody">${reasoning(p)}
+        <div class="whybody">
+          ${p.graph ? `<figure class="cg">${p.graph}<figcaption>Read from the pinned CL
+            release: the is_a path from each term up to its anchor.</figcaption></figure>` : ""}
+          ${reasoning(p)}
           <p class="perma"><a href="#${pid(p)}">link to this proposal</a></p></div>
       </details>
       <div class="verif">${verif}

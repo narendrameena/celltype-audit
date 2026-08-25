@@ -102,6 +102,15 @@ setTimeout(() => {
   const gaps = props.filter(p => STACK.some(v => !(p.checks || {})[v]));
   if (gaps.length) problems.push(`${gaps.length} proposals missing a verdict for some check`);
   // a proposal that failed exclusivity must say so where a curator will see it
+  // every proposal must carry its own ontology graph, read from the release rather than
+  // a shared explainer link: the generic one told a curator what an anchor set is and
+  // nothing about the proposal in front of them
+  const graphed = props.filter(p => p.graph).length;
+  if (graphed !== props.length)
+    problems.push(`${graphed}/${props.length} proposals carry an ontology graph`);
+  const svgs = (out.match(/<figure class="cg">/g) || []).length;
+  if (svgs !== props.length) problems.push(`${svgs} graphs rendered for ${props.length} proposals`);
+
   const weak = props.filter(p => p.readiness === "weakened").length;
   const marks = (out.match(/Not ready to submit/g) || []).length;
   if (marks !== weak) problems.push(`${marks} "not ready" notices for ${weak} weakened proposals`);

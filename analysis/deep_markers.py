@@ -20,10 +20,19 @@ from heca_markers import marker_table                               # noqa: E402
 # ASCT+B organ tag -> hECA organ file. palatine-tonsil has no hECA counterpart.
 # ASCT+B covers 15 organs; CellMarker covers ~27 of hECA's, so the deep pass is run over
 # the union -- the gold can only reach an organ that at least one expert resource covers.
-ORGANS = ["Lung", "Kidney", "Thymus", "Lymph_node", "Bone_marrow", "Brain", "Skin",
-          "Liver", "Heart", "Placenta", "Pancreas", "Bronchi", "Uterine_tube", "Prostate",
-          "Blood", "Eye", "Intestine", "Spleen", "Breast", "Ovary", "Adipose", "Oesophagus",
-          "Salivary_gland", "Uterus", "Testis", "Muscle", "Stomach", "Bladder", "Nose"]
+# Every organ the atlas maps, not a list chosen for gold construction. The 29-organ list
+# this replaces was picked because "the gold can only reach an organ that at least one
+# expert resource covers" -- correct for building a gold, and wrong for everything else
+# that reads these markers. Proposals are generated from all 36 mapped organs, and four of
+# them (Adrenal_gland, Pleura, Spinal_cord, Ureter) had no markers, so five proposals sat
+# in the queue with no check that could run against them at all.
+def _mapped():
+    import glob as _g
+    return sorted(os.path.basename(p)[len("heca_to_cl_"):-len(".json")]
+                  for p in _g.glob(os.path.join(HERE, "results", "heca_to_cl_*.json")))
+
+
+ORGANS = _mapped()
 H5 = os.path.join(os.path.dirname(HERE), "..", "heca_data", "RNA-%s.h5ad")
 
 if __name__ == "__main__":
