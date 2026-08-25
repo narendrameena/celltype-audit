@@ -11,6 +11,9 @@ on:
     paths:
       - "docs/**"
       - ".github/workflows/pages.yml"
+      # the smoke test gates this deploy, so a change to it must re-run the deploy --
+      # otherwise a fix to the gate sits unapplied while the site serves the last build
+      - "tests/render_smoke.js"
   workflow_dispatch:
 
 permissions:
