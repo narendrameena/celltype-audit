@@ -89,6 +89,17 @@ setTimeout(() => {
   // Target the CLAIM, not the vocabulary. "Neither subsumes the other" is a verified
   // negative computed from the graph and must stay; "broader than" asserted about a
   // lexical near-match is the thing that was wrong.
+  // V10 and V12 are the checks that make a proposal falsifiable rather than merely
+  // stated. They were hardcoded "not-run" on every proposal for weeks; if they regress to
+  // that, the page is claiming a verification stack it did not run.
+  const props = json("proposals.json").proposals;
+  const ranV = props.filter(p => ["pass", "fail"].includes((p.checks || {}).V10) ||
+                                 ["pass", "fail"].includes((p.checks || {}).V12)).length;
+  if (ranV === 0) problems.push("no proposal has V10 or V12 actually run");
+  const detailed = props.filter(p => p.check_detail && (p.check_detail.V10 || p.check_detail.V12)).length;
+  if (detailed !== props.length)
+    problems.push(`${detailed}/${props.length} proposals carry falsification detail`);
+
   const bad = out.match(/\b(broader|narrower) than\b|\bwhich subsumes\b/gi);
   if (bad) problems.push("prose claims a subclass direction proposals.json does not carry: "
                          + bad.join(", "));

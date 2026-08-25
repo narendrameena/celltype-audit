@@ -130,6 +130,12 @@
   .why[open] > summary{background:var(--sunk)}
   .whybody{padding:2px 18px 14px; color:var(--muted); display:flex; flex-direction:column; gap:.55rem}
   .whybody b{color:var(--ink)} .whybody p{margin:0; line-height:1.55}
+  .vtag{font-family:ui-monospace,Menlo,monospace; font-size:.7rem; font-weight:700;
+    padding:1px 6px; border-radius:3px; border:1px solid; margin-right:.35em;
+    white-space:nowrap}
+  .vtag.pass{color:var(--pass); border-color:var(--pass); background:var(--pass-bg)}
+  .vtag.fail{color:var(--fail); border-color:var(--fail); background:var(--fail-bg)}
+  .vtag.not-run{color:var(--faint); border-color:var(--rule); border-style:dashed}
   .perma{font-size:.78rem}
   .p:target{outline:2px solid var(--accent); outline-offset:2px}
   .verif{display:flex; gap:6px; flex-wrap:wrap; align-items:center;
@@ -278,6 +284,14 @@ function reasoning(p){
   const ran = CHECK_ORDER.filter(k => c[k] === "pass" || c[k] === "fail");
   const notrun = CHECK_ORDER.filter(k => c[k] === "not-run");
   if (ran.length) s.push(`Checks that ran: ${ran.join(", ")}.` + (notrun.length ? ` Not run: ${notrun.join(", ")} &mdash; so those are not evidence either way.` : ""));
+  // What the falsification checks actually found. A proposal that survives an attempt to
+  // break it is worth more than one nobody tried to break, and the attempt has to be shown.
+  const det = p.check_detail || {};
+  ["V10", "V12"].forEach(k => {
+    if (!det[k] || c[k] === "n/a") return;
+    const v = c[k];
+    s.push(`<span class="vtag ${v}">${k} ${v}</span> ${esc(det[k])}`);
+  });
   return s.map(x => `<p>${x}</p>`).join("");
 }
 function bgLink(p){
