@@ -254,10 +254,13 @@ function reasoning(p){
   // put it in the queue, stated so a curator can disagree with a specific step of it.
   const s = [], c = p.checks || {}, cand = p.candidate, top = (p.expression_top || [])[0];
   const n = p.n_cells ? p.n_cells.toLocaleString() : "?";
-  s.push(`The atlas asserts <b>${esc(p.label)}</b> for a ${n}-cell population in ${esc(p.organ)}.`);
+  s.push(`The atlas asserts <b>${esc(p.label)}</b> for ${n} cells in ${esc(p.organ)}.`);
   if (p.kind === "new-term") {
+    // `overlap` is lexical token overlap, NOT a subclass relation. An earlier version of
+    // this sentence called the nearest match "broader", which for Eye/Bipolar cell named
+    // ON-bipolar cell -- a NARROWER term -- and stated a direction nothing had checked.
     s.push(cand
-      ? `The name resolves only as far as <span class="mono">${esc(cand.curie)}</span> &mdash; ${esc(cand.name)} &mdash; which is broader than what is being named.`
+      ? `The name does not resolve. Its closest match in CL is ${esc(cand.name)} <span class="mono">${esc(cand.curie)}</span>, sharing ${Math.round((cand.overlap || 0) * 100)}% of the label's words &mdash; a near miss on the string, which is not evidence of a relation between them.`
       : `The name does not resolve to any term in the pinned CL release.`);
     if (top) s.push(`Scored on its markers, the best-explaining term is ${esc(top.name)}${p.lexical_vs_expression === "disagree" ? ", which is not what the name points at" : ""}.`);
     s.push(`So the gap is a <b>vocabulary</b> one: the atlas is naming a population the ontology has no term for.`);

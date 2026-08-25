@@ -83,6 +83,11 @@ setTimeout(() => {
   if (perma !== cards) problems.push(`${perma} permalinks for ${cards} cards`);
   if (/undefined|\[object Object\]|NaN/.test(out))
     problems.push("rendered output contains undefined/NaN - a field name is wrong");
+  // proposals.json carries a lexical overlap score and no subsumption relation, so the
+  // page must not describe a nearest match as broader or narrower than the label. It did,
+  // and named a narrower term as broader.
+  if (/\b(broader|narrower|subsumes|is a parent of)\b/i.test(out))
+    problems.push("rendered prose claims a subclass direction the data does not carry");
 
   if (problems.length) {
     problems.forEach(p => console.error("FAIL: " + p));
