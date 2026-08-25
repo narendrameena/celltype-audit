@@ -136,6 +136,20 @@ def v12(term, markers, g):
                     % (len(viol), checked, viol[0][0], viol[0][1], format(viol[0][2], ",")))
 
 
+def _name_contained(label, rival):
+    """The rival's name already contains the label, or the reverse.
+
+    "Luminal cell" against "luminal cell of prostate epithelium" is not two cell types that
+    happen to share markers; it is one cell type the resolver failed to reach. Distinguish
+    that from "Pit cell" against "goblet cell", which are genuinely different types that
+    both make mucus -- shared markers there weaken a proposal without settling it.
+    """
+    import re as _re
+    a = _re.sub(r"[^a-z0-9]+", " ", label.lower()).strip()
+    b = _re.sub(r"[^a-z0-9]+", " ", rival.lower()).strip()
+    return a in b or b in a or (set(a.split()) and set(a.split()) <= set(b.split()))
+
+
 def main():
     g = load()
     doc = json.load(open(os.path.join(DOCS, "proposals.json")))
@@ -160,10 +174,42 @@ def main():
             ch["V12"] = ch.get("V12", "n/a"); d12 = "structural, not marker-based"
         p.setdefault("check_detail", {})["V10"] = d10
         p["check_detail"]["V12"] = d12
+
+        # A proposal that fails exclusivity is not ready to put in front of a curator, and
+        # saying so is the point of running the check. Two outcomes, deliberately not one:
+        #   * the winning term's name already contains the label -> the population is
+        #     covered and the resolver simply missed it; drop it as satisfied
+        #   * a different term merely shares the markers -> the proposal is WEAKENED, not
+        #     refuted, and is kept where a curator can see why it is doubted
+        p["readiness"] = "ready"
+        if ch["V10"] == "fail":
+            import re as _re
+            m = _re.search(r"term in \S+ is (.+?) \([\d,]+ cells\) at ", d10)
+            rival = m.group(1) if m else ""
+            if rival and _name_contained(p["label"], rival):
+                p["readiness"] = "covered"
+                p["covered_by"] = rival
+            else:
+                p["readiness"] = "weakened"
+                p["weakened_by"] = rival
         ran["V10"][ch["V10"]] = ran["V10"].get(ch["V10"], 0) + 1
         ran["V12"][ch["V12"]] = ran["V12"].get(ch["V12"], 0) + 1
         print("  %-16s %-9s %-28s V10=%-7s V12=%s"
               % (p["kind"], p["organ"], p["label"][:28], ch["V10"], ch["V12"]))
+    covered = [p for p in doc["proposals"] if p.get("readiness") == "covered"]
+    doc["proposals"] = [p for p in doc["proposals"] if p.get("readiness") != "covered"]
+    doc.setdefault("covered_after_exclusivity", []).extend(
+        {"organ": p["organ"], "label": p["label"], "covered_by": p.get("covered_by")}
+        for p in covered)
+    r = doc["summary"]
+    r["n"] = len(doc["proposals"])
+    r["ready"] = sum(1 for p in doc["proposals"] if p.get("readiness") == "ready")
+    r["weakened"] = sum(1 for p in doc["proposals"] if p.get("readiness") == "weakened")
+    r["covered_after_exclusivity"] = len(doc["covered_after_exclusivity"])
+    print("\n  ready %d | weakened by exclusivity %d | dropped as already covered %d"
+          % (r["ready"], r["weakened"], r["covered_after_exclusivity"]))
+    for c in covered:
+        print("     dropped: %-9s %-24s -> %s" % (c["organ"], c["label"][:24], c.get("covered_by")))
     json.dump(doc, open(os.path.join(DOCS, "proposals.json"), "w"), indent=1)
     print("\n  V10 %s\n  V12 %s" % (ran["V10"], ran["V12"]))
     print("wrote %s" % os.path.join(DOCS, "proposals.json"))

@@ -96,6 +96,15 @@ setTimeout(() => {
   const ranV = props.filter(p => ["pass", "fail"].includes((p.checks || {}).V10) ||
                                  ["pass", "fail"].includes((p.checks || {}).V12)).length;
   if (ranV === 0) problems.push("no proposal has V10 or V12 actually run");
+  // every proposal must carry a verdict for every check in the stack -- an absent key is
+  // a check that silently stopped applying, which reads on the page as if it never existed
+  const STACK = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V12"];
+  const gaps = props.filter(p => STACK.some(v => !(p.checks || {})[v]));
+  if (gaps.length) problems.push(`${gaps.length} proposals missing a verdict for some check`);
+  // a proposal that failed exclusivity must say so where a curator will see it
+  const weak = props.filter(p => p.readiness === "weakened").length;
+  const marks = (out.match(/Not ready to submit/g) || []).length;
+  if (marks !== weak) problems.push(`${marks} "not ready" notices for ${weak} weakened proposals`);
   const detailed = props.filter(p => p.check_detail && (p.check_detail.V10 || p.check_detail.V12)).length;
   if (detailed !== props.length)
     problems.push(`${detailed}/${props.length} proposals carry falsification detail`);

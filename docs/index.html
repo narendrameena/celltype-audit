@@ -122,6 +122,10 @@
 
   .bg{font-size:.78rem; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:1px}
   .bg:hover{color:var(--accent); border-bottom-color:var(--accent)}
+  .weak{margin:0; padding:9px 18px; font-size:.84rem; color:var(--ink);
+    background:var(--pending-bg); border-top:1px solid var(--hair);
+    border-left:3px solid var(--pending)}
+  .weak b{color:var(--pending)}
   .why{border-top:1px solid var(--hair); font-size:.86rem}
   .why > summary{cursor:pointer; padding:9px 18px; color:var(--accent); font-weight:600;
     list-style:none; font-size:.8rem}
@@ -337,7 +341,11 @@ function issueURL(p){
 
 function render(){
   const list = document.getElementById("list");
-  const shown = DATA.proposals.filter(p => active === "all" || p.kind === active);
+  // ready first: a proposal that failed exclusivity is not in the same state as one
+  // that passed it, and ordering them together would hide that.
+  const RANK = { ready: 0, weakened: 1 };
+  const shown = DATA.proposals.filter(p => active === "all" || p.kind === active)
+    .slice().sort((a, b) => (RANK[a.readiness] ?? 0) - (RANK[b.readiness] ?? 0));
   list.innerHTML = shown.map(p => {
     const cand = p.candidate;
     const top = (p.expression_top && p.expression_top[0]) || null;
@@ -376,6 +384,8 @@ function render(){
       ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
       ${p.markers && p.markers.length
         ? `<div class="genes">${p.markers.map(g => `<span class="g mono">${esc(g)}</span>`).join("")}</div>` : ""}
+      ${p.readiness === "weakened"
+        ? `<p class="weak"><b>Not ready to submit.</b> Exclusivity failed: ${esc(p.weakened_by || "another term")} in this tissue expresses the same markers. That does not refute the proposal &mdash; different cell types share markers &mdash; but it has to be settled before a curator is asked to act on it.</p>` : ""}
       <details class="why">
         <summary>Why this proposal &rarr;</summary>
         <div class="whybody">${reasoning(p)}

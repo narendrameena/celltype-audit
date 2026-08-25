@@ -2,7 +2,7 @@
  "summary": {
   "generated_from": "celltype-audit",
   "cl_release": "2026-06-08",
-  "n": 20,
+  "n": 19,
   "by_kind": {
    "marker-condition": 1,
    "missing-axiom": 1,
@@ -10,23 +10,29 @@
   },
   "checks_run": [
    "V1",
+   "V10",
+   "V12",
    "V2",
    "V3",
-   "V9",
-   "V10",
-   "V12"
-  ],
-  "checks_not_run": [
    "V4",
    "V5",
    "V6",
    "V7",
-   "V8"
+   "V8",
+   "V9"
   ],
+  "checks_not_run": [],
   "cells_covered": 306486,
   "already_satisfied": 3,
   "already_curated": 17,
-  "routes_disagree": 6
+  "routes_disagree": 6,
+  "ready": 11,
+  "weakened": 8,
+  "covered_after_exclusivity": 1,
+  "reasoner": {
+   "engine": "ELK via ROBOT",
+   "ontology": "cl-base.owl"
+  }
  },
  "proposals": [
   {
@@ -52,13 +58,20 @@
     "V3": "pass",
     "V9": "fail",
     "V10": "pass",
-    "V12": "fail"
+    "V12": "fail",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "lexical_vs_expression": "n/a",
    "check_detail": {
     "V10": "markers FCGR3B+ELANE; strongest unrelated, current, well-supported term in Lung is classical monocyte (148,595 cells) at 18% of the target's signal",
     "V12": "11 of 14 clusters asserted to this term lack every proposed marker; largest is Skin Monocyte at 23,110 cells"
-   }
+   },
+   "readiness": "ready",
+   "reason_note": "CL carries no marker property, so this proposal cannot be stated as an axiom against the current release; it is a request for one rather than an axiom to check."
   },
   {
    "kind": "missing-axiom",
@@ -86,12 +99,26 @@
     "V3": "pass",
     "V9": "n/a",
     "V10": "n/a",
-    "V12": "pass"
+    "V12": "pass",
+    "V4": "pass",
+    "V5": "pass",
+    "V6": "pass",
+    "V7": "pass",
+    "V8": "pass"
    },
    "lexical_vs_expression": "n/a",
    "check_detail": {
     "V10": "not a marker-based proposal",
     "V12": "structural, not marker-based"
+   },
+   "readiness": "ready",
+   "reason_note": "asserts an is_a path between the two sibling terms",
+   "reason_evidence": {
+    "V4": "merged cleanly",
+    "V5": "no class becomes unsatisfiable",
+    "V6": "1 new entailment(s), none outside the axiom's signature",
+    "V7": "nothing new entailed between pre-existing classes",
+    "V8": "1 new entailment(s)"
    }
   },
   {
@@ -145,55 +172,18 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "pass",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers PCP2+LPGAT1+PRKCA+SERPINI1+CCDC136+CABP5; strongest unrelated, current, well-supported term in Eye is bipolar neuron (807,271 cells) at 39% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
-  },
-  {
-   "lexical_vs_expression": "n/a",
-   "kind": "new-term",
-   "organ": "Prostate",
-   "label": "Luminal cell",
-   "n_cells": 8610,
-   "markers": [
-    "PLA2G2A",
-    "SLC39A6",
-    "SLC44A4",
-    "MSMB",
-    "TMC5",
-    "SPDEF"
-   ],
-   "candidate": null,
-   "alternatives": [],
-   "expression_top": [
-    {
-     "curie": "CL:0000163",
-     "name": "endocrine cell"
-    },
-    {
-     "curie": "CL:0002340",
-     "name": "luminal cell of prostate epithelium"
-    },
-    {
-     "curie": "CL:4032000",
-     "name": "club-like cell of the urethral epithelium"
-    }
-   ],
-   "checks": {
-    "V1": "n/a",
-    "V2": "n/a",
-    "V3": "n/a",
-    "V9": "pass",
-    "V10": "fail",
-    "V12": "n/a"
    },
-   "check_detail": {
-    "V10": "markers PLA2G2A+SLC39A6+SLC44A4+MSMB+TMC5+SPDEF; strongest unrelated, current, well-supported term in Prostate is luminal cell of prostate epithelium (30,648 cells) at 103% of the target's signal",
-    "V12": "a missing term is not falsified by a counterexample"
-   }
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -246,12 +236,19 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers MUCL1+TESC+AQP5+DNER+S100A1+DNASE2B; strongest unrelated, current, well-supported term in Salivary_gland is acinar cell of salivary gland (28,192 cells) at 1594% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "acinar cell of salivary gland"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -282,12 +279,18 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "n/a",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no scoreable term to compare against",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "agree",
@@ -322,12 +325,18 @@
     "V3": "pass",
     "V9": "not-run",
     "V10": "n/a",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no scoreable term to compare against",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -365,12 +374,19 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers TTN+GRIK1+SLC1A2+TRAPPC8+PSD3+REPS2; strongest unrelated, current, well-supported term in Eye is diffuse bipolar 1 cell (49,273 cells) at 98% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "diffuse bipolar 1 cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -408,12 +424,19 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers PCP4L1+VSX1+CABP2+MPP2+SLC24A4+CCDC88A; strongest unrelated, current, well-supported term in Eye is cone retinal bipolar cell (10,171 cells) at 181% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "cone retinal bipolar cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -451,12 +474,19 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers DNAJC12+TMC5+AGR2+ANKRD30A+MLPH+TMEM45B; strongest unrelated, current, well-supported term in Breast is exocrine cell (222,183 cells) at 93% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "exocrine cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -487,12 +517,18 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "n/a",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no scoreable term to compare against",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -534,12 +570,19 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers PIGR+LYZ+MUC6+RPL28+RPL5+RNASE1; strongest unrelated, current, well-supported term in Stomach is goblet cell (4,366 cells) at 106% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "goblet cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -577,12 +620,19 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers ESRRG+FGD4+IGFBP5+SIK2+ARHGEF28+RAP1GAP2; strongest unrelated, current, well-supported term in Stomach is goblet cell (4,366 cells) at 80% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "goblet cell"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -624,12 +674,19 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers CPLX1+SATB1-AS1+ADAMTS17+ANKRD34C-AS1+GABRD+MB; strongest unrelated, current, well-supported term in Brain is pvalb chandelier GABAergic interneuron (35,113 cells) at 143% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "pvalb chandelier GABAergic interneuron"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -667,12 +724,18 @@
     "V3": "n/a",
     "V9": "pass",
     "V10": "pass",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers POU5F1+TUBA1C+DPPA5+PGK1+SNRPC+PDPN; strongest unrelated, current, well-supported term in Testis is connective tissue cell (7,830 cells) at 8% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -725,12 +788,19 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "fail",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "markers DMBT1+ODAM+S100A1+MUC7+DLC1+LPO; strongest unrelated, current, well-supported term in Nose is endothelial cell of vascular tree (614 cells) at 78% of the target's signal",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "weakened",
+   "weakened_by": "endothelial cell of vascular tree"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -761,12 +831,18 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "n/a",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no scoreable term to compare against",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -797,12 +873,18 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "n/a",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no scoreable term to compare against",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -850,12 +932,18 @@
     "V3": "pass",
     "V9": "pass",
     "V10": "not-run",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no comparable terms in this tissue",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -886,12 +974,25 @@
     "V3": "n/a",
     "V9": "not-run",
     "V10": "n/a",
-    "V12": "n/a"
+    "V12": "n/a",
+    "V4": "n/a",
+    "V5": "n/a",
+    "V6": "n/a",
+    "V7": "n/a",
+    "V8": "n/a"
    },
    "check_detail": {
     "V10": "no scoreable term to compare against",
     "V12": "a missing term is not falsified by a counterexample"
-   }
+   },
+   "readiness": "ready"
+  }
+ ],
+ "covered_after_exclusivity": [
+  {
+   "organ": "Prostate",
+   "label": "Luminal cell",
+   "covered_by": "luminal cell of prostate epithelium"
   }
  ]
 }
