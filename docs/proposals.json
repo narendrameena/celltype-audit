@@ -68,7 +68,7 @@
    "lexical_vs_expression": "n/a",
    "check_detail": {
     "V10": "markers FCGR3B+ELANE; strongest unrelated, current, well-supported term in Lung is classical monocyte (148,595 cells) at 18% of the target's signal",
-    "V12": "11 of 15 clusters asserted to this term lack every proposed marker; largest is Skin Monocyte at 23,110 cells",
+    "V12": "3 of 5 clusters asserted to this term lack every proposed marker; largest is Lung Neutrophilic granulocyte at 56,394 cells",
     "V1": "CL:0000775 is present in the CL 2026-06-08 release",
     "V2": "the release gives CL:0000775 the label 'neutrophil', which is the name used here",
     "V3": "CL:0000775 is neither obsolete nor scoped to a non-human species",
@@ -109,7 +109,7 @@
     "V3": "pass",
     "V9": "n/a",
     "V10": "n/a",
-    "V12": "pass",
+    "V12": "n/a",
     "V4": "pass",
     "V5": "pass",
     "V6": "pass",
@@ -119,7 +119,7 @@
    "lexical_vs_expression": "n/a",
    "check_detail": {
     "V10": "not a marker-based proposal",
-    "V12": "structural, not marker-based",
+    "V12": "this proposal asserts no marker condition, so there is nothing a cluster could violate",
     "V1": "CL:0002131 is present in the CL 2026-06-08 release",
     "V2": "the release gives CL:0002131 the label 'regular ventricular cardiac myocyte', which is the name used here",
     "V3": "CL:0002131 is neither obsolete nor scoped to a non-human species",

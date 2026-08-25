@@ -43,6 +43,7 @@ RES = os.path.join(HERE, "results")
 DOCS = os.path.abspath(os.path.join(HERE, "..", "..", "celltype-audit", "docs"))
 
 from cl_lineage import load, ancestors                                  # noqa: E402
+from cl_resolve import resolve as resolve2                              # noqa: E402
 
 # A competitor must beat this share of the target's own signal to count as one; below it
 # the markers are doing their job. Reported alongside the verdict so it can be argued with.
@@ -118,10 +119,18 @@ def v10(term, markers, organ, g):
 
 
 def v12(term, markers, g):
-    """-> (verdict, detail). Clusters asserted to be this type that lack the markers."""
+    """-> (verdict, detail). Clusters ASSERTED to be this type that lack the markers.
+
+    "Asserted" means the atlas LABEL resolves to the term. An earlier version matched on
+    heca_to_cl's `cl` field, which is the expression-ranked candidate list -- the opposite
+    claim. It reported Skin "Monocyte" as a neutrophil counterexample, when what that row
+    records is the audit finding neutrophil to be the best expression match for a cluster
+    labelled monocyte. Counting those as violations of a neutrophil condition inverts the
+    check: it collects clusters the markers point AT and calls them clusters that fail the
+    markers.
+    """
     if not markers:
         return "n/a", "no markers to violate"
-    kin = {term}
     viol, checked = [], 0
     for p in sorted(__import__("glob").glob(os.path.join(RES, "heca_to_cl_*.json"))):
         d = json.load(open(p))
@@ -130,10 +139,12 @@ def v12(term, markers, g):
             deep = json.load(open(os.path.join(RES, "heca_markers_deep_%s.json" % organ)))["types"]
         except FileNotFoundError:
             continue
+        ctx = {c["curie"] for v in d["types"].values() for c in v.get("cl", [])}
         for label, v in d["types"].items():
             if v.get("n_cells", 0) < MINC:
                 continue
-            if not any(c["curie"] in kin for c in v.get("cl", [])[:1]):
+            asserted, _how = resolve2(label, ctx, organ=organ)
+            if asserted != term:
                 continue
             checked += 1
             have = {m["gene"] for m in deep.get(label, {}).get("markers", [])[:50]}
@@ -184,7 +195,8 @@ def main():
             ch["V12"], d12 = "n/a", "a missing term is not falsified by a counterexample"
         else:
             ch["V10"], d10 = "n/a", "not a marker-based proposal"
-            ch["V12"] = ch.get("V12", "n/a"); d12 = "structural, not marker-based"
+            ch["V12"], d12 = "n/a", ("this proposal asserts no marker condition, so there "
+                                     "is nothing a cluster could violate")
         p.setdefault("check_detail", {})["V10"] = d10
         p["check_detail"]["V12"] = d12
 

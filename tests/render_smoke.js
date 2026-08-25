@@ -117,6 +117,18 @@ setTimeout(() => {
   if (tables !== proposals.length)
     problems.push(`${tables} check tables for ${proposals.length} proposals`);
 
+  // V12 searches clusters ASSERTED to the term. It once matched heca_to_cl's expression
+  // ranking instead -- the opposite claim -- and reported a skin monocyte as a neutrophil
+  // counterexample. Pin the known case: the neutrophil condition must be falsified by the
+  // lung cluster labelled neutrophil, not by something the markers merely point at.
+  const neut = proposals.find(p => p.kind === "marker-condition" && p.label === "neutrophil");
+  if (neut) {
+    const d = (neut.check_detail || {}).V12 || "";
+    if (neut.checks.V12 !== "fail") problems.push("the neutrophil condition is no longer falsified");
+    else if (!/Lung .*neutroph/i.test(d))
+      problems.push("neutrophil V12 counterexample is not the lung cluster: " + d.slice(0, 120));
+  }
+
   const graphed = proposals.filter(p => p.graph).length;
   if (graphed !== proposals.length)
     problems.push(`${graphed}/${proposals.length} proposals carry an ontology graph`);
