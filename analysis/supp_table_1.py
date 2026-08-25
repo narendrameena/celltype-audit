@@ -113,44 +113,53 @@ def fmt(r, k):
     return format(v, ",") if isinstance(v, int) else v
 
 
-md = ["**Supplementary Table 1 | The surveyed CELLxGENE Discover datasets.** "
-      "Twelve published human datasets, one per tissue and at most two per collection, "
-      "selected for tissue breadth from 979 datasets annotated `disease == normal` with a "
-      "qualified tissue term; embryonic and fetal datasets were excluded and only datasets "
-      "whose tissue has a CELLxGENE WMG reference were audited. *Audited* counts cell types "
-      "passing the 500-cell floor whose asserted CL term is scoreable against the "
-      "reference. A winner resting on less than 10% of the asserted term's reference "
-      "support is discarded as *thin* before the call is made, so the three outcome "
-      "columns sum to Audited minus Thin. *Agree* means the best-scoring term is the "
-      "asserted term or an `is_a` relative of it; *within lineage* and *cross lineage* "
-      "classify the remainder by whether the winner shares an anchor set with the "
-      "assertion. Pooled, 3 of 80 surviving cell types (3.8%) cross a lineage boundary. "
-      "Two datasets are slices of the Tabula Sapiens collection "
-      "(`e5f58829-1a66-40b5-a624-9046778e74f5`), which the study also uses as its "
-      "independent witness; they are marked and are not independent of that comparison. "
-      "Excluding them, the remaining ten give 3 of 75 (4.0%), so the survey result does "
-      "not rest on them — they contribute 0 of the 3 cross-lineage calls. Cell counts are "
-      "as distributed. Every value is read directly from the distributed `.h5ad` files "
-      "and from `results/cxg_survey.json`.", "",
+# Derived once, ABOVE the caption. The caption used to state "Twelve published human
+# datasets ... 3 of 80 (3.8%)" as literal prose, and would have gone on saying so after the
+# survey grew to 141 datasets and 670 scoreable cell types: prose is the one part of a
+# generated table that nothing recomputes.
+live_n = tot["n_audited"] - tot["thin"]
+ind = [r for r in out if r["independent"] == "yes"]
+il = sum(r["agree"] + r["within_lineage"] + r["cross_lineage"] for r in ind)
+ic = sum(r["cross_lineage"] for r in ind)
+
+CAPTION = (
+    "**Supplementary Table 1 | The surveyed CELLxGENE Discover datasets.** "
+    "Every public human dataset in CELLxGENE Discover the audit can score: exactly "
+    "*Homo sapiens*, exactly `disease == normal`, not embryonic or fetal, and carrying at "
+    "least one UBERON term the WMG expression reference holds. 208 datasets met those "
+    "criteria and were downloaded and verified byte-exact; the {nds} listed here are those "
+    "with a scoreable cell type. *Audited* counts cell types passing the 500-cell floor "
+    "whose asserted CL term is scoreable against the reference. A winner resting on less "
+    "than 10% of the asserted term's reference support is discarded as *thin* before the "
+    "call is made, so the three outcome columns sum to Audited minus Thin. *Agree* means "
+    "the best-scoring term is the asserted term or an `is_a` relative of it; *within "
+    "lineage* and *cross lineage* classify the remainder by whether the winner shares an "
+    "anchor set with the assertion. Pooled, {cross} of {surv} surviving cell types "
+    "({pct:.1f}%) cross a lineage boundary. {nts} are slices of the Tabula Sapiens "
+    "collection (`e5f58829-1a66-40b5-a624-9046778e74f5`), which the study also uses as "
+    "its independent witness; they are marked and are not independent of that comparison. "
+    "Excluding them, the remaining {nind} give {ic} of {il} ({ipct:.1f}%), so the survey "
+    "result does not rest on them. Cell counts are as distributed. Every value is read "
+    "directly from the distributed `.h5ad` files and from `results/cxg_survey.json`."
+).format(nds=len(out), cross=tot["cross_lineage"], surv=live_n,
+         pct=100 * tot["cross_lineage"] / live_n, nts=len(out) - len(ind),
+         nind=len(ind), ic=ic, il=il, ipct=100 * ic / il)
+
+md = [CAPTION, "",
       "| " + " | ".join(h for _, h in COLS) + " |",
       "|" + "|".join("---" for _ in COLS) + "|"]
 for r in out:
     md.append("| " + " | ".join(fmt(r, k) for k, _ in COLS) + " |")
-md.append("| **Total (n=12)** | | | | **%s** | **%s** | | " % (format(tot["n_cells"], ","),
+md.append("| **Total (n=%d)** | | | | **%s** | **%s** | | " % (len(out), format(tot["n_cells"], ","),
                                                               format(tot["n_cell_types"], ","))
           + " | ".join("**%s**" % format(tot[k], ",") for k in KEYS[2:]) + " | | |")
 open(os.path.join(ROOT, "supplementary_table_1.md"), "w").write("\n".join(md) + "\n")
 
-live_n = tot["n_audited"] - tot["thin"]
 print("%d datasets | %s cells | %d audited, %d thin-discarded"
       % (len(out), format(tot["n_cells"], ","), tot["n_audited"], tot["thin"]))
 print("agree %d / within %d / cross %d of %d surviving -> cross %.1f%%"
       % (tot["agree"], tot["within_lineage"], tot["cross_lineage"], live_n,
          100 * tot["cross_lineage"] / live_n))
 assert tot["agree"] + tot["within_lineage"] + tot["cross_lineage"] == live_n, "partition"
-ind = [r for r in out if r["independent"] == "yes"]
-il = sum(r["agree"] + r["within_lineage"] + r["cross_lineage"] for r in ind)
-ic = sum(r["cross_lineage"] for r in ind)
 print("independent of TS: %d datasets, %d surviving, cross %d -> %.1f%%"
       % (len(ind), il, ic, 100 * ic / il))
-print("PAPER SAYS: 12 datasets, 103 cell types, 3.8% cross-lineage")
