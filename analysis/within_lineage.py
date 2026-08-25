@@ -85,7 +85,8 @@ def _related(a, b, hops=3):
     return b in ancestors(a) or a in ancestors(b)
 
 
-def features(idx, mats, organ, markers, asserted, min_ref=None):
+def features(idx, mats, organ, markers, asserted, min_ref=None,
+             subspace=None, rates=None):
     """-> (percentile, ratio, rank, n_terms, best_term, best_score, related) or None.
 
     min_ref overrides the module default; sensitivity.py sweeps it, and must reach this
@@ -102,7 +103,19 @@ def features(idx, mats, organ, markers, asserted, min_ref=None):
     cols = [gix[g] for g in markers if g in gix]
     if not cols:
         return None
-    s = M[:, cols].mean(axis=1)
+    # Score in the organ's shared discriminative subspace when one is supplied, so every
+    # candidate term is asked the same question. The mean over a cluster's own markers asks
+    # a different question of each candidate and costs 14.5 points of top-1 against the
+    # hand-curated gold. Falls back to the mean when no subspace is given, which is what
+    # this did before and what sensitivity.py's swept calls still exercise.
+    scols = [gix[g] for g in (subspace or []) if g in gix]
+    q = np.array([(rates or {}).get(g, 0.0) for g in (subspace or []) if g in gix],
+                 dtype=np.float32)
+    if scols and float(np.linalg.norm(q)) > 0:
+        R = M[:, scols]
+        s = R.dot(q) / ((np.linalg.norm(R, axis=1) + 1e-9) * float(np.linalg.norm(q)))
+    else:
+        s = M[:, cols].mean(axis=1)
     cnt = idx["counts"].get(ub, {})
     inv = {v: k for k, v in tix.items()}
     keep = np.array([cnt.get(inv[i], 0) >= min_ref for i in range(len(s))])
@@ -135,6 +148,11 @@ def build_rows(idx, mats, minc=None, min_ref=None):
         D = json.load(open(dp))["types"]
         M = json.load(open(mp))["types"]
         ctx = {c["curie"] for v in M.values() for c in v.get("cl", [])}
+        # One subspace per organ, the union of every cluster's deep markers, exactly as
+        # heca_to_cl builds it -- the two must agree or the audit and the annotation are
+        # scoring in different spaces and their numbers cannot be compared.
+        SUBK = 20
+        sub = sorted({m["gene"] for v in D.values() for m in v["markers"][:SUBK]})
         for t, gd in G.items():
             v = D.get(t)
             if not v or v["n_cells"] < minc:
@@ -142,7 +160,9 @@ def build_rows(idx, mats, minc=None, min_ref=None):
             cur, how = resolve2(t, ctx, organ=o)
             if not cur:
                 continue
+            rates = {m["gene"]: float(m.get("pc_in", 0.0)) for m in v["markers"][:SUBK]}
             f = features(idx, mats, o, [m["gene"] for m in v["markers"]], cur,
+                         subspace=sub, rates=rates,
                          min_ref=min_ref)
             if not f:
                 continue

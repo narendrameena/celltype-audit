@@ -118,7 +118,7 @@ def v10(term, markers, organ, g):
     return ("pass" if ratio < EXCL_RATIO else "fail"), detail
 
 
-def v12(term, markers, g):
+def v11(term, markers, g):
     """-> (verdict, detail). Clusters ASSERTED to be this type that lack the markers.
 
     "Asserted" means the atlas LABEL resolves to the term. An earlier version matched on
@@ -174,16 +174,52 @@ def _name_contained(label, rival):
     return a in b or b in a or (set(a.split()) and set(a.split()) <= set(b.split()))
 
 
+def _toks(x):
+    """Label as an unordered bag of stems, `cell` dropped -- the same normalisation the
+    already-known gate uses, so the two agree about when CL covers a population."""
+    import re as _re
+    w = _re.sub(r"[^a-z0-9]+", " ", x.lower()).split()
+    w = [t[:-1] if len(t) > 3 and t.endswith("s") and not t.endswith("ss") else t for t in w]
+    return frozenset(t for t in w if t not in ("cell", "cells"))
+
+
+def v12(p, g):
+    """-> (verdict, detail). Under the improved scorer, is this population already named?
+
+    A proposal says CL has no term for what the atlas calls X. The scorer changed
+    underneath it -- the shared-subspace ranking is 14.5 points more accurate against the
+    hand-curated gold -- so the claim is re-asked with the better evidence: does the term
+    the improved scorer now puts first actually name this population?
+
+    Deterministic on purpose. The obvious form of this check is a threshold on the
+    scorer's confidence, and that was measured before being built: the top-1 cosine
+    separates correct from incorrect calls so poorly that 82% of wrong calls exceed the
+    10th percentile of right ones, the margin over the best unrelated runner-up reaches
+    AUC 0.620, and the term's is_a depth reaches 0.522. A pass/fail verdict resting on any
+    of those would be a confident claim on a signal known to be near-useless, which is the
+    failure this stack exists to catch. Name matching carries no threshold.
+    """
+    top = ((p.get("expression_top") or [{}])[0] or {}).get("curie")
+    if p["kind"] != "new-term" or not top:
+        return "n/a", "only a new-term proposal claims CL lacks a term for a population"
+    name = g["label"].get(top, top)
+    if _toks(p["label"]) and _toks(p["label"]) <= _toks(name):
+        return "fail", ("the improved scorer puts %s first, which already names this "
+                        "population; CL may not be missing a term" % name)
+    return "pass", ("the improved scorer puts %s first, which does not name this "
+                    "population, so the gap stands under the better evidence" % name)
+
+
 def main():
     g = load()
     doc = json.load(open(os.path.join(DOCS, "proposals.json")))
-    ran = {"V10": {}, "V11": {}}
+    ran = {"V10": {}, "V11": {}, "V12": {}}
     for p in doc["proposals"]:
         mk, ch = p.get("markers") or [], p["checks"]
         term = (p.get("candidate") or {}).get("curie")
         if p["kind"] == "marker-condition" and term:
             ch["V10"], d10 = v10(term, mk, p["organ"], g)
-            ch["V11"], d12 = v12(term, mk, g)
+            ch["V11"], d12 = v11(term, mk, g)
         elif p["kind"] == "new-term":
             # There is no term yet, so exclusivity is asked of the population instead:
             # does anything CL already carries in this tissue express all these markers?
@@ -197,7 +233,9 @@ def main():
             ch["V10"], d10 = "n/a", "not a marker-based proposal"
             ch["V11"], d12 = "n/a", ("this proposal asserts no marker condition, so there "
                                      "is nothing a cluster could violate")
-        p.setdefault("check_detail", {})["V10"] = d10
+        ch["V12"], d12b = v12(p, g)
+        p.setdefault("check_detail", {})["V12"] = d12b
+        p["check_detail"]["V10"] = d10
         p["check_detail"]["V11"] = d12
 
         # A proposal that fails exclusivity is not ready to put in front of a curator, and
@@ -219,6 +257,7 @@ def main():
                 p["weakened_by"] = rival
         ran["V10"][ch["V10"]] = ran["V10"].get(ch["V10"], 0) + 1
         ran["V11"][ch["V11"]] = ran["V11"].get(ch["V11"], 0) + 1
+        ran["V12"][ch["V12"]] = ran["V12"].get(ch["V12"], 0) + 1
         print("  %-16s %-9s %-28s V10=%-7s V11=%s"
               % (p["kind"], p["organ"], p["label"][:28], ch["V10"], ch["V11"]))
     covered = [p for p in doc["proposals"] if p.get("readiness") == "covered"]
@@ -236,7 +275,7 @@ def main():
     for c in covered:
         print("     dropped: %-9s %-24s -> %s" % (c["organ"], c["label"][:24], c.get("covered_by")))
     json.dump(doc, open(os.path.join(DOCS, "proposals.json"), "w"), indent=1)
-    print("\n  V10 %s\n  V11 %s" % (ran["V10"], ran["V11"]))
+    print("\n  V10 %s\n  V11 %s\n  V12 %s" % (ran["V10"], ran["V11"], ran["V12"]))
     print("wrote %s" % os.path.join(DOCS, "proposals.json"))
 
 

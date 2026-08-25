@@ -141,16 +141,52 @@ class Reference:
                    idx["gene_ix"], idx["term_ix"], idx["counts"], idx["labels"])
 
     # ------------------------------------------------------------------ score
-    def score(self, tissue, markers, min_ref=100):
-        """-> {curie: score} for every sufficiently supported term in the tissue."""
+    def subspace(self, tissue, marker_sets):
+        """The genes to score in: every cluster's markers pooled, kept if the reference has them.
+
+        Scoring a cluster only on its OWN markers asks each candidate term a different
+        question, and scoring on the full profile drowns identity in abundance -- the whole
+        1,958-gene profile does worse than five markers. The union of what discriminates
+        every type in the tissue is the space where identity actually lives, and it is the
+        same space for every candidate, so the comparison is like for like.
+        """
+        gix = self.gene_ix.get(tissue) or {}
+        pool = {g for ms in marker_sets for g in ms}
+        return [g for g in sorted(pool) if g in gix]
+
+    def score(self, tissue, markers, min_ref=100, subspace=None):
+        """-> {curie: score} for every sufficiently supported term in the tissue.
+
+        With `subspace`, the cluster and every candidate are represented over those genes
+        and ranked by cosine; the cluster's own detection rates weight the query, so genes
+        it does not express contribute nothing. Without it, the mean over the cluster's own
+        markers, which is what this did before and is kept for callers that have no table.
+
+        `markers` may be gene names or marker records carrying `pc_in`; the subspace path
+        needs the rates, so records are required for it and a bare list falls back.
+        """
         M, gix, tix = self.mats.get(tissue), self.gene_ix.get(tissue), self.term_ix.get(tissue)
         if M is None or not gix or not tix:
             return {}
-        cols = [gix[g] for g in markers if g in gix]
-        if len(cols) < 3:
-            return {}
+        recs = [m for m in markers if isinstance(m, dict)]
+        names = [m["gene"] for m in recs] if recs else list(markers)
         cnt = self.counts.get(tissue, {})
         inv = {v: k for k, v in tix.items()}
+
+        if subspace and recs:
+            cols = [gix[g] for g in subspace]
+            rate = {m["gene"]: float(m.get("pc_in", 0.0)) for m in recs}
+            q = np.array([rate.get(g, 0.0) for g in subspace])
+            nq = np.linalg.norm(q)
+            if nq > 0 and len(cols) >= 3:
+                R = M[:, cols]
+                s = R.dot(q) / ((np.linalg.norm(R, axis=1) + 1e-9) * nq)
+                return {inv[i]: float(s[i]) for i in range(len(s))
+                        if cnt.get(inv[i], 0) >= min_ref}
+
+        cols = [gix[g] for g in names if g in gix]
+        if len(cols) < 3:
+            return {}
         s = M[:, cols].mean(axis=1)
         return {inv[i]: float(s[i]) for i in range(len(s))
                 if cnt.get(inv[i], 0) >= min_ref}

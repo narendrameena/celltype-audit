@@ -30,10 +30,24 @@ from heca_markers import marker_table                              # noqa: E402
 
 RES = os.path.join(HERE, "results")
 TOPK = int(sys.argv[1]) if len(sys.argv) > 1 else 20
-ORG = {"Pancreas": ("UBERON:0001264", "../heca_data/RNA-Pancreas.h5ad"),
-       "Liver": ("UBERON:0002107", "../heca_data/RNA-Liver.h5ad"),
-       "Blood": ("UBERON:0000178", "../heca_data/RNA-Blood.h5ad"),
-       "Bone_marrow": ("UBERON:0002371", "../heca_data/RNA-Bone_marrow.h5ad")}
+# Every curated organ, with its tissue id read from the atlas mapping. This was the four
+# organs that existed when the experiment was written, and the comparison it reports --
+# the subspace scorer beating production by 8.4 points -- had never been tried on the six
+# curated since. A scorer chosen on four organs is a scorer chosen on four organs.
+def _org():
+    from gold_organs import curated
+    out = {}
+    for o in curated():
+        m = os.path.join(RES, "heca_to_cl_%s.json" % o)
+        h5 = os.path.join(os.path.dirname(HERE), "..", "heca_data", "RNA-%s.h5ad" % o)
+        if os.path.exists(m) and os.path.exists(h5):
+            ub = json.load(open(m)).get("uberon")
+            if ub:
+                out[o] = (ub, h5)
+    return out
+
+
+ORG = _org()
 WANT = {v[0] for v in ORG.values()}
 
 print("scanning WMG cache once for %d tissues ..." % len(WANT), flush=True)

@@ -83,7 +83,7 @@ def main():
     except FileNotFoundError:
         reasoned = {}
     doc = json.load(open(os.path.join(DOCS, "proposals.json")))
-    STACK = ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11"]
+    STACK = ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12"]
     for p in doc["proposals"]:
         explain(p, g, reasoned)
     gaps = [(p["label"], v) for p in doc["proposals"] for v in STACK

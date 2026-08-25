@@ -18,6 +18,11 @@ import urllib.error
 import urllib.request
 from collections import defaultdict
 
+import numpy as np
+
+SUBSPACE_TOPK = 20
+SPACE_CHUNK = 60   # genes per WMG request; longer lists are rejected
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "results")
 CACHE = os.path.join(HERE, ".wmg_cache")
@@ -127,6 +132,66 @@ def rank_cl(markers, uberon, topn=TOPN):
     return out[:topn] or None
 
 
+def fetch_space(union, uberon, min_cells=None):
+    """-> (genes, terms, R, counts): every candidate term's profile over the shared genes.
+
+    One query for the organ. Returns None when the tissue has nothing, so the caller falls
+    back to the per-cluster scorer rather than silently producing empty results.
+    """
+    ids = sorted({SYM2ENS[m] for m in union if m in SYM2ENS})
+    if not ids:
+        return None
+    # The API rejects long gene lists, and a rejected request here returned None, which
+    # the caller reads as "no space" and falls back to the per-cluster scorer. That is a
+    # silent no-op: the subspace never ran and every organ reproduced production exactly.
+    es, lbl = {}, {}
+    for i in range(0, len(ids), SPACE_CHUNK):
+        r = _fetch(WMG, {"filter": {"gene_ontology_term_ids": ids[i:i + SPACE_CHUNK],
+                                    "organism_ontology_term_id": HUMAN}, "is_rollup": True})
+        if not r:
+            continue
+        es.update(r.get("expression_summary") or {})
+        lbl.update((r.get("term_id_labels") or {}).get("cell_types", {}).get(uberon, {}))
+    if not es:
+        return None
+    ens2sym = {v: k for k, v in SYM2ENS.items()}
+    prof = defaultdict(dict)
+    for gid in ids:
+        sym = ens2sym.get(gid)
+        for ct, v in es.get(gid, {}).get(uberon, {}).items():
+            a = v.get("aggregated") or {}
+            if sym and a.get("pc") is not None:
+                prof[ct][sym] = a["pc"] * a.get("me", 0.0)
+    terms, counts = [], {}
+    for ct in prof:
+        if ct == "CL:0000000":
+            continue
+        info = (lbl.get(ct, {}).get("aggregated") or {})
+        if info.get("total_count", 0) < (min_cells or MINCELLS):
+            continue
+        terms.append(ct)
+        counts[ct] = (info.get("total_count", 0), info.get("name", ct))
+    if not terms:
+        return None
+    genes = sorted({g for ct in terms for g in prof[ct]})
+    R = np.array([[prof[ct].get(g, 0.0) for g in genes] for ct in terms], dtype=np.float32)
+    return genes, terms, R, counts
+
+
+def rank_subspace(marker_recs, space, topn=TOPN):
+    """Cosine between the cluster's detection rates and each term's profile, shared genes."""
+    genes, terms, R, counts = space
+    rate = {m["gene"]: float(m.get("pc_in", 0.0)) for m in marker_recs}
+    q = np.array([rate.get(g, 0.0) for g in genes], dtype=np.float32)
+    nq = float(np.linalg.norm(q))
+    if nq <= 0:
+        return None
+    s = R.dot(q) / ((np.linalg.norm(R, axis=1) + 1e-9) * nq)
+    order = np.argsort(-s)[:topn]
+    return [{"curie": terms[i], "label": counts[terms[i]][1],
+             "score": round(float(s[i]), 4), "n": counts[terms[i]][0]} for i in order] or None
+
+
 def run(organ):
     p = os.path.join(RES, "heca_markers_%s.json" % organ)
     if not os.path.exists(p):
@@ -137,10 +202,26 @@ def run(organ):
     if not uberon:
         print("  %-16s NO CELLxGENE tissue match -> skipped" % organ)
         return None
+    # One shared subspace per organ: the union of every cluster's markers. Scoring a
+    # cluster only on its own markers asks each candidate term a different question and
+    # costs 9.1 points of top-1 across ten hand-curated organs (test_subspace.py). The
+    # union is also ONE WMG query for the organ instead of one per cluster.
+    # The union is built from the DEEP marker pass (top 20 of 50), not the 5-marker
+    # production set. Building it from five defeats the premise -- five markers is the
+    # thing the subspace exists to improve on -- and measured 81.8% on pancreas against
+    # production's 86.4%, where the top-20 union measures 90.9%. The query vector still
+    # uses each cluster's own detection rates.
+    deep = {}
+    dp = os.path.join(RES, "heca_markers_deep_%s.json" % organ)
+    if os.path.exists(dp):
+        deep = json.load(open(dp))["types"]
+    union = sorted({m["gene"] for v in deep.values() for m in v["markers"][:SUBSPACE_TOPK]})
+    space = fetch_space(union, uberon) if union else None
     res, miss = {}, 0
     for t, v in M["types"].items():
         genes = [m["gene"] for m in v["markers"]]
-        hits = rank_cl(genes, uberon)
+        q = deep.get(t, {}).get("markers", [])[:SUBSPACE_TOPK] or v["markers"]
+        hits = rank_subspace(q, space) if space else rank_cl(genes, uberon)
         if hits:
             res[t] = {"n_cells": v["n_cells"], "markers": genes, "cl": hits}
         else:
