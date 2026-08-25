@@ -128,39 +128,29 @@ def ts_rows(idx, mats, p):
     return out
 
 
-def anchor_flags(p):
-    """The lineage sweep, at shortlist depth topk and the given size floor.
+def anchor_flags(p, idx, mats):
+    """C2: the sweep's flags, from the sweep itself.
 
-    Returns (true positives, false positives, flagged keys in scan order). The keys are
-    needed because the two-tier protocol reads these flags BEFORE the ranked queue, and
-    recall at a fixed budget depends on that order.
+    "The sweep" is the margin-based detector -- a better winner, a DIFFERENT cell type,
+    real evidence -- which is what the manuscript reports precision for. This used to
+    re-derive a different detector here, comparing the asserted term's anchor set against
+    the anchor sets of heca_to_cl's candidate list. That is the anchor-set test, not the
+    sweep, and it is a separate thing with a separate precision. Under the production
+    scorer both happened to land near 71% and the substitution was invisible; adopting the
+    shared-subspace scorer moved them apart (71% against 100% on 4 flags) and exposed it.
+    A sensitivity analysis of a re-implementation measures the re-implementation, which is
+    the fourth time this file has learned that lesson and the first time it stuck for C2.
+
+    Note that `topk` does not enter here. The margin detector reads the full ranking rather
+    than a shortlist, so C2 is constant across the shortlist-depth sweep -- reported rather
+    than hidden, because "this constant does not affect the result" is a finding.
     """
-    import glob
-    tp = fp = 0
-    keys = []
-    for fpth in sorted(glob.glob(os.path.join(RES, "heca_to_cl_*.json"))):
-        d = json.load(open(fpth))
-        o = d["organ"]
-        gp = os.path.join(HERE, "%s_gold.json" % o.lower())
-        if not os.path.exists(gp):
-            continue
-        G = {k: v for k, v in json.load(open(gp)).items() if not k.startswith("_") and v}
-        ctx = {c["curie"] for v in d["types"].values() for c in v.get("cl", [])}
-        for t, v in d["types"].items():
-            if v["n_cells"] < p["size_floor"] or len(v.get("cl", [])) < p["topk"]:
-                continue
-            cur, _h = resolve2(t, ctx, organ=o)
-            if not cur or t not in G:
-                continue
-            A = anchor_set(cur)
-            anc = [anchor_set(c["curie"]) for c in v["cl"][:p["topk"]]]
-            if A and any(anc) and all(B and not (A & B) for B in anc):
-                keys.append((o, t))
-                if not ok(cur, G[t]):
-                    tp += 1
-                else:
-                    fp += 1
-    return tp, fp, keys
+    rows = wl.build_rows(idx, mats, minc=p["size_floor"], min_ref=p["min_ref"])
+    ev = wl.evaluate(rows)
+    flagged = [r for r in ev if r.get("flagged")]
+    tp = sum(1 for r in flagged if r["error"])
+    fp = len(flagged) - tp
+    return tp, fp, [(r["organ"], r["label"]) for r in flagged]
 
 
 def evaluate(p, idx, mats):
@@ -171,7 +161,7 @@ def evaluate(p, idx, mats):
     livet = kt["agree"] + kt["within"] + kt["cross"]
     c1h = 100 * kh["cross"] / max(liveh, 1)
     c1t = 100 * kt["cross"] / max(livet, 1)
-    tp, fp, aflag = anchor_flags(p)
+    tp, fp, aflag = anchor_flags(p, idx, mats)
     # with no flags precision is UNDEFINED, not zero; printing 0% would read as a
     # collapse when the sweep has simply become too conservative to fire at all
     prec = (100.0 * tp / (tp + fp)) if (tp + fp) else float("nan")

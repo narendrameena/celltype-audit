@@ -50,6 +50,13 @@
    "added": 0,
    "closed": 0,
    "withdrawn": 2
+  },
+  {
+   "date": "2026-08-25",
+   "release": "2026-06-08",
+   "added": 0,
+   "closed": 0,
+   "withdrawn": 1
   }
  ],
  "proposals": {
@@ -146,7 +153,7 @@
    "organ": "Prostate",
    "label": "Luminal cell",
    "n_cells": 8610,
-   "status": "drafted",
+   "status": "withdrawn",
    "issue": null,
    "accepted": null,
    "first_seen": "2026-08-21",
@@ -157,6 +164,12 @@
      "date": "2026-08-21",
      "status": "drafted",
      "release": "2026-06-08"
+    },
+    {
+     "date": "2026-08-25",
+     "status": "withdrawn",
+     "release": "2026-06-08",
+     "note": "the audit no longer reports this gap"
     }
    ]
   },
@@ -962,10 +975,10 @@
  "latest": {
   "cl_release": "2026-06-08",
   "by_status": {
-   "drafted": 20,
-   "withdrawn": 21
+   "drafted": 19,
+   "withdrawn": 22
   },
-  "open": 20,
+  "open": 19,
   "submitted": 0,
   "accepted": 0,
   "acceptance_rate": null
