@@ -240,7 +240,7 @@
       <div class="chk"><code>V3</code><p>Not obsolete, not scoped to another species.</p></div>
       <div class="chk"><code>V9</code><p>Cells asserted to be of this type express the markers.</p></div>
       <div class="chk"><code>V10</code><p>The markers exclude the other types in the tissue.</p></div>
-      <div class="chk"><code>V12</code><p>Counterexamples: clusters that violate the proposal.</p></div>
+      <div class="chk"><code>V11</code><p>Counterexamples: clusters that violate the proposal.</p></div>
       <div class="chk"><code>V4&ndash;V5</code><p>The axiom parses and merges, and no class
         becomes unsatisfiable. ELK, via ROBOT.</p></div>
       <div class="chk"><code>V6&ndash;V7</code><p>The inferred hierarchy gains nothing outside
@@ -248,6 +248,10 @@
       <div class="chk"><code>V8</code><p>It entails something new. An axiom that changes no
         entailment is noise.</p></div>
     </div>
+    <p class="note" style="margin:.9rem 0 0">Two things about this list. <b>n/a</b> means the
+      check does not bear on that kind of proposal &mdash; a new term asserts no axiom, so
+      there is nothing for a reasoner to merge &mdash; and is different from <b>not run</b>,
+      which means it applies and was not done. Every proposal states which of the two, and why.</p>
     <footer>A claim is admissible only if it is <b>grounded</b> (a lookup), <b>derived</b>
       (a decision procedure) or <b>measured</b> (checked against data). Anything merely
       asserted is prose, and carries no weight here.</footer>
@@ -278,9 +282,9 @@ const CHECK_WHAT = {
   V8: "it entails something new",
   V9: "cells asserted to be this type express the markers",
   V10: "the markers exclude other types in the tissue",
-  V12: "counterexamples: clusters that violate it"
+  V11: "counterexamples: clusters that violate it"
 };
-const CHECK_ORDER = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V12"];
+const CHECK_ORDER = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11"];
 const KIND_LABEL = {
   "synonym":"synonym", "new-term":"new term",
   "missing-axiom":"missing axiom", "marker-condition":"marker condition"

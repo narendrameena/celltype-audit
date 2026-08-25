@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V10 and V12: the two checks that make a proposal falsifiable rather than merely stated.
+"""V10 and V11: the two checks that make a proposal falsifiable rather than merely stated.
 
 A proposal that carries only V1-V3 says its CURIE is real and not obsolete. That is
 bookkeeping. What makes a proposed axiom worth a curator's attention is evidence that
@@ -15,7 +15,7 @@ someone tried to break it and reports whether they succeeded:
        which share the profile by construction. A test that counted those as competitors
        would report every well-specified marker set as non-exclusive.
 
-  V12  COUNTEREXAMPLES. A marker-based sufficient condition claims every cluster of this
+  V11  COUNTEREXAMPLES. A marker-based sufficient condition claims every cluster of this
        type expresses these genes. That is falsifiable, so falsify it: search every
        audited cluster asserted to the term and report the ones that do not.
 
@@ -177,13 +177,13 @@ def _name_contained(label, rival):
 def main():
     g = load()
     doc = json.load(open(os.path.join(DOCS, "proposals.json")))
-    ran = {"V10": {}, "V12": {}}
+    ran = {"V10": {}, "V11": {}}
     for p in doc["proposals"]:
         mk, ch = p.get("markers") or [], p["checks"]
         term = (p.get("candidate") or {}).get("curie")
         if p["kind"] == "marker-condition" and term:
             ch["V10"], d10 = v10(term, mk, p["organ"], g)
-            ch["V12"], d12 = v12(term, mk, g)
+            ch["V11"], d12 = v12(term, mk, g)
         elif p["kind"] == "new-term":
             # There is no term yet, so exclusivity is asked of the population instead:
             # does anything CL already carries in this tissue express all these markers?
@@ -192,13 +192,13 @@ def main():
                 ch["V10"], d10 = v10(near, mk, p["organ"], g)
             else:
                 ch["V10"], d10 = "n/a", "no scoreable term to compare against"
-            ch["V12"], d12 = "n/a", "a missing term is not falsified by a counterexample"
+            ch["V11"], d12 = "n/a", "a missing term is not falsified by a counterexample"
         else:
             ch["V10"], d10 = "n/a", "not a marker-based proposal"
-            ch["V12"], d12 = "n/a", ("this proposal asserts no marker condition, so there "
+            ch["V11"], d12 = "n/a", ("this proposal asserts no marker condition, so there "
                                      "is nothing a cluster could violate")
         p.setdefault("check_detail", {})["V10"] = d10
-        p["check_detail"]["V12"] = d12
+        p["check_detail"]["V11"] = d12
 
         # A proposal that fails exclusivity is not ready to put in front of a curator, and
         # saying so is the point of running the check. Two outcomes, deliberately not one:
@@ -218,9 +218,9 @@ def main():
                 p["readiness"] = "weakened"
                 p["weakened_by"] = rival
         ran["V10"][ch["V10"]] = ran["V10"].get(ch["V10"], 0) + 1
-        ran["V12"][ch["V12"]] = ran["V12"].get(ch["V12"], 0) + 1
-        print("  %-16s %-9s %-28s V10=%-7s V12=%s"
-              % (p["kind"], p["organ"], p["label"][:28], ch["V10"], ch["V12"]))
+        ran["V11"][ch["V11"]] = ran["V11"].get(ch["V11"], 0) + 1
+        print("  %-16s %-9s %-28s V10=%-7s V11=%s"
+              % (p["kind"], p["organ"], p["label"][:28], ch["V10"], ch["V11"]))
     covered = [p for p in doc["proposals"] if p.get("readiness") == "covered"]
     doc["proposals"] = [p for p in doc["proposals"] if p.get("readiness") != "covered"]
     doc.setdefault("covered_after_exclusivity", []).extend(
@@ -236,7 +236,7 @@ def main():
     for c in covered:
         print("     dropped: %-9s %-24s -> %s" % (c["organ"], c["label"][:24], c.get("covered_by")))
     json.dump(doc, open(os.path.join(DOCS, "proposals.json"), "w"), indent=1)
-    print("\n  V10 %s\n  V12 %s" % (ran["V10"], ran["V12"]))
+    print("\n  V10 %s\n  V11 %s" % (ran["V10"], ran["V11"]))
     print("wrote %s" % os.path.join(DOCS, "proposals.json"))
 
 

@@ -15,7 +15,7 @@ what is merely drafted. Checks follow the stack in docs/index.html:
   V3  it is not obsolete and not scoped to another species
   V9  the cells asserted to be of this type express the markers
   V10 the markers exclude the other types in the tissue
-  V12 counterexamples: clusters in the atlas that violate the proposal
+  V11 counterexamples: clusters in the atlas that violate the proposal
 
   V4-V8 (parse, consistency, entailment diff, conservativity, non-triviality) require a
   reasoner run and are reported as not-yet-run rather than assumed.
@@ -37,7 +37,7 @@ from cl_lineage import load, anchor_set                                # noqa: E
 from cl_resolve import resolve as resolve2                             # noqa: E402
 
 MINC = 500
-CHECKS = ["V1", "V2", "V3", "V9", "V10", "V12"]
+CHECKS = ["V1", "V2", "V3", "V9", "V10", "V11"]
 NOT_RUN = ["V4", "V5", "V6", "V7", "V8"]
 
 
@@ -227,7 +227,7 @@ def main():
                     "V3": ("fail" if best and best[1] in obsolete else
                            ("pass" if best else "n/a")),
                     "V9": "pass" if mk else "not-run",
-                    "V10": "not-run", "V12": "not-run"},
+                    "V10": "not-run", "V11": "not-run"},
             })
 
     # ------------------------------------------------------------- the missing-axiom case
@@ -256,7 +256,7 @@ def main():
                  % (A, labels.get(A, A), B, labels.get(B, B), format(art or 180750, ","))),
         "checks": {"V1": "pass", "V2": "pass", "V3": "pass",
                    "V9": "n/a", "V10": "n/a",
-                   "V12": "pass" if unrelated else "fail"},
+                   "V11": "pass" if unrelated else "fail"},
     })
 
     # ----------------------------------------------------- a marker sufficient condition
@@ -272,7 +272,7 @@ def main():
                  "label with neither gene detected, whose own provenance field calls it a "
                  "monocyte in 91.2% of cells."),
         "checks": {"V1": "pass", "V2": "pass", "V3": "pass",
-                   "V9": "fail", "V10": "not-run", "V12": "pass"},
+                   "V9": "fail", "V10": "not-run", "V11": "pass"},
     })
 
     for p in props:

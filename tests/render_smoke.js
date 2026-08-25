@@ -92,15 +92,15 @@ setTimeout(() => {
   // Target the CLAIM, not the vocabulary. "Neither subsumes the other" is a verified
   // negative computed from the graph and must stay; "broader than" asserted about a
   // lexical near-match is the thing that was wrong.
-  // V10 and V12 are the checks that make a proposal falsifiable rather than merely
+  // V10 and V11 are the checks that make a proposal falsifiable rather than merely
   // stated. They were hardcoded "not-run" on every proposal for weeks; if they regress to
   // that, the page is claiming a verification stack it did not run.
   const ranV = proposals.filter(p => ["pass", "fail"].includes((p.checks || {}).V10) ||
-                                 ["pass", "fail"].includes((p.checks || {}).V12)).length;
-  if (ranV === 0) problems.push("no proposal has V10 or V12 actually run");
+                                 ["pass", "fail"].includes((p.checks || {}).V11)).length;
+  if (ranV === 0) problems.push("no proposal has V10 or V11 actually run");
   // every proposal must carry a verdict for every check in the stack -- an absent key is
   // a check that silently stopped applying, which reads on the page as if it never existed
-  const STACK = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V12"];
+  const STACK = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11"];
   const gaps = proposals.filter(p => STACK.some(v => !(p.checks || {})[v]));
   if (gaps.length) problems.push(`${gaps.length} proposals missing a verdict for some check`);
   // a proposal that failed exclusivity must say so where a curator will see it
@@ -109,7 +109,7 @@ setTimeout(() => {
   // nothing about the proposal in front of them
   // every verdict must carry a reason, and every reason must reach the page. A bare n/a
   // is indistinguishable from a skipped check, which is the ambiguity this removes.
-  const STACK2 = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V12"];
+  const STACK2 = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11"];
   const unexplained = proposals.reduce((n, p) =>
     n + STACK2.filter(v => p.checks[v] && !(p.check_detail || {})[v]).length, 0);
   if (unexplained) problems.push(`${unexplained} verdicts carry no reason`);
@@ -117,16 +117,16 @@ setTimeout(() => {
   if (tables !== proposals.length)
     problems.push(`${tables} check tables for ${proposals.length} proposals`);
 
-  // V12 searches clusters ASSERTED to the term. It once matched heca_to_cl's expression
+  // V11 searches clusters ASSERTED to the term. It once matched heca_to_cl's expression
   // ranking instead -- the opposite claim -- and reported a skin monocyte as a neutrophil
   // counterexample. Pin the known case: the neutrophil condition must be falsified by the
   // lung cluster labelled neutrophil, not by something the markers merely point at.
   const neut = proposals.find(p => p.kind === "marker-condition" && p.label === "neutrophil");
   if (neut) {
-    const d = (neut.check_detail || {}).V12 || "";
-    if (neut.checks.V12 !== "fail") problems.push("the neutrophil condition is no longer falsified");
+    const d = (neut.check_detail || {}).V11 || "";
+    if (neut.checks.V11 !== "fail") problems.push("the neutrophil condition is no longer falsified");
     else if (!/Lung .*neutroph/i.test(d))
-      problems.push("neutrophil V12 counterexample is not the lung cluster: " + d.slice(0, 120));
+      problems.push("neutrophil V11 counterexample is not the lung cluster: " + d.slice(0, 120));
   }
 
   const graphed = proposals.filter(p => p.graph).length;
@@ -138,7 +138,7 @@ setTimeout(() => {
   const weak = proposals.filter(p => p.readiness === "weakened").length;
   const marks = (out.match(/Not ready to submit/g) || []).length;
   if (marks !== weak) problems.push(`${marks} "not ready" notices for ${weak} weakened proposals`);
-  const detailed = proposals.filter(p => p.check_detail && (p.check_detail.V10 || p.check_detail.V12)).length;
+  const detailed = proposals.filter(p => p.check_detail && (p.check_detail.V10 || p.check_detail.V11)).length;
   if (detailed !== proposals.length)
     problems.push(`${detailed}/${proposals.length} proposals carry falsification detail`);
 
