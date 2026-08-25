@@ -22,5 +22,5 @@ from .resolve import Resolver
 from .annotate import annotate_h5ad
 from .audit import audit_h5ad, Report
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 __all__ = ["Ontology", "Resolver", "audit_h5ad", "annotate_h5ad", "Report", "__version__"]
