@@ -86,8 +86,12 @@ setTimeout(() => {
   // proposals.json carries a lexical overlap score and no subsumption relation, so the
   // page must not describe a nearest match as broader or narrower than the label. It did,
   // and named a narrower term as broader.
-  if (/\b(broader|narrower|subsumes|is a parent of)\b/i.test(out))
-    problems.push("rendered prose claims a subclass direction the data does not carry");
+  // Target the CLAIM, not the vocabulary. "Neither subsumes the other" is a verified
+  // negative computed from the graph and must stay; "broader than" asserted about a
+  // lexical near-match is the thing that was wrong.
+  const bad = out.match(/\b(broader|narrower) than\b|\bwhich subsumes\b/gi);
+  if (bad) problems.push("prose claims a subclass direction proposals.json does not carry: "
+                         + bad.join(", "));
 
   if (problems.length) {
     problems.forEach(p => console.error("FAIL: " + p));
