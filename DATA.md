@@ -1,6 +1,6 @@
 # Inputs, and where to get them
 
-No data is committed to this repository — the full working set is ~294 GB. Every input is
+No data is committed to this repository — the full working set is ~735 GB. Every input is
 public, and each is fetched by a script here.
 
 | input | size | how to obtain |
@@ -9,7 +9,7 @@ public, and each is fetched by a script here.
 | **CELLxGENE expression reference** | small | `celltype-audit reference --tissues UBERON:... --genes markers.txt -o ref`, or fetched automatically. Public WMG API, no key required |
 | **hECA v2.0** | ~223 GB | <https://doi.org/10.5281/zenodo.7908782> — 40 organ `.h5ad` files |
 | **Tabula Sapiens** | ~23 GB | CELLxGENE collection `e5f58829-1a66-40b5-a624-9046778e74f5` |
-| **CELLxGENE survey datasets** | ~26 GB | selected via the Discover API; see `cellscribe_tool/benchmark/cxg_survey.py` |
+| **CELLxGENE survey datasets** | ~488 GB | every eligible public human dataset, selected and fetched by `analysis/fetch_cxg_survey.py` (208 datasets; run `--list` to see the selection without downloading, or `--max-gb` to cap it) |
 | **HuBMAP ASCT+B tables** | ~1 MB | <https://humanatlas.io/asctb-tables> |
 | **HRA CTann crosswalks** | ~250 KB | Azimuth / CellTypist / popV → CL, from <https://humanatlas.io> |
 | **CellMarker 2.0** | ~8 MB | `Cell_marker_Human.xlsx` from the CellMarker site |

@@ -18,6 +18,12 @@ no ELANE) are a **classical monocyte**. Correcting that one cluster changes the 
 lung neutrophil:monocyte ratio from 1.25:1 to 0:1, against 0.07:1 in an independent atlas
 — an 18-fold error in a statistic anyone might publish.
 
+It is not one atlas. The same pipeline runs across **every public CELLxGENE Discover
+dataset it can score** — 208 met the eligibility criteria, 141 had a scoreable cell type —
+and finds **21 of 670 cell types (3.1%, 95% CI 2.1–4.7) carry a label their own markers
+contradict at the lineage level**. A twelve-dataset pilot put that at 3.8% [1.3–10.5]; the
+estimate barely moved and the interval narrowed from nine points wide to under three.
+
 ### Whose label is being tested
 
 Everything audited here is public data, but "public dataset" and "the authors' annotation"
@@ -40,6 +46,13 @@ text-processing fault rather than a disputed biological judgement.
 So what the audit catches depends on what you point it at — **harmonisation faults** in an
 aggregating atlas, **annotation judgements** in a primary one, and a **base rate** across
 a set of published datasets. It never establishes that the original authors were wrong.
+
+The three read consistently. hECA gives 3.4% (4 of 116) and the 141-dataset survey 3.1%,
+which are indistinguishable (Fisher *p* = 0.78) — the aggregating atlas is not worse than
+the field it was assembled from. Tabula Sapiens, expert-curated and natively CL-annotated,
+gives **0 of 81**; that ordering is what one would expect, but at these counts it is not
+established (*p* = 0.15), and scaling the survey eightfold did not change it, because the
+limit is Tabula Sapiens' own 81 scoreable cell types rather than the comparator.
 
 ## Install
 
