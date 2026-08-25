@@ -61,7 +61,9 @@ try {
 setTimeout(() => {
   const out = el("list").innerHTML;
   const proposals = json("proposals.json").proposals;
-  const cards = (out.match(/<li class="p">/g) || []).length;
+  // matches the card open tag whether or not it carries attributes; the previous form
+  // was an exact string and reported zero cards the moment an id was added to it
+  const cards = (out.match(/<li class="p"[ >]/g) || []).length;
   const problems = [];
 
   if (/Could not load/.test(out)) problems.push("page reports it could not load proposals.json");
