@@ -107,6 +107,16 @@ setTimeout(() => {
   // every proposal must carry its own ontology graph, read from the release rather than
   // a shared explainer link: the generic one told a curator what an anchor set is and
   // nothing about the proposal in front of them
+  // every verdict must carry a reason, and every reason must reach the page. A bare n/a
+  // is indistinguishable from a skipped check, which is the ambiguity this removes.
+  const STACK2 = ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V12"];
+  const unexplained = proposals.reduce((n, p) =>
+    n + STACK2.filter(v => p.checks[v] && !(p.check_detail || {})[v]).length, 0);
+  if (unexplained) problems.push(`${unexplained} verdicts carry no reason`);
+  const tables = (out.match(/<table class="vtab">/g) || []).length;
+  if (tables !== proposals.length)
+    problems.push(`${tables} check tables for ${proposals.length} proposals`);
+
   const graphed = proposals.filter(p => p.graph).length;
   if (graphed !== proposals.length)
     problems.push(`${graphed}/${proposals.length} proposals carry an ontology graph`);
