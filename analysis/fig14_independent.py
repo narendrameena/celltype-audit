@@ -20,6 +20,12 @@ c  Why it was missed until now. The sweep needs the asserted term's anchors disj
    EVERY candidate's, and a term with no anchor set - which asserts nothing - was vetoing
    the flag. Taking unanimity over the candidates that do assert a lineage nearly doubles
    the sweep's reach at unchanged precision.
+d  A second consortium, where the clusters carry no name at all. HuBMAP publishes Leiden
+   clusters without a cell-type assertion, so there is nothing to audit - but naming them
+   is what the shortlist is for. On 8,278 kidney cells the top-ranked term is a kidney
+   anatomical type for 6 of 7 clusters and appears somewhere in the top five for all 7.
+   This is coherence, not accuracy: no gold exists for these clusters, so it says the
+   shortlist lands in the right organ, not that it picks the right segment.
 
 Outputs figure/fig14_independent.{svg,pdf,png} + sourceData/fig14_independent_source_data.tsv
 """
@@ -48,10 +54,10 @@ order = sorted(C, key=lambda t: -C[t]["n"])
 short = {t: (t.replace("endothelial cell of ", "")
              .replace(" hepatic sinusoid", " sinusoid")) for t in order}
 
-fig = plt.figure(figsize=(180 * S.MM, 150 * S.MM))
-gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.92], width_ratios=[1.22, 1.0],
-                      hspace=0.72, wspace=0.52, left=0.245, right=0.985,
-                      top=0.87, bottom=0.10)
+fig = plt.figure(figsize=(180 * S.MM, 205 * S.MM))
+gs = fig.add_gridspec(3, 2, height_ratios=[0.86, 0.72, 0.90], width_ratios=[1.22, 1.0],
+                      hspace=0.98, wspace=0.52, left=0.245, right=0.985,
+                      top=0.905, bottom=0.070)
 
 # ------------------------------------------------------------------ a
 ax = fig.add_subplot(gs[0, :])
@@ -129,6 +135,37 @@ ax.text(0, 1.035, "On the ten curated organs %d → %d flags,\nat %d%% precision
 for sp in ("top", "right"):
     ax.spines[sp].set_visible(False)
 
+# ------------------------------------------------------------------ d
+H = json.load(open(os.path.join(DATA, "hubmap_coherence.json")))
+ax = fig.add_subplot(gs[2, :])
+S.panel(ax, "d", dx=-0.118, dy=1.24)
+ax.set_title("A second consortium, whose clusters carry no name to audit", loc="left", pad=16)
+ax.text(0, 1.055, "HuBMAP kidney, 8,278 cells in 7 Leiden clusters with no cell-type "
+        "assertion.  Naming them is what the shortlist is for.",
+        transform=ax.transAxes, ha="left", va="bottom", fontsize=5.8, color=S.INK2)
+hc = H["clusters"]
+yy = np.arange(len(hc))[::-1]
+for r, y2 in zip(hc, yy):
+    ok = r["top1_kidney"]
+    ax.barh(y2, r["n"], height=0.58, color=S.GREEN if ok else S.FAINT,
+            edgecolor=S.RULE, lw=0.4)
+    ax.text(-40, y2, "cluster %s" % r["cluster"], ha="right", va="center", fontsize=6,
+            color=S.INK if ok else S.INK2)
+    ax.text(r["n"] + 30, y2, "%s    %s" % (format(r["n"], ","), r["top1"][:44]),
+            va="center", fontsize=5.6, color=S.INK2)
+ax.set_xlim(0, 2650)
+ax.set_ylim(-0.7, len(hc) - 0.3)
+ax.set_yticks([])
+ax.set_xlabel("cells")
+for sp in ("top", "right", "left"):
+    ax.spines[sp].set_visible(False)
+ax.scatter([], [], marker="s", s=20, color=S.GREEN,
+           label="top-ranked term is a kidney anatomical type: %d of %d clusters, "
+                 "and all %d carry one somewhere in the top five"
+                 % (H["top1_kidney_specific"], H["n_clusters"], H["any5_kidney_specific"]))
+ax.legend(loc="upper right", frameon=False, fontsize=5.6, handletextpad=.5,
+          bbox_to_anchor=(1.005, 1.115))
+
 tsv = ["panel\tkey\tvalue"]
 for t in order:
     r = recs.get(t)
@@ -143,5 +180,8 @@ tsv.append("c\tatlas_flags_unanimity_all\t%d" % V["atlas_fires_strict"])
 tsv.append("c\tatlas_flags_lineage_asserting_only\t%d" % V["atlas_fires_loose"])
 tsv.append("c\tgold_flags\t%d -> %d at %d%% precision"
            % (V["gold_strict"], V["gold_loose"], V["gold_precision"]))
+for r in hc:
+    tsv.append("d\tcluster %s\t%d cells; top-1 %s; kidney-specific top-1 %s; in top-5 %s"
+               % (r["cluster"], r["n"], r["top1"], r["top1_kidney"], r["any5_kidney"]))
 out = S.save(fig, HERE, "fig14_independent", "\n".join(tsv) + "\n")
 print(out if isinstance(out, str) else "\n".join(map(str, out)))
