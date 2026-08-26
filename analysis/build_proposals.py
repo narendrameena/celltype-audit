@@ -41,6 +41,23 @@ CHECKS = ["V1", "V2", "V3", "V9", "V10", "V11"]
 NOT_RUN = ["V4", "V5", "V6", "V7", "V8"]
 
 
+def seed_reasoner_checks(props):
+    """Give every proposal a verdict for V4-V8 as soon as it is drafted.
+
+    These used to appear only after reason_checks.py ran, so a freshly built queue carried
+    seven verdicts where the page and its smoke test expect twelve, and a rebuild on a
+    machine without ROBOT published proposals with checks silently missing rather than
+    marked. The verdict is knowable without a reasoner for every kind but one: a proposal
+    that asserts no axiom gives a reasoner nothing to merge, which is n/a, not pending.
+    Only an axiom-asserting proposal is left as not-run for reason_checks to decide.
+    """
+    for p in props:
+        ch = p.setdefault("checks", {})
+        for v in NOT_RUN:
+            ch.setdefault(v, "not-run" if p.get("kind") == "missing-axiom" else "n/a")
+    return props
+
+
 # terms so general that matching them tells a curator nothing
 GENERIC = {"cell", "native cell", "animal cell", "eukaryotic cell", "somatic cell",
            "precursor cell", "progenitor cell", "stem cell", "epithelial cell"}
@@ -290,6 +307,7 @@ def main():
         "already_curated": len(decided),
         "routes_disagree": sum(1 for p in props if p["lexical_vs_expression"] == "disagree"),
     }
+    seed_reasoner_checks(props)
     os.makedirs(OUT, exist_ok=True)
     json.dump({"summary": summary, "proposals": props},
               open(os.path.join(OUT, "proposals.json"), "w"), indent=1)

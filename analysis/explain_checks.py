@@ -85,6 +85,12 @@ def main():
     doc = json.load(open(os.path.join(DOCS, "proposals.json")))
     STACK = ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12"]
     for p in doc["proposals"]:
+        # a cached reasoner run decides V4-V8 where it covered this proposal; without it
+        # an axiom-asserting proposal stays not-run rather than banking a vacuous pass
+        got = reasoned.get(p["label"]) or {}
+        for v in ("V4", "V5", "V6", "V7", "V8"):
+            if got.get(v) and p.get("checks", {}).get(v) == "not-run":
+                p["checks"][v] = "pass"
         explain(p, g, reasoned)
     gaps = [(p["label"], v) for p in doc["proposals"] for v in STACK
             if not (p.get("check_detail") or {}).get(v)]
