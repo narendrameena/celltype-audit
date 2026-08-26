@@ -32,6 +32,10 @@ MINC = 50
 TOPK = 20
 
 
+class SingleCellType(ValueError):
+    """A dataset holding one cell type, where no marker can be discriminative."""
+
+
 def markers(path, topk=TOPK, minc=MINC, block=20000):
     f = h5py.File(path, "r")
     gv = f["var/feature_name"]
@@ -66,6 +70,21 @@ def markers(path, topk=TOPK, minc=MINC, block=20000):
     det = det / np.maximum(npt, 1)[:, None]
 
     keep = np.array([bool(g) and not JUNK.search(g) and g not in SEX for g in genes])
+
+    # A marker score is pc_in x (1 - max pc_out over the OTHER types in this dataset). With
+    # one type there are no others, so the discriminative term is UNDEFINED rather than
+    # zero, and np.delete leaves a zero-row array that raises:
+    #     ValueError: zero-size array to reduction operation maximum
+    # Treating the missing term as zero would not rescue the dataset, it would change the
+    # statistic: "markers" would become "the most-detected genes", which for a
+    # 455,006-cell single-type file is housekeeping expression, and scoring that against
+    # the reference is the degenerate regime where a ratio of two near-zero numbers decides
+    # the answer. Such a dataset is not auditable by this method and says so.
+    if sum(1 for k in range(nt) if npt[k] >= minc and tcats[k] not in NOT_A_CELL_TYPE) < 2:
+        f.close()
+        raise SingleCellType(
+            "only one cell type passes the %d-cell floor, so no marker can be "
+            "discriminative" % minc)
     out = {}
     for k in range(nt):
         if npt[k] < minc or tcats[k] in NOT_A_CELL_TYPE:
