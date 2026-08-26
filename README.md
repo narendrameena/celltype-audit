@@ -187,6 +187,14 @@ leave-one-organ-out AUC 0.72, with precision reaching 80% over the most confiden
 calls and 90% over the most confident 17%. That top slice is workable unattended; the rest
 is not.
 
+Against **CellTypist** — an automated annotator that also maps everything to CL — the two
+are exactly tied at **65.8% top-1** on the 190 cell types across six organs where both
+produce a call, but they are right about different cells: both correct on 92, each correct
+where the other fails on 33 (McNemar *p* = 1.00). CellTypist loses where the gold is finer
+than its training vocabulary (*helper T cell* for a naive CD4 T cell); this loses by
+over-reaching from ambiguous markers into a wrong subtype. A vocabulary limit and a ranking
+limit are complementary, so read them together rather than treating either as truth.
+
 What it is good for is that the correct term is in the **top five 81-100%** of the time,
 so it turns "name this cluster" into "choose among five, with evidence". For automated
 annotation of fresh data use a trained classifier (CellTypist, Azimuth, popV) — then audit
