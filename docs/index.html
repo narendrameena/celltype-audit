@@ -200,6 +200,14 @@
     .p > .top{grid-template-columns:1fr}
     .cells{text-align:left}
   }
+  .ct{display:block;border-left:2px solid var(--line,#7C8B97);padding:.35rem 0 .35rem .6rem;
+       font-size:.92em}
+  .ct.on{border-left-color:var(--ok,#2E7D5B)}
+  .ct.off{border-left-color:var(--line,#7C8B97);opacity:.78}
+  .ctm{opacity:.6;font-size:.86em}
+  .src{display:block;border-left:2px solid var(--line,#7C8B97);padding:.35rem 0 .35rem .6rem;
+       font-size:.9em;opacity:.85}
+  .src code{font-size:.9em}
 </style>
 
 <header>
@@ -351,6 +359,29 @@ function reasoning(p){
     `<td>${esc(det[k] || "")}</td></tr>`).join("");
   if (rows) s.push(`<table class="vtab"><thead><tr><th></th><th>verdict</th>` +
     `<th>what it tests</th><th>why</th></tr></thead><tbody>${rows}</tbody></table>`);
+
+  // An independent CL-native annotator asked the same question. Where it cannot be run
+  // the reader is told so, for the same reason n/a is distinguished from not run: a blank
+  // reads as agreement, and silence from a tool that was never asked is not evidence.
+  const ct = p.celltypist;
+  if (ct) {
+    const scored = ct.status === "scored";
+    const fit = ct.fit && ct.fit !== "matched"
+      ? ` <span class="ctm">model is ${esc(ct.fit)} &mdash; ${esc(ct.fit_note || "")}</span>` : "";
+    s.push(`<span class="ct ${scored ? "on" : "off"}">` +
+      `<b>An independent annotator.</b> ${esc(ct.note || "")}.${fit}</span>`);
+  }
+
+  // Where this came from. The header says the queue is drawn from one aggregating atlas,
+  // but a reader looking at a single card should not have to scroll up to learn which
+  // organ and which file the population was found in.
+  const src = p.source;
+  if (src) {
+    s.push(`<span class="src"><b>Source.</b> ${esc(src.organ)} &middot; ` +
+      `${esc(src.atlas)} &middot; <code>${esc(src.file)}</code>` +
+      (src.n_cells ? ` &middot; ${Number(src.n_cells).toLocaleString()} cells` : "") +
+      `. ${esc(src.note || "")}.</span>`);
+  }
   return s.map(x => `<p>${x}</p>`).join("");
 }
 function bgLink(p){
