@@ -53,6 +53,12 @@ MINC = 500
 # cell" lost to endothelium at 78% on MUC7, ODAM and LPO -- salivary enzymes an
 # endothelial cell does not make, from a profile too thin to mean anything.
 MIN_RIVAL_CELLS = 500
+# The target must actually express every marker before "does anything ELSE express them"
+# can be asked. Below this the reference value is not an estimate of expression: it is
+# detection in under ~1% of the term's cells, which is ambient signal and dropout. See the
+# note in v10 -- without it the check divides one noise-level minimum by another and reads
+# the quotient as competition.
+TARGET_FLOOR = 0.02
 
 
 def _ref():
@@ -107,6 +113,22 @@ def v10(term, markers, organ, g):
               if inv[i] not in kin and term not in ancestors(inv[i])
               and inv[i] not in obsolete
               and support.get(inv[i], 0) >= MIN_RIVAL_CELLS]
+    if mine < TARGET_FLOOR:
+        # Scored as a MINIMUM across the markers, so one gene the target does not express
+        # collapses its score, and every rival's score collapses on its own weakest gene
+        # too. The ratio is then noise over noise. Nasal Serous gland cell failed this way:
+        # serous secreting cell expresses DMBT1, ODAM and S100A1 strongly but detects DLC1
+        # in 0.2% of its cells, so its minimum fell to 0.004, and endothelial cell of
+        # vascular tree -- which detects S100A1 in 0.2% and MUC7 in 0.3% of ITS cells, i.e.
+        # expresses none of them -- came in at 78% of that and weakened the proposal. An
+        # independent annotator calls the same cluster a submucosal gland serous cell.
+        # The honest verdict is that the question cannot be asked of this marker set.
+        worst = min(got, key=lambda m: float(M[ti[term], gi[m]]))
+        return "not-run", ("%s is not expressed by %s (%.3f, below the %.2f detection "
+                           "floor), so the marker set is not coherently expressed by the "
+                           "term itself and exclusivity cannot be asked of it"
+                           % (worst, g["label"].get(term, term),
+                              float(M[ti[term], gi[worst]]), TARGET_FLOOR))
     if not rivals or mine <= 0:
         return "not-run", "no comparable terms in this tissue"
     best, who = max(rivals)
