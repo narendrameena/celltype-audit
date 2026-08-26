@@ -174,13 +174,36 @@ def _name_contained(label, rival):
     return a in b or b in a or (set(a.split()) and set(a.split()) <= set(b.split()))
 
 
+# Domain equivalences V12 needs to see, each one a name for the same population written
+# two ways. Curated rather than inferred, and small on purpose: every entry below was
+# added because a proposal claimed CL lacked a term that CL demonstrably had, which is a
+# false positive in the direction that wastes a curator's time.
+EQUIV = {
+    "pv": "pvalb", "parvalbumin": "pvalb",           # PV interneuron  = pvalb interneuron
+    "sst": "sst", "somatostatin": "sst",
+    "inhibitory": "gabaergic",                       # inhibitory neuron = GABAergic neuron
+    "neuron": "interneuron",                         # in the interneuron families CL types
+    "bc": "bipolar",                                 # OFF-BC = OFF-bipolar cell
+    "mesothelium": "mesotheli", "mesothelial": "mesotheli",
+    "epithelium": "epitheli", "epithelial": "epitheli",
+    "endothelium": "endotheli", "endothelial": "endotheli",
+    "gland": "secreting", "glandular": "secreting",  # a serous GLAND cell is a serous SECRETING cell
+    "secretory": "secreting",
+}
+
+
 def _toks(x):
-    """Label as an unordered bag of stems, `cell` dropped -- the same normalisation the
-    already-known gate uses, so the two agree about when CL covers a population."""
+    """Label as an unordered bag of stems, `cell` dropped, domain equivalences applied.
+
+    The plain bag-of-stems version could not see that `PV inhibitory neuron` and `pvalb
+    GABAergic interneuron` name one population, nor that `Mesothelium` and `mesothelial
+    cell` do, so V12 reported a missing term for seven proposals CL already covered.
+    """
     import re as _re
     w = _re.sub(r"[^a-z0-9]+", " ", x.lower()).split()
     w = [t[:-1] if len(t) > 3 and t.endswith("s") and not t.endswith("ss") else t for t in w]
-    return frozenset(t for t in w if t not in ("cell", "cells"))
+    w = [EQUIV.get(t, t) for t in w]
+    return frozenset(t for t in w if t not in ("cell", "cells", "of", "the"))
 
 
 def v12(p, g):
@@ -204,12 +227,23 @@ def v12(p, g):
     top = ((p.get("expression_top") or [{}])[0] or {}).get("curie")
     if p["kind"] != "new-term" or not top:
         return "n/a", "only a new-term proposal claims CL lacks a term for a population"
+    # Read EVERY candidate the scorer returned, not only the first. CL:4023016
+    # `VIP GABAergic interneuron` sat at rank 2 behind an sncg interneuron, and looking
+    # only at rank 1 let the proposal claim a gap over the exact term for its population.
+    want = _toks(p["label"])
+    if not want:
+        return "not-run", "the label carries no comparable name tokens"
+    for c in (p.get("expression_top") or []):
+        cur = c.get("curie")
+        nm = c.get("name") or g["label"].get(cur, cur)
+        if want <= _toks(nm):
+            rank = (p.get("expression_top") or []).index(c) + 1
+            return "fail", ("the improved scorer returns %s at rank %d, which already names "
+                            "this population; CL may not be missing a term" % (nm, rank))
     name = g["label"].get(top, top)
-    if _toks(p["label"]) and _toks(p["label"]) <= _toks(name):
-        return "fail", ("the improved scorer puts %s first, which already names this "
-                        "population; CL may not be missing a term" % name)
-    return "pass", ("the improved scorer puts %s first, which does not name this "
-                    "population, so the gap stands under the better evidence" % name)
+    return "pass", ("none of the %d terms the improved scorer returns names this population "
+                    "-- the closest is %s -- so the gap stands under the better evidence"
+                    % (len(p.get("expression_top") or []), name))
 
 
 def main():
@@ -257,6 +291,17 @@ def main():
             else:
                 p["readiness"] = "weakened"
                 p["weakened_by"] = rival
+        # V12 bears on readiness for the same reason V10 does. A proposal says CL lacks a
+        # term for a population; if the improved scorer returns a term that already names
+        # it, the proposal cannot be READY whatever exclusivity said. Four proposals sat at
+        # "ready to submit" beside a V12 verdict naming umbrella cell of urothelium,
+        # mesothelial cell, VIP GABAergic interneuron and a retinal bipolar term. Marked
+        # weakened rather than withdrawn: V12 matches on the term's NAME, which is evidence
+        # that CL covers the population and not proof, and the curator is shown the term.
+        if ch["V12"] == "fail" and p["readiness"] == "ready":
+            p["readiness"] = "weakened"
+            p.setdefault("weakened_by", (d12b.split(" returns ", 1)[-1].split(",")[0]
+                                         if "returns " in (d12b or "") else ""))
         ran["V10"][ch["V10"]] = ran["V10"].get(ch["V10"], 0) + 1
         ran["V11"][ch["V11"]] = ran["V11"].get(ch["V11"], 0) + 1
         ran["V12"][ch["V12"]] = ran["V12"].get(ch["V12"], 0) + 1

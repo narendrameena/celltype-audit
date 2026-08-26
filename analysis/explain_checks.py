@@ -69,6 +69,8 @@ def explain(p, g, reasoned):
         d.setdefault("V9", "no cluster is asserted to this term, so there is nothing to test")
     elif ch.get("V9") == "fail":
         d.setdefault("V9", "a cluster asserted to this term does not express the markers")
+    elif p.get("V9_detail"):
+        d.setdefault("V9", p["V9_detail"])
     elif mk:
         d.setdefault("V9", "the cluster's own top markers are %s" % ", ".join(mk[:6]))
     else:

@@ -38,6 +38,7 @@ from cl_resolve import resolve as resolve2                             # noqa: E
 
 MINC = 500
 CHECKS = ["V1", "V2", "V3", "V9", "V10", "V11"]
+V9_FLOOR = 0.25   # a population whose own markers are this sparse is not characterised
 NOT_RUN = ["V4", "V5", "V6", "V7", "V8"]
 
 
@@ -219,7 +220,18 @@ def main():
                                   "n_cells": v["n_cells"], "matched": known})
                 continue
             cands = near_matches(label, labels)
-            mk = [m["gene"] for m in deep.get(organ, {}).get(label, {}).get("markers", [])[:6]]
+            recs = deep.get(organ, {}).get(label, {}).get("markers", [])[:6]
+            mk = [m["gene"] for m in recs]
+            # V9 asks whether cells of this type express the markers. For a new-term
+            # proposal the markers ARE this cluster's own top markers, so a bare "pass"
+            # restates how they were obtained and tests nothing -- asserted, by the page's
+            # own rule, rather than measured. Report the detection rates instead, and let a
+            # proposal whose own markers are detected in a quarter of its cells or fewer
+            # fail: at that level the population is not characterised well enough to ask
+            # CL for a term. Nothing in the current queue is near the floor (the weakest
+            # median is 0.48), which is the point -- the check can bite without firing.
+            rates = sorted(float(m.get("pc_in", 0.0)) for m in recs)
+            med = rates[len(rates) // 2] if rates else 0.0
             top = [{"curie": c["curie"], "name": labels.get(c["curie"], c["curie"])}
                    for c in v.get("cl", [])[:3]]
             best = cands[0] if cands else None
@@ -243,8 +255,16 @@ def main():
                     "V2": ("pass" if best and labels.get(best[1]) == best[2] else "n/a"),
                     "V3": ("fail" if best and best[1] in obsolete else
                            ("pass" if best else "n/a")),
-                    "V9": "pass" if mk else "not-run",
+                    "V9": ("not-run" if not mk else
+                           ("pass" if med >= V9_FLOOR else "fail")),
                     "V10": "not-run", "V11": "not-run"},
+                # the measurement behind V9, kept beside the checks rather than inside
+                # them: everything in `checks` is a check id, and a stray key there is
+                # read as a thirteenth check
+                "V9_detail": (None if not mk else
+                              "the proposed markers are detected in a median %.0f%% of this "
+                              "cluster's own cells (weakest %.0f%%)"
+                              % (100 * med, 100 * rates[0])),
             })
 
     # ------------------------------------------------------------- the missing-axiom case
