@@ -43,6 +43,13 @@ MODELS = {
     # That is a misapplied model, not a fair test of CellTypist, so it is not scored.
     "Blood":       ("Immune_All_Low.pkl", "blood_L1"),
     "Bone_marrow": ("Immune_All_Low.pkl", "bone marrow_L1"),
+    # Spleen has no dedicated CellTypist model, but the HRA crosswalk carries a spleen
+    # level whose vocabulary IS Immune_All_Low's -- 31 of its 34 labels are ones this
+    # model can emit -- and spleen is largely immune, so the model is applied rather than
+    # misapplied. Kidney, muscle and pancreas have no runnable option: CellTypist ships no
+    # adult human kidney or skeletal muscle model at all, and the only pancreas models are
+    # islet-only (which forces fibroblasts and T cells into "delta") or fetal.
+    "Spleen":      ("Immune_All_Low.pkl", "spleen_L1"),
 }
 
 
@@ -115,8 +122,17 @@ def main():
     from ctann import load as load_xw
 
     organs = sys.argv[1:] or list(MODELS)
-    _, ct_lv = load_xw("celltypist")
+    # Merge into whatever is already there. This file is written wholesale on every run,
+    # so scoring a single organ used to silently delete the other five -- the same failure
+    # that left organ_scores.json holding seven organs while the study reported ten.
+    dst = os.path.join(RES, "baseline_celltypist.json")
     out = {}
+    if os.path.exists(dst):
+        try:
+            out = json.load(open(dst))
+        except Exception:
+            out = {}
+    _, ct_lv = load_xw("celltypist")
     for organ in organs:
         mname, lvl = MODELS[organ]
         p = os.path.abspath(H5 % organ)
