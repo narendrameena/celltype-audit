@@ -192,12 +192,14 @@ def v12(p, g):
     the improved scorer now puts first actually name this population?
 
     Deterministic on purpose. The obvious form of this check is a threshold on the
-    scorer's confidence, and that was measured before being built: the top-1 cosine
-    separates correct from incorrect calls so poorly that 82% of wrong calls exceed the
-    10th percentile of right ones, the margin over the best unrelated runner-up reaches
-    AUC 0.620, and the term's is_a depth reaches 0.522. A pass/fail verdict resting on any
-    of those would be a confident claim on a signal known to be near-useless, which is the
-    failure this stack exists to catch. Name matching carries no threshold.
+    scorer's confidence, and that is measured rather than assumed (`v12_signal.py`, which
+    writes results/v12_signal.json over the same 297 hand-curated cell types): the top-1
+    cosine separates correct from incorrect calls so poorly that 82% of wrong calls exceed
+    the 10th percentile of right ones; the margin over the best unrelated runner-up reaches
+    AUC 0.683, weak signal rather than none; and the term's is_a depth reaches 0.509, which
+    is chance. Thresholding the margin would buy a little and cost a confident verdict on a
+    proposal, which is the trade this stack exists to refuse. Name matching carries no
+    threshold.
     """
     top = ((p.get("expression_top") or [{}])[0] or {}).get("curie")
     if p["kind"] != "new-term" or not top:

@@ -88,6 +88,32 @@ def main():
         explain(p, g, reasoned)
     gaps = [(p["label"], v) for p in doc["proposals"] for v in STACK
             if not (p.get("check_detail") or {}).get(v)]
+
+    # The last stage owns the summary, because earlier ones cannot: build_proposals writes
+    # by_kind and cells_covered over the set it drafted, and verify_proposals then DROPS any
+    # proposal exclusivity shows CL already covers. Nothing recomputed the rest, so the
+    # published summary claimed 18 new-terms beside a list of 17 and counted the dropped
+    # proposal's cells. Every derived field is now read back off the surviving list.
+    from collections import Counter
+    r = doc["summary"]
+    r["n"] = len(doc["proposals"])
+    r["by_kind"] = dict(sorted(Counter(p["kind"] for p in doc["proposals"]).items()))
+    r["cells_covered"] = sum(p.get("n_cells", 0) for p in doc["proposals"])
+    r["ready"] = sum(1 for p in doc["proposals"] if p.get("readiness") == "ready")
+    r["weakened"] = sum(1 for p in doc["proposals"] if p.get("readiness") == "weakened")
+    r["covered_after_exclusivity"] = len(doc.get("covered_after_exclusivity") or [])
+    seen = Counter()
+    for p in doc["proposals"]:
+        for v, verdict in (p.get("checks") or {}).items():
+            if verdict not in (None, "not-run"):
+                seen[v] += 1
+    r["checks_run"] = sorted(seen, key=lambda v: int(v[1:]))
+    r["checks_not_run"] = [v for v in STACK if v not in seen]
+    r["verdicts"] = dict(sorted(Counter(
+        (p.get("checks") or {}).get(v, "n/a") for p in doc["proposals"] for v in STACK).items()))
+    assert sum(r["by_kind"].values()) == r["n"], "by_kind must sum to the published count"
+    assert sum(r["verdicts"].values()) == r["n"] * len(STACK), "verdicts must cover the stack"
+
     json.dump(doc, open(os.path.join(DOCS, "proposals.json"), "w"), indent=1)
     n = len(doc["proposals"])
     print("  %d proposals x %d checks = %d verdicts" % (n, len(STACK), n * len(STACK)))

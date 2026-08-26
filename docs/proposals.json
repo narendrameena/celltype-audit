@@ -6,32 +6,36 @@
   "by_kind": {
    "marker-condition": 1,
    "missing-axiom": 1,
-   "new-term": 18
+   "new-term": 17
   },
   "checks_run": [
    "V1",
-   "V10",
-   "V11",
    "V2",
    "V3",
+   "V9",
+   "V10",
+   "V11",
+   "V12"
+  ],
+  "checks_not_run": [
    "V4",
    "V5",
    "V6",
    "V7",
-   "V8",
-   "V9"
+   "V8"
   ],
-  "checks_not_run": [],
-  "cells_covered": 306486,
+  "cells_covered": 297876,
   "already_satisfied": 3,
   "already_curated": 17,
   "routes_disagree": 6,
   "ready": 10,
   "weakened": 9,
   "covered_after_exclusivity": 1,
-  "reasoner": {
-   "engine": "ELK via ROBOT",
-   "ontology": "cl-base.owl"
+  "verdicts": {
+   "fail": 14,
+   "n/a": 147,
+   "not-run": 1,
+   "pass": 66
   }
  },
  "proposals": [
@@ -59,12 +63,7 @@
     "V9": "fail",
     "V10": "pass",
     "V11": "fail",
-    "V12": "n/a",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "n/a"
    },
    "lexical_vs_expression": "n/a",
    "check_detail": {
@@ -81,9 +80,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "a cluster asserted to this term does not express the markers"
    },
-   "readiness": "ready",
-   "reason_note": "CL carries no marker property, so this proposal cannot be stated as an axiom against the current release; it is a request for one rather than an axiom to check.",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"neutrophil in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neutrophil</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000775</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">granulocyte</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000094</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">myeloid leukocyte</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000766</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">myeloid cell</text><text x=\"260\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000763</text><line x1=\"260\" y1=\"248\" x2=\"260\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "kind": "missing-axiom",
@@ -112,12 +109,7 @@
     "V9": "n/a",
     "V10": "n/a",
     "V11": "n/a",
-    "V12": "n/a",
-    "V4": "pass",
-    "V5": "pass",
-    "V6": "pass",
-    "V7": "pass",
-    "V8": "pass"
+    "V12": "n/a"
    },
    "lexical_vs_expression": "n/a",
    "check_detail": {
@@ -134,16 +126,7 @@
     "V8": "1 new entailment(s)",
     "V9": "no cluster is asserted to this term, so there is nothing to test"
    },
-   "readiness": "ready",
-   "reason_note": "asserts an is_a path between the two sibling terms",
-   "reason_evidence": {
-    "V4": "merged cleanly",
-    "V5": "no class becomes unsatisfiable",
-    "V6": "1 new entailment(s), none outside the axiom's signature",
-    "V7": "nothing new entailed between pre-existing classes",
-    "V8": "1 new entailment(s)"
-   },
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Ventricle cardiomyocyte cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">regular ventricular cardiac myocyt</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002131</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">regular cardiac myocyte</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002098</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cardiac muscle cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000746</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">striated muscle cell</text><text x=\"260\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000737</text><line x1=\"260\" y1=\"248\" x2=\"260\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -197,12 +180,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "fail",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "fail"
    },
    "check_detail": {
     "V12": "the improved scorer puts rod bipolar cell first, which already names this population; CL may not be missing a term",
@@ -218,8 +196,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are PCP2, LPGAT1, PRKCA, SERPINI1, CCDC136, CABP5"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Bipolar cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">ON-bipolar cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000749</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">retinal bipolar neuron</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000748</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glutamatergic neuron</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000679</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">rod bipolar cell</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000751</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">ON-bipolar cell</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000749</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">retinal bipolar neuron</text><text x=\"400\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000748</text><line x1=\"400\" y1=\"192\" x2=\"400\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glutamatergic neuron</text><text x=\"400\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000679</text><line x1=\"400\" y1=\"248\" x2=\"400\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -273,12 +250,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts seromucus secreting cell first, which does not name this population, so the gap stands under the better evidence",
@@ -295,8 +267,7 @@
     "V9": "the cluster's own top markers are MUCL1, TESC, AQP5, DNER, S100A1, DNASE2B"
    },
    "readiness": "weakened",
-   "weakened_by": "acinar cell of salivary gland",
-   "graph": "<svg viewBox=\"0 0 720 260\" width=\"100%\" style=\"max-width:720px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Serous gland cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">hatching gland cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000249</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"360\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"255\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">seromucus secreting cell</text><text x=\"360\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000159</text><rect x=\"255\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"360\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"360\" y1=\"136\" x2=\"360\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"255\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"360\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"360\" y1=\"192\" x2=\"360\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"600\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"495\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">acinar cell of salivary gland</text><text x=\"600\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002623</text><rect x=\"495\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">acinar cell</text><text x=\"600\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000622</text><line x1=\"600\" y1=\"136\" x2=\"600\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"495\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glandular secretory epithelial cel</text><text x=\"600\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000150</text><line x1=\"600\" y1=\"192\" x2=\"600\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"495\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory epithelial cell</text><text x=\"600\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:1100001</text><line x1=\"600\" y1=\"248\" x2=\"600\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "acinar cell of salivary gland"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -335,12 +306,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts mesenchymal stem cell first, which does not name this population, so the gap stands under the better evidence",
@@ -356,8 +322,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are MEST, GPC3, PLAC9, NR2F1, CEBPD, MGP"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Capsular cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">mesenchymal stem cell</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000134</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">multi fate stem cell</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000048</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">stem cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000034</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">precursor cell</text><text x=\"260\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0011115</text><line x1=\"260\" y1=\"248\" x2=\"260\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "agree",
@@ -400,12 +365,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "fail",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "fail"
    },
    "check_detail": {
     "V12": "the improved scorer puts umbrella cell of urothelium first, which already names this population; CL may not be missing a term",
@@ -421,8 +381,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are UPK3A, ARL14, UPK2, SNX31, UPK1A, C10orf99"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Umbrella cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">umbrella cell of urothelium</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4030056</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">urothelial cell</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000731</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">transitional epithelial cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000244</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-anchor)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">epithelial cell</text><text x=\"260\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000066</text><line x1=\"260\" y1=\"248\" x2=\"260\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -461,12 +420,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts flat midget bipolar cell first, which does not name this population, so the gap stands under the better evidence",
@@ -483,8 +437,7 @@
     "V9": "the cluster's own top markers are TTN, GRIK1, SLC1A2, TRAPPC8, PSD3, REPS2"
    },
    "readiness": "weakened",
-   "weakened_by": "diffuse bipolar 1 cell",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"OFF-BC in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">flat midget bipolar cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4033033</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">OFF-bipolar cell</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000750</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">retinal bipolar neuron</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000748</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glutamatergic neuron</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000679</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">diffuse bipolar 1 cell</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4033027</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">OFF-bipolar cell</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000750</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">retinal bipolar neuron</text><text x=\"400\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000748</text><line x1=\"400\" y1=\"192\" x2=\"400\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glutamatergic neuron</text><text x=\"400\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000679</text><line x1=\"400\" y1=\"248\" x2=\"400\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "diffuse bipolar 1 cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -523,12 +476,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts cone retinal bipolar cell first, which does not name this population, so the gap stands under the better evidence",
@@ -545,8 +493,7 @@
     "V9": "the cluster's own top markers are PCP4L1, VSX1, CABP2, MPP2, SLC24A4, CCDC88A"
    },
    "readiness": "weakened",
-   "weakened_by": "invaginating midget bipolar cell",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"ON-BC in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cone retinal bipolar cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000752</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">retinal bipolar neuron</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000748</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glutamatergic neuron</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000679</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">invaginating midget bipolar cell</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4033034</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">ON-bipolar cell</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000749</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">retinal bipolar neuron</text><text x=\"400\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000748</text><line x1=\"400\" y1=\"192\" x2=\"400\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glutamatergic neuron</text><text x=\"400\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000679</text><line x1=\"400\" y1=\"248\" x2=\"400\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "invaginating midget bipolar cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -585,12 +532,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "fail",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "fail"
    },
    "check_detail": {
     "V12": "the improved scorer puts luminal hormone-sensing cell of mammary gland first, which already names this population; CL may not be missing a term",
@@ -607,8 +549,7 @@
     "V9": "the cluster's own top markers are DNAJC12, TMC5, AGR2, ANKRD30A, MLPH, TMEM45B"
    },
    "readiness": "weakened",
-   "weakened_by": "exocrine cell",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Luminal cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">luminal hormone-sensing cell of ma</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4033058</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">luminal epithelial cell of mammary</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002326</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">branched duct epithelial cell</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000069</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">duct epithelial cell</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000068</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">exocrine cell</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000152</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"400\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"400\" y1=\"192\" x2=\"400\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "exocrine cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -647,12 +588,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts astrocyte first, which does not name this population, so the gap stands under the better evidence",
@@ -668,8 +604,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are GABRG1, SH3GL2, LYPD6, HS6ST3, GMPR, ADCY8"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Midplate (MP) cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">astrocyte</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000127</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">macroglial cell</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000126</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glial cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000125</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neuron associated cell</text><text x=\"260\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000095</text><line x1=\"260\" y1=\"248\" x2=\"260\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -712,12 +647,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts exocrine cell first, which does not name this population, so the gap stands under the better evidence",
@@ -734,8 +664,7 @@
     "V9": "the cluster's own top markers are PIGR, LYZ, MUC6, RPL28, RPL5, RNASE1"
    },
    "readiness": "weakened",
-   "weakened_by": "mucus secreting cell",
-   "graph": "<svg viewBox=\"0 0 720 260\" width=\"100%\" style=\"max-width:720px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Pit cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">hepatic pit cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:2000054</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">liver-resident natural killer cell</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4047101</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">natural killer cell</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000623</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">group 1 innate lymphoid cell</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0001067</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"360\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"255\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">exocrine cell</text><text x=\"360\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000152</text><rect x=\"255\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"360\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"360\" y1=\"136\" x2=\"360\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"255\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"360\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"360\" y1=\"192\" x2=\"360\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"600\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"495\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">mucus secreting cell</text><text x=\"600\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000319</text><rect x=\"495\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">seromucus secreting cell</text><text x=\"600\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000159</text><line x1=\"600\" y1=\"136\" x2=\"600\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"495\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"600\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"600\" y1=\"192\" x2=\"600\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"495\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"600\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"600\" y1=\"248\" x2=\"600\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "mucus secreting cell"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -774,12 +703,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts tuft cell first, which does not name this population, so the gap stands under the better evidence",
@@ -796,8 +720,7 @@
     "V9": "the cluster's own top markers are ESRRG, FGD4, IGFBP5, SIK2, ARHGEF28, RAP1GAP2"
    },
    "readiness": "weakened",
-   "weakened_by": "parietal cell",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fundic gland in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">tuft cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002204</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-anchor)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">epithelial cell</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000066</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">parietal cell</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000162</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">exocrine cell</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000152</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"400\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"400\" y1=\"192\" x2=\"400\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"400\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"400\" y1=\"248\" x2=\"400\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "parietal cell"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -840,12 +763,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts pvalb GABAergic interneuron first, which does not name this population, so the gap stands under the better evidence",
@@ -862,8 +780,7 @@
     "V9": "the cluster's own top markers are CPLX1, SATB1-AS1, ADAMTS17, ANKRD34C-AS1, GABRD, MB"
    },
    "readiness": "weakened",
-   "weakened_by": "pvalb chandelier GABAergic interneuron",
-   "graph": "<svg viewBox=\"0 0 720 260\" width=\"100%\" style=\"max-width:720px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"PV inhibitory neuron in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">inhibitory motor neuron</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0008015</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">motor neuron</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000100</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">efferent neuron</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000527</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neuron</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000540</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"360\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"255\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">pvalb GABAergic interneuron</text><text x=\"360\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4023018</text><rect x=\"255\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">medial ganglionic eminence derived</text><text x=\"360\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4023063</text><line x1=\"360\" y1=\"136\" x2=\"360\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"255\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">interneuron</text><text x=\"360\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000099</text><line x1=\"360\" y1=\"192\" x2=\"360\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"255\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">central nervous system neuron</text><text x=\"360\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:2000029</text><line x1=\"360\" y1=\"248\" x2=\"360\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"600\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"495\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">pvalb chandelier GABAergic interne</text><text x=\"600\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4023036</text><rect x=\"495\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">medial ganglionic eminence derived</text><text x=\"600\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4023069</text><line x1=\"600\" y1=\"136\" x2=\"600\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"495\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cerebral cortex GABAergic interneu</text><text x=\"600\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0010011</text><line x1=\"600\" y1=\"192\" x2=\"600\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"495\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cortical interneuron</text><text x=\"600\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0008031</text><line x1=\"600\" y1=\"248\" x2=\"600\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "pvalb chandelier GABAergic interneuron"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -902,12 +819,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts primordial germ cell first, which does not name this population, so the gap stands under the better evidence",
@@ -923,8 +835,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are POU5F1, TUBA1C, DPPA5, PGK1, SNRPC, PDPN"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 204\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Spermatogenic cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">primordial germ cell</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000670</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">motile cell</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000219</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -978,12 +889,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts serous secreting cell first, which does not name this population, so the gap stands under the better evidence",
@@ -1000,8 +906,7 @@
     "V9": "the cluster's own top markers are DMBT1, ODAM, S100A1, MUC7, DLC1, LPO"
    },
    "readiness": "weakened",
-   "weakened_by": "endothelial cell of vascular tree",
-   "graph": "<svg viewBox=\"0 0 720 260\" width=\"100%\" style=\"max-width:720px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Serous gland cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">hatching gland cell</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000249</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"360\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"255\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">serous secreting cell</text><text x=\"360\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000313</text><rect x=\"255\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">seromucus secreting cell</text><text x=\"360\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000159</text><line x1=\"360\" y1=\"136\" x2=\"360\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"255\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">secretory cell</text><text x=\"360\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000151</text><line x1=\"360\" y1=\"192\" x2=\"360\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"255\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"360\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"360\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"360\" y1=\"248\" x2=\"360\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"376\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"600\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"495\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">endothelial cell of vascular tree</text><text x=\"600\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002139</text><rect x=\"495\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-anchor)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"600\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">endothelial cell</text><text x=\"600\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000115</text><line x1=\"600\" y1=\"136\" x2=\"600\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"616\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "endothelial cell of vascular tree"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -1040,12 +945,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts ependymal cell first, which does not name this population, so the gap stands under the better evidence",
@@ -1061,8 +961,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are CLSTN2, EYA4, EVA1C, CRLF1, FBLN5, GALR1"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Floor plate (FP) cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">ependymal cell</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000065</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glial cell</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000125</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neuron associated cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000095</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-anchor)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neural cell</text><text x=\"260\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002319</text><line x1=\"260\" y1=\"248\" x2=\"260\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -1101,12 +1000,7 @@
     "V9": "pass",
     "V10": "pass",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts mesothelial cell first, which does not name this population, so the gap stands under the better evidence",
@@ -1122,8 +1016,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are RPL30, RPS14, RPL19, RPS15A, RPL41, IFITM3"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 204\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Mesothelium in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"260\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"155\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">mesothelial cell</text><text x=\"260\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000077</text><rect x=\"155\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">meso-epithelial cell</text><text x=\"260\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0002078</text><line x1=\"260\" y1=\"136\" x2=\"260\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"155\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-anchor)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"260\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">epithelial cell</text><text x=\"260\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000066</text><line x1=\"260\" y1=\"192\" x2=\"260\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"276\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "disagree",
@@ -1172,12 +1065,7 @@
     "V9": "pass",
     "V10": "not-run",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts sncg GABAergic interneuron first, which does not name this population, so the gap stands under the better evidence",
@@ -1193,8 +1081,7 @@
     "V8": "this proposal asserts no axiom, so there is nothing for a reasoner to act on",
     "V9": "the cluster's own top markers are COL21A1, L3MBTL4, LYPD4, DNAH17, PSD4, RNR2"
    },
-   "readiness": "ready",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"VIP inhibitory neuron in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE NAME RESOLVES TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">inhibitory motor neuron</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0008015</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">motor neuron</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000100</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">efferent neuron</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000527</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neuron</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000540</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">sncg GABAergic interneuron</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4023015</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">caudal ganglionic eminence derived</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4023064</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cerebral cortex GABAergic interneu</text><text x=\"400\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0010011</text><line x1=\"400\" y1=\"192\" x2=\"400\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"295\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cortical interneuron</text><text x=\"400\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0008031</text><line x1=\"400\" y1=\"248\" x2=\"400\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "readiness": "ready"
   },
   {
    "lexical_vs_expression": "n/a",
@@ -1233,12 +1120,7 @@
     "V9": "pass",
     "V10": "fail",
     "V11": "n/a",
-    "V12": "pass",
-    "V4": "n/a",
-    "V5": "n/a",
-    "V6": "n/a",
-    "V7": "n/a",
-    "V8": "n/a"
+    "V12": "pass"
    },
    "check_detail": {
     "V12": "the improved scorer puts astrocyte first, which does not name this population, so the gap stands under the better evidence",
@@ -1255,8 +1137,7 @@
     "V9": "the cluster's own top markers are VIPR2, ADAMTS3, ANGPT1, ZFHX4, ADAMTS12, MAP7"
    },
    "readiness": "weakened",
-   "weakened_by": "perivascular cell",
-   "graph": "<svg viewBox=\"0 0 520 260\" width=\"100%\" style=\"max-width:520px\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Roof plate (RP) cell in the Cell Ontology\" font-family=\"ui-monospace,SFMono-Regular,Menlo,monospace\"><defs><marker id=\"pa\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"var(--d-line)\"/></marker></defs><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">THE MARKERS POINT TO</text><rect x=\"15\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-ok)\" stroke=\"var(--d-okline)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">astrocyte</text><text x=\"120\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000127</text><rect x=\"15\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">macroglial cell</text><text x=\"120\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000126</text><line x1=\"120\" y1=\"136\" x2=\"120\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"138\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"155.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">glial cell</text><text x=\"120\" y=\"169.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000125</text><line x1=\"120\" y1=\"192\" x2=\"120\" y2=\"136\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"167.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><rect x=\"15\" y=\"194\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"120\" y=\"211.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">neuron associated cell</text><text x=\"120\" y=\"225.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000095</text><line x1=\"120\" y1=\"248\" x2=\"120\" y2=\"192\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"136\" y=\"223.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text><text x=\"400\" y=\"14\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"var(--d-mute)\" letter-spacing=\".06em\">EXCLUSIVITY LOST TO</text><rect x=\"295\" y=\"26\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-bad)\" stroke=\"var(--d-badline)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"43.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">perivascular cell</text><text x=\"400\" y=\"57.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:4033054</text><rect x=\"295\" y=\"82\" width=\"210\" height=\"40\" rx=\"4\" fill=\"var(--d-fill)\" stroke=\"var(--d-stroke)\" stroke-width=\"1.1\"/><text x=\"400\" y=\"99.0\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--d-ink)\" font-weight=\"600\">cell</text><text x=\"400\" y=\"113.0\" text-anchor=\"middle\" font-size=\"9\" fill=\"var(--d-ink)\" font-weight=\"400\">CL:0000000</text><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"80\" stroke=\"var(--d-line)\" stroke-width=\"1.1\" marker-end=\"url(#pa)\"/><text x=\"416\" y=\"111.0\" text-anchor=\"middle\" font-size=\"8\" fill=\"var(--d-mute)\">is_a</text></svg>"
+   "weakened_by": "perivascular cell"
   }
  ],
  "covered_after_exclusivity": [
