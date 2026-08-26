@@ -212,20 +212,21 @@ carries 152 mouse-only classes) and obsolete terms are never returned.
 
 **2. Lineage sweep.** Compare the anchor set of the asserted term against the terms the
 markers point to. Disjoint on every candidate means the two disagree about *lineage*.
-**71% precision** (5 of 7 flags), but structurally blind to any error inside one lineage —
-and most errors are: 21 of 28 in the reference study.
+**46% precision** (11 of 24 flags) and 11 of the 19 known errors. An anchor-set test alone
+is structurally blind to any error inside one lineage — and most errors are, 14 of 19 — so
+the shipped sweep is margin-based and catches 8 of those 14.
 
 **3. Marker queue.** Ask which CL term best explains the cluster, guarded so a merely
 coarser or finer name is not called an error. As a binary flag this does **not** reach
 usable precision and is **not** shipped as one. Ranked, it puts real errors near the top.
 
-Together: reviewing **33 of 256** cell types surfaced **9 of 19** known errors — 27% of
-those reviews landing on a real error, against a 7.4% base rate.
+Together: reviewing **33 of 256** cell types surfaced **12 of 19** known errors — 36% of
+those reviews landing on a real error, against a 7.4% base rate (4.9x).
 
 ## Limitations, stated
 
-- **It is triage, not an oracle.** The top 33 candidates carry 9 of the 19 known errors;
-  reaching 80% of them takes 123 reviews of 256. Yield is what stays fixed as the gold
+- **It is triage, not an oracle.** The top 33 candidates carry 12 of the 19 known errors;
+  reaching 80% of them takes 73 reviews of 256. Yield is what stays fixed as the gold
   grows — recall at a fixed budget falls as more errors are curated into the denominator,
   which says nothing about the method.
 - **The reference can hide errors in atlases that built it.** If your dataset is part of
