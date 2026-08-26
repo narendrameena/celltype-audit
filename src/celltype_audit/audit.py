@@ -43,10 +43,26 @@ class Report:
 
     @property
     def queue(self):
+        """Most-suspicious first, by how much better the winner explains the cluster.
+
+        A record with no `ratio` cannot be ranked and is not a candidate: the ratio is the
+        asserted term's score over the winner's, so it is None exactly when the asserted
+        term has no reference profile to score. That is common rather than exotic -- the
+        reference reaches about 12% of human CL classes -- and sorting None against a float
+        raised TypeError on the first genuinely external atlas this was pointed at, an
+        86,530-cell liver endothelial atlas whose types are finer than the reference
+        carries. Excluded here rather than coerced, because "unrankable" is not "rank 0".
+        """
         q = [r for r in self.records
              if r["audit"]["best_term"] and not r["audit"]["related_to_best"]
-             and not r["audit"]["thin_support"]]
+             and not r["audit"]["thin_support"]
+             and r["audit"].get("ratio") is not None]
         return sorted(q, key=lambda r: r["audit"]["ratio"])
+
+    @property
+    def unscoreable(self):
+        """Records the reference cannot score, which a caller should see rather than lose."""
+        return [r for r in self.records if r["audit"].get("ratio") is None]
 
     def summary(self):
         n = len(self.records)
@@ -58,7 +74,8 @@ class Report:
              "     of which superclass only : %d" % gen,
              "  abstained               : %d" % ab,
              "  lineage-sweep flags     : %d" % len(self.flagged),
-             "  marker-queue candidates : %d" % len(self.queue)]
+             "  marker-queue candidates : %d" % len(self.queue),
+             "  unscoreable against the reference : %d" % len(self.unscoreable)]
         return "\n".join(L)
 
     def to_json(self, path):
@@ -139,7 +156,18 @@ def audit_h5ad(path, organ=None, tissue=None, ontology=None, reference=None,
         A = o.anchors(cur) if cur else frozenset()
         cand = sorted(sc, key=sc.get, reverse=True)[:topk]
         anc = [o.anchors(c) for c in cand]
-        contradicted = bool(A) and bool(cand) and all(B and not (A & B) for B in anc)
+        # Unanimity is over the candidates that ASSERT a lineage. A term with no anchor
+        # set says nothing about lineage -- which is why an unanchored asserted term is
+        # never flagged -- and the same reasoning has to apply when it appears among the
+        # candidates, or one such term silently vetoes an otherwise unanimous
+        # disagreement. Measured on the ten curated organs: 6 flags -> 9, precision 100%
+        # either way, and the flags it recovers include a kidney cluster labelled
+        # "Neuroglial cell" whose gold term is epithelial. Found by running the shipped
+        # tool on an independent liver atlas, where four hepatocyte candidates and one
+        # unanchored `hepatoblast` left a 22,202-cell cluster carrying APOA1, APOC3,
+        # SERPINA1 and HP unflagged.
+        anchored = [B for B in anc if B]
+        contradicted = bool(A) and bool(anchored) and all(not (A & B) for B in anchored)
         ratio = (sc.get(cur, 0.0) / (sc[best] + 1e-9)) if (best and cur in sc) else None
         sup_a = reference.support(ub, cur) if cur else 0
         sup_b = reference.support(ub, best) if best else 0
