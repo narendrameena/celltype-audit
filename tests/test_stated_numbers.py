@@ -91,3 +91,44 @@ def test_the_module_docstring_agrees_with_the_note(gold):
     words = {"four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
     assert words.get(m.group(2)) == gold["organs"], (
         "docstring says %r organs, organ_scores.json has %d" % (m.group(2), gold["organs"]))
+
+
+# --------------------------------------------------------------------------- survey
+# The README's survey figures went stale exactly once and it took a reference refetch to
+# notice: survey_ref had been fetched for each cluster's own five markers, the subspace
+# scorer silently fell back to the mean, and the published 3.1% survived a rerun that
+# reproduced it to the digit. These read the numbers back out of the README and compare
+# them with cxg_survey.json, so the prose cannot outlive the result again.
+@pytest.fixture(scope="module")
+def survey():
+    rows = _load("cxg_survey.json")
+    live = [r for r in rows if not r["thin_support"]]
+    cross = [r for r in live if r["cross_lineage"]]
+    return {"datasets": len({r["dataset"] for r in rows}), "surviving": len(live),
+            "cross": len(cross), "pct": 100.0 * len(cross) / max(len(live), 1)}
+
+
+@pytest.fixture(scope="module")
+def readme():
+    p = os.path.join(HERE, "..", "README.md")
+    if not os.path.exists(p):
+        pytest.skip("README not present")
+    return open(p).read()
+
+
+def test_readme_survey_counts(readme, survey):
+    m = re.search(r"\*\*(\d+) of ([\d,]+) cell types \(([\d.]+)%", readme)
+    assert m, "README no longer states the survey's cross-lineage count"
+    assert int(m.group(1)) == survey["cross"], (
+        "README says %s cross-lineage, cxg_survey.json has %d" % (m.group(1), survey["cross"]))
+    assert int(m.group(2).replace(",", "")) == survey["surviving"], (
+        "README says %s surviving, cxg_survey.json has %d" % (m.group(2), survey["surviving"]))
+    assert abs(float(m.group(3)) - survey["pct"]) < 0.05, (
+        "README says %s%%, cxg_survey.json gives %.1f%%" % (m.group(3), survey["pct"]))
+
+
+def test_readme_dataset_count(readme, survey):
+    m = re.search(r"(\d+) had a scoreable cell type", readme)
+    assert m, "README no longer states how many datasets were scoreable"
+    assert int(m.group(1)) == survey["datasets"], (
+        "README says %s datasets, cxg_survey.json has %d" % (m.group(1), survey["datasets"]))

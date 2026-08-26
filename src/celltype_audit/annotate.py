@@ -1,17 +1,17 @@
 """Propose Cell Ontology terms for clusters that have no annotation yet.
 
 READ THIS BEFORE USING IT. Measured against 297 hand-curated cell types in ten organs,
-with no label involved at any point, picking the top-scoring CL term is right **56%** of
-the time -- 35% in bone marrow, 87% in muscle. A companion experiment (calibration) found
-that the confidence ranks better than chance but nowhere near well enough to act on
-unattended: leave-one-organ-out AUC 0.72, with 80% precision reachable only over the most
-confident 37% of calls and 90% not reachable at all. There is no threshold that makes this
-safe to automate.
+with no label involved at any point, picking the top-scoring CL term is right **71%** of
+the time -- 51% in bone marrow, 100% in muscle. A companion experiment (calibration) found
+that the confidence ranks better than chance and now gates, but only over a narrow band:
+leave-one-organ-out AUC 0.72, with 80% precision over the most confident 51% of calls and
+90% over the most confident 17%. A curator can work that top slice unattended; there is
+still no threshold that makes the whole output safe to automate.
 
 So this is NOT an annotator, and it is not competitive with a trained classifier such as
 CellTypist, Azimuth or popV. What it is good at is the thing those tools do not do: it
 returns a **ranked CL shortlist with the marker evidence attached**, and the correct term
-is in the top five 73-100% of the time depending on tissue. That is a curation aid --
+is in the top five 81-100% of the time depending on tissue. That is a curation aid --
 it turns "name this cluster" into "choose among five, with evidence" -- and it grounds the
 result in the ontology from the start rather than mapping to CL afterwards.
 
@@ -39,9 +39,9 @@ CLUSTER_KEYS = ("cell_type", "leiden", "louvain", "cluster", "clusters",
                 "seurat_clusters", "annotation", "cell_ontology_class")
 
 ACCURACY_NOTE = (
-    "top-1 is right ~56% of the time (297 curated cell types, 10 organs; 35-87% by tissue) "
-    "and confidence is NOT gateable (AUC 0.72; 90% precision unreachable). Read the "
-    "shortlist, not the top hit."
+    "top-1 is right ~71% of the time (297 curated cell types, 10 organs; 51-100% by tissue) "
+    "and confidence gates only narrowly (AUC 0.72; 90% precision over the top 17%). Read "
+    "the shortlist, not the top hit."
 )
 
 

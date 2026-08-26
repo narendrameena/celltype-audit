@@ -72,7 +72,7 @@ celltype-audit annotate fresh.h5ad --cluster-key leiden --tissue UBERON:0002048
 ```
 20 clusters (>=500 cells), grouped on obs/leiden
 
-  !! PROPOSALS, NOT CALLS: top-1 is right ~56% of the time (297 curated cell types, 10 organs; ...)
+  !! PROPOSALS, NOT CALLS: top-1 is right ~71% of the time (297 curated cell types, 10 organs; ...)
 
   3      2869  epithelial cell of proximal tubule segment 1
                  2. kidney proximal convoluted tubule epithelial cell   0.86

@@ -19,10 +19,13 @@ lung neutrophil:monocyte ratio from 1.25:1 to 0:1, against 0.07:1 in an independ
 — an 18-fold error in a statistic anyone might publish.
 
 It is not one atlas. The same pipeline runs across **every public CELLxGENE Discover
-dataset it can score** — 208 met the eligibility criteria, 141 had a scoreable cell type —
-and finds **21 of 670 cell types (3.1%, 95% CI 2.1–4.7) carry a label their own markers
-contradict at the lineage level**. A twelve-dataset pilot put that at 3.8% [1.3–10.5]; the
-estimate barely moved and the interval narrowed from nine points wide to under three.
+dataset it can score** — 208 met the eligibility criteria, 165 had a scoreable cell type —
+and finds **13 of 1,148 cell types (1.1%, 95% CI 0.7–1.9) carry a label their own markers
+contradict at the lineage level**. A twelve-dataset pilot put that at 3.8% [1.3–10.5]. Most
+of that gap is the oracle, not the atlases: the pilot scored against a reference fetched for
+each cluster's own five markers, and refetching it over the full discriminative subspace —
+the same data, r = 1.000 on the overlap, but 32 tissues instead of 14 — took the estimate
+from 3.1% to 1.1%.
 
 ### Whose label is being tested
 
@@ -47,12 +50,13 @@ So what the audit catches depends on what you point it at — **harmonisation fa
 aggregating atlas, **annotation judgements** in a primary one, and a **base rate** across
 a set of published datasets. It never establishes that the original authors were wrong.
 
-The three read consistently. hECA gives 3.4% (4 of 116) and the 141-dataset survey 3.1%,
-which are indistinguishable (Fisher *p* = 0.78) — the aggregating atlas is not worse than
-the field it was assembled from. Tabula Sapiens, expert-curated and natively CL-annotated,
-gives **0 of 81**; that ordering is what one would expect, but at these counts it is not
-established (*p* = 0.15), and scaling the survey eightfold did not change it, because the
-limit is Tabula Sapiens' own 81 scoreable cell types rather than the comparator.
+The three read consistently. hECA gives 1.6% (3 of 190) and the 165-dataset survey 1.1%
+(13 of 1,148), which are indistinguishable (Fisher *p* = 0.49) — the aggregating atlas is
+not worse than the field it was assembled from. Tabula Sapiens, expert-curated and natively
+CL-annotated, gives **1 of 92** (1.1%), and that one call is a tie: the winning term beats
+the assertion by 0.08% of score. All three are indistinguishable (*p* = 1.00, 1.00, 0.49),
+so **no ordering is claimed**. An earlier, sparser reference did show one; it was a property
+of the oracle rather than of the atlases.
 
 ## Install
 
@@ -74,7 +78,7 @@ pip install "git+https://github.com/narendrameena/celltype-audit.git"
 A tag, branch or commit pins it:
 
 ```bash
-pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.5"
+pip install "celltype-audit @ git+https://github.com/narendrameena/celltype-audit.git@v0.1.6"
 ```
 
 ### From source
@@ -177,13 +181,13 @@ celltype-audit annotate fresh.h5ad --cluster-key seurat_clusters --tissue UBERON
 
 returns a ranked CL shortlist per cluster with the marker evidence attached. **This is a
 curation aid, not an annotator.** Measured against 297 hand-curated cell types with no
-label involved, the top-scoring term is right **56%** of the time (35% in bone marrow, 87%
-in muscle). Its confidence ranks better than chance but not well enough to act on
-unattended: leave-one-organ-out AUC 0.72, and precision reaches 80% only over the most
-confident 37% of calls and never reaches 90%. There is no threshold that makes it safe to
-automate.
+label involved, the top-scoring term is right **71%** of the time (51% in bone marrow, 100%
+in muscle). Its confidence ranks better than chance and now gates, but narrowly:
+leave-one-organ-out AUC 0.72, with precision reaching 80% over the most confident 51% of
+calls and 90% over the most confident 17%. That top slice is workable unattended; the rest
+is not.
 
-What it is good for is that the correct term is in the **top five 73-100%** of the time,
+What it is good for is that the correct term is in the **top five 81-100%** of the time,
 so it turns "name this cluster" into "choose among five, with evidence". For automated
 annotation of fresh data use a trained classifier (CellTypist, Azimuth, popV) — then audit
 the result with `celltype-audit audit`, which is where this package actually earns its keep.

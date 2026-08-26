@@ -5,6 +5,15 @@ polyhierarchy (microglia under two anchors), a species-qualified term, an obsole
 a synonym that collides with another term's primary label, and an organ-qualified name
 whose bare form is absent.
 """
+import os
+import sys
+
+# Test the repository, not whatever happens to be installed. A stale celltype-audit in
+# site-packages shadowed src/ here and every local run silently exercised 0.1.0 -- including
+# test_stated_numbers, the guard written to catch exactly this kind of drift. Editable
+# installs are not available on this machine's pip, so the path is set explicitly.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+
 import pytest
 
 from celltype_audit.ontology import Ontology

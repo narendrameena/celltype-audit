@@ -9,8 +9,9 @@ does not try to re-annotate an atlas; it reports where an atlas disagrees with i
     print(report.summary())
 
 For data that has no annotation yet, `annotate_h5ad` proposes a ranked CL shortlist per
-cluster -- a curation aid, not an annotator: top-1 is right about 56%% of the time and its
-confidence is not calibratable, so read the shortlist rather than the top hit.
+cluster -- a curation aid, not an annotator: top-1 is right about 71%% of the time and its
+confidence gates only over the most confident sixth of calls, so read the shortlist rather
+than the top hit.
 
 or from the command line:
 
