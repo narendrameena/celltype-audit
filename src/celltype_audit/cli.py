@@ -59,7 +59,11 @@ def _annotate(a):
         for p in c["proposals"][1:]:
             print("  %-24s %7s    %d. %-38s %.2f" % ("", "", p["rank"], p["label"][:38],
                                                      p["relative"]))
-        print("      markers: %s" % ", ".join(c["markers"][:6]))
+        # markers are records ({gene, score, pc_in}), not bare strings; joining them
+        # raised TypeError on the first cluster, so this line had never printed
+        print("      markers: %s"
+              % ", ".join(m["gene"] if isinstance(m, dict) else str(m)
+                          for m in c["markers"][:6]))
     if a.out:
         json.dump(doc, open(a.out, "w"), indent=1)
         print("\nwrote %s" % a.out)

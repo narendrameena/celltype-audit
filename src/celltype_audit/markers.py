@@ -27,15 +27,32 @@ def _decode(a):
 
 
 def _cat(f, key):
-    """Read a categorical or plain obs/var column as an array of strings."""
+    """Read a categorical or plain obs/var column as (categories, codes).
+
+    Three layouts, all of them in the wild:
+
+      current    the column is a Group holding `categories` and `codes`
+      legacy     the column is an integer Dataset of codes and the categories live in a
+                 sibling `__categories/<name>` group. AnnData wrote this before 0.8 and
+                 HuBMAP still publishes it. Reading such a column as values rather than
+                 codes does not raise -- it silently returns integers where gene symbols
+                 were expected, which is worse than a crash.
+      plain      the column is an array of strings
+
+    A code of -1 means "no category", which is how a missing HUGO symbol is stored. Left
+    as a negative index it would quietly select the LAST category, so it is mapped to an
+    empty string and dropped downstream.
+    """
     g = f[key]
     if isinstance(g, h5py.Group) and "categories" in g:
-        cats = _decode(g["categories"][:])
-        codes = g["codes"][:]
-        return cats, codes
+        return _decode(g["categories"][:]), g["codes"][:]
+    parent, _, name = key.rpartition("/")
+    legacy = f.get("%s/__categories" % parent) if parent else None
+    if legacy is not None and name in legacy and np.issubdtype(g.dtype, np.integer):
+        cats = np.append(_decode(legacy[name][:]), "")     # index -1 -> ""
+        return cats, g[:]
     v = _decode(g[:])
-    cats, codes = np.unique(v, return_inverse=True)
-    return cats, codes
+    return np.unique(v, return_inverse=True)
 
 
 def marker_table(path, gene_key=None, type_key="cell_type", topk=20, min_cells=50,
@@ -48,13 +65,13 @@ def marker_table(path, gene_key=None, type_key="cell_type", topk=20, min_cells=5
     f = h5py.File(path, "r")
     try:
         if gene_key is None:
-            for k in ("feature_name", "Gene_symbol", "gene_symbols", "_index"):
+            for k in ("feature_name", "Gene_symbol", "gene_symbols", "hugo_symbol",
+                      "_index"):
                 if k in f["var"]:
                     gene_key = k
                     break
         gcats, gcodes = _cat(f, "var/%s" % gene_key)
-        genes = gcats[gcodes] if len(gcodes) == f["var/%s" % gene_key].get("codes", np.array([])).shape[0] \
-            or isinstance(f["var/%s" % gene_key], h5py.Group) else gcats[gcodes]
+        genes = gcats[gcodes]
         if type_key not in f["obs"]:
             # A bare KeyError here reads as a broken file. It is almost always a naming
             # difference -- annotations live in `celltype`, `Cell_type`, `annotation`,
