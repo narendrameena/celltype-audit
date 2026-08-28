@@ -196,7 +196,17 @@ def main():
 
             A = anchor_set(cur)
             anc = [anchor_set(c["curie"]) for c in v["cl"][:5]]
-            if A and any(anc) and all(B and not (A & B) for B in anc):
+            # Unanimity over the candidates that ASSERT a lineage. A term with no anchor
+            # set says nothing about lineage -- which is why an unanchored asserted term
+            # is never flagged -- so letting one break unanimity kept disputed clusters in
+            # the refinement pool. It excludes 10 more here (11 -> 21), of which 9 were
+            # being dropped by a later gate anyway, so the cost is one proposal:
+            # Oesophagus "Myeloid cell". Set ANCHOR_VETO=on for the old behaviour.
+            _anchored = [B for B in anc if B]
+            _contradicted = ((any(anc) and all(B and not (A & B) for B in anc))
+                             if os.environ.get("ANCHOR_VETO") == "on"
+                             else (bool(_anchored) and all(not (A & B) for B in _anchored)))
+            if A and _contradicted:
                 funnel["G2_contradicted"] += 1
                 disputed.append({"organ": organ, "label": t, "resolved": cur})
                 continue
@@ -262,7 +272,8 @@ def main():
         print("  %-11s %-24s %7d  %-26s -> %s" % (r["organ"][:11], r["label"][:24], r["n_cells"],
                                                   r["from_label"][:26], r["to_label"][:34]))
     json.dump({"funnel": dict(funnel), "proposals": props, "disputed": disputed},
-              open(os.path.join(RES, "refinements.json"), "w"), indent=1)
+              open(os.path.join(RES, "refinements%s.json"
+                                % os.environ.get("REFINE_SUFFIX", "")), "w"), indent=1)
     print("\nwrote results/refinements.json (%d proposals, %d disputed)" % (len(props), len(disputed)))
 
 
