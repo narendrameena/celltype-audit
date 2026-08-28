@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it using the metadata below. There is no
+  accompanying paper yet: the manuscript is unsubmitted, so the software is the
+  citable artefact.
+type: software
+title: celltype-audit
+abstract: >-
+  Tests single-cell atlas cell-type labels against expression evidence and the Cell
+  Ontology, rather than against other labels. A cluster's markers are scored over a
+  shared discriminative subspace against a CELLxGENE expression reference, and a
+  disagreement between the asserted term's lineage and the evidence's is reported as
+  a ranked review queue rather than as a classification. Its by-products are candidate
+  Cell Ontology contributions, each published with the verification checks that ran
+  and, explicitly, those that did not.
+authors:
+  - family-names: Meena
+    given-names: Narendra
+version: 0.1.9
+date-released: "2026-08-26"
+license: MIT
+repository-code: https://github.com/narendrameena/celltype-audit
+url: https://narendrameena.github.io/celltype-audit/
+keywords:
+  - single-cell transcriptomics
+  - Cell Ontology
+  - cell type annotation
+  - quality control
+  - data curation
+  - CELLxGENE

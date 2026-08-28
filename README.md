@@ -302,3 +302,15 @@ If this is useful, please cite the repository until the paper is out.
 ## Licence
 
 MIT.
+
+## Citing
+
+    Meena, N. (2026). celltype-audit: auditing single-cell atlas cell-type annotations
+    against the Cell Ontology and expression evidence (Version 0.1.9) [Computer software].
+    https://github.com/narendrameena/celltype-audit
+
+`CITATION.cff` carries the same metadata in machine-readable form, so GitHub renders a
+"Cite this repository" button and tools can read it directly. There is no accompanying
+paper: the manuscript is unsubmitted, and no proposed Cell Ontology term has yet been
+adjudicated, so the software is the citable artefact and the proposal queue is a queue
+rather than a set of adopted contributions.
