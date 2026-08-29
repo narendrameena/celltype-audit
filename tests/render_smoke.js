@@ -82,8 +82,15 @@ setTimeout(() => {
   if (why !== cards) problems.push(`${why} reasoning blocks for ${cards} cards`);
   const ids = (out.match(/<li class="p" id="[^"]+"/g) || []).length;
   if (ids !== cards) problems.push(`${ids} cards have a stable id, expected ${cards}`);
-  const perma = (out.match(/link to this proposal/g) || []).length;
-  if (perma !== cards) problems.push(`${perma} permalinks for ${cards} cards`);
+  // No permalink assertion. Every card used to carry a "link to this proposal" anchor to
+  // its own #fragment, and it never worked: the cards are rendered from proposals.json
+  // after load, so a browser resolves an inbound #fragment before the element exists and
+  // scrolls nowhere. The anchor was removed; the stable id above is what a working deep
+  // link would need, and is asserted on its own. Do not re-add this check without also
+  // handling location.hash after render -- it would only guard the appearance of a
+  // feature.
+  if (/link to this proposal/.test(out))
+    problems.push("the permalink anchor is back, but nothing handles location.hash");
   if (/undefined|\[object Object\]|NaN/.test(out))
     problems.push("rendered output contains undefined/NaN - a field name is wrong");
   // proposals.json carries a lexical overlap score and no subsumption relation, so the
