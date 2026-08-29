@@ -204,6 +204,9 @@
   .ct.on{border-left-color:var(--ok,#2E7D5B)}
   .ct.off{border-left-color:var(--line,#7C8B97);opacity:.78}
   .ctm{opacity:.6;font-size:.86em}
+  .perma{font-size:.78rem}
+  .p.targeted{outline:2px solid var(--accent,#1B6E8A);outline-offset:4px;border-radius:3px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   .src{display:block;border-left:2px solid var(--line,#7C8B97);padding:.35rem 0 .35rem .6rem;
        font-size:.9em;opacity:.85}
   .src code{font-size:.9em}
@@ -314,12 +317,11 @@ const BG = {
   "missing-axiom":   ["axiom", "What a missing edge means"]
 };
 function pid(p){
-  // A stable DOM id per proposal. It is NOT a permalink: the cards are rendered from
-  // proposals.json after load, so a #fragment in an inbound URL is resolved by the browser
-  // before the element exists and scrolls nowhere. A "link to this proposal" anchor used
-  // to sit on every card and did nothing for anyone arriving from outside, which is why it
-  // was removed. Restoring it means handling location.hash after render, not adding the
-  // <a> back. The id is kept because render_smoke.js counts cards by it.
+  // A stable DOM id per proposal, and the target of a real permalink. The cards are drawn
+  // from proposals.json after load, so an inbound #fragment is resolved by the browser
+  // before the element exists: focusFromHash() below re-resolves it after render, which is
+  // what makes the link work. Changing this scheme breaks every link already sent to a
+  // curator, so it is derived only from kind, organ and label.
   return (p.kind + "-" + p.organ + "-" + p.label).toLowerCase()
          .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -430,6 +432,32 @@ function issueURL(p){
   return `https://github.com/obophenotype/cell-ontology/issues/new?${q.toString()}`;
 }
 
+function focusFromHash(){
+  // Resolve the fragment AFTER the list exists. Three things a naive scrollIntoView misses:
+  // a filter may be hiding the target, in which case the link must still work, so fall back
+  // to the full list; the evidence lives in a collapsed <details>, and a reader arriving
+  // from a cell-ontology issue wants it open; and the card needs to be identifiable once
+  // the page stops moving, hence the brief highlight.
+  const id = decodeURIComponent((location.hash || "").slice(1));
+  if (!id) return;
+  if (!document.getElementById(id) && active !== "all") { setFilter("all"); }
+  const el = document.getElementById(id);
+  if (!el) return;
+  const d = el.querySelector("details");
+  if (d) d.open = true;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  el.classList.add("targeted");
+  setTimeout(() => el.classList.remove("targeted"), 2600);
+}
+
+function setFilter(k){
+  active = k;
+  const bar = document.getElementById("bar");
+  [...bar.querySelectorAll("button")].forEach(x =>
+    x.setAttribute("aria-pressed", String(x.dataset.kind === k)));
+  render();
+}
+
 function render(){
   const list = document.getElementById("list");
   // ready first: a proposal that failed exclusivity is not in the same state as one
@@ -482,7 +510,8 @@ function render(){
         <div class="whybody">
           ${p.graph ? `<figure class="cg">${p.graph}<figcaption>Read from the pinned CL
             release: the is_a path from each term up to its anchor.</figcaption></figure>` : ""}
-          ${reasoning(p)}</div>
+          ${reasoning(p)}
+          <p class="perma"><a href="#${pid(p)}">link to this proposal</a></p></div>
       </details>
       <div class="verif">${verif}
         ${bgLink(p)}
@@ -528,16 +557,14 @@ Promise.all([
     const b = document.createElement("button");
     b.className = "f";
     b.setAttribute("aria-pressed", String(k === "all"));
+    b.dataset.kind = k;
     b.textContent = k === "all" ? `all ${s.n}` : `${KIND_LABEL[k] || k} ${s.by_kind[k]}`;
-    b.onclick = () => {
-      active = k;
-      [...bar.querySelectorAll("button")].forEach(x =>
-        x.setAttribute("aria-pressed", String(x === b)));
-      render();
-    };
+    b.onclick = () => setFilter(k);
     bar.appendChild(b);
   });
   render();
+  focusFromHash();
+  window.addEventListener("hashchange", focusFromHash);
 }).catch(e => {
   document.getElementById("list").innerHTML =
     // Distinguish "the data is missing" from "the page threw while drawing it". This

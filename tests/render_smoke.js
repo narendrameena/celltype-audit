@@ -82,15 +82,25 @@ setTimeout(() => {
   if (why !== cards) problems.push(`${why} reasoning blocks for ${cards} cards`);
   const ids = (out.match(/<li class="p" id="[^"]+"/g) || []).length;
   if (ids !== cards) problems.push(`${ids} cards have a stable id, expected ${cards}`);
-  // No permalink assertion. Every card used to carry a "link to this proposal" anchor to
-  // its own #fragment, and it never worked: the cards are rendered from proposals.json
-  // after load, so a browser resolves an inbound #fragment before the element exists and
-  // scrolls nowhere. The anchor was removed; the stable id above is what a working deep
-  // link would need, and is asserted on its own. Do not re-add this check without also
-  // handling location.hash after render -- it would only guard the appearance of a
-  // feature.
-  if (/link to this proposal/.test(out))
-    problems.push("the permalink anchor is back, but nothing handles location.hash");
+  // The permalink is only real if something resolves the fragment AFTER render. Asserting
+  // the anchor alone is what let a dead link survive: every card carried one, and an
+  // inbound #fragment scrolled nowhere because the cards did not exist when the browser
+  // read it. So check the anchor AND the handler that makes it work, and check that every
+  // href points at an id the page actually emits.
+  const perma = (out.match(/href="#([^"]+)">link to this proposal<\/a>/g) || []);
+  if (perma.length !== cards)
+    problems.push(`${perma.length} permalinks for ${cards} cards`);
+  const targets = new Set((out.match(/<li class="p" id="([^"]+)"/g) || [])
+    .map(m => m.replace(/.*id="/, "").replace(/"$/, "")));
+  const dangling = perma
+    .map(m => m.replace(/.*href="#/, "").replace(/">.*/, ""))
+    .filter(h => !targets.has(h));
+  if (dangling.length)
+    problems.push(`${dangling.length} permalinks point at no card: ${dangling[0]}`);
+  for (const need of ["function focusFromHash", "hashchange", "scrollIntoView"]) {
+    if (!html.includes(need))
+      problems.push(`the page has permalinks but not ${need} - the fragment resolves nowhere`);
+  }
   if (/undefined|\[object Object\]|NaN/.test(out))
     problems.push("rendered output contains undefined/NaN - a field name is wrong");
   // proposals.json carries a lexical overlap score and no subsumption relation, so the
