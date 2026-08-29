@@ -166,7 +166,6 @@
   .vv{font-weight:700; text-transform:uppercase; font-size:.66rem; letter-spacing:.04em}
   .vv.pass{color:var(--pass)} .vv.fail{color:var(--fail)}
   .vv\[n\/a\], .vv.notrun{color:var(--faint)}
-  .perma{font-size:.78rem}
   .p:target{outline:2px solid var(--accent); outline-offset:2px}
   .verif{display:flex; gap:6px; flex-wrap:wrap; align-items:center;
          padding:11px 18px; border-top:1px solid var(--hair); background:var(--sunk)}
@@ -314,7 +313,13 @@ const BG = {
   "marker-condition":["isa",   "Why CL cannot answer this"],
   "missing-axiom":   ["axiom", "What a missing edge means"]
 };
-function pid(p){                   // stable, so a single proposal can be linked to
+function pid(p){
+  // A stable DOM id per proposal. It is NOT a permalink: the cards are rendered from
+  // proposals.json after load, so a #fragment in an inbound URL is resolved by the browser
+  // before the element exists and scrolls nowhere. A "link to this proposal" anchor used
+  // to sit on every card and did nothing for anyone arriving from outside, which is why it
+  // was removed. Restoring it means handling location.hash after render, not adding the
+  // <a> back. The id is kept because render_smoke.js counts cards by it.
   return (p.kind + "-" + p.organ + "-" + p.label).toLowerCase()
          .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -477,8 +482,7 @@ function render(){
         <div class="whybody">
           ${p.graph ? `<figure class="cg">${p.graph}<figcaption>Read from the pinned CL
             release: the is_a path from each term up to its anchor.</figcaption></figure>` : ""}
-          ${reasoning(p)}
-          <p class="perma"><a href="#${pid(p)}">link to this proposal</a></p></div>
+          ${reasoning(p)}</div>
       </details>
       <div class="verif">${verif}
         ${bgLink(p)}
