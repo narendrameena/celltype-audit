@@ -233,6 +233,14 @@ usable precision and is **not** shipped as one. Ranked, it puts real errors near
 Together: reviewing **33 of 256** cell types surfaced **12 of 19** known errors — 36% of
 those reviews landing on a real error, against a 7.4% base rate (4.9x).
 
+**4. Refinement, where the label is right but coarse.** A cluster whose label resolves
+exactly, is not disputed by the sweep, and whose evidence supports a subtype the reference
+carries, gets a proposed refinement rather than an error. Of 602 well-powered cell types
+**203 survive the gates, 90 of them confident**, and of the 99 landing in a curated organ
+with a gold term **90 (91%) fall inside that term's subtree** — the direction is right even
+where the exact subtype is arguable. The nine outside are mostly dendritic-cell and myeloid
+granularity, which is where the reference itself is thinnest.
+
 ## Limitations, stated
 
 - **It is triage, not an oracle.** The top 33 candidates carry 12 of the 19 known errors;
@@ -268,8 +276,10 @@ and obsolete terms).
 ## What else is in this repository
 
 - **`docs/`** — a review queue for Cell Ontology contributions drafted from the audit's
-  by-products, served by GitHub Pages. Every proposal shows which checks were actually run
-  against it and which were not; approval happens on the
+  by-products, served by GitHub Pages: currently **19 proposals, 6 ready to submit and 13
+  weakened** by a check, with 1 withdrawn because exclusivity showed CL already had the
+  term. Nothing has been submitted, so there is no acceptance rate to report. Every
+  proposal shows which checks were actually run against it and which were not; approval happens on the
   [cell-ontology](https://github.com/obophenotype/cell-ontology/issues) and
   [provisional Cell Ontology](https://github.com/obophenotype/provisional_cell_ontology)
   issue trackers, not here. Regenerate with `python analysis/build_proposals.py`, then
