@@ -438,6 +438,10 @@ function focusFromHash(){
   // to the full list; the evidence lives in a collapsed <details>, and a reader arriving
   // from a cell-ontology issue wants it open; and the card needs to be identifiable once
   // the page stops moving, hence the brief highlight.
+  // No location in the smoke test's stub DOM, and none in any non-browser host. A
+  // permalink is a browser affordance, so its absence is a no-op rather than a throw --
+  // without this guard the whole render aborted and the page reported a render failure.
+  if (typeof location === "undefined") return;
   const id = decodeURIComponent((location.hash || "").slice(1));
   if (!id) return;
   if (!document.getElementById(id) && active !== "all") { setFilter("all"); }
@@ -445,9 +449,11 @@ function focusFromHash(){
   if (!el) return;
   const d = el.querySelector("details");
   if (d) d.open = true;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-  el.classList.add("targeted");
-  setTimeout(() => el.classList.remove("targeted"), 2600);
+  if (el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (el.classList) {
+    el.classList.add("targeted");
+    setTimeout(() => el.classList.remove("targeted"), 2600);
+  }
 }
 
 function setFilter(k){
@@ -564,7 +570,8 @@ Promise.all([
   });
   render();
   focusFromHash();
-  window.addEventListener("hashchange", focusFromHash);
+  if (typeof window !== "undefined" && window.addEventListener)
+    window.addEventListener("hashchange", focusFromHash);
 }).catch(e => {
   document.getElementById("list").innerHTML =
     // Distinguish "the data is missing" from "the page threw while drawing it". This
