@@ -14,6 +14,7 @@ on:
       # the smoke test gates this deploy, so a change to it must re-run the deploy --
       # otherwise a fix to the gate sits unapplied while the site serves the last build
       - "tests/render_smoke.js"
+      - "tests/deeplink_smoke.js"
   workflow_dispatch:
 
 permissions:
@@ -64,6 +65,12 @@ jobs:
           node-version: "20"
       - name: The queue must actually render
         run: node tests/render_smoke.js
+
+      # A permalink that resolves nowhere is worse than none: it looks like evidence a
+      # curator can be pointed at. This follows one, cold and under a filter, and fails
+      # the deploy if it lands anywhere but the right card.
+      - name: Per-proposal permalinks must resolve
+        run: node tests/deeplink_smoke.js
 
       - uses: actions/upload-pages-artifact@v3
         with:
