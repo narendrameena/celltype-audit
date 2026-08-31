@@ -103,6 +103,23 @@ setTimeout(() => {
   }
   if (/undefined|\[object Object\]|NaN/.test(out))
     problems.push("rendered output contains undefined/NaN - a field name is wrong");
+  // A weakened proposal must say WHICH check stopped it. Every weakening used to render as
+  // "Exclusivity failed", including the neutrophil condition, whose own counterexample
+  // search had found three of the five clusters asserted to the term lacking every marker
+  // it proposed. A falsification described as a marker clash with a neighbour reads as far
+  // weaker than it is, so the copy is pinned to the check that actually fired. The count of
+  // notices is asserted further down; this checks that each one says the right thing.
+  const COPY = { V9: "The markers do not hold up", V10: "Exclusivity failed",
+                 V11: "A counterexample was found", V12: "CL may already name this population" };
+  const weakened = proposals.filter(p => p.readiness === "weakened");
+  for (const [v, phrase] of Object.entries(COPY)) {
+    const want = weakened.filter(p => p.weakened_check === v).length;
+    const got = out.split(phrase).length - 1;
+    if (got !== want) problems.push(`${got} cards say "${phrase}", expected ${want} (${v})`);
+  }
+  const unattributed = weakened.filter(p => !COPY[p.weakened_check]);
+  if (unattributed.length)
+    problems.push(`${unattributed.length} weakened proposals name no check: ${unattributed[0].label}`);
   // proposals.json carries a lexical overlap score and no subsumption relation, so the
   // page must not describe a nearest match as broader or narrower than the label. It did,
   // and named a narrower term as broader.

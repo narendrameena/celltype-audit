@@ -464,10 +464,35 @@ function setFilter(k){
   render();
 }
 
+// Why a proposal is not ready depends on which check stopped it. V10 and V12 are clashes
+// with another term and genuinely do not refute the proposal; V9 and V11 are falsifications
+// by the proposal's own evidence, which is a stronger objection. Calling all four
+// "exclusivity failed" would understate exactly the ones that matter most -- the neutrophil
+// condition read as a marker clash with a neighbour when in fact three of the five clusters
+// asserted to the term lacked every marker it proposed.
+function weakCopy(p){
+  const by = esc(p.weakened_by || "another term");
+  if (p.weakened_check === "V11")
+    return `<b>Not ready to submit.</b> A counterexample was found: ${by}. Cells already
+      assigned to this term contradict the condition as written, so the condition has to be
+      narrowed or dropped before a curator is asked to act on it.`;
+  if (p.weakened_check === "V9")
+    return `<b>Not ready to submit.</b> The markers do not hold up: ${by}. A condition the
+      type's own cells fail is not evidence for a new term.`;
+  if (p.weakened_check === "V12")
+    return `<b>Not ready to submit.</b> CL may already name this population &mdash; the
+      improved scorer returns ${by}. That match is on the term's name rather than its
+      definition, so it is doubt rather than proof, and the term is shown for a curator to
+      judge.`;
+  return `<b>Not ready to submit.</b> Exclusivity failed: ${by} in this tissue expresses the
+    same markers. That does not refute the proposal &mdash; different cell types share
+    markers &mdash; but it has to be settled before a curator is asked to act on it.`;
+}
+
 function render(){
   const list = document.getElementById("list");
-  // ready first: a proposal that failed exclusivity is not in the same state as one
-  // that passed it, and ordering them together would hide that.
+  // ready first: a proposal a check has objected to is not in the same state as one no
+  // check objected to, and ordering them together would hide that.
   const RANK = { ready: 0, weakened: 1 };
   const shown = DATA.proposals.filter(p => active === "all" || p.kind === active)
     .slice().sort((a, b) => (RANK[a.readiness] ?? 0) - (RANK[b.readiness] ?? 0));
@@ -509,8 +534,7 @@ function render(){
       ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
       ${p.markers && p.markers.length
         ? `<div class="genes">${p.markers.map(g => `<span class="g mono">${esc(g)}</span>`).join("")}</div>` : ""}
-      ${p.readiness === "weakened"
-        ? `<p class="weak"><b>Not ready to submit.</b> Exclusivity failed: ${esc(p.weakened_by || "another term")} in this tissue expresses the same markers. That does not refute the proposal &mdash; different cell types share markers &mdash; but it has to be settled before a curator is asked to act on it.</p>` : ""}
+      ${p.readiness === "weakened" ? `<p class="weak">${weakCopy(p)}</p>` : ""}
       <details class="why">
         <summary>Why this proposal &rarr;</summary>
         <div class="whybody">

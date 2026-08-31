@@ -276,9 +276,10 @@ and obsolete terms).
 ## What else is in this repository
 
 - **`docs/`** — a review queue for Cell Ontology contributions drafted from the audit's
-  by-products, served by GitHub Pages: currently **19 proposals, 6 ready to submit and 13
+  by-products, served by GitHub Pages: currently **19 proposals, 5 ready to submit and 14
   weakened** by a check, with 1 withdrawn because exclusivity showed CL already had the
-  term. Nothing has been submitted, so there is no acceptance rate to report. Every
+  term. A proposal is ready only if no check objects — exclusivity, counterexample search,
+  marker support and the re-ask under the improved scorer all bind. Nothing has been submitted, so there is no acceptance rate to report. Every
   proposal shows which checks were actually run against it and which were not; approval happens on the
   [cell-ontology](https://github.com/obophenotype/cell-ontology/issues) and
   [provisional Cell Ontology](https://github.com/obophenotype/provisional_cell_ontology)
